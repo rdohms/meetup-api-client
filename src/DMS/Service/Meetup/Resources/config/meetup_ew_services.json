@@ -1,7 +1,7 @@
 {
     "name": "Meetup",
-    "apiVersion": "EW",
-    "description": "Meetup API EW Methods",
+    "apiVersion": "Everywhere",
+    "description": "Meetup Everywhere API Methods: http://www.meetup.com/meetup_api/#everywhere",
     "operations": {
         "CreateCommunity": {
             "httpMethod": "POST",

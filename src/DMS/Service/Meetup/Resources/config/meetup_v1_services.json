@@ -1,7 +1,7 @@
 {
     "name": "Meetup",
     "apiVersion": "1",
-    "description": "Meetup API v1 Methods",
+    "description": "Meetup API v1 Legacy Methods",
     "operations": {
         "ApproveMembership": {
             "httpMethod": "POST",
