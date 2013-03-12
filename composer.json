@@ -1,5 +1,5 @@
 {
-    "name": "rdohms/meetup-api",
+    "name": "dms/meetup-api-client",
     "description": "Meetup.com API client written on top of Guzzle. This supports all API operations.",
     "keywords": ["meetup.com", "dms", "api", "guzzle"],
     "license": "MIT",
