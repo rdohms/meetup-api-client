@@ -1,2 +1,4 @@
-docs/meetup-api-docs
 .idea
+vendor/
+tests/_reports
+docs/meetup-api-docs

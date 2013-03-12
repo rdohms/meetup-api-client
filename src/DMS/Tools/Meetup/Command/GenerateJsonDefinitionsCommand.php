@@ -37,6 +37,11 @@ class GenerateJsonDefinitionsCommand extends Command
      */
     protected $definitions = array();
 
+    /**
+     * @var array
+     */
+    protected $apis = array();
+
     protected function configure()
     {
         $this
@@ -69,7 +74,7 @@ class GenerateJsonDefinitionsCommand extends Command
 
     protected function parseDocuments()
     {
-        $apis = array(
+        $this->apis = array(
             'v2' => array(),
             'ew' => array(),
             'v1' => array(),
@@ -77,47 +82,13 @@ class GenerateJsonDefinitionsCommand extends Command
 
         foreach ($this->getFileIterator() as $file) {
 
-            try {
-
-                /** @var $file SplFileInfo */
-                if ($file->getExtension() !== 'html')
-                    continue;
-
-                $crawler = new Crawler(file_get_contents($file->getRealPath()));
-
-                // Check is Doc page
-                if ($crawler->filter('#method-info')->count() == 0)
-                    continue;
-
-                $operationData = $this->parseOperationData($crawler);
-
-                $this->output->writeln(sprintf("<comment>%s</comment> <info>%s</info>", $operationData['httpMethod'], $operationData['uri']));
-                $this->output->writeln(sprintf("<comment>Summary:</comment> <info>%s</info>", $operationData['summary']));
-
-                $operation = $this->dialog->ask(
-                    $this->output,
-                    "<question>How do you wish to name this Operation? [".$operationData['operation']."]</question>",
-                    $operationData['operation']
-                );
-
-                unset($operationData['operation']);
-
-                $apiType = $this->dialog->ask($this->output, "<question>Which API? [v2]</question>", 'v2', array_keys($apis));
-
-
-                $apis[$apiType][$operation] = $operationData;
-
-            } catch (InvalidArgumentException $e) {
-                echo sprintf('ERROR: %s with %s', $file->getFilename(), $e->getMessage()) . PHP_EOL;
-            } catch (Exception $e) {
-                echo sprintf('ERROR: %s with %s', $file->getFilename(), $e->getMessage()) . PHP_EOL;
-            }
+            $this->parseDocumentationPage($file);
 
         }
 
         $this->output->writeln("All Operations parsed, dumping JSON configuration:");
 
-        foreach ($apis as $key => $value) {
+        foreach ($this->apis as $key => $value) {
             $this->output->writeln(sprintf("<info>API %s</info>", $key));
             $this->output->writeln(json_encode($value));
             $this->output->writeln('');
@@ -127,14 +98,95 @@ class GenerateJsonDefinitionsCommand extends Command
     }
 
     /**
+     * Parses Documentation Page
+     *
+     * @param $file
+     * @throws \OutOfBoundsException
+     */
+    protected function parseDocumentationPage($file)
+    {
+        try {
+
+            /** @var $file SplFileInfo */
+            if ($file->getExtension() !== 'html')
+                throw new \OutOfBoundsException("Not HTML.");
+
+            $crawler = new Crawler(file_get_contents($file->getRealPath()));
+
+            // Check is Doc page
+            if ($crawler->filter('#method-info')->count() == 0)
+                throw new \OutOfBoundsException("Not Documentation File.");
+
+            // Check if is not deprecated
+            if ($crawler->filter('.deprecation-warning')->count() > 0)
+                throw new \OutOfBoundsException('Deprecated.');
+
+            $this->output->writeln("Parsing: ".$file->getPathname());
+            $this->getMethodDefinitions($crawler);
+
+        } catch (\OutOfBoundsException $e) {
+            $this->output->writeln(sprintf('<error>SKIPPED:</error> <info>%s</info> because <info>%s</info>', $file->getPathname(), $e->getMessage()));
+        } catch (InvalidArgumentException $e) {
+            $this->output->writeln(sprintf('<error>ERROR:</error> <info>%s</info> with <info>%s</info> at line %d', $file->getPathname(), $e->getMessage(), $e->getLine()));
+        } catch (Exception $e) {
+            $this->output->writeln(sprintf('<error>ERROR:</error> <info>%s</info> with <info>%s</info>', $file->getPathname(), $e->getMessage()));
+        }
+    }
+
+    /**
      * @param Crawler $crawler
+     */
+    protected function getMethodDefinitions($crawler)
+    {
+        $methodDefinitions = $crawler->filter('#method-info > div');
+
+        $this->output->writeln(sprintf("Found %d definitions:", $methodDefinitions->count()));
+
+        foreach ($methodDefinitions as $definition) {
+            $operationData = $this->parseOperationData($definition);
+
+            $this->output->writeln(sprintf(
+                    "<comment>%s</comment> <info>%s</info>",
+                    $operationData['httpMethod'],
+                    $operationData['uri']
+                )
+            );
+            $this->output->writeln(sprintf(
+                    "<comment>Summary:</comment> <info>%s</info>",
+                    $operationData['summary']
+                )
+            );
+            $this->output->writeln(sprintf(
+                    "<comment>Parameters:</comment> <info>%s</info>",
+                    implode(",", array_keys($operationData['parameters']))
+                )
+            );
+
+            $operation = $this->dialog->ask(
+                $this->output,
+                "<question>How do you wish to name this Operation? [".$operationData['operation']."]</question>",
+                $operationData['operation']
+            );
+
+            unset($operationData['operation']);
+
+            $apiType = $this->dialog->ask($this->output, "<question>Which API? [v2]</question>", 'v2', array_keys($this->apis));
+
+            $this->apis[$apiType][$operation] = $operationData;
+        }
+
+    }
+
+    /**
+     * @param DOMElement $definition
      * @return array
      */
-    protected function parseOperationData($crawler)
+    protected function parseOperationData($definition)
     {
-        $operationFilter = $crawler->filter('#method-info h2');
+        $crawler = new Crawler($definition);
 
-        $operation = str_replace(' ', '', $operationFilter->first()->text());
+        $operationFilter = $crawler->filter('h2');
+        $operation       = str_replace(' ', '', $operationFilter->first()->text());
 
         $uriData = $crawler->filter('.uri div');
 
@@ -148,7 +200,9 @@ class GenerateJsonDefinitionsCommand extends Command
         }
 
         $method = $uriData->filter('.muted')->text();
-        $summary = $crawler->filter('.leading-top p')->text();
+
+        $summaryNode = $crawler->filter('.leading-top p');
+        $summary = ($summaryNode->count() > 0)? $summaryNode->text():null;
 
         $parameterList = $crawler->filter('dl.rounded-all dt span');
         $params = array();
@@ -161,7 +215,6 @@ class GenerateJsonDefinitionsCommand extends Command
             );
         }
 
-
         if (isset($uriParams) && count($uriParams) > 0) {
             foreach ($uriParams as $param) {
                 $params[str_replace(':', '', $param)] = array(
@@ -172,7 +225,9 @@ class GenerateJsonDefinitionsCommand extends Command
         }
 
         //Update Operation
-        $operation = ucfirst($method . $operation);
+        if ($method == 'GET'){
+            $operation = ucfirst(strtolower($method) . $operation);
+        }
 
         return array(
             'operation'  => $operation,

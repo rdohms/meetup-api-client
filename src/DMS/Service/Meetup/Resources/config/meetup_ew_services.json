@@ -1,1 +1,918 @@
-{}
+{
+    "name": "Meetup",
+    "apiVersion": "EW",
+    "description": "Meetup API EW Methods",
+    "operations": {
+        "CreateCommunity": {
+            "httpMethod": "POST",
+            "parameters": {
+                "container_id": {
+                    "location": "body",
+                    "required": true
+                },
+                "country, city, state": {
+                    "location": "body",
+                    "required": true
+                },
+                "lat, lon": {
+                    "location": "body",
+                    "required": true
+                },
+                "name": {
+                    "location": "body",
+                    "required": false
+                },
+                "urlname": {
+                    "location": "body",
+                    "required": true
+                },
+                "zip": {
+                    "location": "body",
+                    "required": true
+                }
+            },
+            "summary": null,
+            "uri": "/ew/community"
+        },
+        "CreateContainer": {
+            "httpMethod": "POST",
+            "parameters": {
+                "description": {
+                    "location": "body",
+                    "required": false
+                },
+                "facebook_urlname": {
+                    "location": "body",
+                    "required": false
+                },
+                "fields": {
+                    "location": "body",
+                    "required": false
+                },
+                "link": {
+                    "location": "body",
+                    "required": false
+                },
+                "link_name": {
+                    "location": "body",
+                    "required": false
+                },
+                "name": {
+                    "location": "body",
+                    "required": true
+                },
+                "twitter_urlname": {
+                    "location": "body",
+                    "required": false
+                },
+                "udf_{varname}": {
+                    "location": "body",
+                    "required": false
+                }
+            },
+            "summary": null,
+            "uri": "/ew/container"
+        },
+        "CreateEWComment": {
+            "httpMethod": "POST",
+            "parameters": {
+                "comment": {
+                    "location": "body",
+                    "required": true
+                },
+                "event_id": {
+                    "location": "body",
+                    "required": true
+                },
+                "fields": {
+                    "location": "body",
+                    "required": false
+                },
+                "parent_id": {
+                    "location": "body",
+                    "required": false
+                },
+                "time": {
+                    "location": "body",
+                    "required": false
+                },
+                "udf_{varname}": {
+                    "location": "body",
+                    "required": false
+                }
+            },
+            "summary": null,
+            "uri": "/ew/comment"
+        },
+        "CreateEWEvent": {
+            "httpMethod": "POST",
+            "parameters": {
+                "address1": {
+                    "location": "body",
+                    "required": false
+                },
+                "community_id": {
+                    "location": "body",
+                    "required": true
+                },
+                "country, city": {
+                    "location": "body",
+                    "required": true
+                },
+                "description": {
+                    "location": "body",
+                    "required": false
+                },
+                "fields": {
+                    "location": "body",
+                    "required": false
+                },
+                "lat, lon": {
+                    "location": "body",
+                    "required": true
+                },
+                "link": {
+                    "location": "body",
+                    "required": false
+                },
+                "local_time": {
+                    "location": "body",
+                    "required": false
+                },
+                "short_description": {
+                    "location": "body",
+                    "required": false
+                },
+                "time": {
+                    "location": "body",
+                    "required": false
+                },
+                "udf_{varname}": {
+                    "location": "body",
+                    "required": false
+                },
+                "urlname, community_urlname": {
+                    "location": "body",
+                    "required": true
+                },
+                "venue_name": {
+                    "location": "body",
+                    "required": false
+                },
+                "zip": {
+                    "location": "body",
+                    "required": true
+                }
+            },
+            "summary": null,
+            "uri": "/ew/event"
+        },
+        "CreateEventSeed": {
+            "httpMethod": "POST",
+            "parameters": {
+                "container_id": {
+                    "location": "body",
+                    "required": true
+                },
+                "description": {
+                    "location": "body",
+                    "required": true
+                },
+                "fields": {
+                    "location": "body",
+                    "required": false
+                },
+                "local_time": {
+                    "location": "body",
+                    "required": true
+                },
+                "short_description": {
+                    "location": "body",
+                    "required": true
+                },
+                "udf_{varname}": {
+                    "location": "body",
+                    "required": false
+                },
+                "urlname": {
+                    "location": "body",
+                    "required": true
+                }
+            },
+            "summary": "For container owners. API method for creating an event to seed to all communities.",
+            "uri": "/ew/seed"
+        },
+        "DeleteCommunity": {
+            "httpMethod": "DELETE",
+            "parameters": {
+                "id": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": "For container owners. API method for removing a community. All events of the community will be removed as well.",
+            "uri": "/ew/community/:id"
+        },
+        "DeleteEWRSVP": {
+            "httpMethod": "DELETE",
+            "parameters": {
+                "id": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": null,
+            "uri": "/ew/rsvp/:id"
+        },
+        "DeleteEventSeed": {
+            "httpMethod": "DELETE",
+            "parameters": {
+                "id": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": "For container owners. API method for removing all events seeded to communities.",
+            "uri": "/ew/seed/:id"
+        },
+        "EditCommunity": {
+            "httpMethod": "POST",
+            "parameters": {
+                "city": {
+                    "location": "body",
+                    "required": false
+                },
+                "country": {
+                    "location": "body",
+                    "required": false
+                },
+                "id": {
+                    "location": "uri",
+                    "required": true
+                },
+                "lat, lon": {
+                    "location": "body",
+                    "required": false
+                },
+                "name": {
+                    "location": "body",
+                    "required": false
+                },
+                "state": {
+                    "location": "body",
+                    "required": false
+                },
+                "zip": {
+                    "location": "body",
+                    "required": false
+                }
+            },
+            "summary": null,
+            "uri": "/ew/community/:id"
+        },
+        "EditContainer": {
+            "httpMethod": "POST",
+            "parameters": {
+                "description": {
+                    "location": "body",
+                    "required": false
+                },
+                "facebook_urlname": {
+                    "location": "body",
+                    "required": false
+                },
+                "fields": {
+                    "location": "body",
+                    "required": false
+                },
+                "id": {
+                    "location": "uri",
+                    "required": true
+                },
+                "link": {
+                    "location": "body",
+                    "required": false
+                },
+                "link_name": {
+                    "location": "body",
+                    "required": false
+                },
+                "name": {
+                    "location": "body",
+                    "required": false
+                },
+                "twitter_urlname": {
+                    "location": "body",
+                    "required": false
+                },
+                "udf_{varname}": {
+                    "location": "body",
+                    "required": false
+                }
+            },
+            "summary": null,
+            "uri": "/ew/container/:id"
+        },
+        "EditContainerAlert": {
+            "httpMethod": "POST",
+            "parameters": {
+                "comments": {
+                    "location": "body",
+                    "required": false
+                },
+                "id": {
+                    "location": "uri",
+                    "required": true
+                },
+                "rsvps": {
+                    "location": "body",
+                    "required": false
+                },
+                "updates": {
+                    "location": "body",
+                    "required": false
+                }
+            },
+            "summary": null,
+            "uri": "/ew/container/:id/alerts"
+        },
+        "EditEWEvent": {
+            "httpMethod": "POST",
+            "parameters": {
+                "address1": {
+                    "location": "body",
+                    "required": false
+                },
+                "country, city, state": {
+                    "location": "body",
+                    "required": false
+                },
+                "description": {
+                    "location": "body",
+                    "required": false
+                },
+                "fields": {
+                    "location": "body",
+                    "required": false
+                },
+                "id": {
+                    "location": "uri",
+                    "required": true
+                },
+                "lat, lon": {
+                    "location": "body",
+                    "required": false
+                },
+                "link": {
+                    "location": "body",
+                    "required": false
+                },
+                "local_time": {
+                    "location": "body",
+                    "required": false
+                },
+                "short_description": {
+                    "location": "body",
+                    "required": false
+                },
+                "time": {
+                    "location": "body",
+                    "required": false
+                },
+                "udf_{varname}": {
+                    "location": "body",
+                    "required": false
+                },
+                "venue_name": {
+                    "location": "body",
+                    "required": false
+                },
+                "zip": {
+                    "location": "body",
+                    "required": false
+                }
+            },
+            "summary": null,
+            "uri": "/ew/event/:id"
+        },
+        "EditEventSeed": {
+            "httpMethod": "POST",
+            "parameters": {
+                "description": {
+                    "location": "body",
+                    "required": false
+                },
+                "fields": {
+                    "location": "body",
+                    "required": false
+                },
+                "id": {
+                    "location": "uri",
+                    "required": true
+                },
+                "short_description": {
+                    "location": "body",
+                    "required": false
+                },
+                "udf_{varname}": {
+                    "location": "body",
+                    "required": false
+                }
+            },
+            "summary": "For container owners. API method for editing events seeded to communities.",
+            "uri": "/ew/seed/:id"
+        },
+        "FollowCommunity": {
+            "httpMethod": "POST",
+            "parameters": {
+                "community_id": {
+                    "location": "body",
+                    "required": true
+                },
+                "fields": {
+                    "location": "body",
+                    "required": false
+                },
+                "udf_{varname}": {
+                    "location": "body",
+                    "required": false
+                }
+            },
+            "summary": null,
+            "uri": "/ew/follow"
+        },
+        "GetCommunities": {
+            "httpMethod": "GET",
+            "parameters": {
+                "community_id": {
+                    "location": "body",
+                    "required": true
+                },
+                "community_urlname": {
+                    "location": "body",
+                    "required": true
+                },
+                "container_id": {
+                    "location": "body",
+                    "required": true
+                },
+                "country, city, state": {
+                    "location": "body",
+                    "required": true
+                },
+                "fields": {
+                    "location": "body",
+                    "required": false
+                },
+                "lat, lon": {
+                    "location": "body",
+                    "required": true
+                },
+                "udf_{varname}": {
+                    "location": "body",
+                    "required": false
+                },
+                "urlname": {
+                    "location": "body",
+                    "required": true
+                },
+                "zip": {
+                    "location": "body",
+                    "required": true
+                }
+            },
+            "summary": null,
+            "uri": "/ew/communities"
+        },
+        "GetCommunity": {
+            "httpMethod": "GET",
+            "parameters": {
+                "fields": {
+                    "location": "body",
+                    "required": false
+                },
+                "id": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": null,
+            "uri": "/ew/community/:id"
+        },
+        "GetCommunityFollow": {
+            "httpMethod": "GET",
+            "parameters": {
+                "fields": {
+                    "location": "body",
+                    "required": false
+                },
+                "id": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": null,
+            "uri": "/ew/follow/:id"
+        },
+        "GetCommunityFollowers": {
+            "httpMethod": "GET",
+            "parameters": {
+                "community_id": {
+                    "location": "body",
+                    "required": true
+                },
+                "community_urlname": {
+                    "location": "body",
+                    "required": true
+                },
+                "container_id": {
+                    "location": "body",
+                    "required": true
+                },
+                "fields": {
+                    "location": "body",
+                    "required": false
+                },
+                "udf_{varname}": {
+                    "location": "body",
+                    "required": false
+                },
+                "urlname": {
+                    "location": "body",
+                    "required": true
+                }
+            },
+            "summary": null,
+            "uri": "/ew/followers"
+        },
+        "GetCommunityFollows": {
+            "httpMethod": "GET",
+            "parameters": {
+                "community_id": {
+                    "location": "body",
+                    "required": false
+                },
+                "container_id": {
+                    "location": "body",
+                    "required": false
+                },
+                "fields": {
+                    "location": "body",
+                    "required": false
+                },
+                "udf_{varname}": {
+                    "location": "body",
+                    "required": false
+                },
+                "urlname": {
+                    "location": "body",
+                    "required": false
+                }
+            },
+            "summary": null,
+            "uri": "/ew/follows"
+        },
+        "GetContainer": {
+            "httpMethod": "GET",
+            "parameters": {
+                "fields": {
+                    "location": "body",
+                    "required": false
+                },
+                "id": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": null,
+            "uri": "/ew/container/:id"
+        },
+        "GetContainerAlerts": {
+            "httpMethod": "GET",
+            "parameters": {
+                "comments": {
+                    "location": "body",
+                    "required": false
+                },
+                "id": {
+                    "location": "uri",
+                    "required": true
+                },
+                "rsvps": {
+                    "location": "body",
+                    "required": false
+                },
+                "updates": {
+                    "location": "body",
+                    "required": false
+                }
+            },
+            "summary": null,
+            "uri": "/ew/container/:id/alerts"
+        },
+        "GetContainers": {
+            "httpMethod": "GET",
+            "parameters": {
+                "container_id": {
+                    "location": "body",
+                    "required": true
+                },
+                "fields": {
+                    "location": "body",
+                    "required": false
+                },
+                "link": {
+                    "location": "body",
+                    "required": true
+                },
+                "udf_{varname}": {
+                    "location": "body",
+                    "required": false
+                },
+                "urlname": {
+                    "location": "body",
+                    "required": true
+                }
+            },
+            "summary": null,
+            "uri": "/ew/containers"
+        },
+        "GetEWComment": {
+            "httpMethod": "GET",
+            "parameters": {
+                "fields": {
+                    "location": "body",
+                    "required": false
+                },
+                "id": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": null,
+            "uri": "/ew/comment/:id"
+        },
+        "DeleteEWComment": {
+            "httpMethod": "DELETE",
+            "parameters": {
+                "id": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": null,
+            "uri": "/ew/comment/:id"
+        },
+        "GetEWComments": {
+            "httpMethod": "GET",
+            "parameters": {
+                "comment_id": {
+                    "location": "body",
+                    "required": true
+                },
+                "community_id": {
+                    "location": "body",
+                    "required": true
+                },
+                "community_urlname": {
+                    "location": "body",
+                    "required": false
+                },
+                "container_id": {
+                    "location": "body",
+                    "required": true
+                },
+                "event_id": {
+                    "location": "body",
+                    "required": true
+                },
+                "fields": {
+                    "location": "body",
+                    "required": false
+                },
+                "member_id": {
+                    "location": "body",
+                    "required": true
+                },
+                "parent_comment_id": {
+                    "location": "body",
+                    "required": true
+                },
+                "time": {
+                    "location": "body",
+                    "required": false
+                },
+                "udf_{varname}": {
+                    "location": "body",
+                    "required": false
+                },
+                "urlname": {
+                    "location": "body",
+                    "required": true
+                }
+            },
+            "summary": null,
+            "uri": "/ew/comments"
+        },
+        "GetEWEvent": {
+            "httpMethod": "GET",
+            "parameters": {
+                "fields": {
+                    "location": "body",
+                    "required": false
+                },
+                "id": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": null,
+            "uri": "/ew/event/:id"
+        },
+        "GetEWEvents": {
+            "httpMethod": "GET",
+            "parameters": {
+                "after": {
+                    "location": "body",
+                    "required": false
+                },
+                "before": {
+                    "location": "body",
+                    "required": false
+                },
+                "community_id": {
+                    "location": "body",
+                    "required": true
+                },
+                "community_urlname": {
+                    "location": "body",
+                    "required": false
+                },
+                "container_id": {
+                    "location": "body",
+                    "required": true
+                },
+                "country, city": {
+                    "location": "body",
+                    "required": false
+                },
+                "event_id": {
+                    "location": "body",
+                    "required": true
+                },
+                "fields": {
+                    "location": "body",
+                    "required": false
+                },
+                "lat, lon": {
+                    "location": "body",
+                    "required": false
+                },
+                "status": {
+                    "location": "body",
+                    "required": false
+                },
+                "time": {
+                    "location": "body",
+                    "required": false
+                },
+                "udf_{varname}": {
+                    "location": "body",
+                    "required": false
+                },
+                "urlname": {
+                    "location": "body",
+                    "required": true
+                },
+                "zip": {
+                    "location": "body",
+                    "required": false
+                }
+            },
+            "summary": null,
+            "uri": "/ew/events"
+        },
+        "GetEWRSVP": {
+            "httpMethod": "GET",
+            "parameters": {
+                "fields": {
+                    "location": "body",
+                    "required": false
+                },
+                "id": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": null,
+            "uri": "/ew/rsvp/:id"
+        },
+        "GetEventSeed": {
+            "httpMethod": "GET",
+            "parameters": {
+                "fields": {
+                    "location": "body",
+                    "required": false
+                },
+                "id": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": "For container owners. API method for querying an event seeded to communities.",
+            "uri": "/ew/seed/:id"
+        },
+        "GetEventSeeds": {
+            "httpMethod": "GET",
+            "parameters": {
+                "community_urlname": {
+                    "location": "body",
+                    "required": false
+                },
+                "container_id": {
+                    "location": "body",
+                    "required": true
+                },
+                "fields": {
+                    "location": "body",
+                    "required": false
+                },
+                "seed_id": {
+                    "location": "body",
+                    "required": true
+                },
+                "short_description": {
+                    "location": "body",
+                    "required": false
+                },
+                "status": {
+                    "location": "body",
+                    "required": false
+                },
+                "udf_{varname}": {
+                    "location": "body",
+                    "required": false
+                },
+                "urlname": {
+                    "location": "body",
+                    "required": true
+                }
+            },
+            "summary": "For container owners. API method for accessing events seeded to communities.",
+            "uri": "/ew/seeds"
+        },
+        "PostEWRSVP": {
+            "httpMethod": "POST",
+            "parameters": {
+                "event_id": {
+                    "location": "body",
+                    "required": true
+                },
+                "fields": {
+                    "location": "body",
+                    "required": false
+                },
+                "udf_{varname}": {
+                    "location": "body",
+                    "required": false
+                }
+            },
+            "summary": null,
+            "uri": "/ew/rsvp"
+        },
+        "UnfollowCommunity": {
+            "httpMethod": "DELETE",
+            "parameters": {
+                "id": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": null,
+            "uri": "/ew/follow/:id"
+        },
+        "getEWRSVPs": {
+            "httpMethod": "GET",
+            "parameters": {
+                "event_id": {
+                    "location": "body",
+                    "required": true
+                },
+                "fields": {
+                    "location": "body",
+                    "required": false
+                },
+                "member_id": {
+                    "location": "body",
+                    "required": true
+                },
+                "udf_{varname}": {
+                    "location": "body",
+                    "required": false
+                }
+            },
+            "summary": null,
+            "uri": "/ew/rsvps"
+        }
+    }
+}

@@ -1,1 +1,334 @@
-{}
+{
+    "name": "Meetup",
+    "apiVersion": "1",
+    "description": "Meetup API v1 Methods",
+    "operations": {
+        "ApproveMembership": {
+            "httpMethod": "POST",
+            "parameters": {
+                "member": {
+                    "location": "body",
+                    "required": false
+                },
+                "send_copy": {
+                    "location": "body",
+                    "required": false
+                },
+                "urlname": {
+                    "location": "uri",
+                    "required": true
+                },
+                "welcome_message": {
+                    "location": "body",
+                    "required": false
+                }
+            },
+            "summary": "Approves one or more requests for group membership",
+            "uri": "/:urlname/member/approvals"
+        },
+        "DeclineMembership": {
+            "httpMethod": "DELETE",
+            "parameters": {
+                "anon": {
+                    "location": "body",
+                    "required": false
+                },
+                "ban": {
+                    "location": "body",
+                    "required": false
+                },
+                "explaination": {
+                    "location": "body",
+                    "required": false
+                },
+                "member": {
+                    "location": "body",
+                    "required": false
+                },
+                "send_copy": {
+                    "location": "body",
+                    "required": false
+                },
+                "urlname": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": "Declines one or more requests for group membership",
+            "uri": "/:urlname/member/approvals"
+        },
+        "FindGroups": {
+            "httpMethod": "GET",
+            "parameters": {
+                "category": {
+                    "location": "body",
+                    "required": false
+                },
+                "country": {
+                    "location": "body",
+                    "required": false
+                },
+                "distance": {
+                    "location": "body",
+                    "required": false
+                },
+                "filter": {
+                    "location": "body",
+                    "required": false
+                },
+                "lat": {
+                    "location": "body",
+                    "required": false
+                },
+                "location": {
+                    "location": "body",
+                    "required": false
+                },
+                "lon": {
+                    "location": "body",
+                    "required": false
+                },
+                "members": {
+                    "location": "body",
+                    "required": false
+                },
+                "most_active": {
+                    "location": "body",
+                    "required": false
+                },
+                "newest": {
+                    "location": "body",
+                    "required": false
+                },
+                "radius": {
+                    "location": "body",
+                    "required": false
+                },
+                "text": {
+                    "location": "body",
+                    "required": false
+                },
+                "upcoming_events": {
+                    "location": "body",
+                    "required": false
+                },
+                "zip": {
+                    "location": "body",
+                    "required": false
+                }
+            },
+            "summary": "Text, location, category and friend-based group searches",
+            "uri": "/find/groups"
+        },
+        "GetActivityFeed": {
+            "httpMethod": "GET",
+            "parameters": {
+                "member_id": {
+                    "location": "body",
+                    "required": false
+                },
+                "page_start": {
+                    "location": "body",
+                    "required": false
+                }
+            },
+            "summary": "API method for retrieving the activity feed for a member's groups",
+            "uri": "/activity"
+        },
+        "GetAttendance": {
+            "httpMethod": "GET",
+            "parameters": {
+                "filter": {
+                    "location": "body",
+                    "required": false
+                },
+                "id": {
+                    "location": "uri",
+                    "required": true
+                },
+                "member": {
+                    "location": "body",
+                    "required": false
+                },
+                "urlname": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": "Lists attendance records for Meetup events",
+            "uri": "/:urlname/events/:id/attendance"
+        },
+        "GetComments": {
+            "httpMethod": "GET",
+            "parameters": {
+                "ctime": {
+                    "location": "body",
+                    "required": false
+                },
+                "group_id": {
+                    "location": "body",
+                    "required": true
+                },
+                "group_urlname": {
+                    "location": "body",
+                    "required": true
+                },
+                "topic, groupnum": {
+                    "location": "body",
+                    "required": true
+                }
+            },
+            "summary": "API method for accessing meetup group comments",
+            "uri": "/comments"
+        },
+        "GetDiscussionBoards": {
+            "httpMethod": "GET",
+            "parameters": {
+                "urlname": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": "Listings of Group discussion boards",
+            "uri": "/:urlname/boards"
+        },
+        "GetDiscussionPosts": {
+            "httpMethod": "GET",
+            "parameters": {
+                "bid": {
+                    "location": "uri",
+                    "required": true
+                },
+                "did": {
+                    "location": "uri",
+                    "required": true
+                },
+                "urlname": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": "Listing Group discussion posts",
+            "uri": "/:urlname/boards/:bid/discussions/:did"
+        },
+        "GetDiscussions": {
+            "httpMethod": "GET",
+            "parameters": {
+                "bid": {
+                    "location": "uri",
+                    "required": true
+                },
+                "urlname": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": "Listings of Group discussions",
+            "uri": "/:urlname/boards/:bid/discussions"
+        },
+        "GetOembed": {
+            "httpMethod": "GET",
+            "parameters": {
+                "maxwidth": {
+                    "location": "body",
+                    "required": false
+                },
+                "url": {
+                    "location": "body",
+                    "required": true
+                }
+            },
+            "summary": "oEmbed implementation",
+            "uri": "/oembed"
+        },
+        "GetRecommendedGroups": {
+            "httpMethod": "GET",
+            "parameters": {
+                "country": {
+                    "location": "body",
+                    "required": false
+                },
+                "lat": {
+                    "location": "body",
+                    "required": false
+                },
+                "location": {
+                    "location": "body",
+                    "required": false
+                },
+                "lon": {
+                    "location": "body",
+                    "required": false
+                },
+                "radius": {
+                    "location": "body",
+                    "required": false
+                },
+                "zip": {
+                    "location": "body",
+                    "required": false
+                }
+            },
+            "summary": "Returns groups Meetup finds relevant to you",
+            "uri": "/recommended/groups"
+        },
+        "GetTopics": {
+            "httpMethod": "GET",
+            "parameters": {
+                "alertees": {
+                    "location": "body",
+                    "required": false
+                },
+                "members": {
+                    "location": "body",
+                    "required": false
+                },
+                "name": {
+                    "location": "body",
+                    "required": false
+                },
+                "search": {
+                    "location": "body",
+                    "required": false
+                },
+                "topic": {
+                    "location": "body",
+                    "required": false
+                }
+            },
+            "summary": "API method for accessing meetup topics",
+            "uri": "/topics"
+        },
+        "PostAttendance": {
+            "httpMethod": "POST",
+            "parameters": {
+                "guests": {
+                    "location": "body",
+                    "required": false
+                },
+                "headcount": {
+                    "location": "body",
+                    "required": false
+                },
+                "id": {
+                    "location": "uri",
+                    "required": true
+                },
+                "member": {
+                    "location": "body",
+                    "required": true
+                },
+                "status": {
+                    "location": "body",
+                    "required": true
+                },
+                "urlname": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": "Takes Member attendance for an Event",
+            "uri": "/:urlname/events/:id/attendance"
+        }
+    }
+}
