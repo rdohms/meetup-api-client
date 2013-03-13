@@ -7,79 +7,79 @@
             "httpMethod": "POST",
             "parameters": {
                 "description": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "duration": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "editing": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "email_reminders": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "group_id": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "group_urlname": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "guest_limit": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "host_instructions": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "hosts": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "name": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "question_{index}": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "rsvp_alerts": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "rsvp_close": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "rsvp_limit": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "rsvp_open": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "time": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "venue_id": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "waitlisting": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "why": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 }
             },
@@ -90,39 +90,39 @@
             "httpMethod": "POST",
             "parameters": {
                 "answer_{qid}": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "group_id": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "group_urlname": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "intro": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "inv_code": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "new_photo": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "photo_id": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "site_name": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "site_url": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 }
             },
@@ -133,11 +133,11 @@
             "httpMethod": "POST",
             "parameters": {
                 "group_id": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "title": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 }
             },
@@ -159,7 +159,7 @@
             "httpMethod": "DELETE",
             "parameters": {
                 "fields": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "id": {
@@ -185,7 +185,7 @@
             "httpMethod": "DELETE",
             "parameters": {
                 "exit_comment": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "gid": {
@@ -215,31 +215,31 @@
             "httpMethod": "POST",
             "parameters": {
                 "description": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "editing": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "email_reminders": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "group_id": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "guest_limit": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "host_instructions": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "hosts": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "id": {
@@ -247,47 +247,47 @@
                     "required": true
                 },
                 "lat,lon": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "name": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "question_edit_{id}": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "question_{index}": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "rsvp_alerts": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "rsvp_close": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "rsvp_open": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "time": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "venue_id": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "waitlisting": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "why": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 }
             },
@@ -298,11 +298,11 @@
             "httpMethod": "POST",
             "parameters": {
                 "add_role": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "answer_{qid}": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "gid": {
@@ -310,7 +310,7 @@
                     "required": true
                 },
                 "intro": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "mid": {
@@ -318,27 +318,27 @@
                     "required": true
                 },
                 "new_photo": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "photo_id": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "remove_role": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "site_name": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "site_url": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "title": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 }
             },
@@ -349,31 +349,31 @@
             "httpMethod": "POST",
             "parameters": {
                 "add_topics": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "bio": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "birthday": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "city": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "city_id": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "country": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "gender": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "id": {
@@ -381,31 +381,31 @@
                     "required": true
                 },
                 "lang": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "lat": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "lon": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "name": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "radius": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "remove_topics": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "zip": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 }
             },
@@ -438,15 +438,15 @@
             "httpMethod": "GET",
             "parameters": {
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "member": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "shortname": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 }
             },
@@ -457,23 +457,23 @@
             "httpMethod": "GET",
             "parameters": {
                 "event_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "group_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "member_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "name": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "time": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 }
             },
@@ -484,19 +484,19 @@
             "httpMethod": "GET",
             "parameters": {
                 "callback": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "event_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "since_count": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "since_mtime": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 }
             },
@@ -507,15 +507,15 @@
             "httpMethod": "WS",
             "parameters": {
                 "event_id": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "since_count": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "since_mtime": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 }
             },
@@ -526,15 +526,15 @@
             "httpMethod": "GET",
             "parameters": {
                 "event_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "since_count": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "since_mtime": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 }
             },
@@ -545,15 +545,15 @@
             "httpMethod": "GET",
             "parameters": {
                 "event_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "since_count": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "since_mtime": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 }
             },
@@ -564,15 +564,15 @@
             "httpMethod": "GET",
             "parameters": {
                 "since_count": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "since_mtime": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "trickle": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 }
             },
@@ -583,11 +583,11 @@
             "httpMethod": "GET",
             "parameters": {
                 "since_count": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "since_mtime": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 }
             },
@@ -598,11 +598,11 @@
             "httpMethod": "GET",
             "parameters": {
                 "since_count": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "since_mtime": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 }
             },
@@ -613,31 +613,31 @@
             "httpMethod": "GET",
             "parameters": {
                 "distance": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "lat": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "lon": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "query": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "radius": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "size": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "smart": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 }
             },
@@ -648,55 +648,55 @@
             "httpMethod": "GET",
             "parameters": {
                 "city": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "country": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "daily_target": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "lat": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "limited_events": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "lon": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "radius": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "self_groups": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "state": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "text_format": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "time": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "zip": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 }
             },
@@ -707,7 +707,7 @@
             "httpMethod": "GET",
             "parameters": {
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "id": {
@@ -715,7 +715,7 @@
                     "required": true
                 },
                 "limited_events": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 }
             },
@@ -726,7 +726,7 @@
             "httpMethod": "GET",
             "parameters": {
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "id": {
@@ -741,11 +741,11 @@
             "httpMethod": "GET",
             "parameters": {
                 "comment_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "created": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 }
             },
@@ -756,39 +756,39 @@
             "httpMethod": "GET",
             "parameters": {
                 "comment_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "event_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "group_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "member_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "name": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "show_diffs": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "thread": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "time": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 }
             },
@@ -799,19 +799,19 @@
             "httpMethod": "GET",
             "parameters": {
                 "callback": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "event_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "since_count": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "since_mtime": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 }
             },
@@ -822,15 +822,15 @@
             "httpMethod": "WS",
             "parameters": {
                 "event_id": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "since_count": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "since_mtime": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 }
             },
@@ -841,19 +841,19 @@
             "httpMethod": "GET",
             "parameters": {
                 "event_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "member_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "rating": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "time": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 }
             },
@@ -864,51 +864,51 @@
             "httpMethod": "GET",
             "parameters": {
                 "event_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "group_domain": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "group_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "group_urlname": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "limited_events": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "member_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "rsvp": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "status": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "text_format": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "time": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "venue_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 }
             },
@@ -919,7 +919,7 @@
             "httpMethod": "GET",
             "parameters": {
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "gid": {
@@ -938,51 +938,51 @@
             "httpMethod": "GET",
             "parameters": {
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "group_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "group_urlname": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "interesting": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "joined": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "member_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "name": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "role": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "status": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "topic, groupnum": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "updated": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "visited": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 }
             },
@@ -993,71 +993,71 @@
             "httpMethod": "GET",
             "parameters": {
                 "category_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "country, city, state": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "domain": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "group_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "group_urlname": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "id": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "lat,lon": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "location": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "member_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "members": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "name": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "organizer_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "radius": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "topic": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "topic, groupnum": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "zip": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 }
             },
@@ -1068,7 +1068,7 @@
             "httpMethod": "GET",
             "parameters": {
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "id": {
@@ -1083,39 +1083,39 @@
             "httpMethod": "GET",
             "parameters": {
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "group_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "group_urlname": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "joined": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "member_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "name": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "service": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "topic,groupnum": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "visited": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 }
             },
@@ -1126,75 +1126,75 @@
             "httpMethod": "GET",
             "parameters": {
                 "and_text": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "category": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "city": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "country": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "distance": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "lat": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "limited_events": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "lon": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "radius": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "state": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "status": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "text": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "text_format": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "time": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "topic": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "trending": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "zip": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 }
             },
@@ -1205,11 +1205,11 @@
             "httpMethod": "GET",
             "parameters": {
                 "since_count": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "since_mtime": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 }
             },
@@ -1220,51 +1220,51 @@
             "httpMethod": "GET",
             "parameters": {
                 "city": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "country": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "distance": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "lat": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "lon": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "radius": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "rating": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "rating_count": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "state": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "text": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "zip": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 }
             },
@@ -1275,27 +1275,27 @@
             "httpMethod": "GET",
             "parameters": {
                 "event_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "group_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "photo_album_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "time": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "title": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "updated": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 }
             },
@@ -1306,23 +1306,23 @@
             "httpMethod": "GET",
             "parameters": {
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "member_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "name": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "photo_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "time": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 }
             },
@@ -1333,19 +1333,19 @@
             "httpMethod": "GET",
             "parameters": {
                 "callback": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "event_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "since_count": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "since_mtime": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 }
             },
@@ -1356,11 +1356,11 @@
             "httpMethod": "WS",
             "parameters": {
                 "since_count": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "since_mtime": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 }
             },
@@ -1371,39 +1371,39 @@
             "httpMethod": "GET",
             "parameters": {
                 "event_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "group_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "group_urlname": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "member_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "photo_album_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "photo_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "tagged": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "time": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 }
             },
@@ -1414,7 +1414,7 @@
             "httpMethod": "GET",
             "parameters": {
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "id": {
@@ -1429,19 +1429,19 @@
             "httpMethod": "GET",
             "parameters": {
                 "callback": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "event_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "since_count": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "since_mtime": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 }
             },
@@ -1452,15 +1452,15 @@
             "httpMethod": "WS",
             "parameters": {
                 "event_id": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "since_count": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "since_mtime": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 }
             },
@@ -1469,29 +1469,30 @@
         },
         "GetRSVPs": {
             "httpMethod": "GET",
+            "responseClass": "Response",
             "parameters": {
                 "event": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "event_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "name": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "rsvp": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "social": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 }
             },
@@ -1502,35 +1503,35 @@
             "httpMethod": "GET",
             "parameters": {
                 "distance": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "event_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "group_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "group_urlname": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "rating": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "rating_count": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "venue_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 }
             },
@@ -1541,19 +1542,19 @@
             "httpMethod": "POST",
             "parameters": {
                 "attendee_member_id": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "comment": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "event_id": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "lat, lon": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 }
             },
@@ -1564,19 +1565,19 @@
             "httpMethod": "POST",
             "parameters": {
                 "comment": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "event_id": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "in_reply_to": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "notifications": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 }
             },
@@ -1587,7 +1588,7 @@
             "httpMethod": "POST",
             "parameters": {
                 "comment_id": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 }
             },
@@ -1609,23 +1610,23 @@
             "httpMethod": "POST",
             "parameters": {
                 "await": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "caption": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "event_id": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "photo": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "photo_album_id": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 }
             },
@@ -1636,15 +1637,15 @@
             "httpMethod": "POST",
             "parameters": {
                 "attendee_count": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "event_id": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "rating": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 }
             },
@@ -1655,15 +1656,15 @@
             "httpMethod": "POST",
             "parameters": {
                 "await": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "main": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "photo": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 }
             },
@@ -1674,31 +1675,31 @@
             "httpMethod": "POST",
             "parameters": {
                 "cc_sender": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "dryrun": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "group_id": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "hide_email": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "member_id": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "message": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "subject": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 }
             },
@@ -1709,11 +1710,11 @@
             "httpMethod": "POST",
             "parameters": {
                 "comment": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "photo_id": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 }
             },
@@ -1724,27 +1725,27 @@
             "httpMethod": "POST",
             "parameters": {
                 "answer_{qid}": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "comments": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "event_id": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "guests": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "member_id": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "rsvp": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 }
             },

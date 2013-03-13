@@ -7,27 +7,27 @@
             "httpMethod": "POST",
             "parameters": {
                 "container_id": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "country, city, state": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "lat, lon": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "name": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "urlname": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "zip": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 }
             },
@@ -38,35 +38,35 @@
             "httpMethod": "POST",
             "parameters": {
                 "description": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "facebook_urlname": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "fields": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "link": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "link_name": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "name": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "twitter_urlname": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "udf_{varname}": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 }
             },
@@ -77,27 +77,27 @@
             "httpMethod": "POST",
             "parameters": {
                 "comment": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "event_id": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "fields": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "parent_id": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "time": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "udf_{varname}": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 }
             },
@@ -108,59 +108,59 @@
             "httpMethod": "POST",
             "parameters": {
                 "address1": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "community_id": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "country, city": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "description": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "fields": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "lat, lon": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "link": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "local_time": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "short_description": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "time": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "udf_{varname}": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "urlname, community_urlname": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "venue_name": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "zip": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 }
             },
@@ -171,31 +171,31 @@
             "httpMethod": "POST",
             "parameters": {
                 "container_id": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "description": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "fields": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "local_time": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "short_description": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "udf_{varname}": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "urlname": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 }
             },
@@ -239,11 +239,11 @@
             "httpMethod": "POST",
             "parameters": {
                 "city": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "country": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "id": {
@@ -251,19 +251,19 @@
                     "required": true
                 },
                 "lat, lon": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "name": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "state": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "zip": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 }
             },
@@ -274,15 +274,15 @@
             "httpMethod": "POST",
             "parameters": {
                 "description": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "facebook_urlname": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "fields": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "id": {
@@ -290,23 +290,23 @@
                     "required": true
                 },
                 "link": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "link_name": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "name": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "twitter_urlname": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "udf_{varname}": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 }
             },
@@ -317,7 +317,7 @@
             "httpMethod": "POST",
             "parameters": {
                 "comments": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "id": {
@@ -325,11 +325,11 @@
                     "required": true
                 },
                 "rsvps": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "updates": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 }
             },
@@ -340,19 +340,19 @@
             "httpMethod": "POST",
             "parameters": {
                 "address1": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "country, city, state": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "description": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "fields": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "id": {
@@ -360,35 +360,35 @@
                     "required": true
                 },
                 "lat, lon": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "link": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "local_time": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "short_description": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "time": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "udf_{varname}": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "venue_name": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "zip": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 }
             },
@@ -399,11 +399,11 @@
             "httpMethod": "POST",
             "parameters": {
                 "description": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "fields": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "id": {
@@ -411,11 +411,11 @@
                     "required": true
                 },
                 "short_description": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "udf_{varname}": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 }
             },
@@ -426,15 +426,15 @@
             "httpMethod": "POST",
             "parameters": {
                 "community_id": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "fields": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "udf_{varname}": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 }
             },
@@ -445,39 +445,39 @@
             "httpMethod": "GET",
             "parameters": {
                 "community_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "community_urlname": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "container_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "country, city, state": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "lat, lon": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "udf_{varname}": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "urlname": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "zip": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 }
             },
@@ -488,7 +488,7 @@
             "httpMethod": "GET",
             "parameters": {
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "id": {
@@ -503,7 +503,7 @@
             "httpMethod": "GET",
             "parameters": {
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "id": {
@@ -518,27 +518,27 @@
             "httpMethod": "GET",
             "parameters": {
                 "community_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "community_urlname": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "container_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "udf_{varname}": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "urlname": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 }
             },
@@ -549,23 +549,23 @@
             "httpMethod": "GET",
             "parameters": {
                 "community_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "container_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "udf_{varname}": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "urlname": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 }
             },
@@ -576,7 +576,7 @@
             "httpMethod": "GET",
             "parameters": {
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "id": {
@@ -591,7 +591,7 @@
             "httpMethod": "GET",
             "parameters": {
                 "comments": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "id": {
@@ -599,11 +599,11 @@
                     "required": true
                 },
                 "rsvps": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "updates": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 }
             },
@@ -614,23 +614,23 @@
             "httpMethod": "GET",
             "parameters": {
                 "container_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "link": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "udf_{varname}": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "urlname": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 }
             },
@@ -641,7 +641,7 @@
             "httpMethod": "GET",
             "parameters": {
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "id": {
@@ -667,47 +667,47 @@
             "httpMethod": "GET",
             "parameters": {
                 "comment_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "community_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "community_urlname": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "container_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "event_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "member_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "parent_comment_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "time": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "udf_{varname}": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "urlname": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 }
             },
@@ -718,7 +718,7 @@
             "httpMethod": "GET",
             "parameters": {
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "id": {
@@ -733,59 +733,59 @@
             "httpMethod": "GET",
             "parameters": {
                 "after": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "before": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "community_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "community_urlname": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "container_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "country, city": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "event_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "lat, lon": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "status": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "time": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "udf_{varname}": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "urlname": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "zip": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 }
             },
@@ -796,7 +796,7 @@
             "httpMethod": "GET",
             "parameters": {
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "id": {
@@ -811,7 +811,7 @@
             "httpMethod": "GET",
             "parameters": {
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "id": {
@@ -826,35 +826,35 @@
             "httpMethod": "GET",
             "parameters": {
                 "community_urlname": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "container_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "seed_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "short_description": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "status": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "udf_{varname}": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "urlname": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 }
             },
@@ -865,15 +865,15 @@
             "httpMethod": "POST",
             "parameters": {
                 "event_id": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "fields": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "udf_{varname}": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 }
             },
@@ -895,19 +895,19 @@
             "httpMethod": "GET",
             "parameters": {
                 "event_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "fields": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "member_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "udf_{varname}": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 }
             },

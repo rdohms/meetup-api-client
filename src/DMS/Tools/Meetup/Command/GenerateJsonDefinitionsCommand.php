@@ -211,7 +211,7 @@ class GenerateJsonDefinitionsCommand extends Command
 
             $params[$parameter->textContent] = array(
                 'required' => ($parameter->getAttribute('class') == 'param_required'),
-                'location' => 'body'
+                'location' => ($method == 'GET') ? 'query' : 'postField',
             );
         }
 

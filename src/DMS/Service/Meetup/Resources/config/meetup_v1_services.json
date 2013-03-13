@@ -7,11 +7,11 @@
             "httpMethod": "POST",
             "parameters": {
                 "member": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "send_copy": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "urlname": {
@@ -19,7 +19,7 @@
                     "required": true
                 },
                 "welcome_message": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 }
             },
@@ -30,23 +30,23 @@
             "httpMethod": "DELETE",
             "parameters": {
                 "anon": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "ban": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "explaination": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "member": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "send_copy": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "urlname": {
@@ -61,59 +61,59 @@
             "httpMethod": "GET",
             "parameters": {
                 "category": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "country": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "distance": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "filter": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "lat": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "location": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "lon": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "members": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "most_active": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "newest": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "radius": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "text": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "upcoming_events": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "zip": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 }
             },
@@ -124,11 +124,11 @@
             "httpMethod": "GET",
             "parameters": {
                 "member_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "page_start": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 }
             },
@@ -139,7 +139,7 @@
             "httpMethod": "GET",
             "parameters": {
                 "filter": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "id": {
@@ -147,7 +147,7 @@
                     "required": true
                 },
                 "member": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "urlname": {
@@ -162,19 +162,19 @@
             "httpMethod": "GET",
             "parameters": {
                 "ctime": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "group_id": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "group_urlname": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 },
                 "topic, groupnum": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 }
             },
@@ -230,11 +230,11 @@
             "httpMethod": "GET",
             "parameters": {
                 "maxwidth": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "url": {
-                    "location": "body",
+                    "location": "query",
                     "required": true
                 }
             },
@@ -245,27 +245,27 @@
             "httpMethod": "GET",
             "parameters": {
                 "country": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "lat": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "location": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "lon": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "radius": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "zip": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 }
             },
@@ -276,23 +276,23 @@
             "httpMethod": "GET",
             "parameters": {
                 "alertees": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "members": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "name": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "search": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 },
                 "topic": {
-                    "location": "body",
+                    "location": "query",
                     "required": false
                 }
             },
@@ -303,11 +303,11 @@
             "httpMethod": "POST",
             "parameters": {
                 "guests": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "headcount": {
-                    "location": "body",
+                    "location": "postField",
                     "required": false
                 },
                 "id": {
@@ -315,11 +315,11 @@
                     "required": true
                 },
                 "member": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "status": {
-                    "location": "body",
+                    "location": "postField",
                     "required": true
                 },
                 "urlname": {
