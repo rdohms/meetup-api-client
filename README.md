@@ -53,7 +53,7 @@ $client = MeetupKeyAuthClient::factory(array('key' => 'my-meetup-key'));
 // Use our __call method (auto-complete provided)
 $response = $client->getRSVPs(array('event_id' => 'the-event-id'));
 
-foreach ($response['results'] as $responseItem) {
+foreach ($response as $responseItem) {
     echo $responseItem['member']['name'] . PHP_EOL;
 }
 ``` 
@@ -70,10 +70,46 @@ $command->prepare();
 
 $response = $command->execute();
 
-foreach ($response['results'] as $responseItem) {
+foreach ($response as $responseItem) {
     echo $responseItem['member']['name'] . PHP_EOL;
 }
 ```
+
+## Response
+
+This wrapper implements two types of custom responses to facilitate the usage of the results directly.
+
+### Response for Collection
+
+When querying for collections the client wraps the result in a `MultiResultResponse`. This response implements a `Iterator` allowing you to directly iterate over the results, while still giving you access to all response data, as well as the metadata returned by the API using the `getMetaData()` method.
+
+```php
+<?php
+
+$rsvps = $client->getRSVPs(array('event_id' => 'the-event-id'));
+
+foreach ($rsvps as $rsvp) {
+    echo $rsvp['member']['name'] . PHP_EOL;
+}
+
+$metadata = $response->getMetaData();
+echo "Debug Url:" . $metadata['url'];
+```
+
+### Response for Single Resource
+
+When getting information of a single resource the client will wrap that in a `SingleResultResponse`. This response gives you direct array access to results, but retains response data so you can still access it.
+
+```php
+<?php
+
+$rsvp = $client->getRSVP(array('id' => 'rsvp-id'));
+
+echo "RSVP? " . $rsvp['response'];
+
+echo "StatusCode: " . $rsvp->getStatusCode();
+```
+
 ## License
 
 The API client is available under an MIT License.
