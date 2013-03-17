@@ -54,6 +54,7 @@ class MeetupKeyAuthClient extends AbstractMeetupClient
         $client->addSubscriber(new KeyAuthPlugin($configuration->get('key')));
 
         static::loadDefinitions($client);
+        static::loadStandardSettings($client);
 
         return $client;
     }

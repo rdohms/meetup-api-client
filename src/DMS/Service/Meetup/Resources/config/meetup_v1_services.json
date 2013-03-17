@@ -24,7 +24,7 @@
                 }
             },
             "summary": "Approves one or more requests for group membership",
-            "uri": "/:urlname/member/approvals"
+            "uri": "/{urlname}/member/approvals"
         },
         "DeclineMembership": {
             "httpMethod": "DELETE",
@@ -55,7 +55,7 @@
                 }
             },
             "summary": "Declines one or more requests for group membership",
-            "uri": "/:urlname/member/approvals"
+            "uri": "/{urlname}/member/approvals"
         },
         "FindGroups": {
             "httpMethod": "GET",
@@ -156,7 +156,7 @@
                 }
             },
             "summary": "Lists attendance records for Meetup events",
-            "uri": "/:urlname/events/:id/attendance"
+            "uri": "/{urlname}/events/{id}/attendance"
         },
         "GetComments": {
             "httpMethod": "GET",
@@ -190,7 +190,7 @@
                 }
             },
             "summary": "Listings of Group discussion boards",
-            "uri": "/:urlname/boards"
+            "uri": "/{urlname}/boards"
         },
         "GetDiscussionPosts": {
             "httpMethod": "GET",
@@ -209,7 +209,7 @@
                 }
             },
             "summary": "Listing Group discussion posts",
-            "uri": "/:urlname/boards/:bid/discussions/:did"
+            "uri": "/{urlname}/boards/{bid}/discussions/{did}"
         },
         "GetDiscussions": {
             "httpMethod": "GET",
@@ -224,7 +224,7 @@
                 }
             },
             "summary": "Listings of Group discussions",
-            "uri": "/:urlname/boards/:bid/discussions"
+            "uri": "/{urlname}/boards/{bid}/discussions"
         },
         "GetOembed": {
             "httpMethod": "GET",
@@ -328,7 +328,7 @@
                 }
             },
             "summary": "Takes Member attendance for an Event",
-            "uri": "/:urlname/events/:id/attendance"
+            "uri": "/{urlname}/events/{id}/attendance"
         }
     }
 }

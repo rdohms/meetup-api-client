@@ -12,6 +12,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class PhpDocGeneratorCommand extends Command
 {
+    const RESPONSE_SINGLE = 'SingleResultResponse';
+    const RESPONSE_MULTI  = 'MultiResultResponse';
+
     /**
      * @var InputInterface
      */
@@ -58,14 +61,33 @@ class PhpDocGeneratorCommand extends Command
         $operations = $serviceDescriptions->getOperations();
 
         foreach ($operations as $operation) {
-
             /** @var $operation Operation */
             $output->writeln(sprintf(
-                    '* @method \Guzzle\Http\Message\Response %s(array $args = array())',
+                    '* @method %s %s(array $args = array())',
+                    ($this->isMulti($operation))? self::RESPONSE_MULTI : self::RESPONSE_SINGLE,
                     lcfirst($operation->getName())
                 ));
         }
 
     }
 
+    /**
+     * Checks if the excepted response is Multi or Single
+     *
+     * @param Operation $operation
+     * @return bool
+     */
+    protected function isMulti($operation)
+    {
+        if ($operation->getHttpMethod() != 'GET') {
+            return false;
+        }
+
+        if ($operation->hasParam('id')) {
+            return false;
+        }
+
+        return true;
+
+    }
 }

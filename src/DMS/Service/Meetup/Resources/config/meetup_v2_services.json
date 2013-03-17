@@ -153,7 +153,7 @@
                 }
             },
             "summary": "Deletes a specified meetup",
-            "uri": "/2/event/:id"
+            "uri": "/2/event/{id}}"
         },
         "DeleteEventComment": {
             "httpMethod": "DELETE",
@@ -168,7 +168,7 @@
                 }
             },
             "summary": "Delete a single event comment or reply",
-            "uri": "/2/event_comment/:id"
+            "uri": "/2/event_comment/{id}"
         },
         "DeleteEventPhoto": {
             "httpMethod": "DELETE",
@@ -179,7 +179,7 @@
                 }
             },
             "summary": "Delete specified event photo",
-            "uri": "/2/photo/:id"
+            "uri": "/2/photo/{id}"
         },
         "DeleteGroupProfile": {
             "httpMethod": "DELETE",
@@ -198,7 +198,7 @@
                 }
             },
             "summary": "Deletes a member's group profile",
-            "uri": "/2/profile/:gid/:mid"
+            "uri": "/2/profile/{gid}/{mid}"
         },
         "DeletePhoto": {
             "httpMethod": "DELETE",
@@ -209,7 +209,7 @@
                 }
             },
             "summary": "Delete specified event photo",
-            "uri": "/2/photo/:id"
+            "uri": "/2/photo/{id}"
         },
         "EditEvent": {
             "httpMethod": "POST",
@@ -292,7 +292,7 @@
                 }
             },
             "summary": "Update an existing Meetup",
-            "uri": "/2/event/:id"
+            "uri": "/2/event/{id}"
         },
         "EditGroupProfile": {
             "httpMethod": "POST",
@@ -343,7 +343,7 @@
                 }
             },
             "summary": "Update a member's group profile",
-            "uri": "/2/profile/:gid/:mid"
+            "uri": "/2/profile/{gid}/{mid}"
         },
         "EditMember": {
             "httpMethod": "POST",
@@ -410,7 +410,7 @@
                 }
             },
             "summary": "Edit the authorized member's attributes",
-            "uri": "/2/member/:id"
+            "uri": "/2/member/{id}"
         },
         "EventCommentSubscribe": {
             "httpMethod": "POST",
@@ -421,7 +421,7 @@
                 }
             },
             "summary": "Subscribe to notifications on updates to a given comment thread",
-            "uri": "/2/event_comment_subscribe/:id"
+            "uri": "/2/event_comment_subscribe/{id}"
         },
         "EventCommentUnsubscribe": {
             "httpMethod": "DELETE",
@@ -432,7 +432,7 @@
                 }
             },
             "summary": "Unsubscribe to notifications for updates to a given comment thread",
-            "uri": "/2/event_comment_subscribe/:id"
+            "uri": "/2/event_comment_subscribe/{id}"
         },
         "GetCategories": {
             "httpMethod": "GET",
@@ -720,7 +720,7 @@
                 }
             },
             "summary": "Retrieve a single meetup",
-            "uri": "/2/event/:id"
+            "uri": "/2/event/{id}"
         },
         "GetEventComment": {
             "httpMethod": "GET",
@@ -735,7 +735,7 @@
                 }
             },
             "summary": "Retrieve a single event comment or reply",
-            "uri": "/2/event_comment/:id"
+            "uri": "/2/event_comment/{id}"
         },
         "GetEventCommentLikes": {
             "httpMethod": "GET",
@@ -932,7 +932,7 @@
                 }
             },
             "summary": "Retrieves a single group profile",
-            "uri": "/2/profile/:gid/:mid"
+            "uri": "/2/profile/{gid}/{mid}"
         },
         "GetGroupProfiles": {
             "httpMethod": "GET",
@@ -1077,7 +1077,7 @@
                 }
             },
             "summary": "Retrieve a single member",
-            "uri": "/2/member/:id"
+            "uri": "/2/member/{id}"
         },
         "GetMembers": {
             "httpMethod": "GET",
@@ -1423,7 +1423,7 @@
                 }
             },
             "summary": "Retrieve a single RSVP",
-            "uri": "/2/rsvp/:id"
+            "uri": "/2/rsvp/{id}"
         },
         "GetRSVPStream": {
             "httpMethod": "GET",
@@ -1469,7 +1469,7 @@
         },
         "GetRSVPs": {
             "httpMethod": "GET",
-            "responseClass": "Response",
+            "responseClass": "MultiResultResponse",
             "parameters": {
                 "event": {
                     "location": "query",
@@ -1604,7 +1604,7 @@
                 }
             },
             "summary": "Like a given Event comment",
-            "uri": "/2/event_comment_like/:id"
+            "uri": "/2/event_comment_like/{id}"
         },
         "PostEventPhoto": {
             "httpMethod": "POST",
@@ -1622,7 +1622,7 @@
                     "required": true
                 },
                 "photo": {
-                    "location": "postField",
+                    "location": "postFile",
                     "required": true
                 },
                 "photo_album_id": {
@@ -1664,7 +1664,7 @@
                     "required": false
                 },
                 "photo": {
-                    "location": "postField",
+                    "location": "postFile",
                     "required": true
                 }
             },
@@ -1761,7 +1761,7 @@
                 }
             },
             "summary": "Unlike a given Event comment",
-            "uri": "/2/event_comment_like/:id"
+            "uri": "/2/event_comment_like/{id}"
         }
     }
 }

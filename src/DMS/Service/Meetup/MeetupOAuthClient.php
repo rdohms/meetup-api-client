@@ -63,6 +63,7 @@ class MeetupOAuthClient extends AbstractMeetupClient
             )));
 
         static::loadDefinitions($client);
+        static::loadStandardSettings($client);
 
         return $client;
     }

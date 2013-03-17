@@ -211,7 +211,7 @@
                 }
             },
             "summary": "For container owners. API method for removing a community. All events of the community will be removed as well.",
-            "uri": "/ew/community/:id"
+            "uri": "/ew/community/{id}"
         },
         "DeleteEWRSVP": {
             "httpMethod": "DELETE",
@@ -222,7 +222,7 @@
                 }
             },
             "summary": null,
-            "uri": "/ew/rsvp/:id"
+            "uri": "/ew/rsvp/{id}"
         },
         "DeleteEventSeed": {
             "httpMethod": "DELETE",
@@ -233,7 +233,7 @@
                 }
             },
             "summary": "For container owners. API method for removing all events seeded to communities.",
-            "uri": "/ew/seed/:id"
+            "uri": "/ew/seed/{id}"
         },
         "EditCommunity": {
             "httpMethod": "POST",
@@ -268,7 +268,7 @@
                 }
             },
             "summary": null,
-            "uri": "/ew/community/:id"
+            "uri": "/ew/community/{id}"
         },
         "EditContainer": {
             "httpMethod": "POST",
@@ -311,7 +311,7 @@
                 }
             },
             "summary": null,
-            "uri": "/ew/container/:id"
+            "uri": "/ew/container/{id}"
         },
         "EditContainerAlert": {
             "httpMethod": "POST",
@@ -334,7 +334,7 @@
                 }
             },
             "summary": null,
-            "uri": "/ew/container/:id/alerts"
+            "uri": "/ew/container/{id}/alerts"
         },
         "EditEWEvent": {
             "httpMethod": "POST",
@@ -393,7 +393,7 @@
                 }
             },
             "summary": null,
-            "uri": "/ew/event/:id"
+            "uri": "/ew/event/{id}"
         },
         "EditEventSeed": {
             "httpMethod": "POST",
@@ -420,7 +420,7 @@
                 }
             },
             "summary": "For container owners. API method for editing events seeded to communities.",
-            "uri": "/ew/seed/:id"
+            "uri": "/ew/seed/{id}"
         },
         "FollowCommunity": {
             "httpMethod": "POST",
@@ -497,7 +497,7 @@
                 }
             },
             "summary": null,
-            "uri": "/ew/community/:id"
+            "uri": "/ew/community/{id}"
         },
         "GetCommunityFollow": {
             "httpMethod": "GET",
@@ -512,7 +512,7 @@
                 }
             },
             "summary": null,
-            "uri": "/ew/follow/:id"
+            "uri": "/ew/follow/{id}"
         },
         "GetCommunityFollowers": {
             "httpMethod": "GET",
@@ -585,7 +585,7 @@
                 }
             },
             "summary": null,
-            "uri": "/ew/container/:id"
+            "uri": "/ew/container/{id}"
         },
         "GetContainerAlerts": {
             "httpMethod": "GET",
@@ -608,7 +608,7 @@
                 }
             },
             "summary": null,
-            "uri": "/ew/container/:id/alerts"
+            "uri": "/ew/container/{id}/alerts"
         },
         "GetContainers": {
             "httpMethod": "GET",
@@ -650,7 +650,7 @@
                 }
             },
             "summary": null,
-            "uri": "/ew/comment/:id"
+            "uri": "/ew/comment/{id}"
         },
         "DeleteEWComment": {
             "httpMethod": "DELETE",
@@ -661,7 +661,7 @@
                 }
             },
             "summary": null,
-            "uri": "/ew/comment/:id"
+            "uri": "/ew/comment/{id}"
         },
         "GetEWComments": {
             "httpMethod": "GET",
@@ -727,7 +727,7 @@
                 }
             },
             "summary": null,
-            "uri": "/ew/event/:id"
+            "uri": "/ew/event/{id}"
         },
         "GetEWEvents": {
             "httpMethod": "GET",
@@ -805,7 +805,7 @@
                 }
             },
             "summary": null,
-            "uri": "/ew/rsvp/:id"
+            "uri": "/ew/rsvp/{id}"
         },
         "GetEventSeed": {
             "httpMethod": "GET",
@@ -820,7 +820,7 @@
                 }
             },
             "summary": "For container owners. API method for querying an event seeded to communities.",
-            "uri": "/ew/seed/:id"
+            "uri": "/ew/seed/{id}"
         },
         "GetEventSeeds": {
             "httpMethod": "GET",
@@ -889,7 +889,7 @@
                 }
             },
             "summary": null,
-            "uri": "/ew/follow/:id"
+            "uri": "/ew/follow/{id}"
         },
         "getEWRSVPs": {
             "httpMethod": "GET",
