@@ -6,7 +6,7 @@ use Closure;
 use Guzzle\Http\Message\Response as BaseResponse;
 use Traversable;
 
-class MultiResultResponse extends BaseResponse implements \IteratorAggregate, \Countable
+class MultiResultResponse extends BaseResponse implements \Countable, \Iterator
 {
     /**
      * Data returned from Request
@@ -55,19 +55,6 @@ class MultiResultResponse extends BaseResponse implements \IteratorAggregate, \C
     }
 
     /**
-     * (PHP 5 &gt;= 5.0.0)<br/>
-     * Retrieve an external iterator
-     *
-     * @link http://php.net/manual/en/iteratoraggregate.getiterator.php
-     * @return Traversable An instance of an object implementing <b>Iterator</b> or
-     * <b>Traversable</b>
-     */
-    public function getIterator()
-    {
-        return new \ArrayIterator($this->data);
-    }
-
-    /**
      * (PHP 5 &gt;= 5.1.0)<br/>
      * Count elements of an object
      *
@@ -89,7 +76,11 @@ class MultiResultResponse extends BaseResponse implements \IteratorAggregate, \C
      */
     public function map(Closure $func)
     {
-        return new static(array_map($func, $this->data));
+        $clone = clone $this;
+
+        $clone->setData(array_map($func, $this->data));
+
+        return $clone;
     }
 
     /**
@@ -102,7 +93,11 @@ class MultiResultResponse extends BaseResponse implements \IteratorAggregate, \C
      */
     public function filter(Closure $p)
     {
-        return new static(array_filter($this->data, $p));
+        $clone = clone $this;
+
+        $clone->setData(array_filter($this->data, $p));
+
+        return $clone;
     }
     /**
      * Applies the given predicate p to all elements of this collection,
@@ -121,6 +116,67 @@ class MultiResultResponse extends BaseResponse implements \IteratorAggregate, \C
         }
 
         return true;
+    }
+
+    /**
+     * (PHP 5 &gt;= 5.0.0)<br/>
+     * Return the current element
+     *
+     * @link http://php.net/manual/en/iterator.current.php
+     * @return mixed Can return any type.
+     */
+    public function current()
+    {
+        return current($this->data);
+    }
+
+    /**
+     * (PHP 5 &gt;= 5.0.0)<br/>
+     * Move forward to next element
+     *
+     * @link http://php.net/manual/en/iterator.next.php
+     * @return void Any returned value is ignored.
+     */
+    public function next()
+    {
+        next($this->data);
+    }
+
+    /**
+     * (PHP 5 &gt;= 5.0.0)<br/>
+     * Return the key of the current element
+     *
+     * @link http://php.net/manual/en/iterator.key.php
+     * @return mixed scalar on success, or null on failure.
+     */
+    public function key()
+    {
+        return key($this->data);
+    }
+
+    /**
+     * (PHP 5 &gt;= 5.0.0)<br/>
+     * Checks if current position is valid
+     *
+     * @link http://php.net/manual/en/iterator.valid.php
+     * @return boolean The return value will be casted to boolean and then evaluated.
+     * Returns true on success or false on failure.
+     */
+    public function valid()
+    {
+        return false !== current($this->data);
+    }
+
+    /**
+     * (PHP 5 &gt;= 5.0.0)<br/>
+     * Rewind the Iterator to the first element
+     *
+     * @link http://php.net/manual/en/iterator.rewind.php
+     * @return void Any returned value is ignored.
+     */
+    public function rewind()
+    {
+        reset($this->data);
     }
 
     /**
