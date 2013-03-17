@@ -2,6 +2,7 @@
 
 namespace DMS\Service\Meetup\Response;
 
+use Closure;
 use Guzzle\Http\Message\Response as BaseResponse;
 use Traversable;
 
@@ -79,11 +80,55 @@ class MultiResultResponse extends BaseResponse implements \IteratorAggregate, \C
     }
 
     /**
+     * Applies the given function to each element in the collection and returns
+     * a new collection with the elements returned by the function.
+     *
+     * @param Closure $func
+     *
+     * @return MultiResultResponse
+     */
+    public function map(Closure $func)
+    {
+        return new static(array_map($func, $this->data));
+    }
+
+    /**
+     * Returns all the elements of this collection that satisfy the predicate p.
+     * The order of the elements is preserved.
+     *
+     * @param Closure $p The predicate used for filtering.
+     *
+     * @return MultiResultResponse A collection with the results of the filter operation.
+     */
+    public function filter(Closure $p)
+    {
+        return new static(array_filter($this->data, $p));
+    }
+    /**
+     * Applies the given predicate p to all elements of this collection,
+     * returning true, if the predicate yields true for all elements.
+     *
+     * @param Closure $p The predicate.
+     *
+     * @return boolean TRUE, if the predicate yields TRUE for all elements, FALSE otherwise.
+     */
+    public function forAll(Closure $p)
+    {
+        foreach ($this->data as $key => $element) {
+            if ( ! $p($key, $element)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Returns true array instance
      *
      * @return array
      */
-    public function __toArray()
+    public function toArray()
     {
         return $this->data;
     }

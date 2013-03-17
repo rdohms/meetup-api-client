@@ -131,7 +131,7 @@ class SingleResultResponse extends BaseResponse implements \ArrayAccess
      *
      * @return array
      */
-    public function __toArray()
+    public function toArray()
     {
         return $this->data;
     }
