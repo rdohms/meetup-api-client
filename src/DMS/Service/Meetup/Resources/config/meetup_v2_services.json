@@ -914,6 +914,10 @@
                 "venue_id": {
                     "location": "query",
                     "required": false
+                },
+                "desc": {
+                    "location": "query",
+                    "required": false
                 }
             },
             "summary": "Access Meetup events using a group, member, or event id. Events in private groups are available only to authenticated members of those groups. To search events by topic or location, see Open Events.",

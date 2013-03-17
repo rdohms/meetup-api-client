@@ -29,7 +29,6 @@ class MeetupResponseParserTest extends GuzzleTestCase
         switch($expectedResponse) {
             case 'multi':
                 $this->assertInstanceOf('\DMS\Service\Meetup\Response\MultiResultResponse', $result);
-                $this->assertInstanceOf('\ArrayIterator', $result->getIterator());
                 break;
             case 'single':
                 $this->assertInstanceOf('\DMS\Service\Meetup\Response\SingleResultResponse', $result);
