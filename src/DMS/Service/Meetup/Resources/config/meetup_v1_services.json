@@ -167,15 +167,19 @@
                 },
                 "group_id": {
                     "location": "query",
-                    "required": true
+                    "required": false
                 },
                 "group_urlname": {
                     "location": "query",
-                    "required": true
+                    "required": false
                 },
-                "topic, groupnum": {
+                "topic": {
                     "location": "query",
-                    "required": true
+                    "required": false
+                },
+                "groupnum": {
+                    "location": "query",
+                    "required": false
                 }
             },
             "summary": "API method for accessing meetup group comments",

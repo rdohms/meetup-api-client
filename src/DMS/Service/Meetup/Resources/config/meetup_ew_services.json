@@ -10,11 +10,23 @@
                     "location": "postField",
                     "required": true
                 },
-                "country, city, state": {
+                "country": {
                     "location": "postField",
                     "required": true
                 },
-                "lat, lon": {
+                "city": {
+                    "location": "postField",
+                    "required": true
+                },
+                "state": {
+                    "location": "postField",
+                    "required": true
+                },
+                "lat": {
+                    "location": "postField",
+                    "required": true
+                },
+                "lon": {
                     "location": "postField",
                     "required": true
                 },
@@ -115,7 +127,11 @@
                     "location": "postField",
                     "required": true
                 },
-                "country, city": {
+                "country": {
+                    "location": "postField",
+                    "required": true
+                },
+                "city": {
                     "location": "postField",
                     "required": true
                 },
@@ -127,7 +143,11 @@
                     "location": "postField",
                     "required": false
                 },
-                "lat, lon": {
+                "lat": {
+                    "location": "postField",
+                    "required": true
+                },
+                "lon": {
                     "location": "postField",
                     "required": true
                 },
@@ -151,7 +171,11 @@
                     "location": "postField",
                     "required": false
                 },
-                "urlname, community_urlname": {
+                "urlname": {
+                    "location": "postField",
+                    "required": true
+                },
+                "community_urlname": {
                     "location": "postField",
                     "required": true
                 },
@@ -250,7 +274,11 @@
                     "location": "uri",
                     "required": true
                 },
-                "lat, lon": {
+                "lat": {
+                    "location": "postField",
+                    "required": false
+                },
+                "lon": {
                     "location": "postField",
                     "required": false
                 },
@@ -343,7 +371,15 @@
                     "location": "postField",
                     "required": false
                 },
-                "country, city, state": {
+                "country": {
+                    "location": "postField",
+                    "required": false
+                },
+                "city": {
+                    "location": "postField",
+                    "required": false
+                },
+                "state": {
                     "location": "postField",
                     "required": false
                 },
@@ -359,7 +395,11 @@
                     "location": "uri",
                     "required": true
                 },
-                "lat, lon": {
+                "lat": {
+                    "location": "postField",
+                    "required": false
+                },
+                "lon": {
                     "location": "postField",
                     "required": false
                 },
@@ -446,27 +486,39 @@
             "parameters": {
                 "community_id": {
                     "location": "query",
-                    "required": true
+                    "required": false
                 },
                 "community_urlname": {
                     "location": "query",
-                    "required": true
+                    "required": false
                 },
                 "container_id": {
                     "location": "query",
-                    "required": true
+                    "required": false
                 },
-                "country, city, state": {
+                "country": {
                     "location": "query",
-                    "required": true
+                    "required": false
+                },
+                "city": {
+                    "location": "query",
+                    "required": false
+                },
+                "state": {
+                    "location": "query",
+                    "required": false
                 },
                 "fields": {
                     "location": "query",
                     "required": false
                 },
-                "lat, lon": {
+                "lat": {
                     "location": "query",
-                    "required": true
+                    "required": false
+                },
+                "lon": {
+                    "location": "query",
+                    "required": false
                 },
                 "udf_{varname}": {
                     "location": "query",
@@ -474,11 +526,11 @@
                 },
                 "urlname": {
                     "location": "query",
-                    "required": true
+                    "required": false
                 },
                 "zip": {
                     "location": "query",
-                    "required": true
+                    "required": false
                 }
             },
             "summary": null,
@@ -519,15 +571,15 @@
             "parameters": {
                 "community_id": {
                     "location": "query",
-                    "required": true
+                    "required": false
                 },
                 "community_urlname": {
                     "location": "query",
-                    "required": true
+                    "required": false
                 },
                 "container_id": {
                     "location": "query",
-                    "required": true
+                    "required": false
                 },
                 "fields": {
                     "location": "query",
@@ -539,7 +591,7 @@
                 },
                 "urlname": {
                     "location": "query",
-                    "required": true
+                    "required": false
                 }
             },
             "summary": null,
@@ -615,7 +667,7 @@
             "parameters": {
                 "container_id": {
                     "location": "query",
-                    "required": true
+                    "required": false
                 },
                 "fields": {
                     "location": "query",
@@ -623,7 +675,7 @@
                 },
                 "link": {
                     "location": "query",
-                    "required": true
+                    "required": false
                 },
                 "udf_{varname}": {
                     "location": "query",
@@ -631,7 +683,7 @@
                 },
                 "urlname": {
                     "location": "query",
-                    "required": true
+                    "required": false
                 }
             },
             "summary": null,
@@ -668,11 +720,11 @@
             "parameters": {
                 "comment_id": {
                     "location": "query",
-                    "required": true
+                    "required": false
                 },
                 "community_id": {
                     "location": "query",
-                    "required": true
+                    "required": false
                 },
                 "community_urlname": {
                     "location": "query",
@@ -680,11 +732,11 @@
                 },
                 "container_id": {
                     "location": "query",
-                    "required": true
+                    "required": false
                 },
                 "event_id": {
                     "location": "query",
-                    "required": true
+                    "required": false
                 },
                 "fields": {
                     "location": "query",
@@ -692,11 +744,11 @@
                 },
                 "member_id": {
                     "location": "query",
-                    "required": true
+                    "required": false
                 },
                 "parent_comment_id": {
                     "location": "query",
-                    "required": true
+                    "required": false
                 },
                 "time": {
                     "location": "query",
@@ -708,7 +760,7 @@
                 },
                 "urlname": {
                     "location": "query",
-                    "required": true
+                    "required": false
                 }
             },
             "summary": null,
@@ -742,7 +794,7 @@
                 },
                 "community_id": {
                     "location": "query",
-                    "required": true
+                    "required": false
                 },
                 "community_urlname": {
                     "location": "query",
@@ -750,21 +802,29 @@
                 },
                 "container_id": {
                     "location": "query",
-                    "required": true
+                    "required": false
                 },
-                "country, city": {
+                "country": {
+                    "location": "query",
+                    "required": false
+                },
+                "city": {
                     "location": "query",
                     "required": false
                 },
                 "event_id": {
                     "location": "query",
-                    "required": true
+                    "required": false
                 },
                 "fields": {
                     "location": "query",
                     "required": false
                 },
-                "lat, lon": {
+                "lat": {
+                    "location": "query",
+                    "required": false
+                },
+                "lon": {
                     "location": "query",
                     "required": false
                 },
@@ -782,7 +842,7 @@
                 },
                 "urlname": {
                     "location": "query",
-                    "required": true
+                    "required": false
                 },
                 "zip": {
                     "location": "query",
@@ -831,7 +891,7 @@
                 },
                 "container_id": {
                     "location": "query",
-                    "required": true
+                    "required": false
                 },
                 "fields": {
                     "location": "query",
@@ -839,7 +899,7 @@
                 },
                 "seed_id": {
                     "location": "query",
-                    "required": true
+                    "required": false
                 },
                 "short_description": {
                     "location": "query",
@@ -855,7 +915,7 @@
                 },
                 "urlname": {
                     "location": "query",
-                    "required": true
+                    "required": false
                 }
             },
             "summary": "For container owners. API method for accessing events seeded to communities.",
