@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+X-OAuth-Scopes: basic
+Date: Sun, 17 Mar 2013 12:43:46 GMT
+Content-Encoding: gzip
+Server: Apache-Coyote/1.1
+Vary: Accept-Encoding,User-Agent
+Content-Type: application/json;charset=utf-8
+X-Meetup-server: api2.int.meetup.com
+Connection: close
+Content-Length: 744
+X-Accepted-OAuth-Scopes: basic
+
+{"results":[{"response":"no","member":{"name":"Bani","member_id":74294622},"member_photo":{"photo_link":"http:\/\/photos3.meetupstatic.com\/photos\/member\/7\/2\/9\/e\/member_89129342.jpeg","highres_link":"http:\/\/photos1.meetupstatic.com\/photos\/member\/7\/2\/9\/e\/highres_89129342.jpeg","thumb_link":"http:\/\/photos1.meetupstatic.com\/photos\/member\/7\/2\/9\/e\/thumb_89129342.jpeg","photo_id":89129342},"created":1361718772000,"event":{"id":"qjpgfdyrgbhb","time":1365201000000,"event_url":"http:\/\/www.meetup.com\/Meetup-API-Testing\/events\/106134832\/","name":"now less than weekly"},"mtime":1361718772000,"guests":0,"rsvp_id":702769262,"venue":{"id":6963732,"zip":"10021","lon":-73.958839,"repinned":false,"name":"Black Dragon","state":"NY","address_1":"1317 3rd Avenue","lat":40.771931,"city":"New York","country":"us"},"group":{"id":1556336,"group_lat":40.70000076293945,"group_lon":-73.98999786376953,"join_mode":"approval","urlname":"Meetup-API-Testing"}},{"response":"yes","member":{"name":"Rob","member_id":78218492},"created":1363195266000,"event":{"id":"qjpgfdyrgbhb","time":1365201000000,"event_url":"http:\/\/www.meetup.com\/Meetup-API-Testing\/events\/106134832\/","name":"now less than weekly"},"mtime":1363195266000,"guests":0,"rsvp_id":725173342,"venue":{"id":6963732,"zip":"10021","lon":-73.958839,"repinned":false,"name":"Black Dragon","state":"NY","address_1":"1317 3rd Avenue","lat":40.771931,"city":"New York","country":"us"},"group":{"id":1556336,"group_lat":40.70000076293945,"group_lon":-73.98999786376953,"join_mode":"approval","urlname":"Meetup-API-Testing"}}],"meta":{"lon":"","count":2,"link":"https:\/\/api.meetup.com\/2\/rsvps","next":"","total_count":2,"url":"https:\/\/api.meetup.com\/2\/rsvps?key=54855707c254f3f793214051c437a&event_id=106134832&order=event&desc=false&format=json&offset=0&page=200&fields=","id":"","title":"Meetup RSVPs v2","updated":1363195266000,"description":"Query for Event RSVPs by event","method":"RSVPs v2","lat":""}}

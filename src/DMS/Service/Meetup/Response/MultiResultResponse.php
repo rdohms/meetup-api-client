@@ -5,9 +5,8 @@ namespace DMS\Service\Meetup\Response;
 use Guzzle\Http\Message\Response as BaseResponse;
 use Traversable;
 
-class MultiResultResponse extends BaseResponse implements \IteratorAggregate
+class MultiResultResponse extends BaseResponse implements \IteratorAggregate, \Countable
 {
-
     /**
      * Data returned from Request
      *
@@ -65,6 +64,18 @@ class MultiResultResponse extends BaseResponse implements \IteratorAggregate
     public function getIterator()
     {
         return new \ArrayIterator($this->data);
+    }
+
+    /**
+     * (PHP 5 &gt;= 5.1.0)<br/>
+     * Count elements of an object
+     *
+     * @link http://php.net/manual/en/countable.count.php
+     * @return int The custom count as an integer.
+     */
+    public function count()
+    {
+        return count($this->data);
     }
 
     /**

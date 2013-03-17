@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+X-OAuth-Scopes: basic
+Date: Sun, 17 Mar 2013 12:43:46 GMT
+Content-Encoding: gzip
+Server: Apache-Coyote/1.1
+Vary: Accept-Encoding,User-Agent
+Content-Type: application/json;charset=utf-8
+X-Meetup-server	api0.int.meetup.com
+Connection: close
+Content-Length	391
+X-Accepted-OAuth-Scopes: basic
+
+{"response":"no","created":1361718772000,"event":{"id":"qjpgfdyrgbhb","time":1365201000000,"event_url":"http:\/\/www.meetup.com\/Meetup-API-Testing\/events\/106134832\/","name":"now less than weekly"},"mtime":1361718772000,"guests":0,"rsvp_id":702769262,"group":{"id":1556336,"group_lat":40.70000076293945,"group_lon":-73.98999786376953,"join_mode":"approval","urlname":"Meetup-API-Testing"},"venue":{"id":6963732,"zip":"10021","lon":-73.958839,"repinned":false,"name":"Black Dragon","state":"NY","address_1":"1317 3rd Avenue","lat":40.771931,"city":"New York","country":"us"}}

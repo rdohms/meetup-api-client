@@ -1,5 +1,8 @@
 <?php
 
+use Guzzle\Service\Builder\ServiceBuilder;
+use Guzzle\Tests\GuzzleTestCase;
+
 include __DIR__.'/../vendor/autoload.php';
 
 Guzzle\Tests\GuzzleTestCase::setServiceBuilder(Guzzle\Service\Builder\ServiceBuilder::factory(array(
@@ -19,3 +22,7 @@ Guzzle\Tests\GuzzleTestCase::setServiceBuilder(Guzzle\Service\Builder\ServiceBui
                 )
             )
         )));
+
+
+$basePath = __DIR__ . '/mock/';
+GuzzleTestCase::setMockBasePath($basePath);

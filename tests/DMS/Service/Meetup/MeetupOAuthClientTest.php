@@ -5,7 +5,8 @@ use DMS\Service\Meetup\MeetupKeyAuthClient;
 use DMS\Service\Meetup\MeetupOAuthClient;
 use Guzzle\Tests\GuzzleTestCase;
 
-class MeetupOAuthClientTest extends GuzzleTestCase {
+class MeetupOAuthClientTest extends GuzzleTestCase
+{
 
     public function testFactory()
     {

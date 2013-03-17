@@ -189,9 +189,6 @@ abstract class AbstractMeetupClient extends Client
         //Force UTF-8 MultiResultResponse
         $client->setDefaultHeaders(array('Accept-Charset' => 'utf-8'));
 
-        //Force JSON
-//        $client->setDefaultHeaders(array('Accept' => 'application/json'));
-
         //Enable Magic Method Handling
         $client->enableMagicMethods(true);
     }
