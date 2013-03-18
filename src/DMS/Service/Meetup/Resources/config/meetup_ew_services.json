@@ -3,6 +3,37 @@
     "apiVersion": "Everywhere",
     "description": "Meetup Everywhere API Methods: http://www.meetup.com/meetup_api/#everywhere",
     "operations": {
+        "EWBaseGet": {
+            "httpMethod": "GET",
+            "parameters": {
+                "page": {
+                    "location": "query",
+                    "required": false
+                },
+                "offset": {
+                    "location": "query",
+                    "required": false
+                },
+                "desc": {
+                    "location": "query",
+                    "required": false
+                },
+                "order": {
+                    "location": "query",
+                    "required": false
+                },
+                "only": {
+                    "location": "query",
+                    "required": false
+                },
+                "omit": {
+                    "location": "query",
+                    "required": false
+                }
+            },
+            "summary": "Base for GET Operations, includes parameters available to all GET requests",
+            "uri": "/"
+        },
         "CreateCommunity": {
             "httpMethod": "POST",
             "parameters": {
@@ -482,6 +513,7 @@
             "uri": "/ew/follow"
         },
         "GetCommunities": {
+            "extends": "EWBaseGet",
             "httpMethod": "GET",
             "parameters": {
                 "community_id": {
@@ -537,6 +569,7 @@
             "uri": "/ew/communities"
         },
         "GetCommunity": {
+            "extends": "EWBaseGet",
             "httpMethod": "GET",
             "parameters": {
                 "fields": {
@@ -552,6 +585,7 @@
             "uri": "/ew/community/{id}"
         },
         "GetCommunityFollow": {
+            "extends": "EWBaseGet",
             "httpMethod": "GET",
             "parameters": {
                 "fields": {
@@ -567,6 +601,7 @@
             "uri": "/ew/follow/{id}"
         },
         "GetCommunityFollowers": {
+            "extends": "EWBaseGet",
             "httpMethod": "GET",
             "parameters": {
                 "community_id": {
@@ -598,6 +633,7 @@
             "uri": "/ew/followers"
         },
         "GetCommunityFollows": {
+            "extends": "EWBaseGet",
             "httpMethod": "GET",
             "parameters": {
                 "community_id": {
@@ -625,6 +661,7 @@
             "uri": "/ew/follows"
         },
         "GetContainer": {
+            "extends": "EWBaseGet",
             "httpMethod": "GET",
             "parameters": {
                 "fields": {
@@ -640,6 +677,7 @@
             "uri": "/ew/container/{id}"
         },
         "GetContainerAlerts": {
+            "extends": "EWBaseGet",
             "httpMethod": "GET",
             "parameters": {
                 "comments": {
@@ -663,6 +701,7 @@
             "uri": "/ew/container/{id}/alerts"
         },
         "GetContainers": {
+            "extends": "EWBaseGet",
             "httpMethod": "GET",
             "parameters": {
                 "container_id": {
@@ -690,6 +729,7 @@
             "uri": "/ew/containers"
         },
         "GetEWComment": {
+            "extends": "EWBaseGet",
             "httpMethod": "GET",
             "parameters": {
                 "fields": {
@@ -716,6 +756,7 @@
             "uri": "/ew/comment/{id}"
         },
         "GetEWComments": {
+            "extends": "EWBaseGet",
             "httpMethod": "GET",
             "parameters": {
                 "comment_id": {
@@ -767,6 +808,7 @@
             "uri": "/ew/comments"
         },
         "GetEWEvent": {
+            "extends": "EWBaseGet",
             "httpMethod": "GET",
             "parameters": {
                 "fields": {
@@ -782,6 +824,7 @@
             "uri": "/ew/event/{id}"
         },
         "GetEWEvents": {
+            "extends": "EWBaseGet",
             "httpMethod": "GET",
             "parameters": {
                 "after": {
@@ -853,6 +896,7 @@
             "uri": "/ew/events"
         },
         "GetEWRSVP": {
+            "extends": "EWBaseGet",
             "httpMethod": "GET",
             "parameters": {
                 "fields": {
@@ -868,6 +912,7 @@
             "uri": "/ew/rsvp/{id}"
         },
         "GetEventSeed": {
+            "extends": "EWBaseGet",
             "httpMethod": "GET",
             "parameters": {
                 "fields": {
@@ -883,6 +928,7 @@
             "uri": "/ew/seed/{id}"
         },
         "GetEventSeeds": {
+            "extends": "EWBaseGet",
             "httpMethod": "GET",
             "parameters": {
                 "community_urlname": {
@@ -952,6 +998,7 @@
             "uri": "/ew/follow/{id}"
         },
         "getEWRSVPs": {
+            "extends": "EWBaseGet",
             "httpMethod": "GET",
             "parameters": {
                 "event_id": {

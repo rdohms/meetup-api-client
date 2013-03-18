@@ -3,6 +3,37 @@
     "apiVersion": "1",
     "description": "Meetup API v1 Legacy Methods",
     "operations": {
+        "V1BaseGet": {
+            "httpMethod": "GET",
+            "parameters": {
+                "page": {
+                    "location": "query",
+                    "required": false
+                },
+                "offset": {
+                    "location": "query",
+                    "required": false
+                },
+                "desc": {
+                    "location": "query",
+                    "required": false
+                },
+                "order": {
+                    "location": "query",
+                    "required": false
+                },
+                "only": {
+                    "location": "query",
+                    "required": false
+                },
+                "omit": {
+                    "location": "query",
+                    "required": false
+                }
+            },
+            "summary": "Base for GET Operations, includes parameters available to all GET requests",
+            "uri": "/"
+        },
         "ApproveMembership": {
             "httpMethod": "POST",
             "parameters": {
@@ -58,6 +89,7 @@
             "uri": "/{urlname}/member/approvals"
         },
         "FindGroups": {
+            "extends": "V1BaseGet",
             "httpMethod": "GET",
             "parameters": {
                 "category": {
@@ -121,6 +153,7 @@
             "uri": "/find/groups"
         },
         "GetActivityFeed": {
+            "extends": "V1BaseGet",
             "httpMethod": "GET",
             "parameters": {
                 "member_id": {
@@ -136,6 +169,7 @@
             "uri": "/activity"
         },
         "GetAttendance": {
+            "extends": "V1BaseGet",
             "httpMethod": "GET",
             "parameters": {
                 "filter": {
@@ -159,6 +193,7 @@
             "uri": "/{urlname}/events/{id}/attendance"
         },
         "GetComments": {
+            "extends": "V1BaseGet",
             "httpMethod": "GET",
             "parameters": {
                 "ctime": {
@@ -186,6 +221,7 @@
             "uri": "/comments"
         },
         "GetDiscussionBoards": {
+            "extends": "V1BaseGet",
             "httpMethod": "GET",
             "parameters": {
                 "urlname": {
@@ -197,6 +233,7 @@
             "uri": "/{urlname}/boards"
         },
         "GetDiscussionPosts": {
+            "extends": "V1BaseGet",
             "httpMethod": "GET",
             "parameters": {
                 "bid": {
@@ -216,6 +253,7 @@
             "uri": "/{urlname}/boards/{bid}/discussions/{did}"
         },
         "GetDiscussions": {
+            "extends": "V1BaseGet",
             "httpMethod": "GET",
             "parameters": {
                 "bid": {
@@ -231,6 +269,7 @@
             "uri": "/{urlname}/boards/{bid}/discussions"
         },
         "GetOembed": {
+            "extends": "V1BaseGet",
             "httpMethod": "GET",
             "parameters": {
                 "maxwidth": {
@@ -246,6 +285,7 @@
             "uri": "/oembed"
         },
         "GetRecommendedGroups": {
+            "extends": "V1BaseGet",
             "httpMethod": "GET",
             "parameters": {
                 "country": {
@@ -277,6 +317,7 @@
             "uri": "/recommended/groups"
         },
         "GetTopics": {
+            "extends": "V1BaseGet",
             "httpMethod": "GET",
             "parameters": {
                 "alertees": {
