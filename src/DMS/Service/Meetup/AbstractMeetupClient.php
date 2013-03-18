@@ -196,17 +196,16 @@ abstract class AbstractMeetupClient extends Client
     /**
      * Shortcut for executing Commands in the Definitions.
      *
-     * @param string $name
-     * @param array|null $arguments
+     * @param string $method
+     * @param array|null $args
      *
      * @return mixed|void
      *
-     * @throws InvalidArgumentException
      */
-    public function __call($name, $arguments)
+    public function __call($method, $args = null)
     {
-        $commandName = ucfirst($name);
+        $commandName = ucfirst($method);
 
-        return parent::__call($commandName, $arguments);
+        return parent::__call($commandName, $args);
     }
 }
