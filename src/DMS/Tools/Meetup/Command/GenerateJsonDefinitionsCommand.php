@@ -46,13 +46,14 @@ class GenerateJsonDefinitionsCommand extends Command
     {
         $this
             ->setName('dms:meetup:generate-json')
-            ->setDescription('Parses online documentation into Operation definitions in json for Guzzle asking for extra input')
+            ->setDescription(
+                'Parses online documentation into Operation definitions in json for Guzzle asking for extra input'
+            )
             ->setDefinition(
                 array(
                     new InputArgument('dir', InputArgument::REQUIRED, 'Directory where docs have been downloaded to.'),
                 )
-            )
-        ;
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -108,28 +109,50 @@ class GenerateJsonDefinitionsCommand extends Command
         try {
 
             /** @var $file SplFileInfo */
-            if ($file->getExtension() !== 'html')
+            if ($file->getExtension() !== 'html') {
                 throw new \OutOfBoundsException("Not HTML.");
+            }
 
             $crawler = new Crawler(file_get_contents($file->getRealPath()));
 
             // Check is Doc page
-            if ($crawler->filter('#method-info')->count() == 0)
+            if ($crawler->filter('#method-info')->count() == 0) {
                 throw new \OutOfBoundsException("Not Documentation File.");
+            }
 
             // Check if is not deprecated
-            if ($crawler->filter('.deprecation-warning')->count() > 0)
+            if ($crawler->filter('.deprecation-warning')->count() > 0) {
                 throw new \OutOfBoundsException('Deprecated.');
+            }
 
-            $this->output->writeln("Parsing: ".$file->getPathname());
+            $this->output->writeln("Parsing: " . $file->getPathname());
             $this->getMethodDefinitions($crawler);
 
         } catch (\OutOfBoundsException $e) {
-            $this->output->writeln(sprintf('<error>SKIPPED:</error> <info>%s</info> because <info>%s</info>', $file->getPathname(), $e->getMessage()));
+            $this->output->writeln(
+                sprintf(
+                    '<error>SKIPPED:</error> <info>%s</info> because <info>%s</info>',
+                    $file->getPathname(),
+                    $e->getMessage()
+                )
+            );
         } catch (InvalidArgumentException $e) {
-            $this->output->writeln(sprintf('<error>ERROR:</error> <info>%s</info> with <info>%s</info> at line %d', $file->getPathname(), $e->getMessage(), $e->getLine()));
+            $this->output->writeln(
+                sprintf(
+                    '<error>ERROR:</error> <info>%s</info> with <info>%s</info> at line %d',
+                    $file->getPathname(),
+                    $e->getMessage(),
+                    $e->getLine()
+                )
+            );
         } catch (Exception $e) {
-            $this->output->writeln(sprintf('<error>ERROR:</error> <info>%s</info> with <info>%s</info>', $file->getPathname(), $e->getMessage()));
+            $this->output->writeln(
+                sprintf(
+                    '<error>ERROR:</error> <info>%s</info> with <info>%s</info>',
+                    $file->getPathname(),
+                    $e->getMessage()
+                )
+            );
         }
     }
 
@@ -145,18 +168,21 @@ class GenerateJsonDefinitionsCommand extends Command
         foreach ($methodDefinitions as $definition) {
             $operationData = $this->parseOperationData($definition);
 
-            $this->output->writeln(sprintf(
+            $this->output->writeln(
+                sprintf(
                     "<comment>%s</comment> <info>%s</info>",
                     $operationData['httpMethod'],
                     $operationData['uri']
                 )
             );
-            $this->output->writeln(sprintf(
+            $this->output->writeln(
+                sprintf(
                     "<comment>Summary:</comment> <info>%s</info>",
                     $operationData['summary']
                 )
             );
-            $this->output->writeln(sprintf(
+            $this->output->writeln(
+                sprintf(
                     "<comment>Parameters:</comment> <info>%s</info>",
                     implode(",", array_keys($operationData['parameters']))
                 )
@@ -170,7 +196,12 @@ class GenerateJsonDefinitionsCommand extends Command
 
             unset($operationData['operation']);
 
-            $apiType = $this->dialog->ask($this->output, "<question>Which API? [v2]</question>", 'v2', array_keys($this->apis));
+            $apiType = $this->dialog->ask(
+                $this->output,
+                "<question>Which API? [v2]</question>",
+                'v2',
+                array_keys($this->apis)
+            );
 
             $this->apis[$apiType][$operation] = $operationData;
         }
@@ -225,7 +256,7 @@ class GenerateJsonDefinitionsCommand extends Command
         }
 
         //Update Operation
-        if ($method == 'GET'){
+        if ($method == 'GET') {
             $operation = ucfirst(strtolower($method) . $operation);
         }
 

@@ -22,7 +22,8 @@ class KeyAuthPlugin implements EventSubscriberInterface
      *
      * @param $key
      */
-    public function __construct($key) {
+    public function __construct($key)
+    {
         $this->key = $key;
     }
 

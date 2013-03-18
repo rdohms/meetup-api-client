@@ -45,8 +45,7 @@ class PhpDocGeneratorCommand extends Command
                 array(
                     new InputArgument('file', InputArgument::REQUIRED, 'JSON file with service definitions.'),
                 )
-            )
-        ;
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -62,11 +61,13 @@ class PhpDocGeneratorCommand extends Command
 
         foreach ($operations as $operation) {
             /** @var $operation Operation */
-            $output->writeln(sprintf(
+            $output->writeln(
+                sprintf(
                     '* @method %s %s(array $args = array())',
-                    ($this->isMulti($operation))? self::RESPONSE_MULTI : self::RESPONSE_SINGLE,
+                    ($this->isMulti($operation)) ? self::RESPONSE_MULTI : self::RESPONSE_SINGLE,
                     lcfirst($operation->getName())
-                ));
+                )
+            );
         }
 
     }

@@ -209,7 +209,4 @@ abstract class AbstractMeetupClient extends Client
 
         return parent::__call($commandName, $arguments);
     }
-
-
-
 }

@@ -55,17 +55,20 @@ class MeetupOAuthClient extends AbstractMeetupClient
 
         $client = new self($configuration->get('base_url'), $configuration);
 
-        $client->addSubscriber(new OauthPlugin(array(
-                'consumer_key'    => $configuration->get('consumer_key'),
-                'consumer_secret' => $configuration->get('consumer_secret'),
-                'token'           => false,
-                'token_secret'    => false
-            )));
+        $client->addSubscriber(
+            new OauthPlugin(
+                array(
+                    'consumer_key'    => $configuration->get('consumer_key'),
+                    'consumer_secret' => $configuration->get('consumer_secret'),
+                    'token'           => false,
+                    'token_secret'    => false
+                )
+            )
+        );
 
         static::loadDefinitions($client);
         static::loadStandardSettings($client);
 
         return $client;
     }
-
 }

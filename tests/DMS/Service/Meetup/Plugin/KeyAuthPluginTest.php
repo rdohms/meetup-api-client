@@ -32,7 +32,7 @@ class KeyAuthPluginTest extends PHPUnit_Framework_TestCase
 
     public function testOnRequestBeforeSendGET()
     {
-        $request = new Request('GET','www.url.com');
+        $request = new Request('GET', 'www.url.com');
 
         $event = new Event(array('request' => $request));
 
@@ -43,7 +43,7 @@ class KeyAuthPluginTest extends PHPUnit_Framework_TestCase
 
     public function testOnRequestBeforeSendPOST()
     {
-        $request = new Request('POST','www.url.com');
+        $request = new Request('POST', 'www.url.com');
 
         $event = new Event(array('request' => $request));
 

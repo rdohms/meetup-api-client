@@ -58,5 +58,4 @@ class MeetupKeyAuthClient extends AbstractMeetupClient
 
         return $client;
     }
-
 }

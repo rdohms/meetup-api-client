@@ -4,7 +4,6 @@ namespace DMS\Service\Meetup\Response;
 
 use Closure;
 use Guzzle\Http\Message\Response as BaseResponse;
-use Traversable;
 
 class MultiResultResponse extends BaseResponse implements \Countable, \Iterator
 {

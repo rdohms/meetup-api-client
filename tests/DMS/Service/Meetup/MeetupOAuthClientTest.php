@@ -26,7 +26,6 @@ class MeetupOAuthClientTest extends GuzzleTestCase
     public function testFactoryValidation()
     {
         $config = array();
-        $client = MeetupOAuthClient::factory($config);
+        MeetupOAuthClient::factory($config);
     }
-
 }
