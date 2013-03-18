@@ -64,25 +64,8 @@ class KeyAuthPlugin implements EventSubscriberInterface
         /** @var $request Request */
         $request = $event['request'];
 
-
-        if ($request->getMethod() == 'POST') {
-            $this->signPostRequest($request);
-            return;
-        }
-
-        $this->signNonPostRequest($request);
+        $this->signRequest($request);
         return;
-    }
-
-    /**
-     * Adds "key" parameters as a POST value
-     *
-     * @param Request $request
-     */
-    protected function signPostRequest($request)
-    {
-        $params = $request->getParams();
-        $params->add('key', $this->key);
     }
 
     /**
@@ -90,7 +73,7 @@ class KeyAuthPlugin implements EventSubscriberInterface
      *
      * @param Request $request
      */
-    protected function signNonPostRequest($request)
+    protected function signRequest($request)
     {
         $url = $request->getUrl(true);
         $url->getQuery()->add('key', $this->key);

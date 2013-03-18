@@ -49,7 +49,6 @@ class KeyAuthPluginTest extends PHPUnit_Framework_TestCase
 
         $this->plugin->onRequestBeforeSend($event);
 
-        $params = $request->getParams();
-        $this->assertTrue($params->hasKey('key'));
+        $this->assertContains('key='.$this->key, $request->getUrl());
     }
 }
