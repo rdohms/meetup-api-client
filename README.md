@@ -1,4 +1,4 @@
-DMS Meetup.com API Client
+DMS Meetup.com API Client [![Build Status](https://travis-ci.org/rdohms/meetup-api-client.png?branch=master)](https://travis-ci.org/rdohms/meetup-api-client)
 =========================
 
 This is a client for the Meetup.com API powered by the Guzzle Project.
