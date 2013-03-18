@@ -1,0 +1,15 @@
+language: php
+php:
+  - "5.5"
+  - "5.4"
+  - "5.3"
+
+before_script:
+  - composer install --prefer-source --dev
+  - pear install pear/PHP_CodeSniffer
+  - phpenv rehash
+  
+script: phpunit --coverage-text
+
+after_script:
+  - phpcs --report=full --report=gitblame --standard=PSR2 src/
