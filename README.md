@@ -8,7 +8,7 @@ This is a client for the Meetup.com API powered by the Guzzle Project.
 The library is available through Composer, so its easy to get it. Simply add this to your `composer.json` file:
 
     "require": {
-        "dms/meetup-api-client": "~1.0@dev"
+        "dms/meetup-api-client": "~1.0"
     }
     
 And run `composer install`
@@ -16,8 +16,8 @@ And run `composer install`
 ## Features
 
 * All documented and non-deprecated methods from:
-    * Meetup Everywhere API
-    * Meetup API v2 (/2/* urls)
+    * Meetup API v3
+    * Meetup API v2 (/2/* urls and Everywhere /ew/ urls)
     * Legacy v1, except methods tagged as deprecated
 * Key authentication
 * OAuth 1.0 Authetication
