@@ -60,8 +60,8 @@ class MeetupOAuthClient extends AbstractMeetupClient
                 array(
                     'consumer_key'    => $configuration->get('consumer_key'),
                     'consumer_secret' => $configuration->get('consumer_secret'),
-                    'token'           => false,
-                    'token_secret'    => false
+                    'token'           => $configuration->get('token'),
+                    'token_secret'    => $configuration->get('token_secret')
                 )
             )
         );

@@ -32,8 +32,9 @@ class MeetupResponseParser extends DefaultResponseParser
      */
     public function parse(CommandInterface $command)
     {
-        $response      = $command->getRequest()->getResponse();
-        $responseArray = $response->json();
+        $response = $command->getRequest()->getResponse();
+
+        $responseArray = $this->parseResponseIntoArray($response);
 
         // If there is no Body, just return the Response
         if ( ! $response->getBody()) {
@@ -79,5 +80,22 @@ class MeetupResponseParser extends DefaultResponseParser
         $response->setData($responseArray);
 
         return $response;
+    }
+
+    /**
+     * Parses response into an array
+     *
+     * @param Response $response
+     * @return array
+     */
+    protected function parseResponseIntoArray($response)
+    {
+        if (strpos($response->getContentType(), 'json') === false) {
+            parse_str($response->getBody(true), $array);
+
+            return $array;
+        }
+
+        return $response->json();
     }
 }

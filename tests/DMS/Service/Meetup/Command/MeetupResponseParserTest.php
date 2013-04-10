@@ -62,8 +62,9 @@ class MeetupResponseParserTest extends GuzzleTestCase
     public function provideForParse()
     {
         return array(
-            array(new Response(200, array(), json_encode(array('results' => array(), 'meta' => array()))), 'multi'),
-            array(new Response(200, array(), json_encode(array('a' => 'b'))), 'single'),
+            array(new Response(200, array('Content-Type' => 'application/json'), json_encode(array('results' => array(), 'meta' => array()))), 'multi'),
+            array(new Response(200, array('Content-Type' => 'application/json'), json_encode(array('a' => 'b'))), 'single'),
+            array(new Response(200, array('Content-Type' => 'text/plain'), 'sample=text&a=b'), 'single'),
             array(new Response(200), 'basic'),
         );
     }

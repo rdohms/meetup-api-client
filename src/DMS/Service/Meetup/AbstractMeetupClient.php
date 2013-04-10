@@ -18,6 +18,8 @@ use DMS\Service\Meetup\Response\MultiResultResponse;
  *
  * @package DMS\Service\Meetup
  *
+ * @method SingleResultResponse getRequestToken(array $args = array())
+ * @method SingleResultResponse getAccessToken(array $args = array())
  * @method SingleResultResponse createEvent(array $args = array())
  * @method SingleResultResponse createGroupProfile(array $args = array())
  * @method SingleResultResponse createPhotoAlbum(array $args = array())
