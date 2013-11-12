@@ -3,54 +3,18 @@
 namespace DMS\Service\Meetup\Response;
 
 use Closure;
-use Guzzle\Http\Message\Response as BaseResponse;
 
-class MultiResultResponse extends BaseResponse implements \Countable, \Iterator
+class MultiResultResponse extends SelfParsingResponse implements \Countable, \Iterator
 {
-    /**
-     * Data returned from Request
-     *
-     * @var array
-     */
-    protected $data;
 
     /**
-     * Metadata returned by API
-     *
-     * @var array
+     * Makes Meetup API Data available on the Data attribute
      */
-    protected $metadata;
-
-    /**
-     * @param array $data
-     */
-    public function setData($data)
+    public function parseMeetupApiData()
     {
-        $this->data = $data;
-    }
-
-    /**
-     * @return array
-     */
-    public function getData()
-    {
-        return $this->data;
-    }
-
-    /**
-     * @param array $metadata
-     */
-    public function setMetadata($metadata)
-    {
-        $this->metadata = $metadata;
-    }
-
-    /**
-     * @return array
-     */
-    public function getMetadata()
-    {
-        return $this->metadata;
+        $responseBody = $this->parseBodyContent();
+        $this->setData($responseBody['results']);
+        $this->setMetadata($responseBody['meta']);
     }
 
     /**

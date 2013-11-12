@@ -11,13 +11,14 @@
     ],
 
     "require": {
-        "guzzle/guzzle": "~3.1"
+        "guzzle/guzzle": "~3.7"
     },
 
     "require-dev": {
         "symfony/css-selector": "~2.2",
         "symfony/dom-crawler": "~2.2",
-        "symfony/console": "~2.2"
+        "symfony/console": "~2.2",
+        "phpunit/phpunit": "~3.7"
     },
 
     "autoload": {

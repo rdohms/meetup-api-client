@@ -11,54 +11,8 @@ use Guzzle\Http\Message\Response as BaseResponse;
  *
  * @package DMS\Service\Meetup\Response
  */
-class SingleResultResponse extends BaseResponse implements \ArrayAccess
+class SingleResultResponse extends SelfParsingResponse implements \ArrayAccess
 {
-
-    /**
-     * Data returned from Request
-     *
-     * @var array
-     */
-    protected $data;
-
-    /**
-     * Metadata returned by API
-     *
-     * @var array
-     */
-    protected $metadata;
-
-    /**
-     * @param array $data
-     */
-    public function setData($data)
-    {
-        $this->data = $data;
-    }
-
-    /**
-     * @return array
-     */
-    public function getData()
-    {
-        return $this->data;
-    }
-
-    /**
-     * @param array $metadata
-     */
-    public function setMetadata($metadata)
-    {
-        $this->metadata = $metadata;
-    }
-
-    /**
-     * @return array
-     */
-    public function getMetadata()
-    {
-        return $this->metadata;
-    }
 
     /**
      * (PHP 5 &gt;= 5.0.0)<br/>
@@ -124,15 +78,5 @@ class SingleResultResponse extends BaseResponse implements \ArrayAccess
     public function offsetUnset($offset)
     {
         unset($this->data[$offset]);
-    }
-
-    /**
-     * Returns true array representation of Response
-     *
-     * @return array
-     */
-    public function toArray()
-    {
-        return $this->data;
     }
 }
