@@ -37,31 +37,27 @@ class MeetupResponseParser extends DefaultResponseParser
         $responseArray = $this->parseResponseIntoArray($response);
 
         // If there is no Body, just return the Response
-        if ( ! $response->getBody()) {
+        if (! $response->getBody()) {
             return $response;
         }
 
         // Handle multi-result responses
         if (array_key_exists('results', $responseArray)) {
-            return $this->createMultiResultResponse($response, $responseArray);
+            return $this->createMultiResultResponse($response);
         }
 
-        return $this->createSingleResultResponse($response, $responseArray);
+        return $this->createSingleResultResponse($response);
     }
 
     /**
      * Create a Multi-Response Object
      *
      * @param Response $response
-     * @param array $responseArray
      * @return \DMS\Service\Meetup\Response\MultiResultResponse
      */
-    protected function createMultiResultResponse($response, $responseArray)
+    protected function createMultiResultResponse($response)
     {
         $response = new MultiResultResponse($response->getStatusCode(), $response->getHeaders(), $response->getBody());
-
-        $response->setMetadata($responseArray['meta']);
-        $response->setData($responseArray['results']);
 
         return $response;
     }
@@ -70,14 +66,11 @@ class MeetupResponseParser extends DefaultResponseParser
      * Create a Single-Response Object
      *
      * @param Response $response
-     * @param array $responseArray
      * @return \DMS\Service\Meetup\Response\SingleResultResponse
      */
-    protected function createSingleResultResponse($response, $responseArray)
+    protected function createSingleResultResponse($response)
     {
         $response = new SingleResultResponse($response->getStatusCode(), $response->getHeaders(), $response->getBody());
-
-        $response->setData($responseArray);
 
         return $response;
     }

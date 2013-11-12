@@ -15,8 +15,8 @@ class MeetupKeyAuthClientTest extends GuzzleTestCase
     }
 
     /**
-     * @expectedException Guzzle\Common\Exception\InvalidArgumentException
-     * @expectedExceptionMessage Config must contain a 'key' key
+     * @expectedException \Guzzle\Common\Exception\InvalidArgumentException
+     * @expectedExceptionMessage Config is missing the following keys: key
      */
     public function testFactoryValidation()
     {
