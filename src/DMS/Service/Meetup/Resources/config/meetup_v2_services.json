@@ -73,9 +73,17 @@
                     "location": "postField",
                     "required": false
                 },
+                "how_to_find_us": {
+                    "location": "postField",
+                    "required": false
+                },
                 "name": {
                     "location": "postField",
                     "required": true
+                },
+                "publish_status": {
+                    "location": "postField",
+                    "required": false
                 },
                 "question_{index}": {
                     "location": "postField",
@@ -102,6 +110,10 @@
                     "required": false
                 },
                 "venue_id": {
+                    "location": "postField",
+                    "required": false
+                },
+                "venue_visibility": {
                     "location": "postField",
                     "required": false
                 },
@@ -245,6 +257,14 @@
         "EditEvent": {
             "httpMethod": "POST",
             "parameters": {
+                "announce": {
+                    "location": "postField",
+                    "required": false
+                },
+                "announce_message": {
+                    "location": "postField",
+                    "required": false
+                },
                 "description": {
                     "location": "postField",
                     "required": false
@@ -273,7 +293,11 @@
                     "location": "postField",
                     "required": false
                 },
-                "id": {
+                "hosts": {
+                    "location": "postField",
+                    "required": false
+                },
+                "how_to_find_us": {
                     "location": "uri",
                     "required": true
                 },
@@ -286,6 +310,10 @@
                     "required": false
                 },
                 "name": {
+                    "location": "postField",
+                    "required": false
+                },
+                "publish_status": {
                     "location": "postField",
                     "required": false
                 },
@@ -309,11 +337,23 @@
                     "location": "postField",
                     "required": false
                 },
+                "rsvp_limit": {
+                    "location": "postField",
+                    "required": false
+                },
+                "simple_html_description": {
+                    "location": "postField",
+                    "required": false
+                },
                 "time": {
                     "location": "postField",
                     "required": false
                 },
                 "venue_id": {
+                    "location": "postField",
+                    "required": false
+                },
+                "venue_visibility": {
                     "location": "postField",
                     "required": false
                 },
