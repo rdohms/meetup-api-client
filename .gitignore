@@ -2,3 +2,6 @@
 vendor/
 tests/_reports
 docs/meetup-api-docs
+.project
+.buildpath
+.settings/
