@@ -18,6 +18,7 @@ use DMS\Service\Meetup\Response\MultiResultResponse;
  *
  * @package DMS\Service\Meetup
  *
+ * @method MultiResultResponse getRecommendedVenues(array $args = array())
  * @method SingleResultResponse createEvent(array $args = array())
  * @method SingleResultResponse createGroupProfile(array $args = array())
  * @method SingleResultResponse createPhotoAlbum(array $args = array())
@@ -48,7 +49,7 @@ use DMS\Service\Meetup\Response\MultiResultResponse;
  * @method MultiResultResponse getEvents(array $args = array())
  * @method MultiResultResponse getGroupProfile(array $args = array())
  * @method MultiResultResponse getGroupProfiles(array $args = array())
- * @method SingleResultResponse getGroups(array $args = array())
+ * @method MultiResultResponse getGroups(array $args = array())
  * @method SingleResultResponse getMember(array $args = array())
  * @method MultiResultResponse getMembers(array $args = array())
  * @method MultiResultResponse getOpenEvents(array $args = array())
@@ -70,6 +71,7 @@ use DMS\Service\Meetup\Response\MultiResultResponse;
  * @method SingleResultResponse postEventPhoto(array $args = array())
  * @method SingleResultResponse postEventRating(array $args = array())
  * @method SingleResultResponse postMemberPhoto(array $args = array())
+ * @method SingleResultResponse deleteMemberPhoto(array $args = array())
  * @method SingleResultResponse postMessage(array $args = array())
  * @method SingleResultResponse postPhotoComment(array $args = array())
  * @method SingleResultResponse postRSVP(array $args = array())
@@ -87,6 +89,7 @@ use DMS\Service\Meetup\Response\MultiResultResponse;
  * @method MultiResultResponse getRecommendedGroups(array $args = array())
  * @method MultiResultResponse getTopics(array $args = array())
  * @method SingleResultResponse postAttendance(array $args = array())
+ * @method MultiResultResponse eWBaseGet(array $args = array())
  * @method SingleResultResponse createCommunity(array $args = array())
  * @method SingleResultResponse createContainer(array $args = array())
  * @method SingleResultResponse createEWComment(array $args = array())

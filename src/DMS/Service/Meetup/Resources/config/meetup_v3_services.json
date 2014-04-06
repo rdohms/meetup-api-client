@@ -1,0 +1,90 @@
+{
+    "name": "Meetup",
+    "apiVersion": "3",
+    "description": "Meetup API v3 Methods",
+    "operations": {
+        "V3BaseGet": {
+            "httpMethod": "GET",
+            "parameters": {
+                "page": {
+                    "location": "query",
+                    "required": false
+                },
+                "offset": {
+                    "location": "query",
+                    "required": false
+                },
+                "desc": {
+                    "location": "query",
+                    "required": false
+                },
+                "order": {
+                    "location": "query",
+                    "required": false
+                },
+                "only": {
+                    "location": "query",
+                    "required": false
+                },
+                "omit": {
+                    "location": "query",
+                    "required": false
+                }
+            },
+            "summary": "Base for GET Operations, includes parameters available to all GET requests",
+            "uri": "/"
+        },
+        "GetRecommendedVenues": {
+            "extends": "V3BaseGet",
+            "httpMethod": "GET",
+            "parameters": {
+                "category": {
+                    "location": "query",
+                    "required": false
+                },
+                "country": {
+                    "location": "query",
+                    "required": false
+                },
+                "group_id": {
+                    "location": "query",
+                    "required": false
+                },
+                "group_urlname": {
+                    "location": "query",
+                    "required": false
+                },
+                "lat": {
+                    "location": "query",
+                    "required": false
+                },
+                "lon": {
+                    "location": "query",
+                    "required": false
+                },
+                "location": {
+                    "location": "query",
+                    "required": false
+                },
+                "min_groups": {
+                    "location": "query",
+                    "required": false
+                },
+                "radius": {
+                    "location": "query",
+                    "required": false
+                },
+                "used_between": {
+                    "location": "query",
+                    "required": false
+                },
+                "zip": {
+                    "location": "query",
+                    "required": false
+                }
+            },
+            "summary": "Returns venues Meetup finds relevant to you based on location and category.",
+            "uri": "/recommended/venues"
+        }
+    }
+}

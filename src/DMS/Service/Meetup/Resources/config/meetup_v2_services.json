@@ -482,6 +482,10 @@
                 "zip": {
                     "location": "postField",
                     "required": false
+                },
+                "sync_photo": {
+                    "location": "postField",
+                    "required": false
                 }
             },
             "summary": "Edit the authorized member's attributes",
@@ -1672,10 +1676,25 @@
                 "photo": {
                     "location": "postFile",
                     "required": true
+                },
+                "sync_photo": {
+                    "location": "postFile",
+                    "required": true
                 }
             },
             "summary": "Uploads a photo to be assocated with a Member",
             "uri": "/2/member_photo"
+        },
+        "DeleteMemberPhoto": {
+            "httpMethod": "DELETE",
+            "parameters": {
+                "id": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": "Delete the specified member photo.",
+            "uri": "/2/member_photo/{id}"
         },
         "PostMessage": {
             "httpMethod": "POST",
@@ -1753,6 +1772,10 @@
                 "rsvp": {
                     "location": "postField",
                     "required": true
+                },
+                "agree_to_refund": {
+                    "location": "postField",
+                    "required": false
                 }
             },
             "summary": "Creates a new Rsvp",
