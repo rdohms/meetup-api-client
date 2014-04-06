@@ -529,97 +529,6 @@
             "summary": "Returns a list of Meetup group categories",
             "uri": "/2/categories"
         },
-        "GetCheckins": {
-            "extends": "V2BaseGet",
-            "httpMethod": "GET",
-            "parameters": {
-                "event_id": {
-                    "location": "query",
-                    "required": false
-                },
-                "group_id": {
-                    "location": "query",
-                    "required": false
-                },
-                "member_id": {
-                    "location": "query",
-                    "required": false
-                },
-                "name": {
-                    "location": "query",
-                    "required": false
-                },
-                "time": {
-                    "location": "query",
-                    "required": false
-                }
-            },
-            "summary": "This method returns checkins for an event. To post checkins, see /2/checkin.",
-            "uri": "/2/checkins"
-        },
-        "GetCheckinsStream": {
-            "extends": "V2BaseGet",
-            "httpMethod": "GET",
-            "parameters": {
-                "callback": {
-                    "location": "query",
-                    "required": true
-                },
-                "event_id": {
-                    "location": "query",
-                    "required": false
-                },
-                "since_count": {
-                    "location": "query",
-                    "required": false
-                },
-                "since_mtime": {
-                    "location": "query",
-                    "required": false
-                }
-            },
-            "summary": "This long-polling \nstream can be easily consumed using JavaScript in any modern browser. Checkin\nnotifications are received when they happen, or as soon as your script finishes handling its\nlast notification.",
-            "uri": "/2/checkins"
-        },
-        "GetCheckinsWebSocketStream": {
-            "httpMethod": "WS",
-            "parameters": {
-                "event_id": {
-                    "location": "postField",
-                    "required": false
-                },
-                "since_count": {
-                    "location": "postField",
-                    "required": false
-                },
-                "since_mtime": {
-                    "location": "postField",
-                    "required": false
-                }
-            },
-            "summary": "For browsers that support it, WebSockets is a more\nefficient alternative to the long-polling stream. This is a push only endpoint and will discard\nany messages received from the client after the socket is open.",
-            "uri": "/2/checkins"
-        },
-        "GetChunkedHTTPCheckinsStream": {
-            "extends": "V2BaseGet",
-            "httpMethod": "GET",
-            "parameters": {
-                "event_id": {
-                    "location": "query",
-                    "required": false
-                },
-                "since_count": {
-                    "location": "query",
-                    "required": false
-                },
-                "since_mtime": {
-                    "location": "query",
-                    "required": false
-                }
-            },
-            "summary": "This method serves checkin notifications using\nchunked encoding\nto maintian a persistent connection with a client. The connection will only be\nterminiated for server maintenance or a connection error. It is suitable for\nlow-level HTTP clients rather than web browsers.",
-            "uri": "/2/checkins"
-        },
         "GetChunkedHTTPEventCommentsStream": {
             "extends": "V2BaseGet",
             "httpMethod": "GET",
@@ -1657,33 +1566,6 @@
             },
             "summary": "Search for Meetup venues by one of your groups, events, or venue identifiers. For a full text search on public venues use OpenVenues.",
             "uri": "/2/venues"
-        },
-        "PostCheckin": {
-            "httpMethod": "POST",
-            "parameters": {
-                "attendee_member_id": {
-                    "location": "postField",
-                    "required": false
-                },
-                "comment": {
-                    "location": "postField",
-                    "required": false
-                },
-                "event_id": {
-                    "location": "postField",
-                    "required": true
-                },
-                "lat": {
-                    "location": "postField",
-                    "required": false
-                },
-                "lon": {
-                    "location": "postField",
-                    "required": false
-                }
-            },
-            "summary": "This method posts event checkins that can be retrieved by /2/checkins. Event attendees may check in themselves and others in the group.",
-            "uri": "/2/checkin"
         },
         "PostEventComment": {
             "httpMethod": "POST",

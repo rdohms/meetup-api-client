@@ -18,8 +18,6 @@ use DMS\Service\Meetup\Response\MultiResultResponse;
  *
  * @package DMS\Service\Meetup
  *
- * @method SingleResultResponse getRequestToken(array $args = array())
- * @method SingleResultResponse getAccessToken(array $args = array())
  * @method SingleResultResponse createEvent(array $args = array())
  * @method SingleResultResponse createGroupProfile(array $args = array())
  * @method SingleResultResponse createPhotoAlbum(array $args = array())
@@ -34,10 +32,6 @@ use DMS\Service\Meetup\Response\MultiResultResponse;
  * @method SingleResultResponse eventCommentSubscribe(array $args = array())
  * @method SingleResultResponse eventCommentUnsubscribe(array $args = array())
  * @method MultiResultResponse getCategories(array $args = array())
- * @method MultiResultResponse getCheckins(array $args = array())
- * @method MultiResultResponse getCheckinsStream(array $args = array())
- * @method SingleResultResponse getCheckinsWebSocketStream(array $args = array())
- * @method MultiResultResponse getChunkedHTTPCheckinsStream(array $args = array())
  * @method MultiResultResponse getChunkedHTTPEventCommentsStream(array $args = array())
  * @method MultiResultResponse getChunkedHTTPOpenVenuesStream(array $args = array())
  * @method MultiResultResponse getChunkedHTTPPhotoStream(array $args = array())
@@ -70,7 +64,6 @@ use DMS\Service\Meetup\Response\MultiResultResponse;
  * @method SingleResultResponse getRSVPWebSocketStream(array $args = array())
  * @method MultiResultResponse getRSVPs(array $args = array())
  * @method MultiResultResponse getVenues(array $args = array())
- * @method SingleResultResponse postCheckin(array $args = array())
  * @method SingleResultResponse postEventComment(array $args = array())
  * @method SingleResultResponse postEventCommentFlag(array $args = array())
  * @method SingleResultResponse likeEventComment(array $args = array())
@@ -127,6 +120,8 @@ use DMS\Service\Meetup\Response\MultiResultResponse;
  * @method SingleResultResponse postEWRSVP(array $args = array())
  * @method SingleResultResponse unfollowCommunity(array $args = array())
  * @method MultiResultResponse getEWRSVPs(array $args = array())
+ * @method MultiResultResponse getRequestToken(array $args = array())
+ * @method MultiResultResponse getAccessToken(array $args = array())
  */
 abstract class AbstractMeetupClient extends Client
 {
