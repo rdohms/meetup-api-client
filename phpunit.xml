@@ -4,6 +4,7 @@
     <testsuites>
         <testsuite name="DMS Meetup API Client">
             <directory>tests/DMS</directory>
+            <directory>tests/Functional</directory>
         </testsuite>
     </testsuites>
 
