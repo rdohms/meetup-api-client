@@ -3,6 +3,11 @@ php:
   - 5.3
   - 5.4
   - 5.5
+  - hhvm
+
+matrix:
+  allow_failures:
+    - php: hhvm
 
 before_script:
   - composer selfupdate
@@ -10,3 +15,8 @@ before_script:
   - phpenv rehash
 
 script: vendor/bin/phpunit --coverage-text
+
+after_success:
+    - wget https://scrutinizer-ci.com/ocular.phar
+    - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+
