@@ -161,6 +161,16 @@ abstract class AbstractMeetupClient extends Client
         $required = static::getRequiredParameters();
         $config = Collection::fromConfig($config, $default, $required);
 
+        $standardHeaders = array(
+            'Accept-Charset' => 'utf-8'
+        );
+
+        $requestOptions = array(
+            'headers' => $standardHeaders,
+        );
+
+        $config->add('request.options', $requestOptions);
+
         return $config;
     }
 
@@ -179,18 +189,6 @@ abstract class AbstractMeetupClient extends Client
         }
 
         $client->setDescription($serviceDescriptions);
-    }
-
-    /**
-     * @param Client $client
-     */
-    public static function loadStandardSettings(Client $client)
-    {
-        //Force UTF-8 MultiResultResponse
-        $client->setDefaultHeaders(array('Accept-Charset' => 'utf-8'));
-
-        //Enable Magic Method Handling
-        $client->enableMagicMethods(true);
     }
 
     /**
