@@ -195,12 +195,12 @@ abstract class AbstractMeetupClient extends Client
      * Shortcut for executing Commands in the Definitions.
      *
      * @param string $method
-     * @param array|null $args
+     * @param array $args
      *
      * @return mixed|void
      *
      */
-    public function __call($method, $args = null)
+    public function __call($method, $args)
     {
         $commandName = ucfirst($method);
 
