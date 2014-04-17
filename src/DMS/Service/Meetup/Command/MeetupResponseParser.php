@@ -34,6 +34,10 @@ class MeetupResponseParser extends DefaultResponseParser
     {
         $response = $command->getRequest()->getResponse();
 
+        if ($response === null) {
+            return null;
+        }
+
         $responseArray = $this->parseResponseIntoArray($response);
 
         // If there is no Body, just return the Response

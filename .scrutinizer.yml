@@ -1,0 +1,20 @@
+filter:
+    paths: [src/*]
+    excluded_paths: [vendor/*, tests/*, docs/*, bin/*]
+
+tools:
+    php_mess_detector: true
+    php_analyzer: true
+    php_code_sniffer:
+        config:
+            standard: PSR2
+            sniffs: { psr1: { classes: { class_declaration_sniff: true } } }
+        filter:
+            excluded_paths: [vendor/*, tests/*, docs/*, bin/*]
+    sensiolabs_security_checker: true
+    php_sim: true
+    php_cpd: false
+    php_loc: true
+    php_pdepend: true
+    external_code_coverage:
+      timeout: 1000

@@ -2,6 +2,7 @@
 namespace DMS\Service\Meetup;
 
 use DMS\Service\Meetup\MeetupKeyAuthClient;
+use Guzzle\Http\Message\Request;
 use Guzzle\Tests\GuzzleTestCase;
 
 class MeetupKeyAuthClientTest extends GuzzleTestCase
@@ -45,6 +46,22 @@ class MeetupKeyAuthClientTest extends GuzzleTestCase
         $this->assertInstanceOf('\DMS\Service\Meetup\Response\SingleResultResponse', $response);
 
         $this->assertEquals('no', $response['response']);
+    }
+
+    public function testDefaultRequestHeaders()
+    {
+        $client = $this->buildClient();
+        $this->setMockResponse($client, 'V2/GetRSVPs');
+
+        $response = $client->getRSVPs(array('event_id' => 'some-id'));
+
+        $requests = $this->getMockedRequests();
+        /** @var Request $request */
+        $request = array_pop($requests);
+
+        $acceptHeader = $request->getHeader('Accept-Charset');
+        $this->assertNotNull($acceptHeader);
+        $this->assertEquals('utf-8', (string) $acceptHeader);
     }
 
     protected function buildClient()

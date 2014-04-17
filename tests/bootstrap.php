@@ -1,6 +1,5 @@
 <?php
 
-use Guzzle\Service\Builder\ServiceBuilder;
 use Guzzle\Tests\GuzzleTestCase;
 
 include __DIR__.'/../vendor/autoload.php';
