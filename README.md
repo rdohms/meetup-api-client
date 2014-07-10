@@ -20,7 +20,7 @@ And run `composer install`
     * Meetup API v2 (/2/* urls and Everywhere /ew/ urls)
     * Legacy v1, except methods tagged as deprecated
 * Key authentication
-* OAuth 1.0 Authetication
+* OAuth 1.0 Authentication
 * POST, GET and DELETE methods
 
 ## Usage
