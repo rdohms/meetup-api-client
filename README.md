@@ -7,13 +7,9 @@ This is a client for the Meetup.com API powered by the Guzzle Project.
 
 ## Installation
 
-The library is available through Composer, so its easy to get it. Simply add this to your `composer.json` file:
+The library is available through Composer, so its easy to get it. Just Run this:
 
-    "require": {
-        "dms/meetup-api-client": "~1.0"
-    }
-    
-And run `composer install`
+    composer require dms/meetup-api-client
 
 ## Features
 
