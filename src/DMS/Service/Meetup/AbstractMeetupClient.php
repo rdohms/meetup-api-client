@@ -2,6 +2,7 @@
 
 namespace DMS\Service\Meetup;
 
+use DMS\Service\Meetup\Plugin\RateLimitPlugin;
 use Guzzle\Common\Collection;
 use Guzzle\Service\Client;
 use Guzzle\Service\Description\Operation;
@@ -92,6 +93,17 @@ use DMS\Service\Meetup\Response\MultiResultResponse;
  */
 abstract class AbstractMeetupClient extends Client
 {
+    /**
+     * Constructor
+     *
+     * {@inheritdoc}
+     */
+    public function __construct($baseUrl = '', $config = null)
+    {
+        $this->addSubscriber(new RateLimitPlugin());
+
+        parent::__construct($baseUrl, $config);
+    }
 
     /**
      * Returns the default values for incoming configuration parameters
