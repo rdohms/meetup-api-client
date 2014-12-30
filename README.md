@@ -15,7 +15,7 @@ The library is available through Composer, so its easy to get it. Just Run this:
 
 * All documented and non-deprecated methods from:
     * Meetup API v3
-    * Meetup API v2 (/2/* urls and Everywhere /ew/ urls)
+    * Meetup API v2
     * Legacy v1, except methods tagged as deprecated
 * Key authentication
 * OAuth 1.0 Authentication
