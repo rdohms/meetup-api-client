@@ -3,8 +3,6 @@
 namespace DMS\Service\Meetup;
 
 use DMS\Service\Meetup\Plugin\KeyAuthPlugin;
-use Guzzle\Common\Collection;
-use Guzzle\Service\Description\ServiceDescription;
 
 /**
  * Meetup.com API Client based on simple key authentication

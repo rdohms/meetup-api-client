@@ -2,9 +2,7 @@
 
 namespace DMS\Service\Meetup;
 
-use Guzzle\Common\Collection;
 use Guzzle\Plugin\Oauth\OauthPlugin;
-use Guzzle\Service\Description\ServiceDescription;
 
 /**
  * Meetup.com API Client based on OAuth 1.0
