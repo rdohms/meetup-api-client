@@ -3,7 +3,6 @@
     "description": "Collection of all Meetup API Service definitions",
     "includes": [
         "meetup_oauth.json",
-        "meetup_ew_services.json",
         "meetup_v1_services.json",
         "meetup_v2_services.json",
         "meetup_v3_services.json"
