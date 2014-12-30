@@ -3,8 +3,6 @@
 namespace DMS\Service\Meetup;
 
 use Guzzle\Common\Collection;
-use Guzzle\Common\Exception\InvalidArgumentException;
-use Guzzle\Http\Message\Response;
 use Guzzle\Service\Client;
 use Guzzle\Service\Description\Operation;
 use Guzzle\Service\Description\ServiceDescription;

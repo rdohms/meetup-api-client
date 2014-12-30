@@ -1,8 +1,4 @@
-.idea
 vendor/
 tests/_reports
 tests/api_key.ini
 docs/meetup-api-docs
-.project
-.buildpath
-.settings/

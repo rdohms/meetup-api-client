@@ -2,8 +2,6 @@
 
 namespace DMS\Service\Meetup\Response;
 
-use Guzzle\Http\Message\Response as BaseResponse;
-
 /**
  * Class SingleResultResponse
  *
