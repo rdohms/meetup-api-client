@@ -20,7 +20,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class RateLimitPlugin implements EventSubscriberInterface
 {
     /**
-     * Whether rate limitting is enabled
+     * Whether rate limiting is enabled
      *
      * @var bool $rateLimitEnabled
      */
@@ -53,11 +53,6 @@ class RateLimitPlugin implements EventSubscriberInterface
      * @var int $rateLimitReset
      */
     private $rateLimitReset = 0;
-
-    /**
-     * @var bool $debug
-     */
-    private $debug = false;
 
     /**
      * Returns an array of event names this subscriber wants to listen to.
@@ -126,17 +121,10 @@ class RateLimitPlugin implements EventSubscriberInterface
         $currentAmount = $this->rateLimitMax - $this->rateLimitRemaining;
         $currentFactor = $currentAmount / $this->rateLimitMax;
 
-        if($this->debug) {
-            printf("%-8d %-8d %-8d %-8d %-8s %-8s\n", $this->rateLimitMax, $this->rateLimitRemaining, $this->rateLimitReset, $currentAmount, round($currentFactor, 3), $this->rateLimitFactor);
-        }
-
         // Perform slowdown if the factor is hit
         if($currentFactor > $this->rateLimitFactor) {
             $microsecondsPerRequestRemaining = $this->rateLimitReset / $this->rateLimitRemaining * 1000000;
 
-            if($this->debug) {
-                echo " *** Sleeping for {$microsecondsPerRequestRemaining} microseconds\n";
-            }
             usleep($microsecondsPerRequestRemaining);
         }
 
