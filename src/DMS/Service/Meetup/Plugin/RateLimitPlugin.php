@@ -9,31 +9,55 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 /**
  * Class RateLimitPlugin
  *
- * This plugin watches the X-Rate-Limit headers of the Meetup API
+ * This plugin watches the X-Rate-Limit headers of the Meetup API.
+ *
+ * Since we can only determine the rate limit numbers from a previous API calls within the same application request
+ * We want to store those values to slow down the sequential calls within the same request exponantially after
+ * a certain factor is hit.
  *
  * @package DMS\Service\Meetup\Plugin
  */
 class RateLimitPlugin implements EventSubscriberInterface
 {
     /**
+     * Whether rate limitting is enabled
+     *
      * @var bool $rateLimitEnabled
      */
     private $rateLimitEnabled = true;
 
     /**
+     * At what factor between 0 and 1, should throttling be kicked in (now 50%)
+     *
+     * @var float $rateLimitFactor
+     */
+    private $rateLimitFactor = 0.5;
+
+    /**
+     * Number of API calls total for this window
+     *
      * @var int $rateLimitMax
      */
-    private $rateLimitMax = 200;
+    private $rateLimitMax = 30;
 
     /**
-     * @var int $rateLimitCurrent
+     * Number of API calls remaining before rate limit is hit
+     *
+     * @var int $rateLimitRemaining
      */
-    private $rateLimitCurrent = 0;
+    private $rateLimitRemaining = 30;
 
     /**
-     * @var int $rateLimitPercentage
+     * Number of seconds before rate limit is reset
+     *
+     * @var int $rateLimitReset
      */
-    private $rateLimitPercentage = 0;
+    private $rateLimitReset = 0;
+
+    /**
+     * @var bool $debug
+     */
+    private $debug = false;
 
     /**
      * Returns an array of event names this subscriber wants to listen to.
@@ -80,37 +104,40 @@ class RateLimitPlugin implements EventSubscriberInterface
             return;
         }
 
-        // Determine rateLimitMax and rateLimitCurrent from headers
         $this->rateLimitMax = $responseHeaders['X-RateLimit-Limit'][0];
-        $remaining = $responseHeaders['X-RateLimit-Remaining'][0];
-        $this->rateLimitCurrent = $this->rateLimitMax - $remaining;
+        $this->rateLimitRemaining = $responseHeaders['X-RateLimit-Remaining'][0];
+        $this->rateLimitReset = $responseHeaders['X-RateLimit-Remaining'][0];
 
         // Prevent division by zero
         if ($this->rateLimitMax == 0) {
             $this->rateLimitMax = 1;
         }
 
-        // Calculate percentage and keep within bounds
-        $percentage = round($this->rateLimitCurrent / $this->rateLimitMax * 100, 2);
-        $percentage = min($percentage, 100);
-        $percentage = max($percentage, 0);
-        $this->rateLimitPercentage = $percentage;
-
         return;
     }
 
     /**
-     * Performs slowdown when rate limiting is enabled and nearing limit
+     * Performs slowdown when rate limiting is enabled and nearing it's limit
      *
      * @param Event $event
      */
     public function onRequestBeforeSend(Event $event)
     {
-        if ($this->rateLimitEnabled) {
-            if ($this->rateLimitPercentage > 50) {
-                // TODO: Calculate relative sleep time until X-RateLimit-Reset
-                usleep(500);
+        $currentAmount = $this->rateLimitMax - $this->rateLimitRemaining;
+        $currentFactor = $currentAmount / $this->rateLimitMax;
+
+        if($this->debug) {
+            printf("%-8d %-8d %-8d %-8d %-8s %-8s\n", $this->rateLimitMax, $this->rateLimitRemaining, $this->rateLimitReset, $currentAmount, round($currentFactor, 3), $this->rateLimitFactor);
+        }
+
+        // Perform slowdown if the factor is hit
+        if($currentFactor > $this->rateLimitFactor) {
+            $microsecondsPerRequestRemaining = $this->rateLimitReset / $this->rateLimitRemaining * 1000000;
+
+            if($this->debug) {
+                echo " *** Sleeping for {$microsecondsPerRequestRemaining} microseconds\n";
             }
+            usleep($microsecondsPerRequestRemaining);
         }
 
         return;
