@@ -81,8 +81,9 @@ class RateLimitPlugin implements EventSubscriberInterface
         }
 
         // Determine rateLimitMax and rateLimitCurrent from headers
-        $this->rateLimitMax = $responseHeaders['X-RateLimit-Limit'];
-        $this->rateLimitCurrent = $this->rateLimitMax - $responseHeaders['X-RateLimit-Remaining'];
+        $this->rateLimitMax = $responseHeaders['X-RateLimit-Limit'][0];
+        $remaining = $responseHeaders['X-RateLimit-Remaining'][0];
+        $this->rateLimitCurrent = $this->rateLimitMax - $remaining;
 
         // Prevent division by zero
         if ($this->rateLimitMax == 0) {
