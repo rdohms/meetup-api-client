@@ -114,15 +114,14 @@ class RateLimitPlugin implements EventSubscriberInterface
     /**
      * Performs slowdown when rate limiting is enabled and nearing it's limit
      *
-     * @param Event $event
      */
-    public function onRequestBeforeSend(Event $event)
+    public function onRequestBeforeSend()
     {
         $currentAmount = $this->rateLimitMax - $this->rateLimitRemaining;
         $currentFactor = $currentAmount / $this->rateLimitMax;
 
         // Perform slowdown if the factor is hit
-        if($currentFactor > $this->rateLimitFactor) {
+        if ($currentFactor > $this->rateLimitFactor) {
             $microsecondsPerRequestRemaining = $this->rateLimitReset / $this->rateLimitRemaining * 1000000;
 
             usleep($microsecondsPerRequestRemaining);
