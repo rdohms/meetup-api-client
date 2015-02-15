@@ -88,6 +88,12 @@ class DocsToJsonCommand extends Command
         $this->output->writeln('Parsing data from API docs ...');
         foreach ($data['docs'] as $definition) {
             $operation = Operation::createFromApiJsonDocs($definition);
+
+            if ($operation === null) {
+                dump($definition);
+                continue;
+            }
+
             $this->apis[ArrayHelper::read($definition, 'api_version', '1')]->addOperation($operation);
         }
 

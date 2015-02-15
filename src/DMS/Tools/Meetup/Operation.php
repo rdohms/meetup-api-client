@@ -16,10 +16,18 @@ class Operation
 
     public static function createFromApiJsonDocs($definition)
     {
+        if (a::read($definition, 'group') == 'deprecated') {
+            return null;
+        }
+
         $operation = new static();
 
+        $operation->parseName(
+            a::read($definition, 'name'),
+            a::read($definition, 'http_method'),
+            a::read($definition, 'path')
+        );
 
-        $operation->parseName(a::read($definition, 'name'), a::read($definition, 'http_method'));
         $operation->httpMethod = a::read($definition, 'http_method');
         $operation->summary = a::read($definition, 'desc');
         $operation->notes  = a::read($definition, 'param_notes');
@@ -53,19 +61,26 @@ class Operation
         $this->addParameter('omit', 'query', false);
     }
 
-    protected function parseName($name, $method)
+    protected function parseName($name, $method, $uri)
     {
         $translate = array(
             ' ' => '',
-            '-' => ''
+            '-' => '',
+            '_' => '',
+            '/' => ''
         );
 
         if ($method == 'GET') {
-            $this->name = ucfirst(strtolower($method)) . strtr($name, $translate);
+            $this->name = ucfirst(strtolower($method)) . ucfirst(strtr($name, $translate));
             return;
         }
 
-        $this->name = strtr($name, $translate);
+        if (empty($name) || $name === null) {
+            $this->name = ucfirst(strtr($uri, $translate));
+            return;
+        }
+
+        $this->name = ucfirst(strtr($name, $translate));
     }
 
     protected function parsePath($path)

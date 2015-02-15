@@ -21,7 +21,8 @@ class Api
 
     public function addOperation(Operation $operation)
     {
-        $this->operations[] = $operation;
+        $this->operations[$operation->name] = $operation;
+        ksort($this->operations);
     }
 
     public function toJson()
