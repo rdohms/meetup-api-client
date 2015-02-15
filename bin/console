@@ -3,6 +3,7 @@
 
 include __DIR__.'/../vendor/autoload.php';
 
+use DMS\Tools\Meetup\Command\DocsToJsonCommand;
 use DMS\Tools\Meetup\Command\GenerateJsonDefinitionsCommand;
 use DMS\Tools\Meetup\Command\PhpDocGeneratorCommand;
 use Symfony\Component\Console\Application;
@@ -10,4 +11,5 @@ use Symfony\Component\Console\Application;
 $application = new Application();
 $application->add(new GenerateJsonDefinitionsCommand());
 $application->add(new PhpDocGeneratorCommand());
+$application->add(new DocsToJsonCommand());
 $application->run();
