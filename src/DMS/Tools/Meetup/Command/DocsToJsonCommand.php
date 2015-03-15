@@ -116,7 +116,7 @@ class DocsToJsonCommand extends Command
 
         $this->output->writeln('Dumping data from API docs ...');
         foreach ($this->apis as $api) {
-            $filename = sys_get_temp_dir() . '/' . sprintf('meetup_v%d_services.json', $api->apiVersion);
+            $filename = sys_get_temp_dir() . '/' . sprintf('meetup_v%s_services.json', $api->apiVersion);
 
             $this->output->writeln(sprintf('Writing to %s ...', $filename));
             file_put_contents($filename, $api->toJson());

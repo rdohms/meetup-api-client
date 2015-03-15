@@ -1,379 +1,260 @@
 {
     "name": "Meetup",
-    "apiVersion": "1",
-    "description": "Meetup API v1 Legacy Methods",
+    "apiVersion": 1,
+    "description": "Meetup API v1 methods",
     "operations": {
-        "V1BaseGet": {
-            "httpMethod": "GET",
-            "parameters": {
-                "page": {
-                    "location": "query",
-                    "required": false
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false
-                },
-                "order": {
-                    "location": "query",
-                    "required": false
-                },
-                "only": {
-                    "location": "query",
-                    "required": false
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false
-                }
-            },
-            "summary": "Base for GET Operations, includes parameters available to all GET requests",
-            "uri": "/"
-        },
-        "ApproveMembership": {
-            "httpMethod": "POST",
-            "parameters": {
-                "member": {
-                    "location": "postField",
-                    "required": false
-                },
-                "send_copy": {
-                    "location": "postField",
-                    "required": false
-                },
-                "urlname": {
-                    "location": "uri",
-                    "required": true
-                },
-                "welcome_message": {
-                    "location": "postField",
-                    "required": false
-                }
-            },
-            "summary": "Approves one or more requests for group membership",
-            "uri": "/{urlname}/member/approvals"
-        },
-        "DeclineMembership": {
-            "httpMethod": "DELETE",
-            "parameters": {
-                "anon": {
-                    "location": "postField",
-                    "required": false
-                },
-                "ban": {
-                    "location": "postField",
-                    "required": false
-                },
-                "explaination": {
-                    "location": "postField",
-                    "required": false
-                },
-                "member": {
-                    "location": "postField",
-                    "required": false
-                },
-                "send_copy": {
-                    "location": "postField",
-                    "required": false
-                },
-                "urlname": {
-                    "location": "uri",
-                    "required": true
-                }
-            },
-            "summary": "Declines one or more requests for group membership",
-            "uri": "/{urlname}/member/approvals"
-        },
-        "FindGroups": {
-            "extends": "V1BaseGet",
-            "httpMethod": "GET",
-            "parameters": {
-                "category": {
-                    "location": "query",
-                    "required": false
-                },
-                "country": {
-                    "location": "query",
-                    "required": false
-                },
-                "distance": {
-                    "location": "query",
-                    "required": false
-                },
-                "filter": {
-                    "location": "query",
-                    "required": false
-                },
-                "lat": {
-                    "location": "query",
-                    "required": false
-                },
-                "location": {
-                    "location": "query",
-                    "required": false
-                },
-                "lon": {
-                    "location": "query",
-                    "required": false
-                },
-                "members": {
-                    "location": "query",
-                    "required": false
-                },
-                "most_active": {
-                    "location": "query",
-                    "required": false
-                },
-                "newest": {
-                    "location": "query",
-                    "required": false
-                },
-                "radius": {
-                    "location": "query",
-                    "required": false
-                },
-                "text": {
-                    "location": "query",
-                    "required": false
-                },
-                "upcoming_events": {
-                    "location": "query",
-                    "required": false
-                },
-                "zip": {
-                    "location": "query",
-                    "required": false
-                }
-            },
-            "summary": "Text, location, category and friend-based group searches",
-            "uri": "/find/groups"
-        },
-        "GetActivityFeed": {
-            "extends": "V1BaseGet",
+        "GetActivity": {
+            "version": "1",
+            "name": "GetActivity",
             "httpMethod": "GET",
             "parameters": {
                 "member_id": {
                     "location": "query",
-                    "required": false
+                    "required": false,
+                    "description": "Returns activity from this member's groups. Must be authenticated as this member"
                 },
                 "page_start": {
                     "location": "query",
-                    "required": false
+                    "required": false,
+                    "description": "Starting timestamp for item to return."
+                },
+                "page": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "offset": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "desc": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "order": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "only": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "omit": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
                 }
             },
             "summary": "API method for retrieving the activity feed for a member's groups",
-            "uri": "/activity"
-        },
-        "GetAttendance": {
-            "extends": "V1BaseGet",
-            "httpMethod": "GET",
-            "parameters": {
-                "filter": {
-                    "location": "query",
-                    "required": false
-                },
-                "id": {
-                    "location": "uri",
-                    "required": true
-                },
-                "member": {
-                    "location": "query",
-                    "required": false
-                },
-                "urlname": {
-                    "location": "uri",
-                    "required": true
-                }
-            },
-            "summary": "Lists attendance records for Meetup events",
-            "uri": "/{urlname}/events/{id}/attendance"
+            "uri": "/activity",
+            "notes": null
         },
         "GetComments": {
-            "extends": "V1BaseGet",
+            "version": "1",
+            "name": "GetComments",
             "httpMethod": "GET",
             "parameters": {
-                "ctime": {
+                "topic": {
                     "location": "query",
-                    "required": false
+                    "required": false,
+                    "description": "Return comments for the group with given topic and number"
+                },
+                " groupnum": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Return comments for the group with given topic and number"
                 },
                 "group_id": {
                     "location": "query",
-                    "required": false
+                    "required": false,
+                    "description": "Return comments in groups with these ID numbers [separated by commas]"
                 },
                 "group_urlname": {
                     "location": "query",
-                    "required": false
+                    "required": false,
+                    "description": "Return comments for the group with this custom URL path"
                 },
-                "topic": {
+                "ctime": {
                     "location": "query",
-                    "required": false
+                    "required": false,
+                    "description": "the date the comment was posted"
                 },
-                "groupnum": {
+                "page": {
                     "location": "query",
-                    "required": false
+                    "required": false,
+                    "description": null
+                },
+                "offset": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "desc": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "order": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "only": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "omit": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
                 }
             },
             "summary": "API method for accessing meetup group comments",
-            "uri": "/comments"
-        },
-        "GetDiscussionBoards": {
-            "extends": "V1BaseGet",
-            "httpMethod": "GET",
-            "parameters": {
-                "urlname": {
-                    "location": "uri",
-                    "required": true
-                }
-            },
-            "summary": "Listings of Group discussion boards",
-            "uri": "/{urlname}/boards"
-        },
-        "GetDiscussionPosts": {
-            "extends": "V1BaseGet",
-            "httpMethod": "GET",
-            "parameters": {
-                "bid": {
-                    "location": "uri",
-                    "required": true
-                },
-                "did": {
-                    "location": "uri",
-                    "required": true
-                },
-                "urlname": {
-                    "location": "uri",
-                    "required": true
-                }
-            },
-            "summary": "Listing Group discussion posts",
-            "uri": "/{urlname}/boards/{bid}/discussions/{did}"
-        },
-        "GetDiscussions": {
-            "extends": "V1BaseGet",
-            "httpMethod": "GET",
-            "parameters": {
-                "bid": {
-                    "location": "uri",
-                    "required": true
-                },
-                "urlname": {
-                    "location": "uri",
-                    "required": true
-                }
-            },
-            "summary": "Listings of Group discussions",
-            "uri": "/{urlname}/boards/{bid}/discussions"
+            "uri": "/comments",
+            "notes": "At least one of the required parameter(s) must be supplied with the request."
         },
         "GetOembed": {
-            "extends": "V1BaseGet",
+            "version": "1",
+            "name": "GetOembed",
             "httpMethod": "GET",
             "parameters": {
-                "maxwidth": {
-                    "location": "query",
-                    "required": false
-                },
                 "url": {
                     "location": "query",
-                    "required": true
+                    "required": false,
+                    "description": "url of resource to be embedded"
+                },
+                "maxwidth": {
+                    "location": "query",
+                    "required": false,
+                    "description": "maximum width to display"
+                },
+                "page": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "offset": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "desc": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "order": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "only": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "omit": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
                 }
             },
             "summary": "oEmbed implementation",
-            "uri": "/oembed"
-        },
-        "GetRecommendedGroups": {
-            "extends": "V1BaseGet",
-            "httpMethod": "GET",
-            "parameters": {
-                "country": {
-                    "location": "query",
-                    "required": false
-                },
-                "lat": {
-                    "location": "query",
-                    "required": false
-                },
-                "location": {
-                    "location": "query",
-                    "required": false
-                },
-                "lon": {
-                    "location": "query",
-                    "required": false
-                },
-                "radius": {
-                    "location": "query",
-                    "required": false
-                },
-                "zip": {
-                    "location": "query",
-                    "required": false
-                }
-            },
-            "summary": "Returns groups Meetup finds relevant to you",
-            "uri": "/recommended/groups"
+            "uri": "/oembed",
+            "notes": "\nThis method does not require authentication. It requires only a url parameter and responds according to the [OEmbed specification](http://www.oembed.com/). Any of the following base URLs may refer to embeddable content:\n\n* http://www.meetup.com/\n* http://meetup.com/\n* http://meetu.ps/\n\nAn optional __maxwidth__ parameter may be provided.\n"
         },
         "GetTopics": {
-            "extends": "V1BaseGet",
+            "version": "1",
+            "name": "GetTopics",
             "httpMethod": "GET",
             "parameters": {
-                "alertees": {
+                "member_id": {
                     "location": "query",
-                    "required": false
-                },
-                "members": {
-                    "location": "query",
-                    "required": false
+                    "required": false,
+                    "description": "Return topics a target member is subscribed to"
                 },
                 "name": {
                     "location": "query",
-                    "required": false
-                },
-                "search": {
-                    "location": "query",
-                    "required": false
+                    "required": false,
+                    "description": "the topic name"
                 },
                 "topic": {
                     "location": "query",
-                    "required": false
+                    "required": false,
+                    "description": "the topic key"
+                },
+                "search": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Return topics related to a list of search terms [separate search keywords with +'s]"
+                },
+                "alertees": {
+                    "location": "query",
+                    "required": false,
+                    "description": "total alertees in the topic"
+                },
+                "members": {
+                    "location": "query",
+                    "required": false,
+                    "description": "total members in the topic"
+                },
+                "page": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "offset": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "desc": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "order": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "only": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "omit": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
                 }
             },
             "summary": "API method for accessing meetup topics",
-            "uri": "/topics"
+            "uri": "/topics",
+            "notes": "At least one of the required parameter(s) must be supplied with the request."
         },
-        "PostAttendance": {
-            "httpMethod": "POST",
-            "parameters": {
-                "guests": {
-                    "location": "postField",
-                    "required": false
-                },
-                "headcount": {
-                    "location": "postField",
-                    "required": false
-                },
-                "id": {
-                    "location": "uri",
-                    "required": true
-                },
-                "member": {
-                    "location": "postField",
-                    "required": true
-                },
-                "status": {
-                    "location": "postField",
-                    "required": true
-                },
-                "urlname": {
-                    "location": "uri",
-                    "required": true
-                }
-            },
-            "summary": "Takes Member attendance for an Event",
-            "uri": "/{urlname}/events/{id}/attendance"
+        "Widget": {
+            "version": "1",
+            "name": "Widget",
+            "httpMethod": null,
+            "parameters": [],
+            "summary": null,
+            "uri": "/widget",
+            "notes": null
+        },
+        "WidgetQuery": {
+            "version": "1",
+            "name": "WidgetQuery",
+            "httpMethod": null,
+            "parameters": [],
+            "summary": null,
+            "uri": "/widget_query",
+            "notes": null
         }
     }
 }
