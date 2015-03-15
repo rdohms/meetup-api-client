@@ -5,19 +5,15 @@ namespace DMS\Tools\Meetup\Command;
 use DMS\Tools\ArrayHelper;
 use DMS\Tools\Meetup\Api;
 use DMS\Tools\Meetup\Operation;
-use DOMElement;
-use Exception;
 use Guzzle\Http\Client;
-use InvalidArgumentException;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
-use SplFileInfo;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\DialogHelper;
-use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Helper\TableHelper;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\DomCrawler\Crawler;
 
 class DocsToJsonCommand extends Command
 {
@@ -54,7 +50,11 @@ class DocsToJsonCommand extends Command
             ->setName('dms:meetup:import-to-docs')
             ->setDescription(
                 'Parses online json documentation into Guzzle Service definitions'
-            );
+            )
+            ->setDefinition(array(
+                new InputOption('debug-names', 'd', InputOption::VALUE_NONE, 'Show name conversion info')
+            ))
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -80,21 +80,38 @@ class DocsToJsonCommand extends Command
             3 => Api::build('Meetup', 3, 'Meetup API v3 methods'),
             2 => Api::build('Meetup', 2, 'Meetup API v2 methods'),
             1 => Api::build('Meetup', 1, 'Meetup API v1 methods'),
+            'stream' => Api::build('Meetup', 'stream', 'Meetup API Stream methods'),
         );
 
         $this->output->writeln('Downloading data from API docs ...');
         $data = $this->getApiData();
 
+        /** @var TableHelper $nameConversionTable */
+        $nameConversionTable = $this->getHelper('table');
+        $nameConversionTable->setHeaders(array('v', 'Docs Name', 'Method', 'Path', 'Final Method Name'));
+
         $this->output->writeln('Parsing data from API docs ...');
         foreach ($data['docs'] as $definition) {
+
             $operation = Operation::createFromApiJsonDocs($definition);
 
             if ($operation === null) {
-                dump($definition);
                 continue;
             }
 
-            $this->apis[ArrayHelper::read($definition, 'api_version', '1')]->addOperation($operation);
+            $nameConversionTable->addRow(array(
+                $operation->version,
+                ArrayHelper::read($definition, 'name'),
+                ArrayHelper::read($definition, 'http_method'),
+                ArrayHelper::read($definition, 'path'),
+                $operation->name
+            ));
+
+            $this->apis[$operation->version]->addOperation($operation);
+        }
+
+        if ($this->input->getOption('debug-names')) {
+            $nameConversionTable->render($this->output);
         }
 
         $this->output->writeln('Dumping data from API docs ...');

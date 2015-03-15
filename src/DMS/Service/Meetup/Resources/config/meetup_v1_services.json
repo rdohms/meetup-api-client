@@ -1,753 +1,379 @@
 {
     "name": "Meetup",
-    "apiVersion": 1,
-    "description": "Meetup API v1 methods",
+    "apiVersion": "1",
+    "description": "Meetup API v1 Legacy Methods",
     "operations": {
-        "GetActivityFeed": {
-            "name": "GetActivityFeed",
+        "V1BaseGet": {
             "httpMethod": "GET",
             "parameters": {
-                "page_start": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Starting timestamp for item to return."
-                },
-                "member_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Returns activity from this member's groups. Must be authenticated as this member"
-                },
                 "page": {
                     "location": "query",
-                    "required": false,
-                    "description": null
+                    "required": false
                 },
                 "offset": {
                     "location": "query",
-                    "required": false,
-                    "description": null
+                    "required": false
                 },
                 "desc": {
                     "location": "query",
-                    "required": false,
-                    "description": null
+                    "required": false
                 },
                 "order": {
                     "location": "query",
-                    "required": false,
-                    "description": null
+                    "required": false
                 },
                 "only": {
                     "location": "query",
-                    "required": false,
-                    "description": null
+                    "required": false
                 },
                 "omit": {
                     "location": "query",
-                    "required": false,
-                    "description": null
+                    "required": false
+                }
+            },
+            "summary": "Base for GET Operations, includes parameters available to all GET requests",
+            "uri": "/"
+        },
+        "ApproveMembership": {
+            "httpMethod": "POST",
+            "parameters": {
+                "member": {
+                    "location": "postField",
+                    "required": false
+                },
+                "send_copy": {
+                    "location": "postField",
+                    "required": false
+                },
+                "urlname": {
+                    "location": "uri",
+                    "required": true
+                },
+                "welcome_message": {
+                    "location": "postField",
+                    "required": false
+                }
+            },
+            "summary": "Approves one or more requests for group membership",
+            "uri": "/{urlname}/member/approvals"
+        },
+        "DeclineMembership": {
+            "httpMethod": "DELETE",
+            "parameters": {
+                "anon": {
+                    "location": "postField",
+                    "required": false
+                },
+                "ban": {
+                    "location": "postField",
+                    "required": false
+                },
+                "explaination": {
+                    "location": "postField",
+                    "required": false
+                },
+                "member": {
+                    "location": "postField",
+                    "required": false
+                },
+                "send_copy": {
+                    "location": "postField",
+                    "required": false
+                },
+                "urlname": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": "Declines one or more requests for group membership",
+            "uri": "/{urlname}/member/approvals"
+        },
+        "FindGroups": {
+            "extends": "V1BaseGet",
+            "httpMethod": "GET",
+            "parameters": {
+                "category": {
+                    "location": "query",
+                    "required": false
+                },
+                "country": {
+                    "location": "query",
+                    "required": false
+                },
+                "distance": {
+                    "location": "query",
+                    "required": false
+                },
+                "filter": {
+                    "location": "query",
+                    "required": false
+                },
+                "lat": {
+                    "location": "query",
+                    "required": false
+                },
+                "location": {
+                    "location": "query",
+                    "required": false
+                },
+                "lon": {
+                    "location": "query",
+                    "required": false
+                },
+                "members": {
+                    "location": "query",
+                    "required": false
+                },
+                "most_active": {
+                    "location": "query",
+                    "required": false
+                },
+                "newest": {
+                    "location": "query",
+                    "required": false
+                },
+                "radius": {
+                    "location": "query",
+                    "required": false
+                },
+                "text": {
+                    "location": "query",
+                    "required": false
+                },
+                "upcoming_events": {
+                    "location": "query",
+                    "required": false
+                },
+                "zip": {
+                    "location": "query",
+                    "required": false
+                }
+            },
+            "summary": "Text, location, category and friend-based group searches",
+            "uri": "/find/groups"
+        },
+        "GetActivityFeed": {
+            "extends": "V1BaseGet",
+            "httpMethod": "GET",
+            "parameters": {
+                "member_id": {
+                    "location": "query",
+                    "required": false
+                },
+                "page_start": {
+                    "location": "query",
+                    "required": false
                 }
             },
             "summary": "API method for retrieving the activity feed for a member's groups",
-            "uri": "/activity",
-            "notes": null
+            "uri": "/activity"
         },
-        "GetChunkedHTTPEventCommentsStream": {
-            "name": "GetChunkedHTTPEventCommentsStream",
+        "GetAttendance": {
+            "extends": "V1BaseGet",
             "httpMethod": "GET",
             "parameters": {
-                "since_mtime": {
+                "filter": {
                     "location": "query",
-                    "required": false,
-                    "description": "Return recent Event Comments with an mtime greater than the supplied time, in milliseconds since the epoch"
+                    "required": false
                 },
-                "event_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Limit notifications to a specific event id. Use alphanumeric ids for repeating events."
+                "id": {
+                    "location": "uri",
+                    "required": true
                 },
-                "since_count": {
+                "member": {
                     "location": "query",
-                    "required": false,
-                    "description": "Request that some number of recent messages be sent immediately, if available. May not be specified in the same request as since_mtime."
+                    "required": false
                 },
-                "page": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
+                "urlname": {
+                    "location": "uri",
+                    "required": true
                 }
             },
-            "summary": "\nLive HTTP stream of Event Comments  within public meetup groups. This method uses [chunked\ntransfer encoding](http://en.wikipedia.org/wiki/Chunked_transfer_encoding)\nto maintain a persistent connection with the client. This connection will only be\nterminated for server maintenance or a connection error.\n    ",
-            "uri": "/2/event_comments",
-            "notes": "This method does not require authentication, or any parameters. Applications should\n                           only need a single connection to the stream, and at most 10 connections are allowed\n                           per client IP address."
-        },
-        "GetChunkedHTTPOpenVenuesStream": {
-            "name": "GetChunkedHTTPOpenVenuesStream",
-            "httpMethod": "GET",
-            "parameters": {
-                "trickle": {
-                    "location": "query",
-                    "required": false,
-                    "description": "When supplied with a request, the Meetup API will push your client the entire Meetup database of public venues in batches of 512"
-                },
-                "since_mtime": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Return recent open venues with an mtime greater then the supplied time, in milliseconds since the epoch"
-                },
-                "since_count": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Request that some number of recent messages be sent immediately, if available. May not be specified in the same request as since_mtime."
-                },
-                "page": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                }
-            },
-            "summary": "\nLive HTTP stream of the creation and modification of public Meetup venues using\n[chunked encoding](http://en.wikipedia.org/wiki/Chunked_transfer_encoding)\nto maintian a persistent connection with a client. The connection will only be\nterminiated for server maintenance or a connection error. It is suitable for\nlow-level HTTP clients rather than web browsers.\n      ",
-            "uri": "/2/open_venues",
-            "notes": "This method does not require authentication, or any parameters. Applications should\n                           only need a single connection to the stream, and at most 10 connections are allowed\n                           per client IP address. This method can also be used to download all of Meetup's public venues by passing in the URL request parameter 'trickle'"
-        },
-        "GetChunkedHTTPPhotoStream": {
-            "name": "GetChunkedHTTPPhotoStream",
-            "httpMethod": "GET",
-            "parameters": {
-                "since_mtime": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Return recent photos with an mtime greater then the supplied time, in millisends since the epoch"
-                },
-                "since_count": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Request that some number of recent messages be sent immediately, if available. May not be specified in the same request as since_mtime."
-                },
-                "page": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                }
-            },
-            "summary": "\nThis method serves photo notifications using\n[chunked encoding](http://en.wikipedia.org/wiki/Chunked_transfer_encoding)\nto maintian a persistent connection with a client. The connection will only be\nterminiated for server maintenance or a connection error. It is suitable for\nlow-level HTTP clients rather than web browsers.\n      ",
-            "uri": "/2/photos",
-            "notes": null
-        },
-        "GetChunkedHTTPRSVPStream": {
-            "name": "GetChunkedHTTPRSVPStream",
-            "httpMethod": "GET",
-            "parameters": {
-                "since_mtime": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Return recent RSVP with an mtime greater than the supplied time, in milliseconds since the epoch"
-                },
-                "since_count": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Request that some number of recent messages be sent immediately, if available. May not be specified in the same request as since_mtime."
-                },
-                "page": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                }
-            },
-            "summary": "\nLive HTTP stream of RSVPs within public Meetup groups. This method uses [chunked \ntransfer encoding](http://en.wikipedia.org/wiki/Chunked_transfer_encoding) \nto maintain a persistent connection with the client. This connection will only be \nterminated for server maintenance or a connection error.\n    ",
-            "uri": "/2/rsvps",
-            "notes": "This method does not require authentication, or any parameters. Applications should\n                           only need a single connection to the stream, and at most 10 connections are allowed\n                           per client IP address."
+            "summary": "Lists attendance records for Meetup events",
+            "uri": "/{urlname}/events/{id}/attendance"
         },
         "GetComments": {
-            "name": "GetComments",
+            "extends": "V1BaseGet",
             "httpMethod": "GET",
             "parameters": {
-                "topic": {
+                "ctime": {
                     "location": "query",
-                    "required": false,
-                    "description": "Return comments for the group with given topic and number"
-                },
-                " groupnum": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Return comments for the group with given topic and number"
+                    "required": false
                 },
                 "group_id": {
                     "location": "query",
-                    "required": false,
-                    "description": "Return comments in groups with these ID numbers [separated by commas]"
+                    "required": false
                 },
                 "group_urlname": {
                     "location": "query",
-                    "required": false,
-                    "description": "Return comments for the group with this custom URL path"
+                    "required": false
                 },
-                "ctime": {
+                "topic": {
                     "location": "query",
-                    "required": false,
-                    "description": "the date the comment was posted"
+                    "required": false
                 },
-                "page": {
+                "groupnum": {
                     "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
+                    "required": false
                 }
             },
             "summary": "API method for accessing meetup group comments",
-            "uri": "/comments",
-            "notes": "At least one of the required parameter(s) must be supplied with the request."
+            "uri": "/comments"
         },
-        "GetLongPollingEventCommentsStream": {
-            "name": "GetLongPollingEventCommentsStream",
+        "GetDiscussionBoards": {
+            "extends": "V1BaseGet",
             "httpMethod": "GET",
             "parameters": {
-                "since_mtime": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Should be supplied for all but the first polling request, so that any missed notifications are can be sent in an immediate response"
-                },
-                "callback": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Name of a function to be called with an array of Event Comment notification objects. If this\nparameter is not supplied, the chunked stream is joined instead."
-                },
-                "event_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Limit notifications to a specific event id. Use alphanumeric ids for repeating events."
-                },
-                "since_count": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Request that some number of recent messages be sent immediately, if available. May not be specified in the same request as since_mtime."
-                },
-                "page": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
+                "urlname": {
+                    "location": "uri",
+                    "required": true
                 }
             },
-            "summary": "\nThis [long-polling](http://en.wikipedia.org/wiki/Comet_%28programming%29#Script_tag_long_polling)\nstream can be easily consumed using JavaScript in any modern browser. Event Comment\nnotifications are received when they happen, or as soon as your script finishes handling its\nlast notification.",
-            "uri": "/2/event_comments",
-            "notes": "These parameters are set automatically by Meetup's [must.js](https://github.com/meetup/must.js#readme) client."
+            "summary": "Listings of Group discussion boards",
+            "uri": "/{urlname}/boards"
         },
-        "GetLongPollingPhotoStream": {
-            "name": "GetLongPollingPhotoStream",
+        "GetDiscussionPosts": {
+            "extends": "V1BaseGet",
             "httpMethod": "GET",
             "parameters": {
-                "since_mtime": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Should be supplied for all but the first polling request, so that any missed notifications are can be sent in an immediate response"
+                "bid": {
+                    "location": "uri",
+                    "required": true
                 },
-                "callback": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Name of a function to be called with an array of photo notification objects. If this \nparameter is not supplied, the chunked stream is joined instead."
+                "did": {
+                    "location": "uri",
+                    "required": true
                 },
-                "event_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Limit notifications to a specific event id. Use alphanumeric ids for repeating events."
-                },
-                "since_count": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Request that some number of recent messages be sent immediately, if available. May not be specified in the same request as since_mtime."
-                },
-                "page": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
+                "urlname": {
+                    "location": "uri",
+                    "required": true
                 }
             },
-            "summary": "\nThis [long-polling](http://en.wikipedia.org/wiki/Comet_%28programming%29#Script_tag_long_polling) \nstream can be easily consumed using JavaScript in any modern browser. Photo upload\nnotifications are received when they happen, or as soon as your script finishes handling its\nlast notification.\n      ",
-            "uri": "/2/photos",
-            "notes": "These parameters are set automatically by Meetup's [must.js](https://github.com/meetup/must.js#readme) client."
+            "summary": "Listing Group discussion posts",
+            "uri": "/{urlname}/boards/{bid}/discussions/{did}"
         },
-        "GetLongPollingRSVPStream": {
-            "name": "GetLongPollingRSVPStream",
+        "GetDiscussions": {
+            "extends": "V1BaseGet",
             "httpMethod": "GET",
             "parameters": {
-                "since_mtime": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Should be supplied for all but the first polling request, so that any missed notifications are can be sent in an immediate response"
+                "bid": {
+                    "location": "uri",
+                    "required": true
                 },
-                "callback": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Name of a function to be called with an array of RSVP notification objects. If this \nparameter is not supplied, the chunked stream is joined instead."
-                },
-                "event_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Limit notifications to a specific event id. Use alphanumeric ids for repeating events."
-                },
-                "since_count": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Request that some number of recent messages be sent immediately, if available. May not be specified in the same request as since_mtime."
-                },
-                "page": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
+                "urlname": {
+                    "location": "uri",
+                    "required": true
                 }
             },
-            "summary": "\nThis [long-polling](http://en.wikipedia.org/wiki/Comet_%28programming%29#Script_tag_long_polling) \nstream can be easily consumed using JavaScript in any modern browser. RSVP\nnotifications are received when they happen, or as soon as your script finishes handling its\nlast notification.",
-            "uri": "/2/rsvps",
-            "notes": "These parameters are set automatically by Meetup's [must.js](https://github.com/meetup/must.js#readme) client."
+            "summary": "Listings of Group discussions",
+            "uri": "/{urlname}/boards/{bid}/discussions"
         },
-        "GetOEmbed": {
-            "name": "GetOEmbed",
+        "GetOembed": {
+            "extends": "V1BaseGet",
             "httpMethod": "GET",
             "parameters": {
                 "maxwidth": {
                     "location": "query",
-                    "required": false,
-                    "description": "maximum width to display"
+                    "required": false
                 },
                 "url": {
                     "location": "query",
-                    "required": false,
-                    "description": "url of resource to be embedded"
-                },
-                "page": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
+                    "required": true
                 }
             },
             "summary": "oEmbed implementation",
-            "uri": "/oembed",
-            "notes": "\nThis method does not require authentication. It requires only a url parameter and responds according to the [OEmbed specification](http://www.oembed.com/). Any of the following base URLs may refer to embeddable content:\n\n* http://www.meetup.com/\n* http://meetup.com/\n* http://meetu.ps/\n\nAn optional __maxwidth__ parameter may be provided.\n"
+            "uri": "/oembed"
         },
-        "GetOpenEventsStream": {
-            "name": "GetOpenEventsStream",
+        "GetRecommendedGroups": {
+            "extends": "V1BaseGet",
             "httpMethod": "GET",
             "parameters": {
-                "since_mtime": {
+                "country": {
                     "location": "query",
-                    "required": false,
-                    "description": "Return events with an mtime greater than the supplied time, in milliseconds since the epoch"
+                    "required": false
                 },
-                "since_count": {
+                "lat": {
                     "location": "query",
-                    "required": false,
-                    "description": "Request that some number of recent messages be sent immediately, if available. May not be specified in the same request as since_mtime."
+                    "required": false
                 },
-                "page": {
+                "location": {
                     "location": "query",
-                    "required": false,
-                    "description": null
+                    "required": false
                 },
-                "offset": {
+                "lon": {
                     "location": "query",
-                    "required": false,
-                    "description": null
+                    "required": false
                 },
-                "desc": {
+                "radius": {
                     "location": "query",
-                    "required": false,
-                    "description": null
+                    "required": false
                 },
-                "order": {
+                "zip": {
                     "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
+                    "required": false
                 }
             },
-            "summary": "\nLive HTTP stream of events within public Meetup groups. This method uses [chunked\ntransfer encoding](http://en.wikipedia.org/wiki/Chunked_transfer_encoding)\nto maintain a persistent connection with the client. This connection will only be\nterminated for server maintenance or a connection error.\n      ",
-            "uri": "/2/open_events",
-            "notes": "This method does not require authentication, or any parameters. Applications should\n                           only need a single connection to the stream, and at most 10 connections are allowed\n                           per client IP address."
+            "summary": "Returns groups Meetup finds relevant to you",
+            "uri": "/recommended/groups"
         },
         "GetTopics": {
-            "name": "GetTopics",
+            "extends": "V1BaseGet",
             "httpMethod": "GET",
             "parameters": {
-                "topic": {
-                    "location": "query",
-                    "required": false,
-                    "description": "the topic key"
-                },
-                "search": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Return topics related to a list of search terms [separate search keywords with +'s]"
-                },
-                "name": {
-                    "location": "query",
-                    "required": false,
-                    "description": "the topic name"
-                },
-                "member_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Return topics a target member is subscribed to"
-                },
                 "alertees": {
                     "location": "query",
-                    "required": false,
-                    "description": "total alertees in the topic"
+                    "required": false
                 },
                 "members": {
                     "location": "query",
-                    "required": false,
-                    "description": "total members in the topic"
+                    "required": false
                 },
-                "page": {
+                "name": {
                     "location": "query",
-                    "required": false,
-                    "description": null
+                    "required": false
                 },
-                "offset": {
+                "search": {
                     "location": "query",
-                    "required": false,
-                    "description": null
+                    "required": false
                 },
-                "desc": {
+                "topic": {
                     "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
+                    "required": false
                 }
             },
             "summary": "API method for accessing meetup topics",
-            "uri": "/topics",
-            "notes": "At least one of the required parameter(s) must be supplied with the request."
+            "uri": "/topics"
         },
-        "WebSocketPhotoStream": {
-            "name": "WebSocketPhotoStream",
-            "httpMethod": "WS",
+        "PostAttendance": {
+            "httpMethod": "POST",
             "parameters": {
-                "since_mtime": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Return recent photos with an mtime greater then the supplied time, in millisends since the epoch"
+                "guests": {
+                    "location": "postField",
+                    "required": false
                 },
-                "since_count": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Request that some number of recent messages be sent immediately, if available. May not be specified in the same request as since_mtime."
+                "headcount": {
+                    "location": "postField",
+                    "required": false
+                },
+                "id": {
+                    "location": "uri",
+                    "required": true
+                },
+                "member": {
+                    "location": "postField",
+                    "required": true
+                },
+                "status": {
+                    "location": "postField",
+                    "required": true
+                },
+                "urlname": {
+                    "location": "uri",
+                    "required": true
                 }
             },
-            "summary": "\nFor browsers that support it, [WebSockets](http://dev.w3.org/html5/websockets/) is a more\nefficient alternative to the long-polling stream. This is a **push only** endpoint and will discard\nany messages received from the client after the socket is open.\n\nBecause browser support for WebSockets is limited, we recommend that you consume this stream\nthrough the [must.js](https://github.com/meetup/must.js#readme) client, which can fallback to long-polling.\n    ",
-            "uri": "/2/photos",
-            "notes": "The full url for this method is **`ws://stream.meetup.com/2/photos`**"
-        },
-        "WebSocketsEventCommentsStream": {
-            "name": "WebSocketsEventCommentsStream",
-            "httpMethod": "WS",
-            "parameters": {
-                "since_mtime": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Return recent Event Comments with an mtime greater than the supplied time, in milliseconds since the epoch"
-                },
-                "event_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Limit notifications to a specific event id. Use alphanumeric ids for repeating events."
-                },
-                "since_count": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Request that some number of recent messages be sent immediately, if available. May not be specified in the same request as since_mtime."
-                }
-            },
-            "summary": "\nFor browsers that support it, [WebSockets](http://dev.w3.org/html5/websockets/) is a more\nefficient alternative to the long-polling stream. This is a **push only** endpoint and will discard\nany messages received from the client after the socket is open.\n\nBecause browser support for WebSockets is limited, we recommend that you consume this stream\nthrough the [must.js](https://github.com/meetup/must.js#readme) client, which can fallback to long-polling.\n    ",
-            "uri": "/2/event_comments",
-            "notes": "The full URL for this method is **`ws://stream.meetup.com/2/event_comments`**"
-        },
-        "WebSocketsRSVPStream": {
-            "name": "WebSocketsRSVPStream",
-            "httpMethod": "WS",
-            "parameters": {
-                "since_mtime": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Return recent RSVPs with an mtime greater than the supplied time, in milliseconds since the epoch"
-                },
-                "event_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Limit notifications to a specific event id. Use alphanumeric ids for repeating events."
-                },
-                "since_count": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Request that some number of recent messages be sent immediately, if available. May not be specified in the same request as since_mtime."
-                }
-            },
-            "summary": "\nFor browsers that support it, [WebSockets](http://dev.w3.org/html5/websockets/) is a more\nefficient alternative to the long-polling stream. This is a **push only** endpoint and will discard\nany messages received from the client after the socket is open.\n\nBecause browser support for WebSockets is limited, we recommend that you consume this stream\nthrough the [must.js](https://github.com/meetup/must.js#readme) client, which can fallback to long-polling.\n    ",
-            "uri": "/2/rsvps",
-            "notes": "The full URL for this method is **`ws://stream.meetup.com/2/rsvps`**"
-        },
-        "Widget": {
-            "name": "Widget",
-            "httpMethod": null,
-            "parameters": [],
-            "summary": null,
-            "uri": "/widget",
-            "notes": null
-        },
-        "Widgetquery": {
-            "name": "Widgetquery",
-            "httpMethod": null,
-            "parameters": [],
-            "summary": null,
-            "uri": "/widget_query",
-            "notes": null
+            "summary": "Takes Member attendance for an Event",
+            "uri": "/{urlname}/events/{id}/attendance"
         }
     }
 }

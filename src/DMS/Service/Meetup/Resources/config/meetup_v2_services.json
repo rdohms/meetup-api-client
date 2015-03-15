@@ -1,2750 +1,1796 @@
 {
     "name": "Meetup",
-    "apiVersion": 2,
-    "description": "Meetup API v2 methods",
+    "apiVersion": "2",
+    "description": "Meetup API v2 Methods",
     "operations": {
-        "EventCommentDelete": {
-            "name": "EventCommentDelete",
-            "httpMethod": "DELETE",
+        "V2BaseGet": {
+            "httpMethod": "GET",
             "parameters": {
-                "id": {
-                    "location": "uri",
-                    "required": true,
-                    "description": null
-                },
-                "fields": {
+                "page": {
                     "location": "query",
-                    "required": false,
-                    "description": "comma-separate list of optional fields"
+                    "required": false
+                },
+                "offset": {
+                    "location": "query",
+                    "required": false
+                },
+                "desc": {
+                    "location": "query",
+                    "required": false
+                },
+                "order": {
+                    "location": "query",
+                    "required": false
+                },
+                "only": {
+                    "location": "query",
+                    "required": false
+                },
+                "omit": {
+                    "location": "query",
+                    "required": false
                 }
             },
-            "summary": "Delete a single event comment or reply",
-            "uri": "/2/event_comment/{id}",
-            "notes": "Only authorization parameters are needed."
+            "summary": "Base for GET Operations, includes parameters available to all GET requests",
+            "uri": "/"
         },
-        "EventCommentFlag": {
-            "name": "EventCommentFlag",
+        "CreateEvent": {
             "httpMethod": "POST",
             "parameters": {
-                "reason": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Reason for flagging the comment. May be one of inappropriate, spam"
-                },
-                "comment_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "The id of the comment"
-                }
-            },
-            "summary": "This method creates a spam report for comment content",
-            "uri": "/2/event_comment_flag",
-            "notes": "All required parameters must be supplied."
-        },
-        "EventCommentLike": {
-            "name": "EventCommentLike",
-            "httpMethod": "POST",
-            "parameters": {
-                "id": {
-                    "location": "uri",
-                    "required": true,
-                    "description": null
-                }
-            },
-            "summary": "Like a given Event comment",
-            "uri": "/2/event_comment_like/{id}",
-            "notes": "Only authorization parameters are needed. :id in the path should be the id of the comment you are liking"
-        },
-        "EventCommentSubscribe": {
-            "name": "EventCommentSubscribe",
-            "httpMethod": "POST",
-            "parameters": {
-                "id": {
-                    "location": "uri",
-                    "required": true,
-                    "description": null
-                }
-            },
-            "summary": "Subscribe to notifications on updates to a given comment thread",
-            "uri": "/2/event_comment_subscribe/{id}",
-            "notes": "Only authorization parameters are needed. :id in the path should be id of comment being replied to which you are subscribing to notifications for"
-        },
-        "EventCommentUnlike": {
-            "name": "EventCommentUnlike",
-            "httpMethod": "DELETE",
-            "parameters": {
-                "id": {
-                    "location": "uri",
-                    "required": true,
-                    "description": null
-                }
-            },
-            "summary": "Unlike a given Event comment",
-            "uri": "/2/event_comment_like/{id}",
-            "notes": "Only authorization parameters are needed. :id in the path should be the id of the comment you are unliking"
-        },
-        "EventCommentUnsubscribe": {
-            "name": "EventCommentUnsubscribe",
-            "httpMethod": "DELETE",
-            "parameters": {
-                "id": {
-                    "location": "uri",
-                    "required": true,
-                    "description": null
-                }
-            },
-            "summary": "Unsubscribe to notifications for updates to a given comment thread",
-            "uri": "/2/event_comment_subscribe/{id}",
-            "notes": "Only authorization parameters are needed. :id in the path should be the id of comment being replied to which you are unsubscribing to notifications from"
-        },
-        "EventCommentv2": {
-            "name": "EventCommentv2",
-            "httpMethod": "POST",
-            "parameters": {
-                "notifications": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Notification control for authorized member on this comment thread. \"on\" will result in notifications being sent. \"off\" will opt the member out of notifications for this comment thread. Defaults to \"on\" unless the member previous opted out of notifications on the thread."
-                },
-                "in_reply_to": {
-                    "location": "query",
-                    "required": false,
-                    "description": "If this comment is a reply, the ID of the comment being replied to"
-                },
-                "event_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "The event related to this comment."
-                },
-                "comment": {
-                    "location": "query",
-                    "required": false,
-                    "description": "The comment text"
-                }
-            },
-            "summary": "This method posts messages that appear under \"Talk about this Meetup\".",
-            "uri": "/2/event_comment",
-            "notes": "All of the required parameters must be supplied with the request, which must be an HTTP POST. The currently authenticated user must be a member of the group hosting the event"
-        },
-        "EventCreate": {
-            "name": "EventCreate",
-            "httpMethod": "POST",
-            "parameters": {
-                "rsvp_limit": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Total number of RSVPs available for the event"
-                },
-                "rsvp_close": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Users with permission may set the RSVP close time for the event. The time may be specified in milliseconds since the epoch, or relative to the current time in the d/w/m format."
-                },
-                "guest_limit": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Number of guests members may include in their RSVP, 0 or more"
-                },
-                "name": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Name of the event. May not be longer than 80 characters."
-                },
-                "rsvp_open": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Users with permission may set the RSVP open time for the event. The time may be specified in milliseconds since the epoch, or relative to the current time in the d/w/m format."
-                },
-                "group_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Group hosting the event"
-                },
-                "question_{index}": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Those with permission may include up to 6 survey questions for the event with each being up to 250 characters. See the parameter notes section for more information"
-                },
-                "publish_status": {
-                    "location": "query",
-                    "required": false,
-                    "description": "If you are an organizer of the group, you may set this to \"draft\" to save the event as a draft. Doing so will require a status=draft filter on /2/event queries."
-                },
-                "group_urlname": {
-                    "location": "query",
-                    "required": false,
-                    "description": "URL name of the Group hosting the event"
-                },
-                "email_reminders": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Limited to organizers and event hosts, if false, disables event reminders"
+                "description": {
+                    "location": "postField",
+                    "required": false
                 },
                 "duration": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Event duration in milliseconds. When not specified, a default of 3 hours may be assumed by applications. To clear event duration, set this to 0"
+                    "location": "postField",
+                    "required": false
                 },
-                "time": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Event start time in milliseconds since the epoch, or relative to the current time in the d/w/m format."
-                },
-                "venue_visibility": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Controls the visibility of the event venue for non members of the hosting group. May be one of \"public\" or \"members\""
-                },
-                "waitlisting": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Waiting list status may be one of: auto, manual, off"
-                },
-                "description": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Longer description of the event, in HTML. May not be longer than 50000 characters."
-                },
-                "how_to_find_us": {
-                    "location": "query",
-                    "required": false,
-                    "description": "The information provided by the event host for \"How will members find you there?\". Visible when location is visible to the authenticated member"
-                },
-                "hosts": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Up to 5 comma-separated valid member ids to be hosts for the event. If hosts is not provided, the authorized member is the default host"
-                },
-                "venue_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Numeric identifier of a venue"
-                },
-                "host_instructions": {
-                    "location": "query",
-                    "required": false,
-                    "description": "optional set of instructions to provide to hosts, only used when hosts are provided"
-                },
-                "rsvp_alerts": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Limited to organizers and event hosts, if false, disables member RSVP alerts"
-                },
-                "simple_html_description": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Description of the event, in simple HTML format. This value is translated to HTML to update the description. May not be longer than 50000 characters."
-                },
-                "why": {
-                    "location": "query",
-                    "required": false,
-                    "description": "We should do this because... May not be longer than 250 characters."
-                }
-            },
-            "summary": "",
-            "uri": "/2/event",
-            "notes": "All required parameters must be supplied. This method requires parameters encoded in application/x-www-form-urlencoded format as an HTTP POST.\n\nSurvey questions may be submitted in the format \"question_{index}=questiontext\" where \"index\" is an integer representing the order the questions should be presented in. e.g. question_0=question1&question_1=question2.\n\nOrganizers of the hosting group may optionally save this event as a draft by setting \"publish_status\" to \"draft\". Drafts are then discoverable using the [/2/events](/meetup_api/docs/2/events) API setting the \"status\" request parameter to \"draft\""
-        },
-        "EventDelete": {
-            "name": "EventDelete",
-            "httpMethod": "DELETE",
-            "parameters": {
-                "id": {
-                    "location": "uri",
-                    "required": true,
-                    "description": null
-                }
-            },
-            "summary": "Deletes a specified meetup",
-            "uri": "/2/event/{id}",
-            "notes": "Only authorization parameters are needed."
-        },
-        "EventEdit": {
-            "name": "EventEdit",
-            "httpMethod": "POST",
-            "parameters": {
-                "id": {
-                    "location": "uri",
-                    "required": true,
-                    "description": null
-                },
-                "rsvp_close": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Users with permission may set the RSVP close time for the event. The time may be specified in milliseconds since the epoch, or relative to the current time in the d/w/m format. To unset rsvp_close, set this to 0"
-                },
-                "announce": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Organizers and hosts may set this to true to announce a Meetup."
-                },
-                "announce_message": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Organizers and hosts may provide an optional message in this field when announcing a Meetup. May not be longer than 500 characters."
-                },
-                "publish_status": {
-                    "location": "query",
-                    "required": false,
-                    "description": "If you are an organizer of the group, you may set this to \"draft\" or \"published\". Setting state to \"draft\" will require a status=draft filter on /2/event queries."
+                "editing": {
+                    "location": "postField",
+                    "required": false
                 },
                 "email_reminders": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Limited to organizers and event hosts, if false, disables event reminders"
+                    "location": "postField",
+                    "required": false
                 },
-                "time": {
-                    "location": "query",
-                    "required": false,
-                    "description": "event start time in milliseconds since the epoch, or relative to the current time in the d/w/m format."
+                "group_id": {
+                    "location": "postField",
+                    "required": true
                 },
-                "venue_visibility": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Controls the visibility of venue. May be one of \"public\" or \"members\""
-                },
-                "description": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Longer description of the event, in HTML. May not be longer than 50000 characters."
-                },
-                "name": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Event name. May not be longer than 80 characters."
-                },
-                "hosts": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Up to 5 valid member ids to be hosts for the event."
-                },
-                "venue_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Numeric identifier of a venue. To unset the event's venue, set this to 0"
-                },
-                "rsvp_alerts": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Limited to organizers and event hosts, if false, disables member RSVP alerts"
-                },
-                "rsvp_limit": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Total number of RSVPs available for the event. To remove this limit, set this to 0"
-                },
-                "lat": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Updates to the venue's latitude and longitude. When present, both must be provided"
-                },
-                "lon": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Updates to the venue's latitude and longitude. When present, both must be provided"
-                },
-                "question_edit_{id}": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Those with permission may include up to 6 survey questions with each being up to 250 characters, including new questions. To delete a question submit this parameter with an empty value"
+                "group_urlname": {
+                    "location": "postField",
+                    "required": true
                 },
                 "guest_limit": {
-                    "location": "query",
-                    "required": false,
-                    "description": "number of guests members may include in their RSVP, 0 or more"
-                },
-                "group_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Group to hold the event"
-                },
-                "rsvp_open": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Users with permission may set the RSVP open time for the event. The time may be specified in milliseconds since the epoch, or relative to the current time in the d/w/m format."
-                },
-                "question_{index}": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Those with permission may include up to 6 survey questions with each being up to 250 characters, including edited questions, for the event. See the parameter notes section for more information"
-                },
-                "duration": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Event duration in milliseconds. When not specified, a default of 3 hours may be assumed by applications. To clear event duration, set this to 0"
-                },
-                "waitlisting": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Waiting list status may be one of: auto, manual, off"
-                },
-                "how_to_find_us": {
-                    "location": "query",
-                    "required": false,
-                    "description": "The information provided by the event host for \"How will members find you there?\". Visible when location is visible to the authenticated member"
+                    "location": "postField",
+                    "required": false
                 },
                 "host_instructions": {
-                    "location": "query",
-                    "required": false,
-                    "description": "optional set of instructions to provide to hosts, only used when hosts are provided"
+                    "location": "postField",
+                    "required": false
                 },
-                "simple_html_description": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Description of the event, in simple HTML format. This value is translated to HTML to update the description. May not be longer than 50000 characters."
+                "hosts": {
+                    "location": "postField",
+                    "required": false
+                },
+                "how_to_find_us": {
+                    "location": "postField",
+                    "required": false
+                },
+                "name": {
+                    "location": "postField",
+                    "required": true
+                },
+                "publish_status": {
+                    "location": "postField",
+                    "required": false
+                },
+                "question_{index}": {
+                    "location": "postField",
+                    "required": false
+                },
+                "rsvp_alerts": {
+                    "location": "postField",
+                    "required": false
+                },
+                "rsvp_close": {
+                    "location": "postField",
+                    "required": false
+                },
+                "rsvp_limit": {
+                    "location": "postField",
+                    "required": false
+                },
+                "rsvp_open": {
+                    "location": "postField",
+                    "required": false
+                },
+                "time": {
+                    "location": "postField",
+                    "required": false
+                },
+                "venue_id": {
+                    "location": "postField",
+                    "required": false
+                },
+                "venue_visibility": {
+                    "location": "postField",
+                    "required": false
+                },
+                "waitlisting": {
+                    "location": "postField",
+                    "required": false
                 },
                 "why": {
-                    "location": "query",
-                    "required": false,
-                    "description": "We should do this because... May not be longer than 250 characters."
+                    "location": "postField",
+                    "required": false
                 }
             },
-            "summary": "Update an existing Meetup",
-            "uri": "/2/event/{id}",
-            "notes": "All parameters are optional. This method requires an HTTP POST.\n\nIf a lat & lon are provided, the event's venue will be updated accordingly.\n\nSurvey questions may be submitted in the format \"question_{index}=questiontext\" where \"index\" is an integer representing the order the questions should be presented in. e.g. question_0=question1&question_1=question2.\n\nTo view existing survey questions supply the request parameter fields=survey_questions with the [Event Get](#get) To edit questions you may submit questions in the format \"question_edit_{id}=updatedquestion\" where id is the id of the question. To clear an existing question for the event survey, just submit question_edit_{id} with an empty value.\n\nOrganizers may publish a draft event by posting with the \"publish_status\" request parameter set to \"published\". Organizers and hosts of the event may also optionally announce an unannounced event by posting with the \"announce\" request parameter set to \"true\""
+            "summary": null,
+            "uri": "/2/event"
         },
-        "EventPhotoUpload": {
-            "name": "EventPhotoUpload",
-            "httpMethod": "POST",
-            "parameters": {
-                "photo": {
-                    "location": "query",
-                    "required": false,
-                    "description": "The photo, encoded as multipart/form-data. The maximum file size allowed is 10MB"
-                },
-                "await": {
-                    "location": "query",
-                    "required": false,
-                    "description": "If true, this ensures a response will not be returned until the upload is accessible"
-                },
-                "photo_album_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Identifier of an existing photo album, which may be an event or group album"
-                },
-                "caption": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Caption for the photo"
-                },
-                "event_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Identifier of an event. If there is no album for this event, one will be created."
-                }
-            },
-            "summary": "Uploads a photo for a given event",
-            "uri": "/2/photo",
-            "notes": "A photo album or event ID must be supplied with the request, which must be a POST of content-type `multipart/form-data`. The currently authenticated user must be a member of the group that is hosting the event. Parameters other than photo may be passed in as a query string or within the posted content. If authenticating with OAuth, no parameters in the multipart form data should be included in the signature base string"
-        },
-        "EventRating": {
-            "name": "EventRating",
-            "httpMethod": "POST",
-            "parameters": {
-                "rating": {
-                    "location": "query",
-                    "required": false,
-                    "description": "The member's rating (either 1, 2, 3, 4, or 5)"
-                },
-                "event_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "The ID of the event to fetch ratings data for"
-                },
-                "attendee_count": {
-                    "location": "query",
-                    "required": false,
-                    "description": "The number of attendees for the event (organizers/assistant organizers/co-organizers/event organizers/event hosts only)"
-                }
-            },
-            "summary": "This method allows members to posts rating for an event after it's occurred. Only permitted for members who rsvp'd \"yes\" or \"maybe\" to the event",
-            "uri": "/2/event_rating",
-            "notes": null
-        },
-        "GetCategories": {
-            "name": "GetCategories",
-            "httpMethod": "GET",
-            "parameters": {
-                "fields": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Parameter for requesting optional response properties"
-                },
-                "member": {
-                    "location": "query",
-                    "required": false,
-                    "description": "order by recommendations for authorized member (deprecated)"
-                },
-                "shortname": {
-                    "location": "query",
-                    "required": false,
-                    "description": "(default order) ascending"
-                },
-                "page": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                }
-            },
-            "summary": "Returns a list of Meetup group categories",
-            "uri": "/2/categories",
-            "notes": "No parameters required parameters"
-        },
-        "GetCities": {
-            "name": "GetCities",
-            "httpMethod": "GET",
-            "parameters": {
-                "lon": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Longitude to search"
-                },
-                "query": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Search term and/or zip to look for (if this is specified, max result size limited to 10)"
-                },
-                "state": {
-                    "location": "query",
-                    "required": false,
-                    "description": "A valid state code for the given country, if the country has states"
-                },
-                "radius": {
-                    "location": "query",
-                    "required": false,
-                    "description": "When searching by lat/lon only, specify a radius to search (default 50 miles)"
-                },
-                "lat": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Latitude to search"
-                },
-                "country": {
-                    "location": "query",
-                    "required": false,
-                    "description": "A valid country code"
-                },
-                "distance": {
-                    "location": "query",
-                    "required": false,
-                    "description": "When lat/lon/query provided, sort matches by distance to coordinates"
-                },
-                "smart": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Sort by size, but if a match is close to given lat/lon, float to top. Only works when query provided"
-                },
-                "size": {
-                    "location": "query",
-                    "required": false,
-                    "description": "(default order) number of members in the city: descending"
-                },
-                "page": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                }
-            },
-            "summary": "Returns Meetup cities. This method supports search by latitude/longitude/radius, by country/state, by query term/zip, or a combination of all of these. Location-only searches by lat and lon return all cities within a radius of the provided coordinates. Searches with a query return up to 10 cities matching the term, and can be sorted by size or distance to a given coordinate. 'smart' ordering can be used to return the match(es) with the highest member_count, unless a smaller size match exists nearby the given coordinates. Query searches are supported for country but not country and state",
-            "uri": "/2/cities",
-            "notes": "This method requires no authentication but is subject to [request limiting](/meetup_api/docs/#limits) based on client IP . This search is location based. A lat and lon must be supplied together or a query or the search will be based on your geo-located ip"
-        },
-        "GetCommentLikes": {
-            "name": "GetCommentLikes",
-            "httpMethod": "GET",
-            "parameters": {
-                "comment_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Return likes for a given comment_id"
-                },
-                "created": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Order by the time the member liked like comment (default: descending)"
-                },
-                "page": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                }
-            },
-            "summary": "Api for listing likes of a given event comment",
-            "uri": "/2/event_comment_likes",
-            "notes": "At least one of the required parameters must be supplied with the request."
-        },
-        "GetCommentsv2": {
-            "name": "GetCommentsv2",
-            "httpMethod": "GET",
-            "parameters": {
-                "member_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Return comments for the given member_ids, separated by commas"
-                },
-                "group_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Return comments in groups with these ID numbers, separated by commas"
-                },
-                "event_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Return comments on these events, separated by commas."
-                },
-                "comment_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Return comments for a given set of comment IDs, separated by commas"
-                },
-                "fields": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Optionally accepts the value \"member_photo\" or \"notifications\""
-                },
-                "time": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Order by the time that each rating was posted (default: descending)"
-                },
-                "thread": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Order by comment threads, those with the most recent activity are listed first. Only one event may be provided and desc not supported. Also note that with this ordering, *replies* are excluded from pagination accounting. Only top-level comments will be capped at the page size."
-                },
-                "name": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Order by the name of the member"
-                },
-                "page": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                }
-            },
-            "summary": "This method returns messages that appear under \"Talk about this Meetup\". To post messages, see the corresponding write method.",
-            "uri": "/2/event_comments",
-            "notes": "At least one of the required parameters must be supplied with the request."
-        },
-        "GetConcierge": {
-            "name": "GetConcierge",
-            "httpMethod": "GET",
-            "parameters": {
-                "zip": {
-                    "location": "query",
-                    "required": false,
-                    "description": "A valid US zip code, limits the returned groups to those within radius miles"
-                },
-                "lon": {
-                    "location": "query",
-                    "required": false,
-                    "description": "A valid longitude, limits the returned group events to those within radius miles"
-                },
-                "with_friends": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Boolean parameter. When set to true, events hosted by groups you have friends in will be recommended"
-                },
-                "page_token": {
-                    "location": "query",
-                    "required": false,
-                    "description": "An opaque string used to page through results. This can be found appended to the 'next' link in the meta section of the response."
-                },
-                "state": {
-                    "location": "query",
-                    "required": false,
-                    "description": "If searching in a country with states, a valid 2 character state code"
-                },
-                "category_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Comma delimited list of category ids to limit recommendations to"
-                },
-                "country": {
-                    "location": "query",
-                    "required": false,
-                    "description": "A valid country code"
-                },
-                "city": {
-                    "location": "query",
-                    "required": false,
-                    "description": "A valid city"
-                },
-                "time": {
-                    "location": "query",
-                    "required": false,
-                    "description": "ascending time is the default and only ordering"
-                },
-                "text_format": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Format of the description text, \"html\", \"plain\", or \"simplehtml\". Defaults to \"html\""
-                },
-                "self_groups": {
-                    "location": "query",
-                    "required": false,
-                    "description": "set to \"include\" or \"exclude\" groups the authorized member belongs to. The default is \"include\". This includes groups in locations that may differ than the provided location"
-                },
-                "radius": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Radius, in miles for geographic requests, defaults to the member's preferred radius or 0.5 -- maximum 100. May also be specified as \"smart\", a dynamic radius based on the number of active groups in the area"
-                },
-                "topic_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Comma delimited list of topics to help inform recommendation"
-                },
-                "lat": {
-                    "location": "query",
-                    "required": false,
-                    "description": "A valid latitude, limits the returned group events to those within radius miles"
-                },
-                "fields": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Request that additional fields (separated by commas) be included in the output"
-                },
-                "page": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                }
-            },
-            "summary": "Recommends upcoming meetups for the authorized member in a given location and in thier groups",
-            "uri": "/2/concierge",
-            "notes": "For geo-based requests, you may provide a location in one of three ways. By `lat` and `lon`, by `zip`, or by `country`, `city`, and optionally a `state`, if the provided country has states.\n\nIf the server is unable to produce recommendations in a suitable amount of time, a 503 error will be returned. If no parameters are specified, Meetups are recommended for the upcoming week in the member's default location.\n\nPagination works a little differently in this method than in others. Rather than using \"offset\" and \"page\" request parameters, this method uses an opaque \"page_token\" request parameter to determine the page of results returned. If there are more results, the \"next\" property of the [meta section](/meetup_api/docs/#meta) of the response will contain the next page's page_token. The number of results returned is not deterministic but a best-effort attempt will be made to return at least some.\n"
-        },
-        "GetEventCommentGet": {
-            "name": "GetEventCommentGet",
-            "httpMethod": "GET",
-            "parameters": {
-                "id": {
-                    "location": "uri",
-                    "required": true,
-                    "description": null
-                },
-                "fields": {
-                    "location": "query",
-                    "required": false,
-                    "description": "comma-separate list of optional fields"
-                },
-                "page": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                }
-            },
-            "summary": "Retrieve a single event comment or reply",
-            "uri": "/2/event_comment/{id}",
-            "notes": "Only authorization parameters are needed."
-        },
-        "GetEventGet": {
-            "name": "GetEventGet",
-            "httpMethod": "GET",
-            "parameters": {
-                "id": {
-                    "location": "uri",
-                    "required": true,
-                    "description": null
-                },
-                "text_format": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Format of the description in the response, \"html\" or \"plain\". Defaults to \"html\""
-                },
-                "limited_events": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Include limited event information for private groups that wish to expose only a small amount of information about their events. This includes just: id, name, utc_offset, time, duration, yes_rsvp_count, waitlist_count, group, visibility, timezone. Value must be true or false."
-                },
-                "fields": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Request that additional fields (separated by commas) be included in the output."
-                },
-                "page": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                }
-            },
-            "summary": "Retrieve a single meetup",
-            "uri": "/2/event/{id}",
-            "notes": "Only authorization parameters are needed. Some groups, while remaining private, still wish to show some information about their events. You can include these events in results using the `limited_events` request parameter."
-        },
-        "GetEvents": {
-            "name": "GetEvents",
-            "httpMethod": "GET",
-            "parameters": {
-                "status": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Status may be \"upcoming\", \"past\", \"proposed\", \"suggested\", \"cancelled\", \"draft\" or multiple separated by a comma. The default is \"upcoming\", which includes Meetups that are happening now according to their **duration**. Meetups that are \"proposed\" or \"suggested\" do not have a date assigned; the former are listed on the site as <i>official</i> while the latter appear as <i>in the making</i>. Drafts are only visible to organizers of groups hosting the events."
-                },
-                "rsvp": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Filters events by the currently authenticated member's RSVP status. May be a comma delimited list of \"yes\", \"no\", \"waitlist\", \"maybe\" or \"none\""
-                },
-                "group_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Multiple ids may be separated with commas"
-                },
-                "event_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Multiple ids may be separated with commas"
-                },
-                "group_urlname": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Path to group from meetup.com, no slashes"
-                },
-                "venue_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Multiple ids may be separated with commas"
-                },
-                "member_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Single member id, to find events in this member's groups"
-                },
-                "text_format": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Format of the description text, \"html\" or \"plain\". Defaults to \"html\""
-                },
-                "time": {
-                    "location": "query",
-                    "required": false,
-                    "description": "(default order) ascending"
-                },
-                "group_domain": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Group custom domain"
-                },
-                "limited_events": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Include limited event information for private groups that wish to expose only a small amount of information about their events. This includes just: id, name, utc_offset, time, duration, yes_rsvp_count, waitlist_count, group, visibility, timezone. Value must be true or false."
-                },
-                "fields": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Request that additional fields (separated by commas) be included in the output"
-                },
-                "page": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                }
-            },
-            "summary": "Access Meetup events using a group, member, or event id. Events in private groups are available only to authenticated members of those groups. To search events by topic or location, see [Open Events](/meetup_api/docs/2/open_events).",
-            "uri": "/2/events",
-            "notes": "At least one of the required parameter(s) must be supplied with the request. Some groups, while remaining private, still wish to show some information about their events. You can include these events in results using the `limited_events` request parameter."
-        },
-        "GetGroups": {
-            "name": "GetGroups",
-            "httpMethod": "GET",
-            "parameters": {
-                "topic": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Only return groups in the specified topic [one topic allowed]"
-                },
-                " groupnum": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Return the group with this topic and number"
-                },
-                "group_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "one or more separated by commas"
-                },
-                "domain": {
-                    "location": "query",
-                    "required": false,
-                    "description": "one or more custom group domains, separated by commas"
-                },
-                "group_urlname": {
-                    "location": "query",
-                    "required": false,
-                    "description": "one or more separated by commas, includes no slashes"
-                },
-                "country": {
-                    "location": "query",
-                    "required": false,
-                    "description": "A valid country code, city and for the US, State. limits the returned groups to those within radius miles"
-                },
-                " city": {
-                    "location": "query",
-                    "required": false,
-                    "description": "A valid country code, city and for the US, State. limits the returned groups to those within radius miles"
-                },
-                " state": {
-                    "location": "query",
-                    "required": false,
-                    "description": "A valid country code, city and for the US, State. limits the returned groups to those within radius miles"
-                },
-                "member_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "one or more separated by commas, for groups this member belongs to"
-                },
-                "lat": {
-                    "location": "query",
-                    "required": false,
-                    "description": "A valid latitude and longitude, limits the returned groups to those within radius miles"
-                },
-                "lon": {
-                    "location": "query",
-                    "required": false,
-                    "description": "A valid latitude and longitude, limits the returned groups to those within radius miles"
-                },
-                "zip": {
-                    "location": "query",
-                    "required": false,
-                    "description": "A valid US zip code, limits the returned groups to those within radius miles."
-                },
-                "category_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Only return groups in the specified category. [one category allowed]"
-                },
-                "radius": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Radius, in miles for geographic requests, default 25 -- maximum 100"
-                },
-                "organizer_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "one or more organizer IDs, separated by commas"
-                },
-                "fields": {
-                    "location": "query",
-                    "required": false,
-                    "description": "optional result fields, separated by commas."
-                },
-                "id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "group creation time [newest first]"
-                },
-                "location": {
-                    "location": "query",
-                    "required": false,
-                    "description": "group location, country, state [if present], city"
-                },
-                "name": {
-                    "location": "query",
-                    "required": false,
-                    "description": "the name of the group"
-                },
-                "members": {
-                    "location": "query",
-                    "required": false,
-                    "description": "number of members [largest first]"
-                },
-                "page": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                }
-            },
-            "summary": "Fetch information about Meetup Groups.",
-            "uri": "/2/groups",
-            "notes": "At least one of the required parameter(s) must be supplied with the request. Answers to questions are expected to follow the naming convention: answer_{question_id}=myanswer when joining with the [Profile Create](/meetup_api/docs/2/profile) method."
-        },
-        "GetMemberGet": {
-            "name": "GetMemberGet",
-            "httpMethod": "GET",
-            "parameters": {
-                "id": {
-                    "location": "uri",
-                    "required": true,
-                    "description": null
-                },
-                "fields": {
-                    "location": "query",
-                    "required": false,
-                    "description": "comma-separate list of optional fields"
-                },
-                "page": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                }
-            },
-            "summary": "Retrieve a single member",
-            "uri": "/2/member/{id}",
-            "notes": "Only authorization parameters are needed."
-        },
-        "GetMembers": {
-            "name": "GetMembers",
-            "httpMethod": "GET",
-            "parameters": {
-                "member_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Return the member with this ID"
-                },
-                "group_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Return members in groups with these ID numbers, separated by commas"
-                },
-                "service": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Match users by the external services they've linked to their member account, specified as \"servicename:identifier\". For example, \"service=twitter:@MeetupAPI\" finds any member account that lists @MeetupAPI as its Twitter name (none, currently). You can query against several at a time by separating them with commas. Facebook identifiers should be provided as numeric values"
-                },
-                "group_urlname": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Return members for the group with the given custom URL path"
-                },
-                "topic": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Return members for the group with given topic and number"
-                },
-                "groupnum": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Return members for the group with given topic and number"
-                },
-                "fields": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Request that additional fields (separated by commas) be included in the output."
-                },
-                "visited": {
-                    "location": "query",
-                    "required": false,
-                    "description": "member's most recent activity"
-                },
-                "joined": {
-                    "location": "query",
-                    "required": false,
-                    "description": "time member joined Meetup"
-                },
-                "name": {
-                    "location": "query",
-                    "required": false,
-                    "description": "the name of the member (default order)"
-                },
-                "page": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                }
-            },
-            "summary": "API method for accessing members of Meetup Groups",
-            "uri": "/2/members",
-            "notes": "At least one of the required parameter(s) must be supplied with the request. If any of the groups you specify are private, you will not see its members listed in the result set unless you are a member of that group."
-        },
-        "GetOpenEvents": {
-            "name": "GetOpenEvents",
-            "httpMethod": "GET",
-            "parameters": {
-                "state": {
-                    "location": "query",
-                    "required": false,
-                    "description": "If searching in a country with states, a valid 2 character state code"
-                },
-                "status": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Status may be \"upcoming\", \"past\" or both separated by a comma. The default is \"upcoming\" only"
-                },
-                "lon": {
-                    "location": "query",
-                    "required": false,
-                    "description": "A valid longitude, limits the returned group events to those within radius miles"
-                },
-                "city": {
-                    "location": "query",
-                    "required": false,
-                    "description": "A valid city"
-                },
-                "lat": {
-                    "location": "query",
-                    "required": false,
-                    "description": "A valid latitude, limits the returned group events to those within radius miles"
-                },
-                "country": {
-                    "location": "query",
-                    "required": false,
-                    "description": "A valid country code"
-                },
-                "text": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Events that contain the given term or terms somewhere in their content. The terms are OR'd by default. Separate terms with \" AND \" for events that have combined terms. To have terms automatically AND'd, set the \"and_text\" to true"
-                },
-                "text_format": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Format of the description text, \"html\" or \"plain\". Defaults to \"html\""
-                },
-                "time": {
-                    "location": "query",
-                    "required": false,
-                    "description": "(default order) ascending"
-                },
-                "topic": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Return events in the specified topic or topics specified by commas. This is the topic \"urlkey\" returned by the Topics method. If all supplied topics are unknown, a 400 error response is returned with the code \"badtopic\"."
-                },
-                "category": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Return events in the specified category or categories specified by commas. This is the category id returned by the Categories method."
-                },
-                "zip": {
-                    "location": "query",
-                    "required": false,
-                    "description": "A valid US zip code, limits the returned groups to those within radius miles"
-                },
-                "radius": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Radius, in miles for geographic requests, default 25.0 -- maximum 100. May also be specified as \"smart\", a dynamic radius based on the number of active groups in the area"
-                },
-                "and_text": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Changes the interpretation of the \"text\" field from OR'd terms to AND'd terms"
-                },
-                "limited_events": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Include limited event information for private groups that wish to expose only a small amount of information about their events. This includes just: id, name, utc_offset, time, duration, yes_rsvp_count, waitlist_count, group, visibility, timezone. Value must be true or false."
-                },
-                "fields": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Request that additional fields (separated by commas) be included in the output"
-                },
-                "trending": {
-                    "location": "query",
-                    "required": false,
-                    "description": "you will likely want to specify \"desc=true\" to get the best trending results first."
-                },
-                "distance": {
-                    "location": "query",
-                    "required": false,
-                    "description": "ordering is approximate and will not exactly match the values in the \"distance\" field."
-                },
-                "page": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                }
-            },
-            "summary": "Searches for recent and upcoming public events hosted by Meetup groups. Its search window  is the past one month through the next three months, and is subject to change. Open Events is optimized to search for current events by location, category, topic, or text, and only lists Meetups that have **3 or more RSVPs**. The number or results returned with each request is not guaranteed to be the same as the page size due to secondary filtering. If you're looking for a particular event or events within a particular group, use the standard [Events](/meetup_api/docs/2/events/) method.",
-            "uri": "/2/open_events",
-            "notes": "At least one of the required parameter(s) must be supplied with the request.\n\nFor geo-based requests, you may provide a location in one of three ways. By `lat` and `lon`, by `zip`, or by `country`, `city`, and optionally a `state`, if the provided country has states.\n\nSome groups, while remaining private, still wish to show some information about their events. You can include these events in results using the `limited_events` request parameter."
-        },
-        "GetOpenVenues": {
-            "name": "GetOpenVenues",
-            "httpMethod": "GET",
-            "parameters": {
-                "state": {
-                    "location": "query",
-                    "required": false,
-                    "description": "For the US, a valid 2 character state code"
-                },
-                "lon": {
-                    "location": "query",
-                    "required": false,
-                    "description": "A valid longitude, limits the returned venues to those within radius miles"
-                },
-                "city": {
-                    "location": "query",
-                    "required": false,
-                    "description": "A valid city"
-                },
-                "zip": {
-                    "location": "query",
-                    "required": false,
-                    "description": "A valid US zip code, limits the returned venues to those within radius miles"
-                },
-                "lat": {
-                    "location": "query",
-                    "required": false,
-                    "description": "A valid latitude, limits the returned venues to those within radius miles"
-                },
-                "country": {
-                    "location": "query",
-                    "required": false,
-                    "description": "A valid country code."
-                },
-                "radius": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Radius, in miles for geographic requests, default 25.0 -- maximum 100.0"
-                },
-                "text": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Venues that contain the given term or terms somewhere in their content. Separate terms with \" AND \" for venues that have combined terms. Append a trailing * to treat this as a prefix search"
-                },
-                "group_urlname": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Returns venues with location relative to the group associated with this urlname"
-                },
-                "fields": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Request that additional fields (separated by commas) be included in the output"
-                },
-                "distance": {
-                    "location": "query",
-                    "required": false,
-                    "description": "(default order) ordering is approximate and will not exactly match the values in the \"distance\" field."
-                },
-                "rating_count": {
-                    "location": "query",
-                    "required": false,
-                    "description": "number of member ratings."
-                },
-                "rating": {
-                    "location": "query",
-                    "required": false,
-                    "description": "average member rating"
-                },
-                "page": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                }
-            },
-            "summary": "Searches for public venues within a given geo space. To search for specific venues that your group has used, use the [Venues](/meetup_api/docs/2/venues) method",
-            "uri": "/2/open_venues",
-            "notes": "At least one of the required parameter(s) must be supplied with the request. If you are not able to provide a relative location you may supply a group_urlname which this method will use to infer location from. You can perform prefix searching by appending a * character to your query"
-        },
-        "GetPhotoAlbums": {
-            "name": "GetPhotoAlbums",
-            "httpMethod": "GET",
-            "parameters": {
-                "photo_album_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Return albums with these IDs, separated by commas"
-                },
-                "group_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Return albums in groups with these ID, separated by commas"
-                },
-                "event_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Return photo albums for these event ids, separated by commas"
-                },
-                "time": {
-                    "location": "query",
-                    "required": false,
-                    "description": "creation date and time"
-                },
-                "title": {
-                    "location": "query",
-                    "required": false,
-                    "description": "title of the album"
-                },
-                "updated": {
-                    "location": "query",
-                    "required": false,
-                    "description": "album updated field"
-                },
-                "page": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                }
-            },
-            "summary": "This method returns photo albums associated with Meetup groups. To create albums, see the corresponding write method.",
-            "uri": "/2/photo_albums",
-            "notes": "At least one of the required parameter(s) must be supplied with the request."
-        },
-        "GetPhotoCommentsv2": {
-            "name": "GetPhotoCommentsv2",
-            "httpMethod": "GET",
-            "parameters": {
-                "photo_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Return comments on these photos, separated by commas"
-                },
-                "member_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Return comments for the given member_ids, separated by commas. The member ids must match up with one of the provided photo ids"
-                },
-                "fields": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Request that additional fields (separated by commas) be included in the output."
-                },
-                "time": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Order by the time that each comment was posted"
-                },
-                "name": {
-                    "location": "query",
-                    "required": false,
-                    "description": "the name of the member"
-                },
-                "page": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                }
-            },
-            "summary": "This method returns comments on meetup photos. To post messages, see the corresponding write method",
-            "uri": "/2/photo_comments",
-            "notes": "At least one of the required parameters must be supplied by the request."
-        },
-        "GetPhotos": {
-            "name": "GetPhotos",
-            "httpMethod": "GET",
-            "parameters": {
-                "member_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Uploaded by members with these IDs, separated by commas"
-                },
-                "time": {
-                    "location": "query",
-                    "required": false,
-                    "description": "creation date and time"
-                },
-                "photo_album_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Photo Album IDs, separated by commas"
-                },
-                "photo_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Photo IDs, separated by commas"
-                },
-                "group_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Group IDs, separated by commas"
-                },
-                "tagged": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Tagged with members with these IDs, separated by commas"
-                },
-                "event_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Event ids, separated by commas. These may contain alphanumeric autoscheduled event ids, only photos of reified events will be returned"
-                },
-                "group_urlname": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Group urlnames, separated by commas"
-                },
-                "fields": {
-                    "location": "query",
-                    "required": false,
-                    "description": "comma-delimited optional response properties such as member_country, member_city, member_state, and self"
-                },
-                "page": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                }
-            },
-            "summary": "This method returns photos by member, group, album, event, photo ID, or tagged member.",
-            "uri": "/2/photos",
-            "notes": "At least one of the required parameter(s) must be supplied with the request."
-        },
-        "GetProfileGet": {
-            "name": "GetProfileGet",
-            "httpMethod": "GET",
-            "parameters": {
-                "gid": {
-                    "location": "uri",
-                    "required": true,
-                    "description": null
-                },
-                "mid": {
-                    "location": "uri",
-                    "required": true,
-                    "description": null
-                },
-                "fields": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Request that additional fields (separated by commas) be included in the output"
-                },
-                "page": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                }
-            },
-            "summary": "Retrieves a single group profile",
-            "uri": "/2/profile/{gid}/{mid}",
-            "notes": "Only authorization parameters are needed."
-        },
-        "GetProfiles": {
-            "name": "GetProfiles",
-            "httpMethod": "GET",
-            "parameters": {
-                "member_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "the id of the member"
-                },
-                "topic": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Group identification by topic, deprecated"
-                },
-                " groupnum": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Group identification by topic, deprecated"
-                },
-                "status": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Status filter for members. Only organizers may see pending. Request must also contain a `group_id` or `group_urlname`. Status may be one of active, pending"
-                },
-                "group_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Return profiles in the group with this ID"
-                },
-                "role": {
-                    "location": "query",
-                    "required": false,
-                    "description": "if \"leads\", only profiles for members of the leadership team are included"
-                },
-                "group_urlname": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Return profiles for the group with the given custom URL path"
-                },
-                "fields": {
-                    "location": "query",
-                    "required": false,
-                    "description": "comma delimited list of optional response properties. A value of \"membership_dues\" will populate membership dues for the authorized user or members of the groups the authorized user organizes"
-                },
-                "visited": {
-                    "location": "query",
-                    "required": false,
-                    "description": "last visit to group pages (default order)"
-                },
-                "joined": {
-                    "location": "query",
-                    "required": false,
-                    "description": "time member joined this group"
-                },
-                "updated": {
-                    "location": "query",
-                    "required": false,
-                    "description": "profile updated field"
-                },
-                "name": {
-                    "location": "query",
-                    "required": false,
-                    "description": "the name of the member"
-                },
-                "interesting": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Order which may be interesting to the authorized member"
-                },
-                "page": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                }
-            },
-            "summary": "This method returns member *profiles* associated with a particular group. Meetup members have separate profiles for each group they join.",
-            "uri": "/2/profiles",
-            "notes": "At least one of the required parameter(s) must be supplied with the request. If any of the groups you specify are private, you will not see its members listed in the result set unless you are a member of that group. If querying for member_id alone, the member's 'hide groups' preference will be honored. 'Interesting' ordered searches only support searching by group_urlname or group_id. Only one of those may be supplied. "
-        },
-        "GetRSVPGet": {
-            "name": "GetRSVPGet",
-            "httpMethod": "GET",
-            "parameters": {
-                "id": {
-                    "location": "uri",
-                    "required": true,
-                    "description": null
-                },
-                "fields": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Request that additional fields (separated by commas) be included in the output"
-                },
-                "page": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                }
-            },
-            "summary": "Retrieve a single RSVP",
-            "uri": "/2/rsvp/{id}",
-            "notes": "Only authorization parameters are needed."
-        },
-        "GetRSVPsv2": {
-            "name": "GetRSVPsv2",
-            "httpMethod": "GET",
-            "parameters": {
-                "rsvp": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Filters response on RSVP status. \"yes\" if member RSVP'd yes otherwise \"no\""
-                },
-                "event_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Multiple alphanumeric ids may be separated with commas"
-                },
-                "fields": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Parameter for requesting optional response properties, set to other_services for a list of third party services"
-                },
-                "event": {
-                    "location": "query",
-                    "required": false,
-                    "description": "the id or time of the event"
-                },
-                "social": {
-                    "location": "query",
-                    "required": false,
-                    "description": "social connections of the authenticated member"
-                },
-                "name": {
-                    "location": "query",
-                    "required": false,
-                    "description": "the name of the attendee"
-                },
-                "page": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                }
-            },
-            "summary": "Query for Event RSVPs by event",
-            "uri": "/2/rsvps",
-            "notes": "At least one of the required parameter(s) must be supplied with the request."
-        },
-        "GetRatingsv2": {
-            "name": "GetRatingsv2",
-            "httpMethod": "GET",
-            "parameters": {
-                "event_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "The ID of the event to fetch ratings data for"
-                },
-                "member_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "The ID of a member to filter ratings on"
-                },
-                "time": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Order by the time that each rating was posted"
-                },
-                "rating": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Order by the value for each rating posted"
-                },
-                "page": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                }
-            },
-            "summary": "API method for accessing Meetup comments",
-            "uri": "/2/event_ratings",
-            "notes": "At least one of the required parameters must be supplied with the request."
-        },
-        "GetTopicCategories": {
-            "name": "GetTopicCategories",
-            "httpMethod": "GET",
-            "parameters": {
-                "lat": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Use a given lat/lon/radius (miles) to search best_topics for instead of using the member's lat/lon.  When present, all three are required."
-                },
-                "lon": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Use a given lat/lon/radius (miles) to search best_topics for instead of using the member's lat/lon.  When present, all three are required."
-                },
-                "radius": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Use a given lat/lon/radius (miles) to search best_topics for instead of using the member's lat/lon.  When present, all three are required."
-                },
-                "fields": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Parameter for requesting optional response properties"
-                },
-                "shortname": {
-                    "location": "query",
-                    "required": false,
-                    "description": "(default order) ascending"
-                },
-                "page": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                }
-            },
-            "summary": "Returns a list of Meetup topic categories",
-            "uri": "/2/topic_categories",
-            "notes": "No parameters required parameters"
-        },
-        "GetVenues": {
-            "name": "GetVenues",
-            "httpMethod": "GET",
-            "parameters": {
-                "venue_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "multiple ids may be separated with commas"
-                },
-                "group_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "multiple ids may be separated with commas"
-                },
-                "event_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "multiple ids may be separated with commas"
-                },
-                "group_urlname": {
-                    "location": "query",
-                    "required": false,
-                    "description": "path to group from meetup.com, no slashes"
-                },
-                "fields": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Request that additional fields (separated by commas) be included in the output"
-                },
-                "distance": {
-                    "location": "query",
-                    "required": false,
-                    "description": "(default order) ordering is approximate and will not exactly match the values in the \"distance\" field."
-                },
-                "rating_count": {
-                    "location": "query",
-                    "required": false,
-                    "description": "number of member ratings."
-                },
-                "rating": {
-                    "location": "query",
-                    "required": false,
-                    "description": "average member rating"
-                },
-                "page": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "offset": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "desc": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "order": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "only": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                },
-                "omit": {
-                    "location": "query",
-                    "required": false,
-                    "description": null
-                }
-            },
-            "summary": "Search for Meetup venues by one of your groups, events, or venue identifiers. For a full text search on public venues use [OpenVenues](/meetup_api/docs/2/open_venues).",
-            "uri": "/2/venues",
-            "notes": "At least one of the required parameter(s) must be supplied with the request. You can use either group_urlname or group_id to filter by groups but not both."
-        },
-        "GroupPhotoUpload": {
-            "name": "GroupPhotoUpload",
-            "httpMethod": "POST",
-            "parameters": {
-                "photo": {
-                    "location": "query",
-                    "required": false,
-                    "description": "The photo, encoded as multipart/form-data. The maximum file size allowed is 10MB"
-                },
-                "await": {
-                    "location": "query",
-                    "required": false,
-                    "description": "If true, this ensures a response will not be returned until the upload is accessible"
-                },
-                "group_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Group ID for the target group. This may be used as an alternative to group_urlname"
-                },
-                "group_urlname": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Group urlname. This may be used as an alternative to group_id"
-                },
-                "main": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Set to 'true' to have this photo become the group's main photo. Set it to 'false' otherwise. Defaults to true"
-                }
-            },
-            "summary": "Uploads a new Meetup Group photo. To change other Group settings use the [Group Edit](/meetup_api/docs/:urlname/#edit) endpoint",
-            "uri": "/2/group_photo",
-            "notes": "The request must be a POST of content-type multipart/form-data. The supplied photo will be added to the provided groups general photo album. If authenticating with OAuth, no parameters in the multipart form data should be included in the signature base string. You must be an organizer of the group in order to load a photo."
-        },
-        "MemberEdit": {
-            "name": "MemberEdit",
-            "httpMethod": "POST",
-            "parameters": {
-                "id": {
-                    "location": "uri",
-                    "required": true,
-                    "description": null
-                },
-                "birthday": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Day you were born. Format should be in the form of yyyy or mmddyyyy. A value of -1 indicates that birthday data should be cleared."
-                },
-                "zip": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Valid zip code for city"
-                },
-                "topics_privacy": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Controls the visibility of the member's topics. May be one of hidden, visible"
-                },
-                "lon": {
-                    "location": "query",
-                    "required": false,
-                    "description": "longitude of city"
-                },
-                "hometown": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Hometown of member. Can not be longer than 64 characters"
-                },
-                "remove_topics": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Comma-delimited list of topic ids to remove from your alert list"
-                },
-                "bio_privacy": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Controls the visibility of the member's bio. May be one of hidden, visible"
-                },
-                "messaging_pref": {
-                    "location": "query",
-                    "required": false,
-                    "description": "This specifies the member's preference for being contacted from members on the site. Possible values are \"orgs_only\" meaning only group organizers can contact you, \"groups_only\" meaning only members of your group can contact you, or \"all_members\" meaning all members may contact you."
-                },
-                "photos_privacy": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Controls the visibility of the member's photos. May be one of hidden, visible"
-                },
-                "lang": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Language preference used on the site. Valid values are en_us, de, es, fr, it, pt"
-                },
-                "country": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Valid country code for your location"
-                },
-                "city": {
-                    "location": "query",
-                    "required": false,
-                    "description": "City name for your location"
-                },
-                "city_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Valid city id from /2/cities method"
-                },
-                "sync_photo": {
-                    "location": "query",
-                    "required": false,
-                    "description": "When set to true, this parameter will sync all of the group profile photos for the member with the provided photo_id"
-                },
-                "groups_privacy": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Controls the visibility of the member's groups. May be one of hidden, visible"
-                },
-                "bio": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Free form text passage about you. must be less than 250 characters"
-                },
-                "name": {
-                    "location": "query",
-                    "required": false,
-                    "description": "The name of the current member"
-                },
-                "gender": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Your gender (used for better recommendations). Valid values are be one of none, other, female, male"
-                },
-                "radius": {
-                    "location": "query",
-                    "required": false,
-                    "description": "radius, in miles to search for city given a lat and lon. default 25.0, max 100.0"
-                },
-                "facebook_privacy": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Controls the visibility of the member's facebook connection. May be one of hidden, visible. If the member has not connected their Facebook account, attempts to set this preference will do nothing."
-                },
-                "photo_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "A valid photo_id from the member's photos to set as the main profile photo. A value of 0 will unset the current photo"
-                },
-                "lat": {
-                    "location": "query",
-                    "required": false,
-                    "description": "latitude of city"
-                },
-                "add_topics": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Comma-delimited list of topics ids to add to your alert list"
-                }
-            },
-            "summary": "Edit the authorized member's attributes",
-            "uri": "/2/member/{id}",
-            "notes": "This method requires tls. Only the authorized user may edit their own properties. A city may be provided by either a city_id or a combination of lat and lon"
-        },
-        "MemberPhotoDelete": {
-            "name": "MemberPhotoDelete",
-            "httpMethod": "DELETE",
-            "parameters": {
-                "id": {
-                    "location": "uri",
-                    "required": true,
-                    "description": null
-                }
-            },
-            "summary": "Delete the specified member photo",
-            "uri": "/2/member_photo/{id}",
-            "notes": "Only authorization parameters are needed. Authorized user must be the member owning the photo"
-        },
-        "MemberPhotoUpload": {
-            "name": "MemberPhotoUpload",
-            "httpMethod": "POST",
-            "parameters": {
-                "photo": {
-                    "location": "query",
-                    "required": false,
-                    "description": "The photo, encoded as multipart/form-data. The maximum file size allowed is 10MB"
-                },
-                "sync_photo": {
-                    "location": "query",
-                    "required": false,
-                    "description": "When set to true, this parameter will sync all of the group profile photos for the member with the provided photo_id"
-                },
-                "await": {
-                    "location": "query",
-                    "required": false,
-                    "description": "If true, this ensures a response will not be returned until the upload is accessible"
-                },
-                "sync_matching_photo": {
-                    "location": "query",
-                    "required": false,
-                    "description": "When set to true and main is set to true, this will replace all group profile photos matching the current photo with the provided replacement"
-                },
-                "main": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Set to \"true\" to have this photo become the member's main profile photo. Otherwise, it will become the main photo only when none other is selected. If the authenticated member does not already have a main profile photo set it will remain so."
-                }
-            },
-            "summary": "Uploads a photo to be associated with a Member",
-            "uri": "/2/member_photo",
-            "notes": "The request must be a POST of content-type multipart/form-data. The supplied photo will be added to the currently authenticated user's member profile. If authenticating with OAuth, no parameters in the multipart form data should be included in the signature base string."
-        },
-        "MessageCreate": {
-            "name": "MessageCreate",
-            "httpMethod": "POST",
-            "parameters": {
-                "member_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "ID of member to message."
-                },
-                "hide_email": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Hides sender's email from receiving member, defaults to false"
-                },
-                "cc_sender": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Sends a copy of the message to the sender, defaults to true."
-                },
-                "group_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "ID of group that sender has relationship with member in"
-                },
-                "message": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Text of message to body"
-                },
-                "dryrun": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Performs request without sending message. Useful for pre-testing error conditions."
-                },
-                "subject": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Text of message subject"
-                }
-            },
-            "summary": "This method allows messaging-authorized requests to send messages between members",
-            "uri": "/2/message",
-            "notes": "This method requires an HTTP POST and OAuth authorization in combination with the __messaging__ [permission scope](/meetup_api/auth/#oauth2-scopes). All required parameters must be supplied. You can call this method with __dryrun__ set to true if you wish to test the validation logic before sending the actual request"
-        },
-        "PhotoAlbum2": {
-            "name": "PhotoAlbum2",
-            "httpMethod": "POST",
-            "parameters": {
-                "title": {
-                    "location": "query",
-                    "required": false,
-                    "description": " Title of the new album"
-                },
-                "group_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Group to create the album in"
-                }
-            },
-            "summary": "This method creates photo albums within a Meetup group",
-            "uri": "/2/photo_album",
-            "notes": "All of the required parameters must be supplied with the request, which must be an HTTP POST. The currently authenticated user must be an organizer (main, assistant, or co-) of the specified group"
-        },
-        "PhotoCommentv2": {
-            "name": "PhotoCommentv2",
-            "httpMethod": "POST",
-            "parameters": {
-                "photo_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "The photo related to this comment."
-                },
-                "comment": {
-                    "location": "query",
-                    "required": false,
-                    "description": "The comment text"
-                }
-            },
-            "summary": "This method posts comments that appear below photos",
-            "uri": "/2/photo_comment",
-            "notes": "All of the required parameters must be supplied with the request, which must be an HTTP POST. The currently authenticated user must be a member of the group hosting the photo"
-        },
-        "PhotoDelete": {
-            "name": "PhotoDelete",
-            "httpMethod": "DELETE",
-            "parameters": {
-                "id": {
-                    "location": "uri",
-                    "required": true,
-                    "description": null
-                }
-            },
-            "summary": "Delete specified event photo",
-            "uri": "/2/photo/{id}",
-            "notes": "Only authorization parameters are needed. Authorized user must be the original poster of the photo or the organizer of the group the photo was posted in"
-        },
-        "ProfileCreate(GroupJoin)": {
-            "name": "ProfileCreate(GroupJoin)",
+        "CreateGroupProfile": {
             "httpMethod": "POST",
             "parameters": {
                 "answer_{qid}": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Answers to questions from groups API join_info question fields"
+                    "location": "postField",
+                    "required": false
                 },
                 "group_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Id of group to join"
-                },
-                "new_photo": {
-                    "location": "query",
-                    "required": false,
-                    "description": "file upload for a new member photo"
-                },
-                "site_name": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Name of member's site. Max length is 32"
+                    "location": "postField",
+                    "required": true
                 },
                 "group_urlname": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Urlname of group to join"
-                },
-                "photo_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "photo_id of the photo to use for this profile"
+                    "location": "postField",
+                    "required": true
                 },
                 "intro": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Provides a Member an opportunity to tell the group about themselves"
+                    "location": "postField",
+                    "required": false
+                },
+                "inv_code": {
+                    "location": "postField",
+                    "required": false
+                },
+                "new_photo": {
+                    "location": "postField",
+                    "required": false
+                },
+                "photo_id": {
+                    "location": "postField",
+                    "required": false
+                },
+                "site_name": {
+                    "location": "postField",
+                    "required": false
                 },
                 "site_url": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Link to member's site. Max length is 80"
+                    "location": "postField",
+                    "required": false
                 }
             },
             "summary": "This method allows an authenticated member to join a group by creating a profile",
-            "uri": "/2/profile",
-            "notes": "This method requires an HTTP POST. All required parameters must be supplied. An intro and answers may be required based on the group the member is joining. To find out if a group requires an intro or answers to questions, query for the group through one of the [Groups methods](/meetup_api/docs/2/groups) providing setting the __fields__ parameter to __join_info__ and inspecting the __join_info__ in the results. Answers to the questions must be named using the convention __answer_{question_id}__."
+            "uri": "/2/profile"
         },
-        "ProfileDelete(LeaveGroup)": {
-            "name": "ProfileDelete(LeaveGroup)",
+        "CreatePhotoAlbum": {
+            "httpMethod": "POST",
+            "parameters": {
+                "group_id": {
+                    "location": "postField",
+                    "required": true
+                },
+                "title": {
+                    "location": "postField",
+                    "required": true
+                }
+            },
+            "summary": "This method creates photo albums within a Meetup group",
+            "uri": "/2/photo_album"
+        },
+        "DeleteEvent": {
             "httpMethod": "DELETE",
             "parameters": {
+                "id": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": "Deletes a specified meetup",
+            "uri": "/2/event/{id}}"
+        },
+        "DeleteEventComment": {
+            "httpMethod": "DELETE",
+            "parameters": {
+                "fields": {
+                    "location": "postField",
+                    "required": false
+                },
+                "id": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": "Delete a single event comment or reply",
+            "uri": "/2/event_comment/{id}"
+        },
+        "DeleteEventPhoto": {
+            "httpMethod": "DELETE",
+            "parameters": {
+                "id": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": "Delete specified event photo",
+            "uri": "/2/photo/{id}"
+        },
+        "DeleteGroupProfile": {
+            "httpMethod": "DELETE",
+            "parameters": {
+                "exit_comment": {
+                    "location": "postField",
+                    "required": false
+                },
                 "gid": {
                     "location": "uri",
-                    "required": true,
-                    "description": null
+                    "required": true
                 },
                 "mid": {
                     "location": "uri",
-                    "required": true,
-                    "description": null
-                },
-                "exit_comment": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Optional message to the organizer when leaving"
+                    "required": true
                 }
             },
             "summary": "Deletes a member's group profile",
-            "uri": "/2/profile/{gid}/{mid}",
-            "notes": "All parameters are optional. Only the authorized member is permitted leave groups they do not organize. This method may not be used by organizers to remove members."
+            "uri": "/2/profile/{gid}/{mid}"
         },
-        "ProfileEdit": {
-            "name": "ProfileEdit",
+        "DeletePhoto": {
+            "httpMethod": "DELETE",
+            "parameters": {
+                "id": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": "Delete specified event photo",
+            "uri": "/2/photo/{id}"
+        },
+        "EditEvent": {
             "httpMethod": "POST",
             "parameters": {
+                "announce": {
+                    "location": "postField",
+                    "required": false
+                },
+                "announce_message": {
+                    "location": "postField",
+                    "required": false
+                },
+                "description": {
+                    "location": "postField",
+                    "required": false
+                },
+                "editing": {
+                    "location": "postField",
+                    "required": false
+                },
+                "email_reminders": {
+                    "location": "postField",
+                    "required": false
+                },
+                "group_id": {
+                    "location": "postField",
+                    "required": false
+                },
+                "guest_limit": {
+                    "location": "postField",
+                    "required": false
+                },
+                "host_instructions": {
+                    "location": "postField",
+                    "required": false
+                },
+                "hosts": {
+                    "location": "postField",
+                    "required": false
+                },
+                "hosts": {
+                    "location": "postField",
+                    "required": false
+                },
+                "how_to_find_us": {
+                    "location": "uri",
+                    "required": true
+                },
+                "lat": {
+                    "location": "postField",
+                    "required": false
+                },
+                "lon": {
+                    "location": "postField",
+                    "required": false
+                },
+                "name": {
+                    "location": "postField",
+                    "required": false
+                },
+                "publish_status": {
+                    "location": "postField",
+                    "required": false
+                },
+                "question_edit_{id}": {
+                    "location": "postField",
+                    "required": false
+                },
+                "question_{index}": {
+                    "location": "postField",
+                    "required": false
+                },
+                "rsvp_alerts": {
+                    "location": "postField",
+                    "required": false
+                },
+                "rsvp_close": {
+                    "location": "postField",
+                    "required": false
+                },
+                "rsvp_open": {
+                    "location": "postField",
+                    "required": false
+                },
+                "rsvp_limit": {
+                    "location": "postField",
+                    "required": false
+                },
+                "simple_html_description": {
+                    "location": "postField",
+                    "required": false
+                },
+                "time": {
+                    "location": "postField",
+                    "required": false
+                },
+                "venue_id": {
+                    "location": "postField",
+                    "required": false
+                },
+                "venue_visibility": {
+                    "location": "postField",
+                    "required": false
+                },
+                "waitlisting": {
+                    "location": "postField",
+                    "required": false
+                },
+                "why": {
+                    "location": "postField",
+                    "required": false
+                }
+            },
+            "summary": "Update an existing Meetup",
+            "uri": "/2/event/{id}"
+        },
+        "EditGroupProfile": {
+            "httpMethod": "POST",
+            "parameters": {
+                "add_role": {
+                    "location": "postField",
+                    "required": false
+                },
+                "answer_{qid}": {
+                    "location": "postField",
+                    "required": false
+                },
                 "gid": {
                     "location": "uri",
-                    "required": true,
-                    "description": null
+                    "required": true
+                },
+                "intro": {
+                    "location": "postField",
+                    "required": false
                 },
                 "mid": {
                     "location": "uri",
-                    "required": true,
-                    "description": null
-                },
-                "answer_{qid}": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Answers to questions from groups API join_info question fields"
-                },
-                "title": {
-                    "location": "query",
-                    "required": false,
-                    "description": "An organizer-defined member title."
-                },
-                "remove_role": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Allows those with permission to remove one of the following roles: event_organizer, coorganizer, assistant_organizer"
+                    "required": true
                 },
                 "new_photo": {
-                    "location": "query",
-                    "required": false,
-                    "description": "file upload for a new member photo"
-                },
-                "site_name": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Name of member's site. Max length is 32"
+                    "location": "postField",
+                    "required": false
                 },
                 "photo_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "photo_id of the photo to use for this profile. set to 0 to unset the current photo"
+                    "location": "postField",
+                    "required": false
                 },
-                "add_role": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Allows those with permission to assign one of the following roles: event_organizer, coorganizer, assistant_organizer"
+                "remove_role": {
+                    "location": "postField",
+                    "required": false
                 },
-                "intro": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Provides a Member an opportunity to tell the group about themselves"
+                "site_name": {
+                    "location": "postField",
+                    "required": false
                 },
                 "site_url": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Link to member's site. Max length is 80"
+                    "location": "postField",
+                    "required": false
+                },
+                "title": {
+                    "location": "postField",
+                    "required": false
                 }
             },
             "summary": "Update a member's group profile",
-            "uri": "/2/profile/{gid}/{mid}",
-            "notes": "The `gid` and `mid` in this method's path are group and member IDs, both needed to uniquely identify the member profile to be edited. An authenticated user may update their own profile by substituting \"self\" for the `mid`. All POST parameters are optional unless required by the group. Only the organizer of the group may edit the member's `title` and `role` within the group. Those are the only things the organizer may edit. When requesting to set a role with `add_role` the member's previous role will be cleared. Members may edit all other fields of their own profiles with the exception of `title`, `add_role`, and `remove_role`. This method requires an HTTP POST."
+            "uri": "/2/profile/{gid}/{mid}"
         },
-        "RSVPCreateUpdate": {
-            "name": "RSVPCreateUpdate",
+        "EditMember": {
             "httpMethod": "POST",
             "parameters": {
-                "agree_to_refund": {
-                    "location": "query",
-                    "required": false,
-                    "description": "For events with fees, the authorized member must agree to the event's refund policy. This must be set to either true or false"
+                "add_topics": {
+                    "location": "postField",
+                    "required": false
                 },
-                "answer_{qid}": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Answers to event survey questions. Answers may not be longer than 250 characters. Organizers and hosts my not edit or create answers on behalf of members"
+                "bio": {
+                    "location": "postField",
+                    "required": false
                 },
-                "rsvp": {
-                    "location": "query",
-                    "required": false,
-                    "description": "The RSVP setting - value must be either \"yes\", \"no\" or \"waitlist\""
+                "birthday": {
+                    "location": "postField",
+                    "required": false
                 },
-                "opt_to_pay": {
-                    "location": "query",
-                    "required": false,
-                    "description": "For events with fees, the authorized member may opt to pay as part of the RSVP request. This may be set to true or false"
+                "city": {
+                    "location": "postField",
+                    "required": false
                 },
-                "guests": {
+                "city_id": {
+                    "location": "postField",
+                    "required": false
+                },
+                "country": {
+                    "location": "postField",
+                    "required": false
+                },
+                "gender": {
+                    "location": "postField",
+                    "required": false
+                },
+                "id": {
+                    "location": "uri",
+                    "required": true
+                },
+                "lang": {
+                    "location": "postField",
+                    "required": false
+                },
+                "lat": {
+                    "location": "postField",
+                    "required": false
+                },
+                "lon": {
+                    "location": "postField",
+                    "required": false
+                },
+                "name": {
+                    "location": "postField",
+                    "required": false
+                },
+                "radius": {
+                    "location": "postField",
+                    "required": false
+                },
+                "remove_topics": {
+                    "location": "postField",
+                    "required": false
+                },
+                "zip": {
+                    "location": "postField",
+                    "required": false
+                },
+                "sync_photo": {
+                    "location": "postField",
+                    "required": false
+                }
+            },
+            "summary": "Edit the authorized member's attributes",
+            "uri": "/2/member/{id}"
+        },
+        "EventCommentSubscribe": {
+            "httpMethod": "POST",
+            "parameters": {
+                "id": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": "Subscribe to notifications on updates to a given comment thread",
+            "uri": "/2/event_comment_subscribe/{id}"
+        },
+        "EventCommentUnsubscribe": {
+            "httpMethod": "DELETE",
+            "parameters": {
+                "id": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": "Unsubscribe to notifications for updates to a given comment thread",
+            "uri": "/2/event_comment_subscribe/{id}"
+        },
+        "GetCategories": {
+            "extends": "V2BaseGet",
+            "httpMethod": "GET",
+            "parameters": {
+                "fields": {
                     "location": "query",
-                    "required": false,
-                    "description": "Number of guests also coming to the event."
+                    "required": false
+                },
+                "member": {
+                    "location": "query",
+                    "required": false
+                },
+                "shortname": {
+                    "location": "query",
+                    "required": false
+                }
+            },
+            "summary": "Returns a list of Meetup group categories",
+            "uri": "/2/categories"
+        },
+        "GetChunkedHTTPEventCommentsStream": {
+            "extends": "V2BaseGet",
+            "httpMethod": "GET",
+            "parameters": {
+                "event_id": {
+                    "location": "query",
+                    "required": false
+                },
+                "since_count": {
+                    "location": "query",
+                    "required": false
+                },
+                "since_mtime": {
+                    "location": "query",
+                    "required": false
+                }
+            },
+            "summary": "Live HTTP stream of Event Comments  within public meetup groups. This method uses chunked\ntransfer encoding\nto maintain a persistent connection with the client. This connection will only be\nterminated for server maintenance or a connection error.",
+            "uri": "/2/event_comments"
+        },
+        "GetChunkedHTTPOpenVenuesStream": {
+            "extends": "V2BaseGet",
+            "httpMethod": "GET",
+            "parameters": {
+                "since_count": {
+                    "location": "query",
+                    "required": false
+                },
+                "since_mtime": {
+                    "location": "query",
+                    "required": false
+                },
+                "trickle": {
+                    "location": "query",
+                    "required": false
+                }
+            },
+            "summary": "Live HTTP stream of the creation and modification of public Meetup venues using\nchunked encoding\nto maintian a persistent connection with a client. The connection will only be\nterminiated for server maintenance or a connection error. It is suitable for\nlow-level HTTP clients rather than web browsers.",
+            "uri": "/2/open_venues"
+        },
+        "GetChunkedHTTPPhotoStream": {
+            "extends": "V2BaseGet",
+            "httpMethod": "GET",
+            "parameters": {
+                "since_count": {
+                    "location": "query",
+                    "required": false
+                },
+                "since_mtime": {
+                    "location": "query",
+                    "required": false
+                }
+            },
+            "summary": "This method serves photo notifications using\nchunked encoding\nto maintian a persistent connection with a client. The connection will only be\nterminiated for server maintenance or a connection error. It is suitable for\nlow-level HTTP clients rather than web browsers.",
+            "uri": "/2/photos"
+        },
+        "GetChunkedHTTPRSVPStream": {
+            "extends": "V2BaseGet",
+            "httpMethod": "GET",
+            "parameters": {
+                "since_count": {
+                    "location": "query",
+                    "required": false
+                },
+                "since_mtime": {
+                    "location": "query",
+                    "required": false
+                }
+            },
+            "summary": "Live HTTP stream of rsvps within public meetup groups. This method uses chunked \ntransfer encoding \nto maintain a persistent connection with the client. This connection will only be \nterminated for server maintenance or a connection error.",
+            "uri": "/2/rsvps"
+        },
+        "GetCities": {
+            "extends": "V2BaseGet",
+            "httpMethod": "GET",
+            "parameters": {
+                "distance": {
+                    "location": "query",
+                    "required": false
+                },
+                "lat": {
+                    "location": "query",
+                    "required": false
+                },
+                "lon": {
+                    "location": "query",
+                    "required": false
+                },
+                "query": {
+                    "location": "query",
+                    "required": false
+                },
+                "radius": {
+                    "location": "query",
+                    "required": false
+                },
+                "size": {
+                    "location": "query",
+                    "required": false
+                },
+                "smart": {
+                    "location": "query",
+                    "required": false
+                }
+            },
+            "summary": "Returns Meetup cities. Can search by location, by query term/zip, or by both.  Location-only searches return all cities within a radius of the provided coordinates.  Searches with a query return up to 10 cities matching the term, and can be sorted by size or distance to a given coordinate. 'smart' ordering can be used to return the match(es) with the highest member_count, unless a smaller size match exists nearby the given coordinates.",
+            "uri": "/2/cities"
+        },
+        "GetConcierge": {
+            "extends": "V2BaseGet",
+            "httpMethod": "GET",
+            "parameters": {
+                "city": {
+                    "location": "query",
+                    "required": false
+                },
+                "country": {
+                    "location": "query",
+                    "required": false
+                },
+                "daily_target": {
+                    "location": "query",
+                    "required": false
+                },
+                "fields": {
+                    "location": "query",
+                    "required": false
+                },
+                "lat": {
+                    "location": "query",
+                    "required": false
+                },
+                "limited_events": {
+                    "location": "query",
+                    "required": false
+                },
+                "lon": {
+                    "location": "query",
+                    "required": false
+                },
+                "radius": {
+                    "location": "query",
+                    "required": false
+                },
+                "self_groups": {
+                    "location": "query",
+                    "required": false
+                },
+                "state": {
+                    "location": "query",
+                    "required": false
+                },
+                "text_format": {
+                    "location": "query",
+                    "required": false
+                },
+                "time": {
+                    "location": "query",
+                    "required": false
+                },
+                "zip": {
+                    "location": "query",
+                    "required": false
+                }
+            },
+            "summary": "Recommends upcoming meetups for the authorized member.",
+            "uri": "/2/concierge"
+        },
+        "GetEvent": {
+            "extends": "V2BaseGet",
+            "httpMethod": "GET",
+            "parameters": {
+                "fields": {
+                    "location": "query",
+                    "required": false
+                },
+                "id": {
+                    "location": "uri",
+                    "required": true
+                },
+                "limited_events": {
+                    "location": "query",
+                    "required": false
+                }
+            },
+            "summary": "Retrieve a single meetup",
+            "uri": "/2/event/{id}"
+        },
+        "GetEventComment": {
+            "extends": "V2BaseGet",
+            "httpMethod": "GET",
+            "parameters": {
+                "fields": {
+                    "location": "query",
+                    "required": false
+                },
+                "id": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": "Retrieve a single event comment or reply",
+            "uri": "/2/event_comment/{id}"
+        },
+        "GetEventCommentLikes": {
+            "extends": "V2BaseGet",
+            "httpMethod": "GET",
+            "parameters": {
+                "comment_id": {
+                    "location": "query",
+                    "required": true
+                },
+                "created": {
+                    "location": "query",
+                    "required": false
+                }
+            },
+            "summary": "Api for listing likes of a given event comment",
+            "uri": "/2/event_comment_likes"
+        },
+        "GetEventComments": {
+            "extends": "V2BaseGet",
+            "httpMethod": "GET",
+            "parameters": {
+                "comment_id": {
+                    "location": "query",
+                    "required": false
                 },
                 "event_id": {
                     "location": "query",
-                    "required": false,
-                    "description": "The event that you are RSVP'ing to"
+                    "required": false
                 },
-                "comments": {
+                "fields": {
                     "location": "query",
-                    "required": false,
-                    "description": "A comment to post along with the RSVP"
+                    "required": false
+                },
+                "group_id": {
+                    "location": "query",
+                    "required": false
                 },
                 "member_id": {
                     "location": "query",
-                    "required": false,
-                    "description": " Organizers and event hosts may RSVP on behalf of a member by specifying an ID here. As when editing RSVPs on the site, organizers may enter a \"yes\" for a member even if the event requires payment."
+                    "required": false
+                },
+                "name": {
+                    "location": "query",
+                    "required": false
+                },
+                "show_diffs": {
+                    "location": "query",
+                    "required": false
+                },
+                "thread": {
+                    "location": "query",
+                    "required": false
+                },
+                "time": {
+                    "location": "query",
+                    "required": false
                 }
             },
-            "summary": "Creates or updates an existing RSVP",
-            "uri": "/2/rsvp",
-            "notes": "At least one of the required parameter(s) must be supplied with the request.\n\nThe RSVP is recorded for the currently authenticated member account, unless a member_id is supplied, in which case the authenticated member must have permissions to edit the event or a host.\n\nMember's RSVP'ing as themselves may supply answers to a Meetup event's survey questions by supplying answers as request parameters corresponding to question ids in the format `answer_{question_id}`. To discover available Meetup event survey questions, supply the [Events 2](/meetup_api/docs/2/events/) method with the 'fields' parameter set to 'survey_questions'.\n\nRepeated attempts to RSVP to the same event given the same member credentials will result in an update to previous RSVP. The state of the event may or may not allow for this update to occur depending on the organizer-defined constraints and pre-requisites for the event.\n\nNote: waitlist responses may be coerced into yes responses when there is space available and yes responses may be coerced into waitlist response when space is not.\n\nIf the event requires payment you are required to send an \"agree_to_refund\" parameter set to the true or false. This represents the authorized members agreement to understanding the event's refund policy.\n"
+            "summary": "This method returns messages that appear under \"Talk about this Meetup\". To post messages, see the corresponding write method.",
+            "uri": "/2/event_comments"
+        },
+        "GetEventCommentsStream": {
+            "extends": "V2BaseGet",
+            "httpMethod": "GET",
+            "parameters": {
+                "callback": {
+                    "location": "query",
+                    "required": true
+                },
+                "event_id": {
+                    "location": "query",
+                    "required": false
+                },
+                "since_count": {
+                    "location": "query",
+                    "required": false
+                },
+                "since_mtime": {
+                    "location": "query",
+                    "required": false
+                }
+            },
+            "summary": "This long-polling\nstream can be easily consumed using JavaScript in any modern browser. Event Comment\nnotifications are received when they happen, or as soon as your script finishes handling its\nlast notification.",
+            "uri": "/2/event_comments"
+        },
+        "GetEventCommentsWebSocketStream": {
+            "httpMethod": "WS",
+            "parameters": {
+                "event_id": {
+                    "location": "postField",
+                    "required": false
+                },
+                "since_count": {
+                    "location": "postField",
+                    "required": false
+                },
+                "since_mtime": {
+                    "location": "postField",
+                    "required": false
+                }
+            },
+            "summary": "For browsers that support it, WebSockets is a more\nefficient alternative to the long-polling stream. This is a push only endpoint and will discard\nany messages received from the client after the socket is open.",
+            "uri": "/2/event_comments"
+        },
+        "GetEventRatings": {
+            "extends": "V2BaseGet",
+            "httpMethod": "GET",
+            "parameters": {
+                "event_id": {
+                    "location": "query",
+                    "required": true
+                },
+                "member_id": {
+                    "location": "query",
+                    "required": false
+                },
+                "rating": {
+                    "location": "query",
+                    "required": false
+                },
+                "time": {
+                    "location": "query",
+                    "required": false
+                }
+            },
+            "summary": "API method for accessing Meetup comments",
+            "uri": "/2/event_ratings"
+        },
+        "GetEvents": {
+            "extends": "V2BaseGet",
+            "httpMethod": "GET",
+            "parameters": {
+                "event_id": {
+                    "location": "query",
+                    "required": false
+                },
+                "fields": {
+                    "location": "query",
+                    "required": false
+                },
+                "group_domain": {
+                    "location": "query",
+                    "required": false
+                },
+                "group_id": {
+                    "location": "query",
+                    "required": false
+                },
+                "group_urlname": {
+                    "location": "query",
+                    "required": false
+                },
+                "limited_events": {
+                    "location": "query",
+                    "required": false
+                },
+                "member_id": {
+                    "location": "query",
+                    "required": false
+                },
+                "rsvp": {
+                    "location": "query",
+                    "required": false
+                },
+                "status": {
+                    "location": "query",
+                    "required": false
+                },
+                "text_format": {
+                    "location": "query",
+                    "required": false
+                },
+                "time": {
+                    "location": "query",
+                    "required": false
+                },
+                "venue_id": {
+                    "location": "query",
+                    "required": false
+                }
+            },
+            "summary": "Access Meetup events using a group, member, or event id. Events in private groups are available only to authenticated members of those groups. To search events by topic or location, see Open Events.",
+            "uri": "/2/events"
+        },
+        "GetGroupProfile": {
+            "extends": "V2BaseGet",
+            "httpMethod": "GET",
+            "parameters": {
+                "fields": {
+                    "location": "query",
+                    "required": false
+                },
+                "gid": {
+                    "location": "uri",
+                    "required": true
+                },
+                "mid": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": "Retrieves a single group profile",
+            "uri": "/2/profile/{gid}/{mid}"
+        },
+        "GetGroupProfiles": {
+            "extends": "V2BaseGet",
+            "httpMethod": "GET",
+            "parameters": {
+                "fields": {
+                    "location": "query",
+                    "required": false
+                },
+                "group_id": {
+                    "location": "query",
+                    "required": false
+                },
+                "group_urlname": {
+                    "location": "query",
+                    "required": false
+                },
+                "interesting": {
+                    "location": "query",
+                    "required": false
+                },
+                "joined": {
+                    "location": "query",
+                    "required": false
+                },
+                "member_id": {
+                    "location": "query",
+                    "required": false
+                },
+                "name": {
+                    "location": "query",
+                    "required": false
+                },
+                "role": {
+                    "location": "query",
+                    "required": false
+                },
+                "status": {
+                    "location": "query",
+                    "required": false
+                },
+                "updated": {
+                    "location": "query",
+                    "required": false
+                },
+                "visited": {
+                    "location": "query",
+                    "required": false
+                }
+            },
+            "summary": "This method returns member profiles associated with a particular group. Meetup members have separate profiles for each group they join.",
+            "uri": "/2/profiles"
+        },
+        "GetGroups": {
+            "extends": "V2BaseGet",
+            "httpMethod": "GET",
+            "parameters": {
+                "category_id": {
+                    "location": "query",
+                    "required": false
+                },
+                "country": {
+                    "location": "query",
+                    "required": false
+                },
+                "city": {
+                    "location": "query",
+                    "required": false
+                },
+                "state": {
+                    "location": "query",
+                    "required": false
+                },
+                "domain": {
+                    "location": "query",
+                    "required": false
+                },
+                "fields": {
+                    "location": "query",
+                    "required": false
+                },
+                "group_id": {
+                    "location": "query",
+                    "required": false
+                },
+                "group_urlname": {
+                    "location": "query",
+                    "required": false
+                },
+                "id": {
+                    "location": "query",
+                    "required": false
+                },
+                "lon": {
+                    "location": "query",
+                    "required": false
+                },
+                "lat": {
+                    "location": "query",
+                    "required": false
+                },
+                "location": {
+                    "location": "query",
+                    "required": false
+                },
+                "member_id": {
+                    "location": "query",
+                    "required": false
+                },
+                "members": {
+                    "location": "query",
+                    "required": false
+                },
+                "name": {
+                    "location": "query",
+                    "required": false
+                },
+                "organizer_id": {
+                    "location": "query",
+                    "required": false
+                },
+                "radius": {
+                    "location": "query",
+                    "required": false
+                },
+                "topic": {
+                    "location": "query",
+                    "required": false
+                },
+                "groupnum": {
+                    "location": "query",
+                    "required": false
+                },
+                "zip": {
+                    "location": "query",
+                    "required": false
+                }
+            },
+            "summary": "Fetch information about Meetup Groups.",
+            "uri": "/2/groups"
+        },
+        "GetMember": {
+            "extends": "V2BaseGet",
+            "httpMethod": "GET",
+            "parameters": {
+                "fields": {
+                    "location": "query",
+                    "required": false
+                },
+                "id": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": "Retrieve a single member",
+            "uri": "/2/member/{id}"
+        },
+        "GetMembers": {
+            "extends": "V2BaseGet",
+            "httpMethod": "GET",
+            "parameters": {
+                "fields": {
+                    "location": "query",
+                    "required": false
+                },
+                "group_id": {
+                    "location": "query",
+                    "required": false
+                },
+                "group_urlname": {
+                    "location": "query",
+                    "required": false
+                },
+                "joined": {
+                    "location": "query",
+                    "required": false
+                },
+                "member_id": {
+                    "location": "query",
+                    "required": false
+                },
+                "name": {
+                    "location": "query",
+                    "required": false
+                },
+                "service": {
+                    "location": "query",
+                    "required": false
+                },
+                "topic": {
+                    "location": "query",
+                    "required": false
+                },
+                "groupnum": {
+                    "location": "query",
+                    "required": false
+                },
+                "visited": {
+                    "location": "query",
+                    "required": false
+                }
+            },
+            "summary": "API method for accessing members of Meetup Groups",
+            "uri": "/2/members"
+        },
+        "GetOpenEvents": {
+            "extends": "V2BaseGet",
+            "httpMethod": "GET",
+            "parameters": {
+                "and_text": {
+                    "location": "query",
+                    "required": false
+                },
+                "category": {
+                    "location": "query",
+                    "required": false
+                },
+                "city": {
+                    "location": "query",
+                    "required": false
+                },
+                "country": {
+                    "location": "query",
+                    "required": false
+                },
+                "distance": {
+                    "location": "query",
+                    "required": false
+                },
+                "fields": {
+                    "location": "query",
+                    "required": false
+                },
+                "lat": {
+                    "location": "query",
+                    "required": false
+                },
+                "limited_events": {
+                    "location": "query",
+                    "required": false
+                },
+                "lon": {
+                    "location": "query",
+                    "required": false
+                },
+                "radius": {
+                    "location": "query",
+                    "required": false
+                },
+                "state": {
+                    "location": "query",
+                    "required": false
+                },
+                "status": {
+                    "location": "query",
+                    "required": false
+                },
+                "text": {
+                    "location": "query",
+                    "required": false
+                },
+                "text_format": {
+                    "location": "query",
+                    "required": false
+                },
+                "time": {
+                    "location": "query",
+                    "required": false
+                },
+                "topic": {
+                    "location": "query",
+                    "required": false
+                },
+                "trending": {
+                    "location": "query",
+                    "required": false
+                },
+                "zip": {
+                    "location": "query",
+                    "required": false
+                }
+            },
+            "summary": "Searches for recent and upcoming public events hosted by Meetup groups. Its search window  is the past one month through the next three months, and is subject to change. Open Events is optimized to search for current events by location, category, topic, or text, and only lists Meetups that have 3 or more RSVPS. The number or results returned with each request is not guaranteed to be the same as the page size due to secondary filtering. If you're looking for a particular event or events within a particular group, use the standard Events method.",
+            "uri": "/2/open_events"
+        },
+        "GetOpenEventsStream": {
+            "extends": "V2BaseGet",
+            "httpMethod": "GET",
+            "parameters": {
+                "since_count": {
+                    "location": "query",
+                    "required": false
+                },
+                "since_mtime": {
+                    "location": "query",
+                    "required": false
+                }
+            },
+            "summary": "Live HTTP stream of events within public Meetup groups. This method uses chunked\ntransfer encoding\nto maintain a persistent connection with the client. This connection will only be\nterminated for server maintenance or a connection error.",
+            "uri": "/2/open_events"
+        },
+        "GetOpenVenues": {
+            "extends": "V2BaseGet",
+            "httpMethod": "GET",
+            "parameters": {
+                "city": {
+                    "location": "query",
+                    "required": false
+                },
+                "country": {
+                    "location": "query",
+                    "required": false
+                },
+                "distance": {
+                    "location": "query",
+                    "required": false
+                },
+                "fields": {
+                    "location": "query",
+                    "required": false
+                },
+                "lat": {
+                    "location": "query",
+                    "required": false
+                },
+                "lon": {
+                    "location": "query",
+                    "required": false
+                },
+                "radius": {
+                    "location": "query",
+                    "required": false
+                },
+                "rating": {
+                    "location": "query",
+                    "required": false
+                },
+                "rating_count": {
+                    "location": "query",
+                    "required": false
+                },
+                "state": {
+                    "location": "query",
+                    "required": false
+                },
+                "text": {
+                    "location": "query",
+                    "required": false
+                },
+                "zip": {
+                    "location": "query",
+                    "required": false
+                }
+            },
+            "summary": "Searches for public venues within a given geo space. To search for specific venues that your group has used, use the Venues method",
+            "uri": "/2/open_venues"
+        },
+        "GetPhotoAlbums": {
+            "extends": "V2BaseGet",
+            "httpMethod": "GET",
+            "parameters": {
+                "event_id": {
+                    "location": "query",
+                    "required": false
+                },
+                "group_id": {
+                    "location": "query",
+                    "required": false
+                },
+                "photo_album_id": {
+                    "location": "query",
+                    "required": false
+                },
+                "time": {
+                    "location": "query",
+                    "required": false
+                },
+                "title": {
+                    "location": "query",
+                    "required": false
+                },
+                "updated": {
+                    "location": "query",
+                    "required": false
+                }
+            },
+            "summary": "This method returns photo albums associated with Meetup groups. To create albums, see the corresponding write method.",
+            "uri": "/2/photo_albums"
+        },
+        "GetPhotoComments": {
+            "extends": "V2BaseGet",
+            "httpMethod": "GET",
+            "parameters": {
+                "fields": {
+                    "location": "query",
+                    "required": false
+                },
+                "member_id": {
+                    "location": "query",
+                    "required": false
+                },
+                "name": {
+                    "location": "query",
+                    "required": false
+                },
+                "photo_id": {
+                    "location": "query",
+                    "required": true
+                },
+                "time": {
+                    "location": "query",
+                    "required": false
+                }
+            },
+            "summary": "This method returns comments on meetup photos. To post messages, see the corresponding write method",
+            "uri": "/2/photo_comments"
+        },
+        "GetPhotoStream": {
+            "extends": "V2BaseGet",
+            "httpMethod": "GET",
+            "parameters": {
+                "callback": {
+                    "location": "query",
+                    "required": true
+                },
+                "event_id": {
+                    "location": "query",
+                    "required": false
+                },
+                "since_count": {
+                    "location": "query",
+                    "required": false
+                },
+                "since_mtime": {
+                    "location": "query",
+                    "required": false
+                }
+            },
+            "summary": "This long-polling \nstream can be easily consumed using JavaScript in any modern browser. Photo upload\nnotifications are received when they happen, or as soon as your script finishes handling its\nlast notification.",
+            "uri": "/2/photos"
+        },
+        "GetPhotoWebSocketStream": {
+            "httpMethod": "WS",
+            "parameters": {
+                "since_count": {
+                    "location": "postField",
+                    "required": false
+                },
+                "since_mtime": {
+                    "location": "postField",
+                    "required": false
+                }
+            },
+            "summary": "For browsers that support it, WebSockets is a more\nefficient alternative to the long-polling stream. This is a push only endpoint and will discard\nany messages received from the client after the socket is open.",
+            "uri": "/2/photos"
+        },
+        "GetPhotos": {
+            "extends": "V2BaseGet",
+            "httpMethod": "GET",
+            "parameters": {
+                "event_id": {
+                    "location": "query",
+                    "required": false
+                },
+                "fields": {
+                    "location": "query",
+                    "required": false
+                },
+                "group_id": {
+                    "location": "query",
+                    "required": false
+                },
+                "group_urlname": {
+                    "location": "query",
+                    "required": false
+                },
+                "member_id": {
+                    "location": "query",
+                    "required": false
+                },
+                "photo_album_id": {
+                    "location": "query",
+                    "required": false
+                },
+                "photo_id": {
+                    "location": "query",
+                    "required": false
+                },
+                "tagged": {
+                    "location": "query",
+                    "required": false
+                },
+                "time": {
+                    "location": "query",
+                    "required": false
+                }
+            },
+            "summary": "This method returns photos by member, group, album, event, photo ID, or tagged member.",
+            "uri": "/2/photos"
+        },
+        "GetRSVP": {
+            "extends": "V2BaseGet",
+            "httpMethod": "GET",
+            "parameters": {
+                "fields": {
+                    "location": "query",
+                    "required": false
+                },
+                "id": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": "Retrieve a single RSVP",
+            "uri": "/2/rsvp/{id}"
+        },
+        "GetRSVPStream": {
+            "extends": "V2BaseGet",
+            "httpMethod": "GET",
+            "parameters": {
+                "callback": {
+                    "location": "query",
+                    "required": true
+                },
+                "event_id": {
+                    "location": "query",
+                    "required": false
+                },
+                "since_count": {
+                    "location": "query",
+                    "required": false
+                },
+                "since_mtime": {
+                    "location": "query",
+                    "required": false
+                }
+            },
+            "summary": "This long-polling \nstream can be easily consumed using JavaScript in any modern browser. RSVP\nnotifications are received when they happen, or as soon as your script finishes handling its\nlast notification.",
+            "uri": "/2/rsvps"
+        },
+        "GetRSVPWebSocketStream": {
+            "httpMethod": "WS",
+            "parameters": {
+                "event_id": {
+                    "location": "postField",
+                    "required": false
+                },
+                "since_count": {
+                    "location": "postField",
+                    "required": false
+                },
+                "since_mtime": {
+                    "location": "postField",
+                    "required": false
+                }
+            },
+            "summary": "For browsers that support it, WebSockets is a more\nefficient alternative to the long-polling stream. This is a push only endpoint and will discard\nany messages received from the client after the socket is open.",
+            "uri": "/2/rsvps"
+        },
+        "GetRSVPs": {
+            "extends": "V2BaseGet",
+            "httpMethod": "GET",
+            "responseClass": "MultiResultResponse",
+            "parameters": {
+                "event": {
+                    "location": "query",
+                    "required": false
+                },
+                "event_id": {
+                    "location": "query",
+                    "required": true
+                },
+                "fields": {
+                    "location": "query",
+                    "required": false
+                },
+                "name": {
+                    "location": "query",
+                    "required": false
+                },
+                "rsvp": {
+                    "location": "query",
+                    "required": false
+                },
+                "social": {
+                    "location": "query",
+                    "required": false
+                }
+            },
+            "summary": "Query for Event RSVPs by event",
+            "uri": "/2/rsvps"
+        },
+        "GetVenues": {
+            "extends": "V2BaseGet",
+            "httpMethod": "GET",
+            "parameters": {
+                "distance": {
+                    "location": "query",
+                    "required": false
+                },
+                "event_id": {
+                    "location": "query",
+                    "required": false
+                },
+                "fields": {
+                    "location": "query",
+                    "required": false
+                },
+                "group_id": {
+                    "location": "query",
+                    "required": false
+                },
+                "group_urlname": {
+                    "location": "query",
+                    "required": false
+                },
+                "rating": {
+                    "location": "query",
+                    "required": false
+                },
+                "rating_count": {
+                    "location": "query",
+                    "required": false
+                },
+                "venue_id": {
+                    "location": "query",
+                    "required": false
+                }
+            },
+            "summary": "Search for Meetup venues by one of your groups, events, or venue identifiers. For a full text search on public venues use OpenVenues.",
+            "uri": "/2/venues"
+        },
+        "PostEventComment": {
+            "httpMethod": "POST",
+            "parameters": {
+                "comment": {
+                    "location": "postField",
+                    "required": true
+                },
+                "event_id": {
+                    "location": "postField",
+                    "required": true
+                },
+                "in_reply_to": {
+                    "location": "postField",
+                    "required": true
+                },
+                "notifications": {
+                    "location": "postField",
+                    "required": false
+                }
+            },
+            "summary": "This method posts messages that appear under \"Talk about this Meetup\".",
+            "uri": "/2/event_comment"
+        },
+        "PostEventCommentFlag": {
+            "httpMethod": "POST",
+            "parameters": {
+                "comment_id": {
+                    "location": "postField",
+                    "required": true
+                }
+            },
+            "summary": "This method creates a spam report for comment content",
+            "uri": "/2/event_comment_flag"
+        },
+        "LikeEventComment": {
+            "httpMethod": "POST",
+            "parameters": {
+                "id": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": "Like a given Event comment",
+            "uri": "/2/event_comment_like/{id}"
+        },
+        "PostEventPhoto": {
+            "httpMethod": "POST",
+            "parameters": {
+                "await": {
+                    "location": "postField",
+                    "required": false
+                },
+                "caption": {
+                    "location": "postField",
+                    "required": false
+                },
+                "event_id": {
+                    "location": "postField",
+                    "required": true
+                },
+                "photo": {
+                    "location": "postFile",
+                    "required": true
+                },
+                "photo_album_id": {
+                    "location": "postField",
+                    "required": true
+                }
+            },
+            "summary": "Uploads a photo for a given event",
+            "uri": "/2/photo"
+        },
+        "PostEventRating": {
+            "httpMethod": "POST",
+            "parameters": {
+                "attendee_count": {
+                    "location": "postField",
+                    "required": false
+                },
+                "event_id": {
+                    "location": "postField",
+                    "required": true
+                },
+                "rating": {
+                    "location": "postField",
+                    "required": true
+                }
+            },
+            "summary": "This method allows members to posts rating for an event after it's occurred. Only permitted for members who rsvp'd \"yes\" or \"maybe\" to the event",
+            "uri": "/2/event_rating"
+        },
+        "PostMemberPhoto": {
+            "httpMethod": "POST",
+            "parameters": {
+                "await": {
+                    "location": "postField",
+                    "required": false
+                },
+                "main": {
+                    "location": "postField",
+                    "required": false
+                },
+                "photo": {
+                    "location": "postFile",
+                    "required": true
+                },
+                "sync_photo": {
+                    "location": "postFile",
+                    "required": true
+                }
+            },
+            "summary": "Uploads a photo to be assocated with a Member",
+            "uri": "/2/member_photo"
+        },
+        "DeleteMemberPhoto": {
+            "httpMethod": "DELETE",
+            "parameters": {
+                "id": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": "Delete the specified member photo.",
+            "uri": "/2/member_photo/{id}"
+        },
+        "PostMessage": {
+            "httpMethod": "POST",
+            "parameters": {
+                "cc_sender": {
+                    "location": "postField",
+                    "required": false
+                },
+                "dryrun": {
+                    "location": "postField",
+                    "required": false
+                },
+                "group_id": {
+                    "location": "postField",
+                    "required": false
+                },
+                "hide_email": {
+                    "location": "postField",
+                    "required": false
+                },
+                "member_id": {
+                    "location": "postField",
+                    "required": true
+                },
+                "message": {
+                    "location": "postField",
+                    "required": true
+                },
+                "subject": {
+                    "location": "postField",
+                    "required": true
+                }
+            },
+            "summary": "This method allows messaging-authorized requests to send messages between members",
+            "uri": "/2/message"
+        },
+        "PostPhotoComment": {
+            "httpMethod": "POST",
+            "parameters": {
+                "comment": {
+                    "location": "postField",
+                    "required": true
+                },
+                "photo_id": {
+                    "location": "postField",
+                    "required": true
+                }
+            },
+            "summary": "This method posts comments that appear below photos",
+            "uri": "/2/photo_comment"
+        },
+        "PostRSVP": {
+            "httpMethod": "POST",
+            "parameters": {
+                "answer_{qid}": {
+                    "location": "postField",
+                    "required": false
+                },
+                "comments": {
+                    "location": "postField",
+                    "required": false
+                },
+                "event_id": {
+                    "location": "postField",
+                    "required": true
+                },
+                "guests": {
+                    "location": "postField",
+                    "required": false
+                },
+                "member_id": {
+                    "location": "postField",
+                    "required": false
+                },
+                "rsvp": {
+                    "location": "postField",
+                    "required": true
+                },
+                "agree_to_refund": {
+                    "location": "postField",
+                    "required": false
+                }
+            },
+            "summary": "Creates a new Rsvp",
+            "uri": "/2/rsvp"
+        },
+        "UnlikeEventComment": {
+            "httpMethod": "DELETE",
+            "parameters": {
+                "id": {
+                    "location": "uri",
+                    "required": true
+                }
+            },
+            "summary": "Unlike a given Event comment",
+            "uri": "/2/event_comment_like/{id}"
         }
     }
 }

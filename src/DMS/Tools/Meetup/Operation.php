@@ -6,7 +6,7 @@ use DMS\Tools\ArrayHelper as a;
 
 class Operation
 {
-
+    public $version;
     public $name;
     public $httpMethod;
     public $parameters = array();
@@ -14,6 +14,10 @@ class Operation
     public $uri;
     public $notes;
 
+    /**
+     * @param $definition
+     * @return static
+     */
     public static function createFromApiJsonDocs($definition)
     {
         if (a::read($definition, 'group') == 'deprecated') {
@@ -22,11 +26,9 @@ class Operation
 
         $operation = new static();
 
-        $operation->parseName(
-            a::read($definition, 'name'),
-            a::read($definition, 'http_method'),
-            a::read($definition, 'path')
-        );
+        $operation->version = (a::read($definition, 'group') == 'streams')
+            ? 'stream'
+            : a::read($definition, 'api_version', '1');
 
         $operation->httpMethod = a::read($definition, 'http_method');
         $operation->summary = a::read($definition, 'desc');
@@ -43,6 +45,8 @@ class Operation
         }
 
         $operation->addStandardParameters(a::read($definition, 'http_method'));
+
+        $operation->name = OperationNameConverter::parseOperationName($operation);
 
         return $operation;
     }
@@ -61,27 +65,7 @@ class Operation
         $this->addParameter('omit', 'query', false);
     }
 
-    protected function parseName($name, $method, $uri)
-    {
-        $translate = array(
-            ' ' => '',
-            '-' => '',
-            '_' => '',
-            '/' => ''
-        );
 
-        if ($method == 'GET') {
-            $this->name = ucfirst(strtolower($method)) . ucfirst(strtr($name, $translate));
-            return;
-        }
-
-        if (empty($name) || $name === null) {
-            $this->name = ucfirst(strtr($uri, $translate));
-            return;
-        }
-
-        $this->name = ucfirst(strtr($name, $translate));
-    }
 
     protected function parsePath($path)
     {
