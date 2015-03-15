@@ -6,6 +6,6 @@
         "meetup_v1_services.json",
         "meetup_v2_services.json",
         "meetup_v3_services.json",
-        "meetup_vstreams_services.json"
+        "meetup_vstream_services.json"
     ]
 }
