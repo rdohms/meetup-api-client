@@ -348,35 +348,25 @@
             "name": "CreateProfile",
             "httpMethod": "POST",
             "parameters": {
-                "gid": {
-                    "location": "uri",
-                    "required": true,
-                    "description": null
-                },
-                "mid": {
-                    "location": "uri",
-                    "required": true,
-                    "description": null
-                },
                 "site_name": {
                     "location": "query",
                     "required": false,
                     "description": "Name of member's site. Max length is 32"
                 },
-                "add_role": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Allows those with permission to assign one of the following roles: coorganizer, event_organizer, assistant_organizer"
-                },
                 "photo_id": {
                     "location": "query",
                     "required": false,
-                    "description": "photo_id of the photo to use for this profile. set to 0 to unset the current photo"
+                    "description": "photo_id of the photo to use for this profile"
                 },
                 "site_url": {
                     "location": "query",
                     "required": false,
                     "description": "Link to member's site. Max length is 80"
+                },
+                "group_urlname": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Urlname of group to join"
                 },
                 "intro": {
                     "location": "query",
@@ -388,15 +378,10 @@
                     "required": false,
                     "description": "file upload for a new member photo"
                 },
-                "title": {
+                "group_id": {
                     "location": "query",
                     "required": false,
-                    "description": "An organizer-defined member title."
-                },
-                "remove_role": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Allows those with permission to remove one of the following roles: coorganizer, event_organizer, assistant_organizer"
+                    "description": "Id of group to join"
                 },
                 "answer_{qid}": {
                     "location": "query",
@@ -404,9 +389,9 @@
                     "description": "Answers to questions from groups API join_info question fields"
                 }
             },
-            "summary": "Update a member's group profile",
-            "uri": "/2/profile/{gid}/{mid}",
-            "notes": "The `gid` and `mid` in this method's path are group and member IDs, both needed to uniquely identify the member profile to be edited. An authenticated user may update their own profile by substituting \"self\" for the `mid`. All POST parameters are optional unless required by the group. Only the organizer of the group may edit the member's `title` and `role` within the group. Those are the only things the organizer may edit. When requesting to set a role with `add_role` the member's previous role will be cleared. Members may edit all other fields of their own profiles with the exception of `title`, `add_role`, and `remove_role`. This method requires an HTTP POST."
+            "summary": "This method allows an authenticated member to join a group by creating a profile",
+            "uri": "/2/profile",
+            "notes": "This method requires an HTTP POST. All required parameters must be supplied. An intro and answers may be required based on the group the member is joining. To find out if a group requires an intro or answers to questions, query for the group through one of the [Groups methods](/meetup_api/docs/2/groups) providing setting the __fields__ parameter to __join_info__ and inspecting the __join_info__ in the results. Answers to the questions must be named using the convention __answer_{question_id}__."
         },
         "CreateRsvp": {
             "version": "2",
@@ -882,6 +867,71 @@
             "summary": "Edit the authorized member's attributes",
             "uri": "/2/member/{id}",
             "notes": "This method requires tls. Only the authorized user may edit their own properties. A city may be provided by either a city_id or a combination of lat and lon"
+        },
+        "EditProfile": {
+            "version": "2",
+            "name": "EditProfile",
+            "httpMethod": "POST",
+            "parameters": {
+                "gid": {
+                    "location": "uri",
+                    "required": true,
+                    "description": null
+                },
+                "mid": {
+                    "location": "uri",
+                    "required": true,
+                    "description": null
+                },
+                "site_name": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Name of member's site. Max length is 32"
+                },
+                "add_role": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Allows those with permission to assign one of the following roles: coorganizer, event_organizer, assistant_organizer"
+                },
+                "photo_id": {
+                    "location": "query",
+                    "required": false,
+                    "description": "photo_id of the photo to use for this profile. set to 0 to unset the current photo"
+                },
+                "site_url": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Link to member's site. Max length is 80"
+                },
+                "intro": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Provides a Member an opportunity to tell the group about themselves"
+                },
+                "new_photo": {
+                    "location": "query",
+                    "required": false,
+                    "description": "file upload for a new member photo"
+                },
+                "title": {
+                    "location": "query",
+                    "required": false,
+                    "description": "An organizer-defined member title."
+                },
+                "remove_role": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Allows those with permission to remove one of the following roles: coorganizer, event_organizer, assistant_organizer"
+                },
+                "answer_{qid}": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Answers to questions from groups API join_info question fields"
+                }
+            },
+            "summary": "Update a member's group profile",
+            "uri": "/2/profile/{gid}/{mid}",
+            "notes": "The `gid` and `mid` in this method's path are group and member IDs, both needed to uniquely identify the member profile to be edited. An authenticated user may update their own profile by substituting \"self\" for the `mid`. All POST parameters are optional unless required by the group. Only the organizer of the group may edit the member's `title` and `role` within the group. Those are the only things the organizer may edit. When requesting to set a role with `add_role` the member's previous role will be cleared. Members may edit all other fields of their own profiles with the exception of `title`, `add_role`, and `remove_role`. This method requires an HTTP POST."
         },
         "GetCategories": {
             "version": "2",

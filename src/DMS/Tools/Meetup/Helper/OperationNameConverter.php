@@ -1,6 +1,8 @@
 <?php
 
-namespace DMS\Tools\Meetup;
+namespace DMS\Tools\Meetup\Helper;
+
+use DMS\Tools\Meetup\ValueObject\Operation;
 
 /**
  * Class OperationNameConverter
@@ -25,6 +27,10 @@ class OperationNameConverter
             $wordifiedPath = $wordifiedPath . 'Stream';
         }
 
+        if (preg_match("/^\/{urlname}.*/", $operation->uri) == 1) {
+            $wordifiedPath = 'Group' . $wordifiedPath;
+        }
+
         return ucfirst($verb . $wordifiedPath);
     }
 
@@ -36,10 +42,6 @@ class OperationNameConverter
      */
     public static function wordifyPath($path)
     {
-        if ($path == '/{urlname}') {
-            return 'Group';
-        }
-
         // drop parameters
         $path = preg_replace('/{[a-z_]*}/', '', $path);
         $path = preg_replace('/[0-9]*/', '', $path);
@@ -77,7 +79,7 @@ class OperationNameConverter
             return 'edit';
         }
 
-        if ($method == 'post' && strpos($path, '{id}') !== false) {
+        if ($method == 'post' && (strpos($path, '{id}') !== false || strpos($path, '{mid}') !== false)) {
             return 'edit';
         }
 

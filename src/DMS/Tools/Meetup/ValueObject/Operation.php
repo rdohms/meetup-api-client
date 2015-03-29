@@ -1,17 +1,49 @@
 <?php
 
-namespace DMS\Tools\Meetup;
+namespace DMS\Tools\Meetup\ValueObject;
 
-use DMS\Tools\ArrayHelper as a;
+use DMS\Tools\Meetup\Helper\OperationNameConverter;
+use DMS\Tools\Meetup\ValueObject\Parameter;
+use MathiasGrimm\ArrayPath\ArrayPath as arr;
 
+/**
+ * Class Operation
+ */
 class Operation
 {
+    /**
+     * @var string
+     */
     public $version;
+
+    /**
+     * @var string
+     */
     public $name;
+
+    /**
+     * @var string
+     */
     public $httpMethod;
+
+    /**
+     * @var array
+     */
     public $parameters = array();
+
+    /**
+     * @var string
+     */
     public $summary;
+
+    /**
+     * @var string
+     */
     public $uri;
+
+    /**
+     * @var string
+     */
     public $notes;
 
     /**
@@ -20,37 +52,42 @@ class Operation
      */
     public static function createFromApiJsonDocs($definition)
     {
-        if (a::read($definition, 'group') == 'deprecated') {
+        if (arr::get('group', $definition) == 'deprecated') {
             return null;
         }
 
         $operation = new static();
 
-        $operation->version = (a::read($definition, 'group') == 'streams')
+        $operation->version = (arr::get('group', $definition) == 'streams')
             ? 'stream'
-            : a::read($definition, 'api_version', '1');
+            : arr::get('api_version', $definition, '1');
 
-        $operation->httpMethod = a::read($definition, 'http_method');
-        $operation->summary = a::read($definition, 'desc');
-        $operation->notes  = a::read($definition, 'param_notes');
-        $operation->parsePath(a::read($definition, 'path'));
+        $operation->httpMethod = arr::get('http_method', $definition);
+        $operation->summary    = arr::get('desc', $definition);
+        $operation->notes      = arr::get('param_notes', $definition);
+        $operation->parsePath(arr::get('path', $definition));
 
-        foreach (a::read($definition, 'params', array()) as $param => $desc) {
+        foreach (arr::get('params', $definition, array()) as $param => $desc) {
             // Always false due to complex rules on meetup's side (one of x is required)
             $operation->addParameter(str_replace('*', '', $param), 'query', false, $desc);
         }
 
-        foreach (a::read($definition, 'orders', array()) as $param => $desc) {
+        foreach (arr::get('orders', $definition, array()) as $param => $desc) {
             $operation->addParameter($param, 'query', false, $desc);
         }
 
-        $operation->addStandardParameters(a::read($definition, 'http_method'));
+        $operation->addStandardParameters(arr::get('http_method', $definition));
 
         $operation->name = OperationNameConverter::parseOperationName($operation);
 
         return $operation;
     }
 
+    /**
+     * Add default parameters
+     *
+     * @param string $httpMethod
+     */
     protected function addStandardParameters($httpMethod)
     {
         if ($httpMethod != 'GET') {
@@ -65,8 +102,10 @@ class Operation
         $this->addParameter('omit', 'query', false);
     }
 
-
-
+    /**
+     * Parse Parameters from Path
+     * @param string $path
+     */
     protected function parsePath($path)
     {
         $uriParams       = array();
@@ -83,6 +122,14 @@ class Operation
         $this->uri = strtr($path, $translateParams);
     }
 
+    /**
+     * Add a new parameter to definition
+     *
+     * @param string $name
+     * @param string $location
+     * @param boolean $required
+     * @param string|null $description
+     */
     protected function addParameter($name, $location, $required, $description = null)
     {
         if (strpos($name, ',') !== false) {
@@ -94,10 +141,12 @@ class Operation
             return;
         }
 
-
         $this->parameters[$name] = Parameter::build($location, $required, $description);
     }
 
+    /**
+     * @return string
+     */
     public function toJson()
     {
         return '';
