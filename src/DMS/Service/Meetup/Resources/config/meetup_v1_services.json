@@ -63,7 +63,7 @@
                     "required": false,
                     "description": "Return comments for the group with given topic and number"
                 },
-                " groupnum": {
+                "groupnum": {
                     "location": "query",
                     "required": false,
                     "description": "Return comments for the group with given topic and number"

@@ -1598,7 +1598,7 @@
                     "required": false,
                     "description": "Only return groups in the specified topic [one topic allowed]"
                 },
-                " groupnum": {
+                "groupnum": {
                     "location": "query",
                     "required": false,
                     "description": "Return the group with this topic and number"
@@ -1663,12 +1663,12 @@
                     "required": false,
                     "description": "A valid country code, city and for the US, State. limits the returned groups to those within radius miles"
                 },
-                " city": {
+                "city": {
                     "location": "query",
                     "required": false,
                     "description": "A valid country code, city and for the US, State. limits the returned groups to those within radius miles"
                 },
-                " state": {
+                "state": {
                     "location": "query",
                     "required": false,
                     "description": "A valid country code, city and for the US, State. limits the returned groups to those within radius miles"
@@ -2388,7 +2388,7 @@
                     "required": false,
                     "description": "Group identification by topic, deprecated"
                 },
-                " groupnum": {
+                "groupnum": {
                     "location": "query",
                     "required": false,
                     "description": "Group identification by topic, deprecated"

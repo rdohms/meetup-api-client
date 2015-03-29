@@ -132,6 +132,8 @@ class Operation
      */
     protected function addParameter($name, $location, $required, $description = null)
     {
+        $name = trim($name);
+
         if (strpos($name, ',') !== false) {
 
             foreach (explode(',', $name) as $subname) {
