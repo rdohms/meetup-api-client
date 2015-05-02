@@ -21,6 +21,7 @@ use DMS\Service\Meetup\Response\MultiResultResponse;
  * @method SingleResultResponse createEventComment(array $args = array())
  * @method SingleResultResponse createEventCommentFlag(array $args = array())
  * @method SingleResultResponse createEventRating(array $args = array())
+ * @method SingleResultResponse createGroupAbuseReports(array $args = array())
  * @method SingleResultResponse createGroupMemberApprovals(array $args = array())
  * @method SingleResultResponse createGroupPhoto(array $args = array())
  * @method SingleResultResponse createGroupTopics(array $args = array())

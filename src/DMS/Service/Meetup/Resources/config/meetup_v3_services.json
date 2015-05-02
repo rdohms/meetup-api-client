@@ -18,6 +18,26 @@
             "uri": "/batch",
             "notes": " You may supply a limited number of API requests, typically 1 to 4, in one batch request using the required \"requests\" parameter.\n Each of these individual batched requests will be tallied separately the same way they would when making individual requests.\n The batch request itself will not be tallied. As such, batch requests can not be rate limited.\n The only failures that you should account for are an authentication failure or a malformed JSON encoding of requests provided with the \"requests\" parameter.\n\n#### Composing batch requests\n\n Requests should be provided within a JSON-encoded array in the following format attached the `requests` parameter\n within a POST body\n\n<pre>\n [{\n   \"path\": \"/2/member/self\",\n   \"ref\":  \"me\",\n   \"params\": {\n     \"only\": \"name,id\"\n   }\n }]\n</pre>\n\n Only \"path\" is required for HTTP GET requests. \"path\" represents the API path for the method. \"ref\" provides a way to tag a request in a batch\n with a label that you can associated with its response in the body of the batch response. This will default to the\n provided \"path\". You may also supply a \"params\" key with a JSON object representing the parameters provided for the\n request. At this time only HTTP GET, DELETE, and POST requests are supported. You may specify one of these as a \"method\" property of the request.\n Methods requiring a multipart form POST are currently not supported. You may also supply headers on a per request basis by adding a \"headers\" field to the\n JSON object representing the request as key value pairs of strings.\n\n#### Interpreting batch responses\n\n A response to a batch request will be in the format\n\n<pre>\n [{\n   \"path\": \"/2/member/self\"\n   \"status\": 200,\n   \"ref\": \"me\",\n   \"body\": {\n     \"id\": 1234,\n     \"name\": \"Noah\"\n   },\n   \"headers\": {\n     \"key\": \"value\"\n    }\n }]\n</pre>\n\n \"path\" is the path of the method invoked. \"status\" represents the HTTP status code returned for the request.\n \"ref\" is the name provided for the inbound request. \"body\" is the JSON-encoded response from the given API request.\n \"headers\" is a JSON-encoded object representing the headers returned for that request.\n These requests may fail the same way they would when making individual requests. The response will indicate these\n failures.\n\n In order to preserve server resources and return batch responses within a reasonable amount of time, individual requests may will timeout\n if a response is not computed within a reasonable amount of time. This allows for some requests to fail and others to pass which is a nicer\n alternative to an all or nothing response timeout.\n A timed out request can be identified by inspecting its response's \"status\" field for a value of 504. A timed out response may look like.\n\n<pre>\n [{\n   \"status\" : 504,\n   \"body\" : {\n    \"errors\" : [{\"code\": \"request_timeout\", \"message\":\"request timed out\"}]\n   },\n   \"headers\" : { ... },\n   \"path\" : \"/end/point\",\n   \"ref\" : \"request_ref\"\n }]\n</pre>\n"
         },
+        "CreateGroupAbuseReports": {
+            "version": "3",
+            "name": "CreateGroupAbuseReports",
+            "httpMethod": "POST",
+            "parameters": {
+                "urlname": {
+                    "location": "uri",
+                    "required": true,
+                    "description": null
+                },
+                "type": {
+                    "location": "query",
+                    "required": false,
+                    "description": "A required identifier for type of abuse you are reporting. Acceptable values include graphic_content, harmful_activities, licensed_services, not_community, nudity, other, promotion_focus, violence"
+                }
+            },
+            "summary": "Submits a new abuse report for a target group. Abuse reports will be followed up on by our Community support team.",
+            "uri": "/{urlname}/abuse_reports",
+            "notes": "This method requires the oauth `reporting` scope for oauth-authenticated requests"
+        },
         "CreateGroupMemberApprovals": {
             "version": "3",
             "name": "CreateGroupMemberApprovals",
@@ -64,7 +84,7 @@
                     "description": "Comma-delimited list of topic ids to associate with group"
                 }
             },
-            "summary": "Associates topics with a given Meetup Group. Limited to organizers of the group. OAuth authenticated requests require an additional [group_edit](http://www.dev.meetup.com/meetup_api/auth/#oauth2-scopes) permission.",
+            "summary": "Associates topics with a given Meetup Group. Limited to organizers of the group. OAuth authenticated requests require an additional [group_edit](/meetup_api/auth/#oauth2-scopes) permission.",
             "uri": "/{urlname}/topics",
             "notes": "A group can have at most 15 topics"
         },
@@ -173,15 +193,15 @@
             "name": "CreateSelfAbuseReports",
             "httpMethod": "POST",
             "parameters": {
+                "member_id": {
+                    "location": "query",
+                    "required": false,
+                    "description": "A numeric identifier for the member being reported. If not provided, this will be infered by the author of the content associated with the provided `content_tag`"
+                },
                 "type": {
                     "location": "query",
                     "required": false,
                     "description": "A required identifier for type of abuse you are reporting. Acceptable values include abuse, copyright, dangerous, fake, harass, inappropriate, join, other, photo, spam"
-                },
-                "member_id": {
-                    "location": "query",
-                    "required": false,
-                    "description": "A required numeric identifier for the target member"
                 },
                 "comments": {
                     "location": "query",
@@ -196,7 +216,7 @@
                 "content_tag": {
                     "location": "query",
                     "required": false,
-                    "description": "An optional identifier for flagged content that identifies both the type and id, where possible, of the content reported. The type and id should be separated by a ':' character, e.g `event_comment:{event_comment_id}`. Valid content_tag types include boards, chapter, convo, convo_message, email, event_comment, event_photo, member_photo, ml, reply"
+                    "description": "An optional identifier for flagged content that identifies both the type and id, where possible, of the content reported. The type and id should be separated by a ':' character, e.g `event_comment:{event_comment_id}`. Valid content_tag types include boards, chapter, convo, convo_message, email, event_comment, event_photo, member_photo, ml, reply. If member_id is not provided, content_tag should be provided to imply member_id"
                 }
             },
             "summary": "Submits a new abuse report for a target member. Abuse reports will be followed up on by our Community support team.",
@@ -304,7 +324,7 @@
                     "description": "Comma-delimited list of topic ids to disassociate with group"
                 }
             },
-            "summary": "Disassociates topics with a given Meetup Group. Limited to organizers of the group. OAuth authenticated requests require an additional [group_edit](http://www.dev.meetup.com/meetup_api/auth/#oauth2-scopes) permission.",
+            "summary": "Disassociates topics with a given Meetup Group. Limited to organizers of the group. OAuth authenticated requests require an additional [group_edit](/meetup_api/auth/#oauth2-scopes) permission.",
             "uri": "/{urlname}/topics",
             "notes": "Groups must have at one topic. Attempts to remove all topics will result in a failed request"
         },
@@ -429,7 +449,7 @@
                     "description": "What members of the group will be called. Can be at most 32 characters"
                 }
             },
-            "summary": "Allows organizers to edit their Meetup group information. To change group topics, see the [add](/meetup_api/docs/:urlname/topics/#add) and [remove](/meetup_api/docs/:urlname/topics/#remove) topics endpoints. To change group photo use the [Group photo upload](/meetup_api/docs/2/group_photo/#create) endpoint. OAuth authenticated requests require an additional [group_edit](http://www.dev.meetup.com/meetup_api/auth/#oauth2-scopes) permission.",
+            "summary": "Allows organizers to edit their Meetup group information. To change group topics, see the [add](/meetup_api/docs/:urlname/topics/#add) and [remove](/meetup_api/docs/:urlname/topics/#remove) topics endpoints. To change group photo use the [Group photo upload](/meetup_api/docs/2/group_photo/#create) endpoint. OAuth authenticated requests require an additional [group_edit](/meetup_api/auth/#oauth2-scopes) permission.",
             "uri": "/{urlname}",
             "notes": "All parameters are optional."
         },
@@ -1053,15 +1073,15 @@
             "name": "GetRecommendedGroupTopics",
             "httpMethod": "GET",
             "parameters": {
-                "text": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Free form text search"
-                },
                 "page": {
                     "location": "query",
                     "required": false,
                     "description": null
+                },
+                "text": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Free form text search"
                 },
                 "lang": {
                     "location": "query",
@@ -1071,7 +1091,12 @@
                 "other_topics": {
                     "location": "query",
                     "required": false,
-                    "description": "A comma-delimited list of topic id's to inform recommendations"
+                    "description": "A comma-delimited list of topic ids to inform recommendations"
+                },
+                "exclude_topics": {
+                    "location": "query",
+                    "required": false,
+                    "description": "A comma-delimited list of topic ids to exclude from the recommendations"
                 },
                 "offset": {
                     "location": "query",
@@ -1099,7 +1124,7 @@
                     "description": null
                 }
             },
-            "summary": "Recommends suggestions for group topics based on a text search and optionally other topics",
+            "summary": "Recommends suggestions for group topics based on a text search or other topics",
             "uri": "/recommended/group_topics",
             "notes": null
         },
