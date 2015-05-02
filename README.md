@@ -22,7 +22,7 @@ The library is available through Composer, so its easy to get it. Just Run this:
 * POST, GET and DELETE methods
 
 ## Usage
-    
+
 To use the API Client simply instantiate the preferred client (key auth or OAuth), giving it the correct parameters
 
 ```php
@@ -44,7 +44,7 @@ $client = MeetupOAuthClient::factory($config);
 Invoke Commands using our `__call` method (auto-complete phpDocs are included)
 
 ```php
-<?php 
+<?php
 
 $client = MeetupKeyAuthClient::factory(array('key' => 'my-meetup-key'));
 
@@ -54,11 +54,11 @@ $response = $client->getRsvps(array('event_id' => 'the-event-id'));
 foreach ($response as $responseItem) {
     echo $responseItem['member']['name'] . PHP_EOL;
 }
-``` 
+```
 Or Use the `getCommand` method:
 
 ```php
-<?php 
+<?php
 
 $client = MeetupKeyAuthClient::factory(array('key' => 'my-meetup-key'));
 
@@ -106,6 +106,38 @@ $rsvp = $client->getRsvp(array('id' => 'rsvp-id'));
 echo "RSVP? " . $rsvp['response'];
 
 echo "StatusCode: " . $rsvp->getStatusCode();
+```
+
+## Rate Limiting
+
+A rate limiter is included in this client, its **enabled by default**, but can be disabled as described below. It uses a pre-defined factor (50% by default) to determine when it should start throttling the calls, by using a sleep slowdown. Operations are based on the `X-RateLimit-*` headers, to determine remaining limits and reset times.
+
+### Configuring Rate Limit Kick-in Factor
+
+To configure how late the back algorithm kicks in, you can set a custom rate factor:
+
+```php
+<?php
+
+$client = MeetupKeyAuthClient::factory(array(
+    'key' => 'my-meetup-key',
+    'rate_limit_factor' => 0.75
+));
+
+```
+
+### Disabling Rate Limiting
+
+If you do not wish to use Rate Limiting and deal with errors sent by the API yourself, use the config below.
+
+```php
+<?php
+
+$client = MeetupKeyAuthClient::factory(array(
+    'key' => 'my-meetup-key',
+    'disable_rate_limiting' => true
+));
+
 ```
 
 ## License

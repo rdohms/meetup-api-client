@@ -120,8 +120,6 @@ abstract class AbstractMeetupClient extends Client
      */
     public function __construct($baseUrl = '', $config = null)
     {
-        $this->addSubscriber(new RateLimitPlugin());
-
         parent::__construct($baseUrl, $config);
     }
 
@@ -185,6 +183,20 @@ abstract class AbstractMeetupClient extends Client
         }
 
         $client->setDescription($serviceDescriptions);
+    }
+
+    /**
+     * @param Client $client
+     * @param $config
+     */
+    public static function toggleRateLimitingPlugin(Client $client, $config)
+    {
+        if (array_key_exists('disable_rate_limiting', $config) && $config['disable_rate_limiting']) {
+            return;
+        }
+
+        $rateFactor = (array_key_exists('rate_limit_factor', $config))? $config['rate_limit_factor'] : null;
+        $client->addSubscriber(new RateLimitPlugin($rateFactor));
     }
 
     /**

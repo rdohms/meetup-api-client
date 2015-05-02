@@ -52,6 +52,7 @@ class MeetupKeyAuthClient extends AbstractMeetupClient
         $client->addSubscriber(new KeyAuthPlugin($configuration->get('key')));
 
         static::loadDefinitions($client);
+        static::toggleRateLimitingPlugin($client, $config);
 
         return $client;
     }
