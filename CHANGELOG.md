@@ -1,3 +1,9 @@
+2.0.0 / 2014-05-01
+==================
+ * Auto API Parity: added a new command to parse json docs and auto generate operation definitions
+ * Deprecated Anywhere API methods
+ * New Methods: v3 events, dashboard and abuse
+ * RateLimiting: added by dennisdegreef a plugin now automatically slows queries according to rate limit.
 
 1.2.0 / 2014-04-18 
 ==================

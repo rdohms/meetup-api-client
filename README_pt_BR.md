@@ -53,7 +53,7 @@ Chame os *Commands* usando nosso método `__call` (phpDocs para auto-complete es
 $client = MeetupKeyAuthClient::factory(array('key' => 'my-meetup-key'));
 
 // Use nosso método __call (auto-complete fornecido)
-$response = $client->getRSVPs(array('event_id' => 'the-event-id'));
+$response = $client->getRsvps(array('event_id' => 'the-event-id'));
 
 foreach ($response as $responseItem) {
     echo $responseItem['member']['name'] . PHP_EOL;
@@ -67,7 +67,7 @@ Ou use o método `getCommand`:
 $client = MeetupKeyAuthClient::factory(array('key' => 'my-meetup-key'));
 
 //Recuperando o Command do Guzzle
-$command = $client->getCommand('GetRSVPs', array('event_id' => 'the-event-id'));
+$command = $client->getCommand('GetRsvps', array('event_id' => 'the-event-id'));
 $command->prepare();
 
 $response = $command->execute();
@@ -88,7 +88,7 @@ Quando está consultando coleções (collections), o cliente encapsula o resulta
 ```php
 <?php
 
-$rsvps = $client->getRSVPs(array('event_id' => 'the-event-id'));
+$rsvps = $client->getRsvps(array('event_id' => 'the-event-id'));
 
 foreach ($rsvps as $rsvp) {
     echo $rsvp['member']['name'] . PHP_EOL;
@@ -105,9 +105,9 @@ Quando está buscando informação de um recurso único, o cliente irá encapsul
 ```php
 <?php
 
-$rsvp = $client->getRSVP(array('id' => 'rsvp-id'));
+$rsvp = $client->getRsvp(array('id' => 'rsvp-id'));
 
-echo "RSVP? " . $rsvp['response'];
+echo "Rsvp? " . $rsvp['response'];
 
 echo "StatusCode: " . $rsvp->getStatusCode();
 ```

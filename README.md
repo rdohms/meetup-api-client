@@ -49,7 +49,7 @@ Invoke Commands using our `__call` method (auto-complete phpDocs are included)
 $client = MeetupKeyAuthClient::factory(array('key' => 'my-meetup-key'));
 
 // Use our __call method (auto-complete provided)
-$response = $client->getRSVPs(array('event_id' => 'the-event-id'));
+$response = $client->getRsvps(array('event_id' => 'the-event-id'));
 
 foreach ($response as $responseItem) {
     echo $responseItem['member']['name'] . PHP_EOL;
@@ -63,7 +63,7 @@ Or Use the `getCommand` method:
 $client = MeetupKeyAuthClient::factory(array('key' => 'my-meetup-key'));
 
 //Retrieve the Command from Guzzle
-$command = $client->getCommand('GetRSVPs', array('event_id' => 'the-event-id'));
+$command = $client->getCommand('GetRsvps', array('event_id' => 'the-event-id'));
 $command->prepare();
 
 $response = $command->execute();
@@ -84,7 +84,7 @@ When querying for collections the client wraps the result in a `MultiResultRespo
 ```php
 <?php
 
-$rsvps = $client->getRSVPs(array('event_id' => 'the-event-id'));
+$rsvps = $client->getRsvps(array('event_id' => 'the-event-id'));
 
 foreach ($rsvps as $rsvp) {
     echo $rsvp['member']['name'] . PHP_EOL;
@@ -101,7 +101,7 @@ When getting information of a single resource the client will wrap that in a `Si
 ```php
 <?php
 
-$rsvp = $client->getRSVP(array('id' => 'rsvp-id'));
+$rsvp = $client->getRsvp(array('id' => 'rsvp-id'));
 
 echo "RSVP? " . $rsvp['response'];
 
