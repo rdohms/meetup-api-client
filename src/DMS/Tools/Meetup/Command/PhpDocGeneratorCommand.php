@@ -13,7 +13,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class PhpDocGeneratorCommand extends Command
 {
     const RESPONSE_SINGLE = 'SingleResultResponse';
-    const RESPONSE_MULTI  = 'MultiResultResponse';
+    const RESPONSE_MULTI  = 'MultiResultResponse ';
 
     /**
      * @var InputInterface
@@ -59,15 +59,20 @@ class PhpDocGeneratorCommand extends Command
 
         $operations = $serviceDescriptions->getOperations();
 
+        $phpDocs = array();
         foreach ($operations as $operation) {
             /** @var $operation Operation */
-            $output->writeln(
-                sprintf(
-                    '* @method %s %s(array $args = array())',
-                    ($this->isMulti($operation)) ? self::RESPONSE_MULTI : self::RESPONSE_SINGLE,
-                    lcfirst($operation->getName())
-                )
+            $phpDocs[$operation->getName()] = sprintf(
+                '* @method %s %s(array $args = array())',
+                ($this->isMulti($operation)) ? self::RESPONSE_MULTI : self::RESPONSE_SINGLE,
+                lcfirst($operation->getName())
             );
+        }
+
+        ksort($phpDocs);
+
+        foreach ($phpDocs as $phpDoc) {
+            $this->output->writeln($phpDoc);
         }
 
     }

@@ -1,0 +1,337 @@
+{
+    "name": "Meetup",
+    "apiVersion": "stream",
+    "description": "Meetup API Stream methods",
+    "operations": {
+        "GetEventCommentsStream": {
+            "version": "stream",
+            "name": "GetEventCommentsStream",
+            "httpMethod": "GET",
+            "parameters": {
+                "since_mtime": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Return recent Event Comments with an mtime greater than the supplied time, in milliseconds since the epoch"
+                },
+                "since_count": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Request that some number of recent messages be sent immediately, if available. May not be specified in the same request as since_mtime."
+                },
+                "event_id": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Limit notifications to a specific event id. Use alphanumeric ids for repeating events."
+                },
+                "page": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "offset": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "desc": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "order": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "only": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "omit": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                }
+            },
+            "summary": "\nLive HTTP stream of Event Comments  within public meetup groups. This method uses [chunked\ntransfer encoding](http://en.wikipedia.org/wiki/Chunked_transfer_encoding)\nto maintain a persistent connection with the client. This connection will only be\nterminated for server maintenance or a connection error.\n    ",
+            "uri": "/2/event_comments",
+            "notes": "This method does not require authentication, or any parameters. Applications should\n                           only need a single connection to the stream, and at most 10 connections are allowed\n                           per client IP address."
+        },
+        "GetOpenEventsStream": {
+            "version": "stream",
+            "name": "GetOpenEventsStream",
+            "httpMethod": "GET",
+            "parameters": {
+                "since_mtime": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Return events with an mtime greater than the supplied time, in milliseconds since the epoch"
+                },
+                "since_count": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Request that some number of recent messages be sent immediately, if available. May not be specified in the same request as since_mtime."
+                },
+                "page": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "offset": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "desc": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "order": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "only": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "omit": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                }
+            },
+            "summary": "\nLive HTTP stream of events within public Meetup groups. This method uses [chunked\ntransfer encoding](http://en.wikipedia.org/wiki/Chunked_transfer_encoding)\nto maintain a persistent connection with the client. This connection will only be\nterminated for server maintenance or a connection error.\n      ",
+            "uri": "/2/open_events",
+            "notes": "This method does not require authentication, or any parameters. Applications should\n                           only need a single connection to the stream, and at most 10 connections are allowed\n                           per client IP address."
+        },
+        "GetOpenVenuesStream": {
+            "version": "stream",
+            "name": "GetOpenVenuesStream",
+            "httpMethod": "GET",
+            "parameters": {
+                "since_mtime": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Return recent open venues with an mtime greater then the supplied time, in milliseconds since the epoch"
+                },
+                "since_count": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Request that some number of recent messages be sent immediately, if available. May not be specified in the same request as since_mtime."
+                },
+                "trickle": {
+                    "location": "query",
+                    "required": false,
+                    "description": "When supplied with a request, the Meetup API will push your client the entire Meetup database of public venues in batches of 512"
+                },
+                "page": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "offset": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "desc": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "order": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "only": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "omit": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                }
+            },
+            "summary": "\nLive HTTP stream of the creation and modification of public Meetup venues using\n[chunked encoding](http://en.wikipedia.org/wiki/Chunked_transfer_encoding)\nto maintian a persistent connection with a client. The connection will only be\nterminiated for server maintenance or a connection error. It is suitable for\nlow-level HTTP clients rather than web browsers.\n      ",
+            "uri": "/2/open_venues",
+            "notes": "This method does not require authentication, or any parameters. Applications should\n                           only need a single connection to the stream, and at most 10 connections are allowed\n                           per client IP address. This method can also be used to download all of Meetup's public venues by passing in the URL request parameter 'trickle'"
+        },
+        "GetPhotosStream": {
+            "version": "stream",
+            "name": "GetPhotosStream",
+            "httpMethod": "GET",
+            "parameters": {
+                "since_mtime": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Return recent photos with an mtime greater then the supplied time, in millisends since the epoch"
+                },
+                "since_count": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Request that some number of recent messages be sent immediately, if available. May not be specified in the same request as since_mtime."
+                },
+                "page": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "offset": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "desc": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "order": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "only": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "omit": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                }
+            },
+            "summary": "\nThis method serves photo notifications using\n[chunked encoding](http://en.wikipedia.org/wiki/Chunked_transfer_encoding)\nto maintian a persistent connection with a client. The connection will only be\nterminiated for server maintenance or a connection error. It is suitable for\nlow-level HTTP clients rather than web browsers.\n      ",
+            "uri": "/2/photos",
+            "notes": null
+        },
+        "GetRsvpsStream": {
+            "version": "stream",
+            "name": "GetRsvpsStream",
+            "httpMethod": "GET",
+            "parameters": {
+                "since_mtime": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Return recent RSVP with an mtime greater than the supplied time, in milliseconds since the epoch"
+                },
+                "since_count": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Request that some number of recent messages be sent immediately, if available. May not be specified in the same request as since_mtime."
+                },
+                "page": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "offset": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "desc": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "order": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "only": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "omit": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                }
+            },
+            "summary": "\nLive HTTP stream of RSVPs within public Meetup groups. This method uses [chunked \ntransfer encoding](http://en.wikipedia.org/wiki/Chunked_transfer_encoding) \nto maintain a persistent connection with the client. This connection will only be \nterminated for server maintenance or a connection error.\n    ",
+            "uri": "/2/rsvps",
+            "notes": "This method does not require authentication, or any parameters. Applications should\n                           only need a single connection to the stream, and at most 10 connections are allowed\n                           per client IP address."
+        },
+        "WebSocketEventCommentsStream": {
+            "version": "stream",
+            "name": "WebSocketEventCommentsStream",
+            "httpMethod": "WS",
+            "parameters": {
+                "since_mtime": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Return recent Event Comments with an mtime greater than the supplied time, in milliseconds since the epoch"
+                },
+                "since_count": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Request that some number of recent messages be sent immediately, if available. May not be specified in the same request as since_mtime."
+                },
+                "event_id": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Limit notifications to a specific event id. Use alphanumeric ids for repeating events."
+                }
+            },
+            "summary": "\nFor browsers that support it, [WebSockets](http://dev.w3.org/html5/websockets/) is a more\nefficient alternative to the long-polling stream. This is a **push only** endpoint and will discard\nany messages received from the client after the socket is open.\n\nBecause browser support for WebSockets is limited, we recommend that you consume this stream\nthrough the [must.js](https://github.com/meetup/must.js#readme) client, which can fallback to long-polling.\n    ",
+            "uri": "/2/event_comments",
+            "notes": "The full URL for this method is **`ws://stream.meetup.com/2/event_comments`**"
+        },
+        "WebSocketPhotosStream": {
+            "version": "stream",
+            "name": "WebSocketPhotosStream",
+            "httpMethod": "WS",
+            "parameters": {
+                "since_mtime": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Return recent photos with an mtime greater then the supplied time, in millisends since the epoch"
+                },
+                "since_count": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Request that some number of recent messages be sent immediately, if available. May not be specified in the same request as since_mtime."
+                }
+            },
+            "summary": "\nFor browsers that support it, [WebSockets](http://dev.w3.org/html5/websockets/) is a more\nefficient alternative to the long-polling stream. This is a **push only** endpoint and will discard\nany messages received from the client after the socket is open.\n\nBecause browser support for WebSockets is limited, we recommend that you consume this stream\nthrough the [must.js](https://github.com/meetup/must.js#readme) client, which can fallback to long-polling.\n    ",
+            "uri": "/2/photos",
+            "notes": "The full url for this method is **`ws://stream.meetup.com/2/photos`**"
+        },
+        "WebSocketRsvpsStream": {
+            "version": "stream",
+            "name": "WebSocketRsvpsStream",
+            "httpMethod": "WS",
+            "parameters": {
+                "since_mtime": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Return recent RSVPs with an mtime greater than the supplied time, in milliseconds since the epoch"
+                },
+                "since_count": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Request that some number of recent messages be sent immediately, if available. May not be specified in the same request as since_mtime."
+                },
+                "event_id": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Limit notifications to a specific event id. Use alphanumeric ids for repeating events."
+                }
+            },
+            "summary": "\nFor browsers that support it, [WebSockets](http://dev.w3.org/html5/websockets/) is a more\nefficient alternative to the long-polling stream. This is a **push only** endpoint and will discard\nany messages received from the client after the socket is open.\n\nBecause browser support for WebSockets is limited, we recommend that you consume this stream\nthrough the [must.js](https://github.com/meetup/must.js#readme) client, which can fallback to long-polling.\n    ",
+            "uri": "/2/rsvps",
+            "notes": "The full URL for this method is **`ws://stream.meetup.com/2/rsvps`**"
+        }
+    }
+}

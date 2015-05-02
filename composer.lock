@@ -1,9 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
     ],
-    "hash": "897eb370f9f2d147353becd2c1fa2f0a",
+    "hash": "5c2173f08cd48e130cceea60c6582b3e",
     "packages": [
         {
             "name": "guzzle/guzzle",
@@ -153,6 +154,51 @@
         }
     ],
     "packages-dev": [
+        {
+            "name": "mathiasgrimm/arraypath",
+            "version": "v1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mathiasgrimm/arraypath.git",
+                "reference": "0fddb6014e7e50f6406f39d50075a327a76759fe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mathiasgrimm/arraypath/zipball/0fddb6014e7e50f6406f39d50075a327a76759fe",
+                "reference": "0fddb6014e7e50f6406f39d50075a327a76759fe",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MathiasGrimm\\ArrayPath\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Mathias Grimm",
+                    "email": "mathiasgrimm@gmail.com",
+                    "homepage": "http://phpEmpregos.com"
+                }
+            ],
+            "description": "php array utility to manipulate array in a xpath way",
+            "homepage": "https://github.com/mathiasgrimm/arraypath/",
+            "keywords": [
+                "Xpath",
+                "array",
+                "array_key_exists_recursive",
+                "php",
+                "util"
+            ],
+            "time": "2015-03-22 17:26:20"
+        },
         {
             "name": "phpunit/php-code-coverage",
             "version": "1.2.13",
@@ -678,6 +724,63 @@
             "time": "2013-09-25 09:22:53"
         },
         {
+            "name": "symfony/var-dumper",
+            "version": "v2.6.4",
+            "target-dir": "Symfony/Component/VarDumper",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/var-dumper.git",
+                "reference": "c3d5a36c3e3298bd8b070488fba5537174647353"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/c3d5a36c3e3298bd8b070488fba5537174647353",
+                "reference": "c3d5a36c3e3298bd8b070488fba5537174647353",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "suggest": {
+                "ext-symfony_debug": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.6-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "Resources/functions/dump.php"
+                ],
+                "psr-0": {
+                    "Symfony\\Component\\VarDumper\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                },
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                }
+            ],
+            "description": "Symfony mechanism for exploring and dumping PHP variables",
+            "homepage": "http://symfony.com",
+            "keywords": [
+                "debug",
+                "dump"
+            ],
+            "time": "2015-02-02 16:32:08"
+        },
+        {
             "name": "symfony/yaml",
             "version": "v2.3.6",
             "target-dir": "Symfony/Component/Yaml",
@@ -725,17 +828,11 @@
             "time": "2013-09-22 18:04:39"
         }
     ],
-    "aliases": [
-
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [
-
-    ],
-    "platform": [
-
-    ],
-    "platform-dev": [
-
-    ]
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
 }

@@ -5,6 +5,7 @@
         "meetup_oauth.json",
         "meetup_v1_services.json",
         "meetup_v2_services.json",
-        "meetup_v3_services.json"
+        "meetup_v3_services.json",
+        "meetup_vstream_services.json"
     ]
 }
