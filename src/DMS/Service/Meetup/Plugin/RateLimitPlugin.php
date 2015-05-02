@@ -55,6 +55,18 @@ class RateLimitPlugin implements EventSubscriberInterface
     private $rateLimitReset = 0;
 
     /**
+     * Constructor
+     *
+     * @param float $rateLimitFactor
+     */
+    public function __construct($rateLimitFactor = null)
+    {
+        if ($rateLimitFactor !== null) {
+            $this->rateLimitFactor = $rateLimitFactor;
+        }
+    }
+
+    /**
      * Returns an array of event names this subscriber wants to listen to.
      *
      * The array keys are event names and the value can be:
@@ -77,7 +89,7 @@ class RateLimitPlugin implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            'request.before_send' => array('onRequestBeforeSend', -1000),
+            'request.before_send' => array('onBeforeSend', -1000),
             'request.success' => array('onRequestSuccess', -1000),
         );
     }
@@ -92,16 +104,21 @@ class RateLimitPlugin implements EventSubscriberInterface
     {
         /** @var Response $response */
         $response = $event['response'];
-        $responseHeaders = $response->getHeaders()->toArray();
 
-        if (!isset($responseHeaders['X-RateLimit-Limit'])) {
+        if (! $response->hasHeader('X-RateLimit-Limit')) {
             $this->rateLimitEnabled = false;
             return;
         }
 
-        $this->rateLimitMax = $responseHeaders['X-RateLimit-Limit'][0];
-        $this->rateLimitRemaining = $responseHeaders['X-RateLimit-Remaining'][0];
-        $this->rateLimitReset = $responseHeaders['X-RateLimit-Remaining'][0];
+        $this->rateLimitMax = (string) $response->getHeader('X-RateLimit-Limit');
+
+        if ($response->hasHeader('X-RateLimit-Remaining')) {
+            $this->rateLimitRemaining = (string) $response->getHeader('X-RateLimit-Remaining');
+        }
+
+        if ($response->hasHeader('X-RateLimit-Reset')) {
+            $this->rateLimitReset = (string) $response->getHeader('X-RateLimit-Reset');
+        }
 
         // Prevent division by zero
         if ($this->rateLimitMax == 0) {
@@ -115,18 +132,25 @@ class RateLimitPlugin implements EventSubscriberInterface
      * Performs slowdown when rate limiting is enabled and nearing it's limit
      *
      */
-    public function onRequestBeforeSend()
+    public function onBeforeSend()
     {
         $currentAmount = $this->rateLimitMax - $this->rateLimitRemaining;
         $currentFactor = $currentAmount / $this->rateLimitMax;
 
         // Perform slowdown if the factor is hit
         if ($currentFactor > $this->rateLimitFactor) {
-            $microsecondsPerRequestRemaining = $this->rateLimitReset / $this->rateLimitRemaining * 1000000;
-
-            usleep($microsecondsPerRequestRemaining);
+            $this->slowdownRequests();
         }
 
         return;
+    }
+
+    /**
+     * Implements a wait in the code to space out requests to respect the current limit and the reset time.
+     */
+    protected function slowdownRequests()
+    {
+        $microsecondsPerRequestRemaining = $this->rateLimitReset / $this->rateLimitRemaining * 1000000;
+        usleep($microsecondsPerRequestRemaining);
     }
 }

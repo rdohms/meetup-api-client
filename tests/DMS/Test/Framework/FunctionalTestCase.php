@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Framework;
+namespace DMS\Test\Framework;
 
 use DMS\Service\Meetup\MeetupKeyAuthClient;
 use PHPUnit_Framework_TestCase;

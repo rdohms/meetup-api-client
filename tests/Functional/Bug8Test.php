@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Functional;
+namespace DMS\Functional;
 
-use Test\Framework\FunctionalTestCase;
+use DMS\Test\Framework\FunctionalTestCase;
 
 class Bug8Test extends FunctionalTestCase
 {

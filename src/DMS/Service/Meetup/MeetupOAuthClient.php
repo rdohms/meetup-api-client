@@ -65,6 +65,7 @@ class MeetupOAuthClient extends AbstractMeetupClient
         );
 
         static::loadDefinitions($client);
+        static::toggleRateLimitingPlugin($client, $config);
 
         return $client;
     }
