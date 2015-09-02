@@ -17,7 +17,7 @@ class FunctionalTestCase extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $configFile = __DIR__ . '/../../api_key.ini';
+        $configFile = __DIR__ . '/../../../api_key.ini';
 
         if (! file_exists($configFile)) {
             $this->markTestSkipped('Functional Tests require an Oauth Key');
