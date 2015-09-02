@@ -18,7 +18,7 @@
         "symfony/css-selector": "~2.2",
         "symfony/dom-crawler": "~2.2",
         "symfony/console": "~2.2",
-        "phpunit/phpunit": "~3.7",
+        "phpunit/phpunit": "^4.8",
         "symfony/var-dumper": "~2.6",
         "mathiasgrimm/arraypath": "~1.3"
     },
