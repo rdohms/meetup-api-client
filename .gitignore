@@ -2,3 +2,4 @@ vendor/
 tests/_reports
 tests/api_key.ini
 docs/meetup-api-docs
+phpunit.xml
