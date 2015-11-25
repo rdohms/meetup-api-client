@@ -156,7 +156,8 @@ abstract class AbstractMeetupClient extends Client
         $config = Collection::fromConfig($config, $default, $required);
 
         $standardHeaders = array(
-            'Accept-Charset' => 'utf-8'
+            'Accept-Charset' => 'utf-8',
+            'Accept' => 'application/json',
         );
 
         $requestOptions = array(
