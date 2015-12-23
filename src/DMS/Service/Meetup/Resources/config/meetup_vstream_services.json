@@ -23,6 +23,11 @@
                     "required": false,
                     "description": "Limit notifications to a specific event id. Use alphanumeric ids for repeating events."
                 },
+                "api_version": {
+                    "location": "query",
+                    "required": false,
+                    "description": "2"
+                },
                 "page": {
                     "location": "query",
                     "required": false,
@@ -73,6 +78,11 @@
                     "required": false,
                     "description": "Request that some number of recent messages be sent immediately, if available. May not be specified in the same request as since_mtime."
                 },
+                "api_version": {
+                    "location": "query",
+                    "required": false,
+                    "description": "2"
+                },
                 "page": {
                     "location": "query",
                     "required": false,
@@ -122,6 +132,11 @@
                     "location": "query",
                     "required": false,
                     "description": "Request that some number of recent messages be sent immediately, if available. May not be specified in the same request as since_mtime."
+                },
+                "api_version": {
+                    "location": "query",
+                    "required": false,
+                    "description": "2"
                 },
                 "trickle": {
                     "location": "query",
@@ -178,6 +193,11 @@
                     "required": false,
                     "description": "Request that some number of recent messages be sent immediately, if available. May not be specified in the same request as since_mtime."
                 },
+                "api_version": {
+                    "location": "query",
+                    "required": false,
+                    "description": "2"
+                },
                 "page": {
                     "location": "query",
                     "required": false,
@@ -227,6 +247,11 @@
                     "location": "query",
                     "required": false,
                     "description": "Request that some number of recent messages be sent immediately, if available. May not be specified in the same request as since_mtime."
+                },
+                "api_version": {
+                    "location": "query",
+                    "required": false,
+                    "description": "2"
                 },
                 "page": {
                     "location": "query",
@@ -282,6 +307,11 @@
                     "location": "query",
                     "required": false,
                     "description": "Limit notifications to a specific event id. Use alphanumeric ids for repeating events."
+                },
+                "api_version": {
+                    "location": "query",
+                    "required": false,
+                    "description": "2"
                 }
             },
             "summary": "\nFor browsers that support it, [WebSockets](http://dev.w3.org/html5/websockets/) is a more\nefficient alternative to the long-polling stream. This is a **push only** endpoint and will discard\nany messages received from the client after the socket is open.\n\nBecause browser support for WebSockets is limited, we recommend that you consume this stream\nthrough the [must.js](https://github.com/meetup/must.js#readme) client, which can fallback to long-polling.\n    ",
@@ -302,6 +332,11 @@
                     "location": "query",
                     "required": false,
                     "description": "Request that some number of recent messages be sent immediately, if available. May not be specified in the same request as since_mtime."
+                },
+                "api_version": {
+                    "location": "query",
+                    "required": false,
+                    "description": "2"
                 }
             },
             "summary": "\nFor browsers that support it, [WebSockets](http://dev.w3.org/html5/websockets/) is a more\nefficient alternative to the long-polling stream. This is a **push only** endpoint and will discard\nany messages received from the client after the socket is open.\n\nBecause browser support for WebSockets is limited, we recommend that you consume this stream\nthrough the [must.js](https://github.com/meetup/must.js#readme) client, which can fallback to long-polling.\n    ",
@@ -327,6 +362,11 @@
                     "location": "query",
                     "required": false,
                     "description": "Limit notifications to a specific event id. Use alphanumeric ids for repeating events."
+                },
+                "api_version": {
+                    "location": "query",
+                    "required": false,
+                    "description": "2"
                 }
             },
             "summary": "\nFor browsers that support it, [WebSockets](http://dev.w3.org/html5/websockets/) is a more\nefficient alternative to the long-polling stream. This is a **push only** endpoint and will discard\nany messages received from the client after the socket is open.\n\nBecause browser support for WebSockets is limited, we recommend that you consume this stream\nthrough the [must.js](https://github.com/meetup/must.js#readme) client, which can fallback to long-polling.\n    ",

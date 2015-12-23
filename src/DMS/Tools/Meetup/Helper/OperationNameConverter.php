@@ -91,6 +91,10 @@ class OperationNameConverter
             return 'webSocket';
         }
 
+        if ($method == 'patch') {
+            return 'edit';
+        }
+
         return '';
     }
 }

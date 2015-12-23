@@ -2,6 +2,7 @@
 
 namespace DMS\Tools\Meetup\Command;
 
+use DMS\Tools\Meetup\Helper\DuplicateResolver;
 use DMS\Tools\Meetup\ValueObject\Api;
 use DMS\Tools\Meetup\ValueObject\Operation;
 use Guzzle\Http\Client;
@@ -123,6 +124,8 @@ class DocsToJsonCommand extends Command
 
             $this->apis[$operation->version]->addOperation($operation);
         }
+
+        DuplicateResolver::processApis($this->apis);
 
         if ($this->input->getOption('debug-names')) {
             $nameConversionTable->render($this->output);
