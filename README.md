@@ -73,6 +73,8 @@ foreach ($response as $responseItem) {
 }
 ```
 
+For a list of all the available commands, see the [Meetup API documentation on ReadTheDocs](http://meetup-api.readthedocs.org/en/latest/meetup_api.html#api-client-method-index)
+
 ## Response
 
 This wrapper implements two types of custom responses to facilitate the usage of the results directly.
