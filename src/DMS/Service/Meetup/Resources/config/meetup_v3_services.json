@@ -773,6 +773,61 @@
             "uri": "/{urlname}",
             "notes": "Only the path param :urlname is required"
         },
+        "GetGroupEvents": {
+            "version": "3",
+            "name": "GetGroupEvents",
+            "httpMethod": "GET",
+            "parameters": {
+                "urlname": {
+                    "location": "uri",
+                    "required": true,
+                    "description": null
+                },
+                "scroll": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "page": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "fields": {
+                    "location": "query",
+                    "required": false,
+                    "description": "A comma-delimited list of optional fields to append to the response"
+                },
+                "status": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "offset": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "desc": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "only": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "omit": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                }
+            },
+            "summary": "Gets a listing of all Meetup Events hosted by a target group",
+            "uri": "/{urlname}/events",
+            "notes": "Only the path param :urlname is required"
+        },
         "GetGroupBoards": {
             "version": "3",
             "name": "GetGroupBoards",

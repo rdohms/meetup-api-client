@@ -75,6 +75,7 @@ use DMS\Service\Meetup\Response\MultiResultResponse;
  * @method MultiResultResponse  getGroup(array $args = array())
  * @method MultiResultResponse  getGroupBoards(array $args = array())
  * @method MultiResultResponse  getGroupBoardsDiscussions(array $args = array())
+ * @method MultiResultResponse  getGroupEvents(array $args = array())
  * @method SingleResultResponse getGroupEventsAttendance(array $args = array())
  * @method MultiResultResponse  getGroupSimilarGroups(array $args = array())
  * @method MultiResultResponse  getGroupVenues(array $args = array())
