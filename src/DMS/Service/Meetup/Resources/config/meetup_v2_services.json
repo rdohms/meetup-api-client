@@ -806,7 +806,7 @@
                 "lang": {
                     "location": "query",
                     "required": false,
-                    "description": "Language preference used on the site. Valid values are en_us, it, es, fr, de, pt, ja"
+                    "description": "Language preference used on the site. Valid values are en-us, en-au, de-de, es, es-es, fr-fr, it-it, pt-br, ja-jp, en_us, en_au, de_de, es, es_es, fr_fr, it_it, pt_br, ja_jp, en, en, de, es, es, fr, it, pt, ja"
                 },
                 "radius": {
                     "location": "query",
