@@ -54,6 +54,18 @@ class Api
     }
 
     /**
+     * @param $oldName
+     * @param $newName
+     */
+    public function renameOperation($oldName, $newName)
+    {
+        $this->operations[$oldName]->name = $newName;
+        $this->operations[$newName] = $this->operations[$oldName];
+
+        unset($this->operations[$oldName]);
+    }
+
+    /**
      * Outputs Guzzle Json structure
      *
      * @return string
@@ -61,5 +73,22 @@ class Api
     public function toJson()
     {
         return json_encode($this, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+    }
+
+    /**
+     * @param string $name
+     * @return Operation
+     */
+    public function getOperation($name)
+    {
+        return $this->operations[$name];
+    }
+
+    /**
+     * @return array
+     */
+    public function extractMethodNames()
+    {
+        return array_keys($this->operations);
     }
 }
