@@ -141,14 +141,4 @@ class MultiResultResponse extends SelfParsingResponse implements \Countable, \It
     {
         reset($this->data);
     }
-
-    /**
-     * Returns true array instance
-     *
-     * @return array
-     */
-    public function toArray()
-    {
-        return $this->data;
-    }
 }

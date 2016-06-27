@@ -66,7 +66,7 @@ class SelfParsingResponse extends Response
      */
     public function parseBodyContent()
     {
-        if (strpos($this->getContentType(), 'json') === false) {
+        if (! $this->isContentType('json')) {
             parse_str($this->getBody(true), $array);
 
             return $array;
