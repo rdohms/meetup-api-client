@@ -36,16 +36,12 @@ class MeetupResponseParser extends DefaultResponseParser
     {
         $response = $command->getRequest()->getResponse();
 
-        if ($response === null) {
-            return;
+        // If there is no response or Body, just return it
+        if ($response === null || !$response->getBody()) {
+            return $response;
         }
 
         $responseArray = $this->parseResponseIntoArray($response);
-
-        // If there is no Body, just return the Response
-        if (!$response->getBody()) {
-            return $response;
-        }
 
         // Handle multi-result responses
         if (array_key_exists('results', $responseArray)) {
@@ -78,9 +74,7 @@ class MeetupResponseParser extends DefaultResponseParser
      */
     protected function createSingleResultResponse($response)
     {
-        $response = new SingleResultResponse($response->getStatusCode(), $response->getHeaders(), $response->getBody());
-
-        return $response;
+        return new SingleResultResponse($response->getStatusCode(), $response->getHeaders(), $response->getBody());
     }
 
     /**
@@ -92,7 +86,7 @@ class MeetupResponseParser extends DefaultResponseParser
      */
     protected function parseResponseIntoArray($response)
     {
-        if (strpos($response->getContentType(), 'json') === false) {
+        if (!$response->isContentType('json')) {
             parse_str($response->getBody(true), $array);
 
             return $array;

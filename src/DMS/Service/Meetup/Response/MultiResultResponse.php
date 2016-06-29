@@ -2,32 +2,28 @@
 
 namespace DMS\Service\Meetup\Response;
 
+use ArrayIterator;
 use Closure;
 use Guzzle\Http\EntityBody;
 
-class MultiResultResponse extends SelfParsingResponse implements \Countable, \Iterator
+class MultiResultResponse extends SelfParsingResponse implements \Countable, \IteratorAggregate
 {
+    /**
+     * Metadata returned by API.
+     *
+     * @var array
+     */
+    private $metadata;
+
     /**
      * Makes Meetup API Data available on the Data attribute.
      */
-    public function parseMeetupApiData()
+    protected function parseMeetupApiData()
     {
         $responseBody = $this->parseBodyContent();
-        $this->setData($responseBody['results']);
-        $this->setMetadata($responseBody['meta']);
-    }
 
-    /**
-     * (PHP 5 &gt;= 5.1.0)<br/>
-     * Count elements of an object.
-     *
-     * @link http://php.net/manual/en/countable.count.php
-     *
-     * @return int The custom count as an integer.
-     */
-    public function count()
-    {
-        return count($this->data);
+        $this->data = $responseBody['results'];
+        $this->metadata = $responseBody['meta'];
     }
 
     /**
@@ -42,7 +38,7 @@ class MultiResultResponse extends SelfParsingResponse implements \Countable, \It
     {
         $clone = clone $this;
 
-        $clone->setData(array_map($func, $this->data));
+        $clone->data = array_map($func, $this->data);
         $clone->updateBody();
 
         return $clone;
@@ -60,7 +56,7 @@ class MultiResultResponse extends SelfParsingResponse implements \Countable, \It
     {
         $clone = clone $this;
 
-        $clone->setData(array_filter($this->data, $p));
+        $clone->data = array_filter($this->data, $p);
         $clone->updateBody();
 
         return $clone;
@@ -98,68 +94,26 @@ class MultiResultResponse extends SelfParsingResponse implements \Countable, \It
     }
 
     /**
-     * (PHP 5 &gt;= 5.0.0)<br/>
-     * Return the current element.
-     *
-     * @link http://php.net/manual/en/iterator.current.php
-     *
-     * @return mixed Can return any type.
+     * @return array
      */
-    public function current()
+    public function getMetadata()
     {
-        return current($this->data);
+        return $this->metadata;
     }
 
     /**
-     * (PHP 5 &gt;= 5.0.0)<br/>
-     * Move forward to next element.
-     *
-     * @link http://php.net/manual/en/iterator.next.php
-     *
-     * @return void Any returned value is ignored.
+     * {@inheritdoc}
      */
-    public function next()
+    public function count()
     {
-        next($this->data);
+        return count($this->data);
     }
 
     /**
-     * (PHP 5 &gt;= 5.0.0)<br/>
-     * Return the key of the current element.
-     *
-     * @link http://php.net/manual/en/iterator.key.php
-     *
-     * @return mixed scalar on success, or null on failure.
+     * {@inheritdoc}
      */
-    public function key()
+    public function getIterator()
     {
-        return key($this->data);
-    }
-
-    /**
-     * (PHP 5 &gt;= 5.0.0)<br/>
-     * Checks if current position is valid.
-     *
-     * @link http://php.net/manual/en/iterator.valid.php
-     *
-     * @return bool The return value will be casted to boolean and then evaluated.
-     *              Returns true on success or false on failure.
-     */
-    public function valid()
-    {
-        return false !== current($this->data);
-    }
-
-    /**
-     * (PHP 5 &gt;= 5.0.0)<br/>
-     * Rewind the Iterator to the first element.
-     *
-     * @link http://php.net/manual/en/iterator.rewind.php
-     *
-     * @return void Any returned value is ignored.
-     */
-    public function rewind()
-    {
-        reset($this->data);
+        return new ArrayIterator($this->data);
     }
 }

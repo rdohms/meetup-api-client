@@ -13,25 +13,10 @@ class SelfParsingResponse extends Response
      */
     protected $data;
 
-    /**
-     * Metadata returned by API.
-     *
-     * @var array
-     */
-    protected $metadata;
-
     public function __construct($statusCode, $headers = null, $body = null)
     {
         parent::__construct($statusCode, $headers, $body);
         $this->parseMeetupApiData();
-    }
-
-    /**
-     * @param array $data
-     */
-    public function setData($data)
-    {
-        $this->data = $data;
     }
 
     /**
@@ -43,27 +28,11 @@ class SelfParsingResponse extends Response
     }
 
     /**
-     * @param array $metadata
-     */
-    public function setMetadata($metadata)
-    {
-        $this->metadata = $metadata;
-    }
-
-    /**
-     * @return array
-     */
-    public function getMetadata()
-    {
-        return $this->metadata;
-    }
-
-    /**
      * Parses the Meetup Response based on content type.
      *
      * @return array
      */
-    public function parseBodyContent()
+    protected function parseBodyContent()
     {
         if (!$this->isContentType('json')) {
             parse_str($this->getBody(true), $array);
@@ -77,10 +46,9 @@ class SelfParsingResponse extends Response
     /**
      * Makes Meetup API Data available on the Data attribute.
      */
-    public function parseMeetupApiData()
+    protected function parseMeetupApiData()
     {
-        $responseBody = $this->parseBodyContent();
-        $this->setData($responseBody);
+        $this->data = $this->parseBodyContent();
     }
 
     /**
