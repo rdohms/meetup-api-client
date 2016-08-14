@@ -10,8 +10,8 @@ Guzzle\Tests\GuzzleTestCase::setServiceBuilder(
             'test.meetup.key'   => array(
                 'class'  => 'DMS.Service.Meetup.MeetupKeyAuthClient',
                 'params' => array(
-                    'key' => 'mykey'
-                )
+                    'key' => 'mykey',
+                ),
             ),
             'test.meetup.oauth' => array(
                 'class'  => 'DMS.Service.Meetup.MeetupOauthAuthClient',
@@ -19,13 +19,13 @@ Guzzle\Tests\GuzzleTestCase::setServiceBuilder(
                     'consumer_key'    => 'key',
                     'consumer_secret' => 'secret',
                     'token'           => 'token',
-                    'token_secret'    => 'token_secret'
-                )
-            )
+                    'token_secret'    => 'token_secret',
+                ),
+            ),
         )
     )
 );
 
 
-$basePath = __DIR__ . '/mock/';
+$basePath = __DIR__.'/mock/';
 GuzzleTestCase::setMockBasePath($basePath);

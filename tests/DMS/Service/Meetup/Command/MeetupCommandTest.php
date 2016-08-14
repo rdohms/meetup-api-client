@@ -1,4 +1,5 @@
 <?php
+
 namespace DMS\Service\Meetup\Command;
 
 use Guzzle\Tests\GuzzleTestCase;

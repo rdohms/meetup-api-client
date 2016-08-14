@@ -6,12 +6,10 @@ use Guzzle\Service\Command\OperationCommand;
 use Guzzle\Service\Command\ResponseParserInterface;
 
 /**
- * Class MeetupCommand
+ * Class MeetupCommand.
  *
  * Custom Command Class that allows us to parse into
  * custom Responses
- *
- * @package DMS\Service\Meetup\Command
  */
 class MeetupCommand extends OperationCommand
 {
@@ -22,7 +20,7 @@ class MeetupCommand extends OperationCommand
      */
     public function getResponseParser()
     {
-        if ( ! $this->responseParser) {
+        if (!$this->responseParser) {
             $this->responseParser = MeetupResponseParser::getInstance();
         }
 

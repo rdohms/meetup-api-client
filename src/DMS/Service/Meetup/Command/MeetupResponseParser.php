@@ -11,14 +11,15 @@ use Guzzle\Service\Command\DefaultResponseParser;
 class MeetupResponseParser extends DefaultResponseParser
 {
     /**
-     * Get a cached instance of the default response parser
+     * Get a cached instance of the default response parser.
+     *
      * @return self
      * @codeCoverageIgnore
      */
     public static function getInstance()
     {
         if (!self::$instance) {
-            self::$instance = new self;
+            self::$instance = new self();
         }
 
         return self::$instance;
@@ -28,6 +29,7 @@ class MeetupResponseParser extends DefaultResponseParser
      * {@inheritdoc}
      *
      * @param CommandInterface $command
+     *
      * @return array|MultiResultResponse|SingleResultResponse|Response|mixed
      */
     public function parse(CommandInterface $command)
@@ -35,13 +37,13 @@ class MeetupResponseParser extends DefaultResponseParser
         $response = $command->getRequest()->getResponse();
 
         if ($response === null) {
-            return null;
+            return;
         }
 
         $responseArray = $this->parseResponseIntoArray($response);
 
         // If there is no Body, just return the Response
-        if (! $response->getBody()) {
+        if (!$response->getBody()) {
             return $response;
         }
 
@@ -54,9 +56,10 @@ class MeetupResponseParser extends DefaultResponseParser
     }
 
     /**
-     * Create a Multi-Response Object
+     * Create a Multi-Response Object.
      *
      * @param Response $response
+     *
      * @return \DMS\Service\Meetup\Response\MultiResultResponse
      */
     protected function createMultiResultResponse($response)
@@ -67,9 +70,10 @@ class MeetupResponseParser extends DefaultResponseParser
     }
 
     /**
-     * Create a Single-Response Object
+     * Create a Single-Response Object.
      *
      * @param Response $response
+     *
      * @return \DMS\Service\Meetup\Response\SingleResultResponse
      */
     protected function createSingleResultResponse($response)
@@ -80,9 +84,10 @@ class MeetupResponseParser extends DefaultResponseParser
     }
 
     /**
-     * Parses response into an array
+     * Parses response into an array.
      *
      * @param Response $response
+     *
      * @return array
      */
     protected function parseResponseIntoArray($response)

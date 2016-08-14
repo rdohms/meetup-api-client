@@ -1,6 +1,5 @@
 <?php
 
-
 namespace DMS\Functional;
 
 use DMS\Test\Framework\FunctionalTestCase;

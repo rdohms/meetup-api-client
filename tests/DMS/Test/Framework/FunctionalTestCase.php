@@ -3,11 +3,9 @@
 namespace DMS\Test\Framework;
 
 use DMS\Service\Meetup\MeetupKeyAuthClient;
-use PHPUnit_Framework_TestCase;
 
 class FunctionalTestCase extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var MeetupKeyAuthClient
      */
@@ -17,9 +15,9 @@ class FunctionalTestCase extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $configFile = __DIR__ . '/../../../api_key.ini';
+        $configFile = __DIR__.'/../../../api_key.ini';
 
-        if (! file_exists($configFile)) {
+        if (!file_exists($configFile)) {
             $this->markTestSkipped('Functional Tests require an Oauth Key');
         }
 
@@ -27,5 +25,4 @@ class FunctionalTestCase extends \PHPUnit_Framework_TestCase
 
         $this->keyClient = MeetupKeyAuthClient::factory(array('key' => $config['key']));
     }
-
 }

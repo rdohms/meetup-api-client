@@ -3,12 +3,12 @@
 namespace DMS\Tools\Meetup\ValueObject;
 
 /**
- * Class Parameter
+ * Class Parameter.
  */
 class Parameter
 {
     const LOCATION_QUERY = 'query';
-    const LOCATION_URI   = 'uri';
+    const LOCATION_URI = 'uri';
 
     /**
      * @var string
@@ -16,7 +16,7 @@ class Parameter
     public $location;
 
     /**
-     * @var boolean
+     * @var bool
      */
     public $required = false;
 
@@ -27,8 +27,9 @@ class Parameter
 
     /**
      * @param string $location
-     * @param bool $required
+     * @param bool   $required
      * @param string $description
+     *
      * @return static
      */
     public static function build($location, $required, $description)

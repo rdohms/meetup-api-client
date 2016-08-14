@@ -27,7 +27,7 @@ class DuplicateResolver
         $overlap = array_intersect($mainApi->extractMethodNames(), $secondaryApi->extractMethodNames());
 
         foreach ($overlap as $key) {
-            $secondaryApi->renameOperation($key, $key . 'v' . $secondaryApi->apiVersion);
+            $secondaryApi->renameOperation($key, $key.'v'.$secondaryApi->apiVersion);
         }
     }
 }

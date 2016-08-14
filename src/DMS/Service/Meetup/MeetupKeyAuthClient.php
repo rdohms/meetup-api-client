@@ -5,12 +5,11 @@ namespace DMS\Service\Meetup;
 use DMS\Service\Meetup\Plugin\KeyAuthPlugin;
 
 /**
- * Meetup.com API Client based on simple key authentication
+ * Meetup.com API Client based on simple key authentication.
  *
  * Docs: API key as a parameter -- for server-side apps acting on behalf of a single user.
  *
  * @link http://www.meetup.com/meetup_api/auth/
- * @package DMS\Service\Meetup
  */
 class MeetupKeyAuthClient extends AbstractMeetupClient
 {
@@ -38,9 +37,10 @@ class MeetupKeyAuthClient extends AbstractMeetupClient
     }
 
     /**
-     * Factory Method to build new Client
+     * Factory Method to build new Client.
      *
      * @param array $config
+     *
      * @return MeetupKeyAuthClient
      */
     public static function factory($config = array())
