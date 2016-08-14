@@ -3,6 +3,7 @@
 namespace DMS\Service\Meetup\Response;
 
 use Closure;
+use Guzzle\Http\EntityBody;
 
 class MultiResultResponse extends SelfParsingResponse implements \Countable, \Iterator
 {
@@ -42,6 +43,7 @@ class MultiResultResponse extends SelfParsingResponse implements \Countable, \It
         $clone = clone $this;
 
         $clone->setData(array_map($func, $this->data));
+        $clone->updateBody();
 
         return $clone;
     }
@@ -59,9 +61,23 @@ class MultiResultResponse extends SelfParsingResponse implements \Countable, \It
         $clone = clone $this;
 
         $clone->setData(array_filter($this->data, $p));
+        $clone->updateBody();
 
         return $clone;
     }
+
+    /**
+     * Assigns a new body to the request, based on the data it contains.
+     */
+    private function updateBody()
+    {
+        $data = array('meta' => $this->metadata, 'results' => $this->data);
+
+        $this->body = EntityBody::factory(
+            $this->isContentType('json') ? json_encode($data) : http_build_query($data)
+        );
+    }
+
     /**
      * Applies the given predicate p to all elements of this collection,
      * returning true, if the predicate yields true for all elements.
@@ -140,15 +156,5 @@ class MultiResultResponse extends SelfParsingResponse implements \Countable, \It
     public function rewind()
     {
         reset($this->data);
-    }
-
-    /**
-     * Returns true array instance
-     *
-     * @return array
-     */
-    public function toArray()
-    {
-        return $this->data;
     }
 }
