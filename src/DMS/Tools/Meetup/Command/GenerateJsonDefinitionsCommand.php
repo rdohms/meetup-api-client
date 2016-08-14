@@ -58,7 +58,7 @@ class GenerateJsonDefinitionsCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->input  = $input;
+        $this->input = $input;
         $this->output = $output;
 
         $this->dialog = $this->getHelperSet()->get('dialog');
@@ -82,26 +82,23 @@ class GenerateJsonDefinitionsCommand extends Command
         );
 
         foreach ($this->getFileIterator() as $file) {
-
             $this->parseDocumentationPage($file);
-
         }
 
-        $this->output->writeln("All Operations parsed, dumping JSON configuration:");
+        $this->output->writeln('All Operations parsed, dumping JSON configuration:');
 
         foreach ($this->apis as $key => $value) {
-            $this->output->writeln(sprintf("<info>API %s</info>", $key));
+            $this->output->writeln(sprintf('<info>API %s</info>', $key));
             $this->output->writeln(json_encode($value));
             $this->output->writeln('');
         }
-
-
     }
 
     /**
-     * Parses Documentation Page
+     * Parses Documentation Page.
      *
      * @param $file
+     *
      * @throws \OutOfBoundsException
      */
     protected function parseDocumentationPage($file)
@@ -110,14 +107,14 @@ class GenerateJsonDefinitionsCommand extends Command
 
             /** @var $file SplFileInfo */
             if ($file->getExtension() !== 'html') {
-                throw new \OutOfBoundsException("Not HTML.");
+                throw new \OutOfBoundsException('Not HTML.');
             }
 
             $crawler = new Crawler(file_get_contents($file->getRealPath()));
 
             // Check is Doc page
             if ($crawler->filter('#method-info')->count() == 0) {
-                throw new \OutOfBoundsException("Not Documentation File.");
+                throw new \OutOfBoundsException('Not Documentation File.');
             }
 
             // Check if is not deprecated
@@ -125,9 +122,8 @@ class GenerateJsonDefinitionsCommand extends Command
                 throw new \OutOfBoundsException('Deprecated.');
             }
 
-            $this->output->writeln("Parsing: " . $file->getPathname());
+            $this->output->writeln('Parsing: '.$file->getPathname());
             $this->getMethodDefinitions($crawler);
-
         } catch (\OutOfBoundsException $e) {
             $this->output->writeln(
                 sprintf(
@@ -163,34 +159,34 @@ class GenerateJsonDefinitionsCommand extends Command
     {
         $methodDefinitions = $crawler->filter('#method-info > div');
 
-        $this->output->writeln(sprintf("Found %d definitions:", $methodDefinitions->count()));
+        $this->output->writeln(sprintf('Found %d definitions:', $methodDefinitions->count()));
 
         foreach ($methodDefinitions as $definition) {
             $operationData = $this->parseOperationData($definition);
 
             $this->output->writeln(
                 sprintf(
-                    "<comment>%s</comment> <info>%s</info>",
+                    '<comment>%s</comment> <info>%s</info>',
                     $operationData['httpMethod'],
                     $operationData['uri']
                 )
             );
             $this->output->writeln(
                 sprintf(
-                    "<comment>Summary:</comment> <info>%s</info>",
+                    '<comment>Summary:</comment> <info>%s</info>',
                     $operationData['summary']
                 )
             );
             $this->output->writeln(
                 sprintf(
-                    "<comment>Parameters:</comment> <info>%s</info>",
-                    implode(",", array_keys($operationData['parameters']))
+                    '<comment>Parameters:</comment> <info>%s</info>',
+                    implode(',', array_keys($operationData['parameters']))
                 )
             );
 
             $operation = $this->dialog->ask(
                 $this->output,
-                "<question>How do you wish to name this Operation? [".$operationData['operation']."]</question>",
+                '<question>How do you wish to name this Operation? ['.$operationData['operation'].']</question>',
                 $operationData['operation']
             );
 
@@ -198,18 +194,18 @@ class GenerateJsonDefinitionsCommand extends Command
 
             $apiType = $this->dialog->ask(
                 $this->output,
-                "<question>Which API? [v2]</question>",
+                '<question>Which API? [v2]</question>',
                 'v2',
                 array_keys($this->apis)
             );
 
             $this->apis[$apiType][$operation] = $operationData;
         }
-
     }
 
     /**
      * @param DOMElement $definition
+     *
      * @return array
      */
     protected function parseOperationData($definition)
@@ -217,7 +213,7 @@ class GenerateJsonDefinitionsCommand extends Command
         $crawler = new Crawler($definition);
 
         $operationFilter = $crawler->filter('h2');
-        $operation       = str_replace(' ', '', $operationFilter->first()->text());
+        $operation = str_replace(' ', '', $operationFilter->first()->text());
 
         $uriData = $crawler->filter('.uri div');
 
@@ -225,20 +221,20 @@ class GenerateJsonDefinitionsCommand extends Command
         $uri = $matches[1];
 
         $uriParams = array();
-        if (strpos($uri, ":") !== false) {
-            preg_match_all("|(:[^/]*)|", $uri, $uriParams);
+        if (strpos($uri, ':') !== false) {
+            preg_match_all('|(:[^/]*)|', $uri, $uriParams);
             $uriParams = array_shift($uriParams);
         }
 
         $method = $uriData->filter('.muted')->text();
 
         $summaryNode = $crawler->filter('.leading-top p');
-        $summary = ($summaryNode->count() > 0)? $summaryNode->text():null;
+        $summary = ($summaryNode->count() > 0) ? $summaryNode->text() : null;
 
         $parameterList = $crawler->filter('dl.rounded-all dt span');
         $params = array();
         foreach ($parameterList as $parameter) {
-            /** @var $parameter DOMElement */
+            /* @var $parameter DOMElement */
 
             $params[$parameter->textContent] = array(
                 'required' => ($parameter->getAttribute('class') == 'param_required'),
@@ -250,14 +246,14 @@ class GenerateJsonDefinitionsCommand extends Command
             foreach ($uriParams as $param) {
                 $params[str_replace(':', '', $param)] = array(
                     'required' => true,
-                    'location' => 'uri'
+                    'location' => 'uri',
                 );
             }
         }
 
         //Update Operation
         if ($method == 'GET') {
-            $operation = ucfirst(strtolower($method) . $operation);
+            $operation = ucfirst(strtolower($method).$operation);
         }
 
         return array(
@@ -265,8 +261,7 @@ class GenerateJsonDefinitionsCommand extends Command
             'httpMethod' => $method,
             'uri'        => $uri,
             'summary'    => $summary,
-            'parameters' => $params
+            'parameters' => $params,
         );
-
     }
 }

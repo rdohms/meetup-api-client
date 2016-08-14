@@ -1,4 +1,5 @@
 <?php
+
 namespace DMS\Service\Meetup\Plugin;
 
 use Guzzle\Common\Event;
@@ -7,7 +8,6 @@ use PHPUnit_Framework_TestCase;
 
 class KeyAuthPluginTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * @var KeyAuthPlugin
      */

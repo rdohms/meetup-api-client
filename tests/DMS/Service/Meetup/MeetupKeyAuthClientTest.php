@@ -1,13 +1,12 @@
 <?php
+
 namespace DMS\Service\Meetup;
 
-use DMS\Service\Meetup\MeetupKeyAuthClient;
 use Guzzle\Http\Message\Request;
 use Guzzle\Tests\GuzzleTestCase;
 
 class MeetupKeyAuthClientTest extends GuzzleTestCase
 {
-
     public function testFactory()
     {
         $client = $this->buildClient();
@@ -67,7 +66,7 @@ class MeetupKeyAuthClientTest extends GuzzleTestCase
     protected function buildClient()
     {
         $config = array(
-            'key' => 'mykey'
+            'key' => 'mykey',
         );
 
         $client = MeetupKeyAuthClient::factory($config);
