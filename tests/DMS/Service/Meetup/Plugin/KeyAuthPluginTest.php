@@ -1,4 +1,5 @@
 <?php
+
 namespace DMS\Service\Meetup\Plugin;
 
 use Guzzle\Common\Event;
@@ -7,7 +8,6 @@ use PHPUnit_Framework_TestCase;
 
 class KeyAuthPluginTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * @var KeyAuthPlugin
      */
@@ -34,7 +34,7 @@ class KeyAuthPluginTest extends PHPUnit_Framework_TestCase
     {
         $request = new Request('GET', 'www.url.com');
 
-        $event = new Event(array('request' => $request));
+        $event = new Event(['request' => $request]);
 
         $this->plugin->onRequestBeforeSend($event);
 
@@ -45,7 +45,7 @@ class KeyAuthPluginTest extends PHPUnit_Framework_TestCase
     {
         $request = new Request('POST', 'www.url.com');
 
-        $event = new Event(array('request' => $request));
+        $event = new Event(['request' => $request]);
 
         $this->plugin->onRequestBeforeSend($event);
 

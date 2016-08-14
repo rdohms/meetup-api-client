@@ -1,23 +1,20 @@
 <?php
 
-
 namespace DMS\Service\Meetup\Plugin;
-
 
 use Guzzle\Common\Event;
 use Guzzle\Http\Message\Response;
 
 class RateLimitPluginTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testOnRequestSuccess()
     {
         $event = new Event();
-        $response = new Response(200, array(
-            'X-RateLimit-Limit'     => array(30),
-            'X-RateLimit-Remaining' => array(29),
-            'X-RateLimit-Reset'     => array(10),
-        ));
+        $response = new Response(200, [
+            'X-RateLimit-Limit'     => [30],
+            'X-RateLimit-Remaining' => [29],
+            'X-RateLimit-Reset'     => [10],
+        ]);
 
         $event['response'] = $response;
 
@@ -37,7 +34,7 @@ class RateLimitPluginTest extends \PHPUnit_Framework_TestCase
     public function testOnRequestSuccessWithNoLimit()
     {
         $event = new Event();
-        $response = new Response(200, array());
+        $response = new Response(200, []);
 
         $event['response'] = $response;
 
@@ -50,9 +47,9 @@ class RateLimitPluginTest extends \PHPUnit_Framework_TestCase
     public function testOnRequestSuccessAvoidDivisionByZero()
     {
         $event = new Event();
-        $response = new Response(200, array(
-            'X-RateLimit-Limit'     => array(0),
-        ));
+        $response = new Response(200, [
+            'X-RateLimit-Limit'     => [0],
+        ]);
 
         $event['response'] = $response;
 
@@ -83,20 +80,21 @@ class RateLimitPluginTest extends \PHPUnit_Framework_TestCase
      * @param $limit
      * @param $remaining
      * @param $reset
+     *
      * @return RateLimitPlugin | RateLimitPluginProxy
      */
     protected function setupProxyPluginWithValues($limit, $remaining, $reset, $factor = null)
     {
         $event = new Event();
-        $response = new Response(200, array(
-            'X-RateLimit-Limit'     => array($limit),
-            'X-RateLimit-Remaining' => array($remaining),
-            'X-RateLimit-Reset'     => array($reset),
-        ));
+        $response = new Response(200, [
+            'X-RateLimit-Limit'     => [$limit],
+            'X-RateLimit-Remaining' => [$remaining],
+            'X-RateLimit-Reset'     => [$reset],
+        ]);
 
         $event['response'] = $response;
 
-        $plugin = ($factor === null)? new RateLimitPluginProxy() : new RateLimitPluginProxy($factor);
+        $plugin = ($factor === null) ? new RateLimitPluginProxy() : new RateLimitPluginProxy($factor);
         $plugin->onRequestSuccess($event);
 
         return $plugin;

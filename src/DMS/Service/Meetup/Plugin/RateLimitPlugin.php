@@ -7,55 +7,53 @@ use Guzzle\Http\Message\Response;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * Class RateLimitPlugin
+ * Class RateLimitPlugin.
  *
  * This plugin watches the X-Rate-Limit headers of the Meetup API.
  *
  * Since we can only determine the rate limit numbers from a previous API calls within the same application request
  * We want to store those values to slow down the sequential calls within the same request exponantially after
  * a certain factor is hit.
- *
- * @package DMS\Service\Meetup\Plugin
  */
 class RateLimitPlugin implements EventSubscriberInterface
 {
     /**
-     * Whether rate limiting is enabled
+     * Whether rate limiting is enabled.
      *
-     * @var bool $rateLimitEnabled
+     * @var bool
      */
     private $rateLimitEnabled = true;
 
     /**
-     * At what factor between 0 and 1, should throttling be kicked in (now 50%)
+     * At what factor between 0 and 1, should throttling be kicked in (now 50%).
      *
-     * @var float $rateLimitFactor
+     * @var float
      */
     private $rateLimitFactor = 0.5;
 
     /**
-     * Number of API calls total for this window
+     * Number of API calls total for this window.
      *
-     * @var int $rateLimitMax
+     * @var int
      */
     private $rateLimitMax = 30;
 
     /**
-     * Number of API calls remaining before rate limit is hit
+     * Number of API calls remaining before rate limit is hit.
      *
-     * @var int $rateLimitRemaining
+     * @var int
      */
     private $rateLimitRemaining = 30;
 
     /**
-     * Number of seconds before rate limit is reset
+     * Number of seconds before rate limit is reset.
      *
-     * @var int $rateLimitReset
+     * @var int
      */
     private $rateLimitReset = 0;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param float $rateLimitFactor
      */
@@ -88,16 +86,17 @@ class RateLimitPlugin implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
-            'request.before_send' => array('onBeforeSend', -1000),
-            'request.success' => array('onRequestSuccess', -1000),
-        );
+        return [
+            'request.before_send' => ['onBeforeSend', -1000],
+            'request.success'     => ['onRequestSuccess', -1000],
+        ];
     }
 
     /**
-     * Request before-send event handler
+     * Request before-send event handler.
      *
      * @param Event $event Event received
+     *
      * @return array
      */
     public function onRequestSuccess(Event $event)
@@ -105,8 +104,9 @@ class RateLimitPlugin implements EventSubscriberInterface
         /** @var Response $response */
         $response = $event['response'];
 
-        if (! $response->hasHeader('X-RateLimit-Limit')) {
+        if (!$response->hasHeader('X-RateLimit-Limit')) {
             $this->rateLimitEnabled = false;
+
             return;
         }
 
@@ -124,13 +124,10 @@ class RateLimitPlugin implements EventSubscriberInterface
         if ($this->rateLimitMax == 0) {
             $this->rateLimitMax = 1;
         }
-
-        return;
     }
 
     /**
-     * Performs slowdown when rate limiting is enabled and nearing it's limit
-     *
+     * Performs slowdown when rate limiting is enabled and nearing it's limit.
      */
     public function onBeforeSend()
     {
@@ -141,8 +138,6 @@ class RateLimitPlugin implements EventSubscriberInterface
         if ($currentFactor > $this->rateLimitFactor) {
             $this->slowdownRequests();
         }
-
-        return;
     }
 
     /**

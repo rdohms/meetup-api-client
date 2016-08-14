@@ -1,7 +1,7 @@
 <?php
+
 namespace DMS\Service\Meetup\Command;
 
-use Guzzle\Http\Message\Request;
 use Guzzle\Http\Message\Response;
 use Guzzle\Tests\GuzzleTestCase;
 
@@ -26,7 +26,7 @@ class MeetupResponseParserTest extends GuzzleTestCase
 
         $result = $responder->parse($command);
 
-        switch($expectedResponse) {
+        switch ($expectedResponse) {
             case 'multi':
                 $this->assertInstanceOf('\DMS\Service\Meetup\Response\MultiResultResponse', $result);
                 break;
@@ -61,11 +61,11 @@ class MeetupResponseParserTest extends GuzzleTestCase
 
     public function provideForParse()
     {
-        return array(
-            array(new Response(200, array('Content-Type' => 'application/json'), json_encode(array('results' => array(), 'meta' => array()))), 'multi'),
-            array(new Response(200, array('Content-Type' => 'application/json'), json_encode(array('a' => 'b'))), 'single'),
-            array(new Response(200, array('Content-Type' => 'text/plain'), 'sample=text&a=b'), 'single'),
-            array(new Response(200), 'basic'),
-        );
+        return [
+            [new Response(200, ['Content-Type' => 'application/json'], json_encode(['results' => [], 'meta' => []])), 'multi'],
+            [new Response(200, ['Content-Type' => 'application/json'], json_encode(['a' => 'b'])), 'single'],
+            [new Response(200, ['Content-Type' => 'text/plain'], 'sample=text&a=b'), 'single'],
+            [new Response(200), 'basic'],
+        ];
     }
 }

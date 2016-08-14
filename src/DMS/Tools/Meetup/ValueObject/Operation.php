@@ -3,11 +3,10 @@
 namespace DMS\Tools\Meetup\ValueObject;
 
 use DMS\Tools\Meetup\Helper\OperationNameConverter;
-use DMS\Tools\Meetup\ValueObject\Parameter;
 use MathiasGrimm\ArrayPath\ArrayPath as arr;
 
 /**
- * Class Operation
+ * Class Operation.
  */
 class Operation
 {
@@ -29,7 +28,7 @@ class Operation
     /**
      * @var array
      */
-    public $parameters = array();
+    public $parameters = [];
 
     /**
      * @var string
@@ -48,12 +47,13 @@ class Operation
 
     /**
      * @param $definition
+     *
      * @return static
      */
     public static function createFromApiJsonDocs($definition)
     {
         if (arr::get('group', $definition) == 'deprecated') {
-            return null;
+            return;
         }
 
         $operation = new static();
@@ -63,16 +63,16 @@ class Operation
             : arr::get('api_version', $definition, '1');
 
         $operation->httpMethod = arr::get('http_method', $definition);
-        $operation->summary    = arr::get('desc', $definition);
-        $operation->notes      = arr::get('param_notes', $definition);
+        $operation->summary = arr::get('desc', $definition);
+        $operation->notes = arr::get('param_notes', $definition);
         $operation->parsePath(arr::get('path', $definition));
 
-        foreach (arr::get('params', $definition, array()) as $param => $desc) {
+        foreach (arr::get('params', $definition, []) as $param => $desc) {
             // Always false due to complex rules on meetup's side (one of x is required)
             $operation->addParameter(str_replace('*', '', $param), 'query', false, $desc);
         }
 
-        foreach (arr::get('orders', $definition, array()) as $param => $desc) {
+        foreach (arr::get('orders', $definition, []) as $param => $desc) {
             $operation->addParameter($param, 'query', false, $desc);
         }
 
@@ -84,7 +84,7 @@ class Operation
     }
 
     /**
-     * Add default parameters
+     * Add default parameters.
      *
      * @param string $httpMethod
      */
@@ -103,31 +103,32 @@ class Operation
     }
 
     /**
-     * Parse Parameters from Path
+     * Parse Parameters from Path.
+     *
      * @param string $path
      */
     protected function parsePath($path)
     {
-        $uriParams       = array();
-        $uriParamsCount  = preg_match_all("/(:[^\/]*)/", $path, $uriParams);
-        $translateParams = array();
+        $uriParams = [];
+        $uriParamsCount = preg_match_all("/(:[^\/]*)/", $path, $uriParams);
+        $translateParams = [];
 
         foreach ($uriParams[0] as $rawParam) {
             $param = str_replace(':', '', $rawParam);
             $this->addParameter($param, 'uri', true);
 
-            $translateParams[$rawParam] = "{" . $param . "}";
+            $translateParams[$rawParam] = '{'.$param.'}';
         }
 
         $this->uri = strtr($path, $translateParams);
     }
 
     /**
-     * Add a new parameter to definition
+     * Add a new parameter to definition.
      *
-     * @param string $name
-     * @param string $location
-     * @param boolean $required
+     * @param string      $name
+     * @param string      $location
+     * @param bool        $required
      * @param string|null $description
      */
     protected function addParameter($name, $location, $required, $description = null)
@@ -135,7 +136,6 @@ class Operation
         $name = trim($name);
 
         if (strpos($name, ',') !== false) {
-
             foreach (explode(',', $name) as $subname) {
                 $this->addParameter($subname, $location, $required, $description);
             }

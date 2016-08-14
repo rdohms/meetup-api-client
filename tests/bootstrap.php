@@ -6,26 +6,26 @@ include __DIR__.'/../vendor/autoload.php';
 
 Guzzle\Tests\GuzzleTestCase::setServiceBuilder(
     Guzzle\Service\Builder\ServiceBuilder::factory(
-        array(
-            'test.meetup.key'   => array(
+        [
+            'test.meetup.key'   => [
                 'class'  => 'DMS.Service.Meetup.MeetupKeyAuthClient',
-                'params' => array(
-                    'key' => 'mykey'
-                )
-            ),
-            'test.meetup.oauth' => array(
+                'params' => [
+                    'key' => 'mykey',
+                ],
+            ],
+            'test.meetup.oauth' => [
                 'class'  => 'DMS.Service.Meetup.MeetupOauthAuthClient',
-                'params' => array(
+                'params' => [
                     'consumer_key'    => 'key',
                     'consumer_secret' => 'secret',
                     'token'           => 'token',
-                    'token_secret'    => 'token_secret'
-                )
-            )
-        )
+                    'token_secret'    => 'token_secret',
+                ],
+            ],
+        ]
     )
 );
 
 
-$basePath = __DIR__ . '/mock/';
+$basePath = __DIR__.'/mock/';
 GuzzleTestCase::setMockBasePath($basePath);

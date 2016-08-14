@@ -7,18 +7,16 @@ use Guzzle\Http\Message\Request;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * Class KeyAuthPlugin
+ * Class KeyAuthPlugin.
  *
  * This Guzzle plugin implements Key based authorization that is supported by the Meetup.com API
- *
- * @package DMS\Service\Meetup\Plugin
  */
 class KeyAuthPlugin implements EventSubscriberInterface
 {
     protected $key;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param $key
      */
@@ -49,15 +47,16 @@ class KeyAuthPlugin implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
-            'request.before_send' => array('onRequestBeforeSend', -1000)
-        );
+        return [
+            'request.before_send' => ['onRequestBeforeSend', -1000],
+        ];
     }
 
     /**
-     * Request before-send event handler
+     * Request before-send event handler.
      *
      * @param Event $event Event received
+     *
      * @return array
      */
     public function onRequestBeforeSend(Event $event)
@@ -66,11 +65,10 @@ class KeyAuthPlugin implements EventSubscriberInterface
         $request = $event['request'];
 
         $this->signRequest($request);
-        return;
     }
 
     /**
-     * Adds "key" parameters as a Query Parameter
+     * Adds "key" parameters as a Query Parameter.
      *
      * @param Request $request
      */

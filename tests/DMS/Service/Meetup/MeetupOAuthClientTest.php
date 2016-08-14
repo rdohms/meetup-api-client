@@ -1,17 +1,17 @@
 <?php
+
 namespace DMS\Service\Meetup;
 
 use Guzzle\Tests\GuzzleTestCase;
 
 class MeetupOAuthClientTest extends GuzzleTestCase
 {
-
     public function testFactory()
     {
-        $config = array(
+        $config = [
             'consumer_key'    => '**',
             'consumer_secret' => '**',
-        );
+        ];
 
         $client = MeetupOAuthClient::factory($config);
 
@@ -23,7 +23,7 @@ class MeetupOAuthClientTest extends GuzzleTestCase
      */
     public function testFactoryValidation()
     {
-        $config = array();
+        $config = [];
         MeetupOAuthClient::factory($config);
     }
 }
