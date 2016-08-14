@@ -31,7 +31,7 @@
                 "type": {
                     "location": "query",
                     "required": false,
-                    "description": "A required identifier for type of abuse you are reporting. Acceptable values include graphic_content, harmful_activities, licensed_services, not_community, nudity, other, promotion_focus, violence"
+                    "description": "A required identifier for type of abuse you are reporting. Acceptable values include dangerous, graphic_content, graphic_photo, licensed_services, not_accurate, not_irl, other, sex, transactional"
                 }
             },
             "summary": "Submits a new abuse report for a target group. Abuse reports will be followed up on by our Community Support team.",
@@ -101,7 +101,7 @@
                 "event_hosts": {
                     "location": "query",
                     "required": false,
-                    "description": "Up to 5 comma-separated valid member ids to be hosts for the event. If hosts are not provided, the authenticated member becomes the default host"
+                    "description": "Up to 5 comma-separated valid member ids to be hosts for the event."
                 },
                 "name": {
                     "location": "query",
@@ -112,6 +112,11 @@
                     "location": "query",
                     "required": false,
                     "description": "Number of guests members may include in their RSVP, 0 or more. This defaults to 2 when undefined."
+                },
+                "self_rsvp": {
+                    "location": "query",
+                    "required": false,
+                    "description": "The authenticated member will be RSVP'd to the created event. If `event_hosts` is not provided or is empty, the authenticated member will also be the event host. Defaults to \"true\"."
                 },
                 "time": {
                     "location": "query",
@@ -476,7 +481,7 @@
                 "type": {
                     "location": "query",
                     "required": false,
-                    "description": "A required identifier for type of abuse you are reporting. Acceptable values include abuse, copyright, cron, dangerous, fake, harass, harmful_activities, inappropriate, join, licensed_services, not_community, nudity, other, photo, promotion_focus, spam, violence"
+                    "description": "A required identifier for type of abuse you are reporting. Acceptable values include abuse, cron, dangerous, dislike_photo, fake, graphic_content, graphic_photo, impersonation, inappropriate, inappropriate_photo, join, licensed_services, not_accurate, not_irl, offsite, other, photo, sex, spam, transactional, underage"
                 },
                 "comments": {
                     "location": "query",
@@ -491,7 +496,7 @@
                 "content_tag": {
                     "location": "query",
                     "required": false,
-                    "description": "An optional identifier for flagged content that identifies both the type and id, where possible, of the content reported. The type and id should be separated by a ':' character, e.g `event_comment:{event_comment_id}`. Valid content_tag types include conversation_message, convo, email, event_comment, event_photo, group, mailing_list, member_photo, message_boards, reply. If member_id is not provided, content_tag should be provided to imply member_id"
+                    "description": "An optional identifier for flagged content that identifies both the type and id, where possible, of the content reported. The type and id should be separated by a ':' character, e.g `event_comment:{event_comment_id}`. Valid content_tag types include conversation, conversation_message, convo, email, event_comment, event_photo, group, mailing_list, member_photo, member_profile, message_board, organizer_broadcast, pro_megaphone, reply. If member_id is not provided, content_tag should be provided to imply member_id"
                 }
             },
             "summary": "Submits a new abuse report for a target member. Abuse reports will be followed up on by our Community Support team.",
@@ -511,7 +516,7 @@
                 "report": {
                     "location": "query",
                     "required": false,
-                    "description": "An optional value that represents a type of abuse the target member is being blocked for. Acceptable values include one of the following: fake, harass, inappropriate, spam"
+                    "description": "An optional value that represents a type of abuse the target member is being blocked for. Acceptable values include one of the following: fake, impersonation, inappropriate_photo, offsite, underage"
                 },
                 "comments": {
                     "location": "query",
@@ -901,7 +906,7 @@
                 "event_hosts": {
                     "location": "query",
                     "required": false,
-                    "description": "Up to 5 comma-separated valid member ids to be hosts for the event. If hosts are not provided, the authenticated member becomes the default host"
+                    "description": "Up to 5 comma-separated valid member ids to be hosts for the event."
                 },
                 "name": {
                     "location": "query",
@@ -1126,7 +1131,7 @@
                 "gender": {
                     "location": "query",
                     "required": false,
-                    "description": "Members gender.\nValue may be one of \"female\", \"male\", \"none\", or \"other\""
+                    "description": "Member's gender.\nValue may be one of \"female\", \"male\", \"none\", or \"other\""
                 },
                 "topics_privacy": {
                     "location": "query",
@@ -1176,7 +1181,7 @@
                 "lang": {
                     "location": "query",
                     "required": false,
-                    "description": "Members language preference.\nValue may be one of \"de-DE\", \"en-AU\", \"en-US\", \"es\", \"es-ES\", \"fr-FR\", \"it-IT\", \"ja-JP\", or \"pt-BR\""
+                    "description": "Member's language preference.\nValue may be one of \"de-DE\", \"en-AU\", \"en-US\", \"es\", \"es-ES\", \"fr-FR\", \"it-IT\", \"ja-JP\", or \"pt-BR\""
                 },
                 "lat": {
                     "location": "query",
@@ -1338,16 +1343,6 @@
                     "required": false,
                     "description": "Search for locations based on location longitude.\nMust be provided with \"lat\""
                 },
-                "lat": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Search for locations based on location latitude.\nMust be provided with \"lon\""
-                },
-                "query": {
-                    "location": "query",
-                    "required": false,
-                    "description": "Search for locations based on city name or zip code"
-                },
                 "page": {
                     "location": "query",
                     "required": false,
@@ -1357,6 +1352,16 @@
                     "location": "query",
                     "required": false,
                     "description": null
+                },
+                "lat": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Search for locations based on location latitude.\nMust be provided with \"lon\""
+                },
+                "query": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Search for locations based on city name or zip code"
                 },
                 "desc": {
                     "location": "query",
@@ -1381,7 +1386,7 @@
             },
             "summary": "Provides a query interface for finding known locations",
             "uri": "/find/locations",
-            "notes": null
+            "notes": "This endpoint uses HTTP [Link header based pagination](/meetup_api/docs/#v3_json)."
         },
         "GetFindTopicCategories": {
             "version": "3",
@@ -1716,7 +1721,7 @@
                 "filter": {
                     "location": "query",
                     "required": false,
-                    "description": "A named filter to apply to the attendance list. These are roughly equivalent to the set of filters you will see in the attendance tool on the site. These filters correspond with attendance records as well as each member's original RSVP status. The filter value be one of: maybe, waitlist, yes, absent, all, attended, noshow, excused, no. The default is 'attended'. The 'absent' filter represents all members not in attendance including members with a 'noshow' status. An 'excused' absence is an absent member marked as such by an administrative member"
+                    "description": "A named filter to apply to the attendance list. These are roughly equivalent to the set of filters you will see in the attendance tool on the site. These filters correspond with attendance records as well as each member's original RSVP status. The filter value be one of: maybe, waitlist, yes, absent, all, attended, noshow, excused, relevant, no. The default is 'attended'. The 'absent' filter represents all members not in attendance including members with a 'noshow' status. An 'excused' absence is an absent member marked as such by an administrative member"
                 },
                 "member": {
                     "location": "query",
@@ -2796,6 +2801,86 @@
             },
             "summary": "Name, location, and time based search for the members of the meetups belonging to Pro organization.",
             "uri": "/pro/{urlname}/members",
+            "notes": "All parameters are optional."
+        },
+        "GetProTickets": {
+            "version": "3",
+            "name": "GetProTickets",
+            "httpMethod": "GET",
+            "parameters": {
+                "urlname": {
+                    "location": "uri",
+                    "required": true,
+                    "description": null
+                },
+                "country": {
+                    "location": "query",
+                    "required": false,
+                    "description": "String: two-letter country code of the redeemed chapters"
+                },
+                "chapter_name": {
+                    "location": "query",
+                    "required": false,
+                    "description": "By the name of the chapter that redeemed the ticket"
+                },
+                "ticket_key": {
+                    "location": "query",
+                    "required": false,
+                    "description": "String: full matching string of an issued ticket key"
+                },
+                "chapters": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Comma delimited positive integers: ids of redeemed chapters"
+                },
+                "status": {
+                    "location": "query",
+                    "required": false,
+                    "description": "By the redeemed status of the ticket"
+                },
+                "updated": {
+                    "location": "query",
+                    "required": false,
+                    "description": "By the update timestamp of ticket"
+                },
+                "created": {
+                    "location": "query",
+                    "required": false,
+                    "description": "By the creation timestamp of ticket"
+                },
+                "page": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "offset": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "desc": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "order": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "only": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "omit": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                }
+            },
+            "summary": "Redeemed chapter, redeemed member, status, and timestamp for tickets belonging to Pro organization.",
+            "uri": "/pro/{urlname}/tickets",
             "notes": "All parameters are optional."
         },
         "GetRecommendedGroupTopics": {

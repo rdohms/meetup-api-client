@@ -1,15 +1,12 @@
 <?php
 
-
 namespace DMS\Service\Meetup\Plugin;
-
 
 use Guzzle\Common\Event;
 use Guzzle\Http\Message\Response;
 
 class RateLimitPluginTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testOnRequestSuccess()
     {
         $event = new Event();
@@ -83,6 +80,7 @@ class RateLimitPluginTest extends \PHPUnit_Framework_TestCase
      * @param $limit
      * @param $remaining
      * @param $reset
+     *
      * @return RateLimitPlugin | RateLimitPluginProxy
      */
     protected function setupProxyPluginWithValues($limit, $remaining, $reset, $factor = null)
@@ -96,7 +94,7 @@ class RateLimitPluginTest extends \PHPUnit_Framework_TestCase
 
         $event['response'] = $response;
 
-        $plugin = ($factor === null)? new RateLimitPluginProxy() : new RateLimitPluginProxy($factor);
+        $plugin = ($factor === null) ? new RateLimitPluginProxy() : new RateLimitPluginProxy($factor);
         $plugin->onRequestSuccess($event);
 
         return $plugin;

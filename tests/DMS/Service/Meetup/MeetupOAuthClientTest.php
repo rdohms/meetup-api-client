@@ -1,11 +1,11 @@
 <?php
+
 namespace DMS\Service\Meetup;
 
 use Guzzle\Tests\GuzzleTestCase;
 
 class MeetupOAuthClientTest extends GuzzleTestCase
 {
-
     public function testFactory()
     {
         $config = array(

@@ -5,16 +5,15 @@ namespace DMS\Tools\Meetup\Helper;
 use DMS\Tools\Meetup\ValueObject\Operation;
 
 /**
- * Class OperationNameConverter
- *
- * @package DMS\Tools\Meetup
+ * Class OperationNameConverter.
  */
 class OperationNameConverter
 {
     /**
-     * Parse Operation name
+     * Parse Operation name.
      *
      * @param Operation $operation
+     *
      * @return string
      */
     public static function parseOperationName(Operation $operation)
@@ -24,20 +23,21 @@ class OperationNameConverter
         $wordifiedPath = self::wordifyPath($operation->uri);
 
         if ($operation->version == 'stream') {
-            $wordifiedPath = $wordifiedPath . 'Stream';
+            $wordifiedPath = $wordifiedPath.'Stream';
         }
 
         if (preg_match("/^\/{urlname}.*/", $operation->uri) == 1) {
-            $wordifiedPath = 'Group' . $wordifiedPath;
+            $wordifiedPath = 'Group'.$wordifiedPath;
         }
 
-        return ucfirst($verb . $wordifiedPath);
+        return ucfirst($verb.$wordifiedPath);
     }
 
     /**
-     * Converts the url parts into words
+     * Converts the url parts into words.
      *
      * @param string $path
+     *
      * @return string
      */
     public static function wordifyPath($path)
@@ -57,10 +57,11 @@ class OperationNameConverter
     }
 
     /**
-     * Derives a Verb for the endpoint
+     * Derives a Verb for the endpoint.
      *
      * @param string $method
      * @param string $path
+     *
      * @return string
      */
     public static function deriveAction($method, $path)

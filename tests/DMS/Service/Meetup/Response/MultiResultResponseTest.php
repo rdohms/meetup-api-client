@@ -1,6 +1,5 @@
 <?php
 
-
 namespace DMS\Service\Meetup\Response;
 
 use Guzzle\Common\Collection;
@@ -84,7 +83,7 @@ class MultiResultResponseTest extends \PHPUnit_Framework_TestCase
 
         $content = json_encode(
             array(
-                'meta' => array('self' => 'me'),
+                'meta'    => array('self' => 'me'),
                 'results' => array(
                     array('id' => 1),
                     array('id' => 2),
@@ -104,10 +103,9 @@ class MultiResultResponseTest extends \PHPUnit_Framework_TestCase
                 function (array $item) {
                     return $item['id'] < 3;
                 },
-                array(array('id' => 1), array('id' => 2))
-            )
+                array(array('id' => 1), array('id' => 2)),
+            ),
         );
-
     }
 
     public function mapData()
@@ -116,6 +114,7 @@ class MultiResultResponseTest extends \PHPUnit_Framework_TestCase
             array(
                 function (array $item) {
                     $item['id'] *= 2;
+
                     return $item;
                 },
                 array(
@@ -123,8 +122,8 @@ class MultiResultResponseTest extends \PHPUnit_Framework_TestCase
                     array('id' => 4),
                     array('id' => 6),
                     array('id' => 8),
-                )
-            )
+                ),
+            ),
         );
     }
 }

@@ -1,7 +1,7 @@
 <?php
+
 namespace DMS\Service\Meetup\Command;
 
-use Guzzle\Http\Message\Request;
 use Guzzle\Http\Message\Response;
 use Guzzle\Tests\GuzzleTestCase;
 
@@ -26,7 +26,7 @@ class MeetupResponseParserTest extends GuzzleTestCase
 
         $result = $responder->parse($command);
 
-        switch($expectedResponse) {
+        switch ($expectedResponse) {
             case 'multi':
                 $this->assertInstanceOf('\DMS\Service\Meetup\Response\MultiResultResponse', $result);
                 break;

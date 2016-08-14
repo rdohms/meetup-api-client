@@ -166,7 +166,7 @@
                 "attendee_count": {
                     "location": "query",
                     "required": false,
-                    "description": "The number of attendees for the event (organizers/assistant organizers/co-organizers/event organizers/event hosts only)"
+                    "description": "DEPRECATED: The number of attendees for the event (organizers/assistant organizers/co-organizers/event organizers/event hosts only)"
                 },
                 "rating": {
                     "location": "query",

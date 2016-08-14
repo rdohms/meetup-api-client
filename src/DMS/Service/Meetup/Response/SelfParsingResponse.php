@@ -6,16 +6,15 @@ use Guzzle\Http\Message\Response;
 
 class SelfParsingResponse extends Response
 {
-
     /**
-     * Data returned from Request
+     * Data returned from Request.
      *
      * @var array
      */
     protected $data;
 
     /**
-     * Metadata returned by API
+     * Metadata returned by API.
      *
      * @var array
      */
@@ -66,7 +65,7 @@ class SelfParsingResponse extends Response
      */
     public function parseBodyContent()
     {
-        if (! $this->isContentType('json')) {
+        if (!$this->isContentType('json')) {
             parse_str($this->getBody(true), $array);
 
             return $array;
@@ -76,7 +75,7 @@ class SelfParsingResponse extends Response
     }
 
     /**
-     * Makes Meetup API Data available on the Data attribute
+     * Makes Meetup API Data available on the Data attribute.
      */
     public function parseMeetupApiData()
     {
@@ -85,7 +84,7 @@ class SelfParsingResponse extends Response
     }
 
     /**
-     * Returns true array representation of Response
+     * Returns true array representation of Response.
      *
      * @return array
      */

@@ -5,12 +5,11 @@ namespace DMS\Service\Meetup;
 use Guzzle\Plugin\Oauth\OauthPlugin;
 
 /**
- * Meetup.com API Client based on OAuth 1.0
+ * Meetup.com API Client based on OAuth 1.0.
  *
  * Docs: OAuth 1.0a signed requests -- for apps that carry out actions for many Meetup users.
  *
  * @link http://www.meetup.com/meetup_api/auth/
- * @package DMS\Service\Meetup
  */
 class MeetupOAuthClient extends AbstractMeetupClient
 {
@@ -37,14 +36,15 @@ class MeetupOAuthClient extends AbstractMeetupClient
         return array(
             'consumer_key',
             'consumer_secret',
-            'base_url'
+            'base_url',
         );
     }
 
     /**
-     * Factory Method to build new Client
+     * Factory Method to build new Client.
      *
      * @param array $config
+     *
      * @return MeetupOAuthClient
      */
     public static function factory($config = array())
@@ -59,7 +59,7 @@ class MeetupOAuthClient extends AbstractMeetupClient
                     'consumer_key'    => $configuration->get('consumer_key'),
                     'consumer_secret' => $configuration->get('consumer_secret'),
                     'token'           => $configuration->get('token'),
-                    'token_secret'    => $configuration->get('token_secret')
+                    'token_secret'    => $configuration->get('token_secret'),
                 )
             )
         );

@@ -7,9 +7,8 @@ use Guzzle\Http\EntityBody;
 
 class MultiResultResponse extends SelfParsingResponse implements \Countable, \Iterator
 {
-
     /**
-     * Makes Meetup API Data available on the Data attribute
+     * Makes Meetup API Data available on the Data attribute.
      */
     public function parseMeetupApiData()
     {
@@ -20,9 +19,10 @@ class MultiResultResponse extends SelfParsingResponse implements \Countable, \It
 
     /**
      * (PHP 5 &gt;= 5.1.0)<br/>
-     * Count elements of an object
+     * Count elements of an object.
      *
      * @link http://php.net/manual/en/countable.count.php
+     *
      * @return int The custom count as an integer.
      */
     public function count()
@@ -84,12 +84,12 @@ class MultiResultResponse extends SelfParsingResponse implements \Countable, \It
      *
      * @param Closure $p The predicate.
      *
-     * @return boolean TRUE, if the predicate yields TRUE for all elements, FALSE otherwise.
+     * @return bool TRUE, if the predicate yields TRUE for all elements, FALSE otherwise.
      */
     public function forAll(Closure $p)
     {
         foreach ($this->data as $key => $element) {
-            if ( ! $p($key, $element)) {
+            if (!$p($key, $element)) {
                 return false;
             }
         }
@@ -99,9 +99,10 @@ class MultiResultResponse extends SelfParsingResponse implements \Countable, \It
 
     /**
      * (PHP 5 &gt;= 5.0.0)<br/>
-     * Return the current element
+     * Return the current element.
      *
      * @link http://php.net/manual/en/iterator.current.php
+     *
      * @return mixed Can return any type.
      */
     public function current()
@@ -111,9 +112,10 @@ class MultiResultResponse extends SelfParsingResponse implements \Countable, \It
 
     /**
      * (PHP 5 &gt;= 5.0.0)<br/>
-     * Move forward to next element
+     * Move forward to next element.
      *
      * @link http://php.net/manual/en/iterator.next.php
+     *
      * @return void Any returned value is ignored.
      */
     public function next()
@@ -123,9 +125,10 @@ class MultiResultResponse extends SelfParsingResponse implements \Countable, \It
 
     /**
      * (PHP 5 &gt;= 5.0.0)<br/>
-     * Return the key of the current element
+     * Return the key of the current element.
      *
      * @link http://php.net/manual/en/iterator.key.php
+     *
      * @return mixed scalar on success, or null on failure.
      */
     public function key()
@@ -135,11 +138,12 @@ class MultiResultResponse extends SelfParsingResponse implements \Countable, \It
 
     /**
      * (PHP 5 &gt;= 5.0.0)<br/>
-     * Checks if current position is valid
+     * Checks if current position is valid.
      *
      * @link http://php.net/manual/en/iterator.valid.php
-     * @return boolean The return value will be casted to boolean and then evaluated.
-     * Returns true on success or false on failure.
+     *
+     * @return bool The return value will be casted to boolean and then evaluated.
+     *              Returns true on success or false on failure.
      */
     public function valid()
     {
@@ -148,9 +152,10 @@ class MultiResultResponse extends SelfParsingResponse implements \Countable, \It
 
     /**
      * (PHP 5 &gt;= 5.0.0)<br/>
-     * Rewind the Iterator to the first element
+     * Rewind the Iterator to the first element.
      *
      * @link http://php.net/manual/en/iterator.rewind.php
+     *
      * @return void Any returned value is ignored.
      */
     public function rewind()

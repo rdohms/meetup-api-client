@@ -1,6 +1,5 @@
 <?php
 
-
 namespace DMS\Service\Meetup\Response;
 
 use Guzzle\Common\Collection;
@@ -12,7 +11,7 @@ class SingleResultResponseTest extends \PHPUnit_Framework_TestCase
         $code = 200;
 
         $headers = new Collection(array(
-            'Content-Type' => 'application/json'
+            'Content-Type' => 'application/json',
         ));
 
         $content = json_encode(array(
