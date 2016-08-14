@@ -7,7 +7,7 @@ class RateLimitPluginProxy extends RateLimitPlugin
     public $slowdowns = 0;
 
     /**
-     * Override and capture slowdowns
+     * Override and capture slowdowns.
      */
     protected function slowdownRequests()
     {
@@ -15,5 +15,4 @@ class RateLimitPluginProxy extends RateLimitPlugin
 
         $this->slowdowns++;
     }
-
 }

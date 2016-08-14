@@ -1,6 +1,5 @@
 <?php
 
-
 namespace DMS\Service\Meetup\Response;
 
 use Guzzle\Common\Collection;
@@ -80,18 +79,18 @@ class MultiResultResponseTest extends \PHPUnit_Framework_TestCase
     private function createResponse()
     {
         $code = 200;
-        $headers = new Collection(array('Content-Type' => 'application/json'));
+        $headers = new Collection(['Content-Type' => 'application/json']);
 
         $content = json_encode(
-            array(
-                'meta' => array('self' => 'me'),
-                'results' => array(
-                    array('id' => 1),
-                    array('id' => 2),
-                    array('id' => 3),
-                    array('id' => 4),
-                ),
-            )
+            [
+                'meta'    => ['self' => 'me'],
+                'results' => [
+                    ['id' => 1],
+                    ['id' => 2],
+                    ['id' => 3],
+                    ['id' => 4],
+                ],
+            ]
         );
 
         return new MultiResultResponse($code, $headers, $content);
@@ -99,32 +98,32 @@ class MultiResultResponseTest extends \PHPUnit_Framework_TestCase
 
     public function filterData()
     {
-        return array(
-            array(
+        return [
+            [
                 function (array $item) {
                     return $item['id'] < 3;
                 },
-                array(array('id' => 1), array('id' => 2))
-            )
-        );
-
+                [['id' => 1], ['id' => 2]],
+            ],
+        ];
     }
 
     public function mapData()
     {
-        return array(
-            array(
+        return [
+            [
                 function (array $item) {
                     $item['id'] *= 2;
+
                     return $item;
                 },
-                array(
-                    array('id' => 2),
-                    array('id' => 4),
-                    array('id' => 6),
-                    array('id' => 8),
-                )
-            )
-        );
+                [
+                    ['id' => 2],
+                    ['id' => 4],
+                    ['id' => 6],
+                    ['id' => 8],
+                ],
+            ],
+        ];
     }
 }

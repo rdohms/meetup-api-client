@@ -1,13 +1,12 @@
 <?php
+
 namespace DMS\Service\Meetup;
 
-use DMS\Service\Meetup\MeetupKeyAuthClient;
 use Guzzle\Http\Message\Request;
 use Guzzle\Tests\GuzzleTestCase;
 
 class MeetupKeyAuthClientTest extends GuzzleTestCase
 {
-
     public function testFactory()
     {
         $client = $this->buildClient();
@@ -21,7 +20,7 @@ class MeetupKeyAuthClientTest extends GuzzleTestCase
      */
     public function testFactoryValidation()
     {
-        $config = array();
+        $config = [];
         MeetupKeyAuthClient::factory($config);
     }
 
@@ -30,7 +29,7 @@ class MeetupKeyAuthClientTest extends GuzzleTestCase
         $client = $this->buildClient();
         $this->setMockResponse($client, 'V2/GetRSVPs');
 
-        $response = $client->getRsvps(array('event_id' => 'some-id'));
+        $response = $client->getRsvps(['event_id' => 'some-id']);
 
         $this->assertInstanceOf('\DMS\Service\Meetup\Response\MultiResultResponse', $response);
         $this->assertCount(2, $response);
@@ -41,7 +40,7 @@ class MeetupKeyAuthClientTest extends GuzzleTestCase
         $client = $this->buildClient();
         $this->setMockResponse($client, 'V2/GetRSVP');
 
-        $response = $client->getRsvp(array('id' => '702769262'));
+        $response = $client->getRsvp(['id' => '702769262']);
 
         $this->assertInstanceOf('\DMS\Service\Meetup\Response\SingleResultResponse', $response);
 
@@ -53,7 +52,7 @@ class MeetupKeyAuthClientTest extends GuzzleTestCase
         $client = $this->buildClient();
         $this->setMockResponse($client, 'V2/GetRSVPs');
 
-        $response = $client->getRsvps(array('event_id' => 'some-id'));
+        $response = $client->getRsvps(['event_id' => 'some-id']);
 
         $requests = $this->getMockedRequests();
         /** @var Request $request */
@@ -66,9 +65,9 @@ class MeetupKeyAuthClientTest extends GuzzleTestCase
 
     protected function buildClient()
     {
-        $config = array(
-            'key' => 'mykey'
-        );
+        $config = [
+            'key' => 'mykey',
+        ];
 
         $client = MeetupKeyAuthClient::factory($config);
 

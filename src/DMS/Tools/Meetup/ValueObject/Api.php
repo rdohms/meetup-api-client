@@ -22,28 +22,29 @@ class Api
     /**
      * @var array
      */
-    public $operations = array();
+    public $operations = [];
 
     /**
-     * Build a new API Object
+     * Build a new API Object.
      *
      * @param string $name
      * @param string $version
      * @param string $description
+     *
      * @return static
      */
     public static function build($name, $version, $description)
     {
-        $api              = new static();
-        $api->name        = $name;
-        $api->apiVersion  = $version;
+        $api = new static();
+        $api->name = $name;
+        $api->apiVersion = $version;
         $api->description = $description;
 
         return $api;
     }
 
     /**
-     * Adds a new operation
+     * Adds a new operation.
      *
      * @param Operation $operation
      */
@@ -66,7 +67,7 @@ class Api
     }
 
     /**
-     * Outputs Guzzle Json structure
+     * Outputs Guzzle Json structure.
      *
      * @return string
      */
@@ -77,6 +78,7 @@ class Api
 
     /**
      * @param string $name
+     *
      * @return Operation
      */
     public function getOperation($name)

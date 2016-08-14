@@ -6,8 +6,7 @@ use DMS\Tools\Meetup\Helper\DuplicateResolver;
 use DMS\Tools\Meetup\ValueObject\Api;
 use DMS\Tools\Meetup\ValueObject\Operation;
 use Guzzle\Http\Client;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
+use MathiasGrimm\ArrayPath\ArrayPath as arr;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\DialogHelper;
 use Symfony\Component\Console\Helper\TableHelper;
@@ -15,14 +14,13 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use MathiasGrimm\ArrayPath\ArrayPath as arr;
 
 /**
- * Class DocsToJsonCommand
+ * Class DocsToJsonCommand.
  */
 class DocsToJsonCommand extends Command
 {
-    const API_DOCS = "http://api.meetup.com/docs";
+    const API_DOCS = 'http://api.meetup.com/docs';
 
     /**
      * @var InputInterface
@@ -42,15 +40,15 @@ class DocsToJsonCommand extends Command
     /**
      * @var array
      */
-    protected $definitions = array();
+    protected $definitions = [];
 
     /**
      * @var array
      */
-    protected $apis = array();
+    protected $apis = [];
 
     /**
-     * Setup Command
+     * Setup Command.
      */
     protected function configure()
     {
@@ -59,7 +57,7 @@ class DocsToJsonCommand extends Command
             ->setDescription(
                 'Parses online json documentation into Guzzle Service definitions'
             )
-            ->setDefinition(array(
+            ->setDefinition([
                 new InputOption('debug-names', 'd', InputOption::VALUE_NONE, 'Show name conversion info'),
                 new InputArgument(
                     'target-dir',
@@ -67,17 +65,16 @@ class DocsToJsonCommand extends Command
                     'Where to save generated files',
                     sys_get_temp_dir()
                 ),
-            ))
-        ;
+            ]);
     }
 
     /**
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->input  = $input;
+        $this->input = $input;
         $this->output = $output;
 
         $this->dialog = $this->getHelperSet()->get('dialog');
@@ -87,40 +84,39 @@ class DocsToJsonCommand extends Command
     }
 
     /**
-     * Parse API Docs
+     * Parse API Docs.
      */
     protected function parseDocuments()
     {
-        $this->apis = array(
-            3 => Api::build('Meetup', 3, 'Meetup API v3 methods'),
-            2 => Api::build('Meetup', 2, 'Meetup API v2 methods'),
-            1 => Api::build('Meetup', 1, 'Meetup API v1 methods'),
+        $this->apis = [
+            3        => Api::build('Meetup', 3, 'Meetup API v3 methods'),
+            2        => Api::build('Meetup', 2, 'Meetup API v2 methods'),
+            1        => Api::build('Meetup', 1, 'Meetup API v1 methods'),
             'stream' => Api::build('Meetup', 'stream', 'Meetup API Stream methods'),
-        );
+        ];
 
         $this->output->writeln('Downloading data from API docs ...');
         $data = $this->getApiData();
 
         /** @var TableHelper $nameConversionTable */
         $nameConversionTable = $this->getHelper('table');
-        $nameConversionTable->setHeaders(array('v', 'Docs Name', 'Method', 'Path', 'Final Method Name'));
+        $nameConversionTable->setHeaders(['v', 'Docs Name', 'Method', 'Path', 'Final Method Name']);
 
         $this->output->writeln('Parsing data from API docs ...');
         foreach ($data['docs'] as $definition) {
-
             $operation = Operation::createFromApiJsonDocs($definition);
 
             if ($operation === null) {
                 continue;
             }
 
-            $nameConversionTable->addRow(array(
+            $nameConversionTable->addRow([
                 $operation->version,
                 arr::get('name', $definition),
                 arr::get('http_method', $definition),
                 arr::get('path', $definition),
-                $operation->name
-            ));
+                $operation->name,
+            ]);
 
             $this->apis[$operation->version]->addOperation($operation);
         }
@@ -133,7 +129,7 @@ class DocsToJsonCommand extends Command
     }
 
     /**
-     * Read API json
+     * Read API json.
      *
      * @return array|bool|float|int|string
      */
@@ -151,7 +147,7 @@ class DocsToJsonCommand extends Command
 
         $this->output->writeln('Dumping data from API docs ...');
         foreach ($this->apis as $api) {
-            $filename = $path . '/' . sprintf('meetup_v%s_services.json', $api->apiVersion);
+            $filename = $path.'/'.sprintf('meetup_v%s_services.json', $api->apiVersion);
 
             $this->output->writeln(sprintf('Writing to %s ...', $filename));
             file_put_contents($filename, $api->toJson());

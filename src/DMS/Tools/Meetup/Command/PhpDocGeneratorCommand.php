@@ -13,7 +13,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class PhpDocGeneratorCommand extends Command
 {
     const RESPONSE_SINGLE = 'SingleResultResponse';
-    const RESPONSE_MULTI  = 'MultiResultResponse ';
+    const RESPONSE_MULTI = 'MultiResultResponse ';
 
     /**
      * @var InputInterface
@@ -33,8 +33,7 @@ class PhpDocGeneratorCommand extends Command
     /**
      * @var array
      */
-    protected $definitions = array();
-
+    protected $definitions = [];
 
     protected function configure()
     {
@@ -42,15 +41,15 @@ class PhpDocGeneratorCommand extends Command
             ->setName('dms:meetup:generate-phpdoc')
             ->setDescription('Generates phpDoc code to document available methods in the client using @method syntax.')
             ->setDefinition(
-                array(
+                [
                     new InputArgument('file', InputArgument::REQUIRED, 'JSON file with service definitions.'),
-                )
+                ]
             );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->input  = $input;
+        $this->input = $input;
         $this->output = $output;
         $this->dialog = $this->getHelperSet()->get('dialog');
 
@@ -59,9 +58,9 @@ class PhpDocGeneratorCommand extends Command
 
         $operations = $serviceDescriptions->getOperations();
 
-        $phpDocs = array();
+        $phpDocs = [];
         foreach ($operations as $operation) {
-            /** @var $operation Operation */
+            /* @var $operation Operation */
             $phpDocs[$operation->getName()] = sprintf(
                 '* @method %s %s(array $args = array())',
                 ($this->isMulti($operation)) ? self::RESPONSE_MULTI : self::RESPONSE_SINGLE,
@@ -74,13 +73,13 @@ class PhpDocGeneratorCommand extends Command
         foreach ($phpDocs as $phpDoc) {
             $this->output->writeln($phpDoc);
         }
-
     }
 
     /**
-     * Checks if the excepted response is Multi or Single
+     * Checks if the excepted response is Multi or Single.
      *
      * @param Operation $operation
+     *
      * @return bool
      */
     protected function isMulti($operation)
@@ -94,6 +93,5 @@ class PhpDocGeneratorCommand extends Command
         }
 
         return true;
-
     }
 }

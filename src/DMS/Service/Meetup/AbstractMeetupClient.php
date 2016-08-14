@@ -3,19 +3,18 @@
 namespace DMS\Service\Meetup;
 
 use DMS\Service\Meetup\Plugin\RateLimitPlugin;
+use DMS\Service\Meetup\Response\MultiResultResponse;
+use DMS\Service\Meetup\Response\SingleResultResponse;
 use Guzzle\Common\Collection;
 use Guzzle\Service\Client;
 use Guzzle\Service\Description\Operation;
 use Guzzle\Service\Description\ServiceDescription;
-use DMS\Service\Meetup\Response\SingleResultResponse;
-use DMS\Service\Meetup\Response\MultiResultResponse;
 
 /**
- * Class AbstractMeetupClient
+ * Class AbstractMeetupClient.
  *
  * This is the foundation for the clients that implement proper Authentication methods.
  *
- * @package DMS\Service\Meetup
  *
  * @method SingleResultResponse createBatch(array $args = array())
  * @method SingleResultResponse createEvent(array $args = array())
@@ -145,7 +144,7 @@ use DMS\Service\Meetup\Response\MultiResultResponse;
 abstract class AbstractMeetupClient extends Client
 {
     /**
-     * Constructor
+     * Constructor.
      *
      * {@inheritdoc}
      */
@@ -155,45 +154,46 @@ abstract class AbstractMeetupClient extends Client
     }
 
     /**
-     * Returns the default values for incoming configuration parameters
+     * Returns the default values for incoming configuration parameters.
      *
      * @return array
      */
     public static function getDefaultParameters()
     {
-        return array();
+        return [];
     }
 
     /**
-     * Defines the configuration parameters that are required for client
+     * Defines the configuration parameters that are required for client.
      *
      * @return array
      */
     public static function getRequiredParameters()
     {
-        return array();
+        return [];
     }
 
     /**
-     * Builds array of configurations into final config
+     * Builds array of configurations into final config.
      *
      * @param array $config
+     *
      * @return Collection
      */
-    public static function buildConfig($config = array())
+    public static function buildConfig($config = [])
     {
-        $default  = static::getDefaultParameters();
+        $default = static::getDefaultParameters();
         $required = static::getRequiredParameters();
         $config = Collection::fromConfig($config, $default, $required);
 
-        $standardHeaders = array(
+        $standardHeaders = [
             'Accept-Charset' => 'utf-8',
-            'Accept' => 'application/json',
-        );
+            'Accept'         => 'application/json',
+        ];
 
-        $requestOptions = array(
+        $requestOptions = [
             'headers' => $standardHeaders,
-        );
+        ];
 
         $config->add('request.options', $requestOptions);
 
@@ -201,16 +201,16 @@ abstract class AbstractMeetupClient extends Client
     }
 
     /**
-     * Loads API method definitions
+     * Loads API method definitions.
      *
      * @param \Guzzle\Service\Client $client
      */
     public static function loadDefinitions(Client $client)
     {
-        $serviceDescriptions = ServiceDescription::factory(__DIR__ . '/Resources/config/meetup.json');
+        $serviceDescriptions = ServiceDescription::factory(__DIR__.'/Resources/config/meetup.json');
 
         foreach ($serviceDescriptions->getOperations() as $operation) {
-            /** @var $operation Operation */
+            /* @var $operation Operation */
             $operation->setClass('DMS\Service\Meetup\Command\MeetupCommand');
         }
 
@@ -227,7 +227,7 @@ abstract class AbstractMeetupClient extends Client
             return;
         }
 
-        $rateFactor = (array_key_exists('rate_limit_factor', $config))? $config['rate_limit_factor'] : null;
+        $rateFactor = (array_key_exists('rate_limit_factor', $config)) ? $config['rate_limit_factor'] : null;
         $client->addSubscriber(new RateLimitPlugin($rateFactor));
     }
 
@@ -235,10 +235,9 @@ abstract class AbstractMeetupClient extends Client
      * Shortcut for executing Commands in the Definitions.
      *
      * @param string $method
-     * @param array $args
+     * @param array  $args
      *
      * @return mixed|void
-     *
      */
     public function __call($method, $args)
     {
