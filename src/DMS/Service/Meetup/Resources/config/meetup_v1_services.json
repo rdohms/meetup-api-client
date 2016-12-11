@@ -237,24 +237,6 @@
             "summary": "API method for accessing meetup topics",
             "uri": "/topics",
             "notes": "At least one of the required parameter(s) must be supplied with the request."
-        },
-        "Widget": {
-            "version": "1",
-            "name": "Widget",
-            "httpMethod": null,
-            "parameters": [],
-            "summary": null,
-            "uri": "/widget",
-            "notes": null
-        },
-        "WidgetQuery": {
-            "version": "1",
-            "name": "WidgetQuery",
-            "httpMethod": null,
-            "parameters": [],
-            "summary": null,
-            "uri": "/widget_query",
-            "notes": null
         }
     }
 }
