@@ -796,7 +796,7 @@
                 "lang": {
                     "location": "query",
                     "required": false,
-                    "description": "Language preference used on the site. Valid values are en-us, en-au, de-de, es, es-es, fr-fr, it-it, pt-br, ja-jp, nl-nl, ko-kr, en_us, en_au, de_de, es, es_es, fr_fr, it_it, pt_br, ja_jp, nl_nl, ko_kr, en, en, de, es, es, fr, it, pt, ja, nl, ko"
+                    "description": "Language preference used on the site. Valid values are en-us, en-au, de-de, es, es-es, fr-fr, it-it, pt-br, ja-jp, nl-nl, ko-kr, pl-pl, th-th, tr-tr, sv-se, en_us, en_au, de_de, es, es_es, fr_fr, it_it, pt_br, ja_jp, nl_nl, ko_kr, pl_pl, th_th, tr_tr, sv_se, en, en, de, es, es, fr, it, pt, ja, nl, ko, pl, th, tr, sv"
                 },
                 "radius": {
                     "location": "query",

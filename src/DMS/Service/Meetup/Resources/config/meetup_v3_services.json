@@ -31,7 +31,7 @@
                 "type": {
                     "location": "query",
                     "required": false,
-                    "description": "A required identifier for type of abuse you are reporting. Acceptable values include dangerous, graphic_content, graphic_photo, harmful_activities, licensed_services, not_accurate, not_community, not_irl, nudity, other, promotion_focus, sex, transactional, violence"
+                    "description": "A required identifier for type of abuse you are reporting. Acceptable values include dangerous, graphic_content, graphic_photo, harmful_activities, licensed_services, not_accurate, not_community, not_irl, nudity, other, promotion_focus, sex, smyte_warn, transactional, violence"
                 }
             },
             "summary": "Submits a new abuse report for a target group. Abuse reports will be followed up on by our Community Support team.",
@@ -1346,7 +1346,7 @@
                 "lang": {
                     "location": "query",
                     "required": false,
-                    "description": "Member's language preference.\nValue may be one of \"de-DE\", \"en-AU\", \"en-US\", \"es\", \"es-ES\", \"fr-FR\", \"it-IT\", \"ja-JP\", \"ko-KR\", \"nl-NL\", or \"pt-BR\""
+                    "description": "Member's language preference.\nValue may be one of \"de-DE\", \"en-AU\", \"en-US\", \"es\", \"es-ES\", \"fr-FR\", \"it-IT\", \"ja-JP\", \"ko-KR\", \"nl-NL\", \"pl-PL\", \"pt-BR\", \"sv-SE\", \"th-TH\", or \"tr-TR\""
                 },
                 "lat": {
                     "location": "query",
@@ -1377,6 +1377,16 @@
                     "location": "query",
                     "required": false,
                     "description": "Approximate target longitude"
+                },
+                "text": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Raw full text search query"
+                },
+                "radius": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Radius in miles. May be 0.0-100.0, 'global' or 'smart', a dynamic radius based on the number of active groups in the area. Defaults to member's preferred radius"
                 },
                 "fields": {
                     "location": "query",
@@ -1778,6 +1788,101 @@
             "uri": "/find/topics",
             "notes": "This endpoint uses HTTP [Link header based pagination](/meetup_api/docs/#v3_json)."
         },
+        "GetFindVenues": {
+            "version": "3",
+            "name": "GetFindVenues",
+            "httpMethod": "GET",
+            "parameters": {
+                "zip": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Zipcode of location to limit search to"
+                },
+                "text": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Raw full text search query"
+                },
+                "country": {
+                    "location": "query",
+                    "required": false,
+                    "description": "A valid two charater country code, desfaults to US"
+                },
+                "location": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Raw text location query"
+                },
+                "lon": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Approximate longitude"
+                },
+                "radius": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Radius in miles. Defaults to 25.0"
+                },
+                "fields": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Comma-delimited list of optional fields to append to the response"
+                },
+                "lat": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Approximate latitude"
+                },
+                "desc": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "rating": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Order by member rating"
+                },
+                "distance": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Order by distance for search location (default)"
+                },
+                "rating_count": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Order by number of member ratings"
+                },
+                "page": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "offset": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "order": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "only": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "omit": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                }
+            },
+            "summary": "Returns list of venues based on location",
+            "uri": "/find/venues",
+            "notes": "\nYou can provide location in the form of zip+country,\nlat+lon or a raw location search. If you do not supply\nsome explicit form of location information, the results\nwill be based on the authenticated Member's profile location,\nfalling back on the request's IP' geographic location.\n\nYou can expand the search radius, which defaults to\n25.0 miles to search a wider area.\n         "
+        },
         "GetGroup": {
             "version": "3",
             "name": "GetGroup",
@@ -1941,7 +2046,7 @@
                 "scroll": {
                     "location": "query",
                     "required": false,
-                    "description": "A string representing an alias for a point on a timeline.\n\n__recent_past__: Scroll to the last past Meetup Event. If there are no recently events in the past,\nthis defaults to __next_upcoming__. Unless otherwise specified, this will apply a 'status' filter\nof \"upcoming\" and \"past\".\n\n__next_upcoming__: Scroll to the next upcoming Meetup event. Unless otherwise specified, this will apply a 'status'\nfilter of \"upcoming\" and \"past\""
+                    "description": "A string representing an alias for a point on a timeline.\n\n__recent_past__: Scroll to the last past Meetup Event. If there are no recently events in the past,\nthis defaults to __next_upcoming__. Unless otherwise specified, this will apply a 'status' filter\nof \"upcoming\" and \"past\".\n\n__next_upcoming__: Scroll to the next upcoming Meetup event. Unless otherwise specified, this will apply a 'status'\nfilter of \"upcoming\" and \"past\"\n\n__future_or_past__: Scroll to the next ongoing or upcoming Meetup event. If there are no ongoing or upcoming events,\nthis defaults to returning past events. Unless otherwise specified, this will apply a 'status'\nfilter of \"upcoming\" and \"past\".\n\n"
                 },
                 "page": {
                     "location": "query",
@@ -2808,6 +2913,11 @@
                     "required": false,
                     "description": "Positive Integer: Minumum range of the number of the past events held"
                 },
+                "chapters": {
+                    "location": "query",
+                    "required": false,
+                    "description": "List of Integer: the chapter ids that may belong to the organization"
+                },
                 "member_count_max": {
                     "location": "query",
                     "required": false,
@@ -2832,6 +2942,11 @@
                     "location": "query",
                     "required": false,
                     "description": "Positive Integer: Minumum range of the average number of repeat rsvpers"
+                },
+                "chapter_urlname": {
+                    "location": "query",
+                    "required": false,
+                    "description": "List of String: the urlnames of chapters that may belong to the organization"
                 },
                 "average_age_min": {
                     "location": "query",
@@ -2883,6 +2998,11 @@
                     "required": false,
                     "description": "List of Integers: the ids of topic of the group"
                 },
+                "query": {
+                    "location": "query",
+                    "required": false,
+                    "description": "String: raw query to search from group name, description, leadership member name, or city"
+                },
                 "upcoming_events_max": {
                     "location": "query",
                     "required": false,
@@ -2923,6 +3043,11 @@
                     "required": false,
                     "description": "Milliseconds since epoch: Maximum range of the founded dates of the groups"
                 },
+                "excluded_chapters": {
+                    "location": "query",
+                    "required": false,
+                    "description": "List of Integer: the chapters to exclude from the result"
+                },
                 "member_count_min": {
                     "location": "query",
                     "required": false,
@@ -2936,7 +3061,7 @@
                 "name": {
                     "location": "query",
                     "required": false,
-                    "description": "String: Name of the group looking for"
+                    "description": "By the name of the groups"
                 },
                 "next_event_max": {
                     "location": "query",
@@ -3097,6 +3222,11 @@
                     "location": "query",
                     "required": false,
                     "description": "List of Integers: The chapters which the member belongs to"
+                },
+                "query": {
+                    "location": "query",
+                    "required": false,
+                    "description": "String: raw query string to search from member name or city"
                 },
                 "is_organizer": {
                     "location": "query",
@@ -3361,7 +3491,7 @@
                 "lang": {
                     "location": "query",
                     "required": false,
-                    "description": "Defines a language preference for ordering results. Valid values are en-USen-AUde-DEeses-ESfr-FRit-ITpt-BRja-JPnl-NLko-KRen-aude-dept-bren-uses-esnl-nlit-itfr-frko-krja-jpendefritptjanlko. You may also substitute this with the Accept-Language header"
+                    "description": "Defines a language preference for ordering results. Valid values are en-USen-AUde-DEeses-ESfr-FRit-ITpt-BRja-JPnl-NLko-KRpl-PLth-THtr-TRsv-SEpt-brpl-plit-itsv-seja-jpen-aude-deen-usth-thtr-tres-esnl-nlfr-frko-krendefritptjanlkoplthtrsv. You may also substitute this with the Accept-Language header"
                 },
                 "other_topics": {
                     "location": "query",
@@ -3437,6 +3567,11 @@
                     "location": "query",
                     "required": false,
                     "description": "Comma delimited list of up to 100 topic ids to help inform recommendations"
+                },
+                "sort": {
+                    "location": "query",
+                    "required": false,
+                    "description": "How to order the results. Valid values are \"default\" or \"static\"."
                 },
                 "radius": {
                     "location": "query",
