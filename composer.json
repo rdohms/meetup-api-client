@@ -11,8 +11,9 @@
     ],
 
     "require": {
-        "php": "^5.3.10 | ^7.0",
-        "guzzle/guzzle": "~3.7"
+        "php": "^7.1",
+        "guzzlehttp/guzzle-services": "^1.1",
+        "gimler/guzzle-description-loader": "^0.0.4"
     },
 
     "require-dev": {
