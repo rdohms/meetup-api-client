@@ -22,7 +22,12 @@ class Api
     /**
      * @var array
      */
-    public $operations = array();
+    public $operations = [];
+
+    /**
+     * @var array
+     */
+    public $models = [];
 
     /**
      * Build a new API Object.
@@ -52,6 +57,18 @@ class Api
     {
         $this->operations[$operation->name] = $operation;
         ksort($this->operations);
+
+        $this->addModelFromOperation($operation);
+    }
+
+    private function addModelFromOperation(Operation $operation): void
+    {
+        $model = ($operation->response !== null)
+            ? Model::createFromConfig($operation->response, $operation->hasListResult())
+            : new SimpleModel();
+
+        $this->models[$operation->name] = $model;
+        ksort($this->models);
     }
 
     /**

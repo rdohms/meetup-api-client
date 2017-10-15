@@ -28,7 +28,7 @@ class Operation
     /**
      * @var array
      */
-    public $parameters = array();
+    public $parameters = [];
 
     /**
      * @var string
@@ -46,39 +46,58 @@ class Operation
     public $notes;
 
     /**
+     * @var array
+     */
+    public $response;
+
+    /**
+     * @var string
+     */
+    public $tag;
+
+    /**
+     * @var string
+     */
+    public $responseModel;
+
+    /**
      * @param $definition
      *
      * @return static
      */
     public static function createFromApiJsonDocs($definition)
     {
-        if (arr::get('group', $definition) == 'deprecated') {
+        if (arr::get('group', $definition) === 'deprecated') {
             return;
         }
 
         $operation = new static();
 
-        $operation->version = (arr::get('group', $definition) == 'streams')
+        $operation->version = (arr::get('group', $definition) === 'streams')
             ? 'stream'
             : arr::get('api_version', $definition, '1');
 
         $operation->httpMethod = arr::get('http_method', $definition);
-        $operation->summary = arr::get('desc', $definition);
-        $operation->notes = arr::get('param_notes', $definition);
+        $operation->summary    = arr::get('desc', $definition);
+        $operation->notes      = arr::get('param_notes', $definition);
         $operation->parsePath(arr::get('path', $definition));
 
-        foreach (arr::get('params', $definition, array()) as $param => $desc) {
+        $operation->response = arr::get('response', $definition);
+        $operation->tag      = arr::get('tag', $definition);
+
+        foreach (arr::get('params', $definition, []) as $param => $desc) {
             // Always false due to complex rules on meetup's side (one of x is required)
             $operation->addParameter(str_replace('*', '', $param), 'query', false, $desc);
         }
 
-        foreach (arr::get('orders', $definition, array()) as $param => $desc) {
+        foreach (arr::get('orders', $definition, []) as $param => $desc) {
             $operation->addParameter($param, 'query', false, $desc);
         }
 
         $operation->addStandardParameters(arr::get('http_method', $definition));
 
         $operation->name = OperationNameConverter::parseOperationName($operation);
+        $operation->responseModel = $operation->name;
 
         return $operation;
     }
@@ -90,7 +109,7 @@ class Operation
      */
     protected function addStandardParameters($httpMethod)
     {
-        if ($httpMethod != 'GET') {
+        if ($httpMethod !== 'GET') {
             return;
         }
 
@@ -109,15 +128,15 @@ class Operation
      */
     protected function parsePath($path)
     {
-        $uriParams = array();
-        $uriParamsCount = preg_match_all("/(:[^\/]*)/", $path, $uriParams);
-        $translateParams = array();
+        $uriParams       = [];
+        $uriParamsCount  = preg_match_all("/(:[^\/]*)/", $path, $uriParams);
+        $translateParams = [];
 
         foreach ($uriParams[0] as $rawParam) {
             $param = str_replace(':', '', $rawParam);
             $this->addParameter($param, 'uri', true);
 
-            $translateParams[$rawParam] = '{'.$param.'}';
+            $translateParams[$rawParam] = '{' . $param . '}';
         }
 
         $this->uri = strtr($path, $translateParams);
@@ -144,6 +163,32 @@ class Operation
         }
 
         $this->parameters[$name] = Parameter::build($location, $required, $description);
+    }
+
+    public function hasListResult(): bool
+    {
+        if ($this->tag === 'list') {
+            return true;
+        }
+
+        if ($this->httpMethod !== 'GET') {
+            return false;
+        }
+
+        if ($this->tag === 'get') {
+            return false;
+        }
+
+        if ($this->hasParameter('id')) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function hasParameter(string $parameter): bool
+    {
+        return isset($this->parameters[$parameter]);
     }
 
     /**
