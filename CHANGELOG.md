@@ -1,3 +1,8 @@
+3.0.0 / 
+==================
+ * Migrated to Guzzle 6 via guzzle-services
+ * Rewritten from the ground up
+
 2.0.0 / 2014-05-01
 ==================
  * Auto API Parity: added a new command to parse json docs and auto generate operation definitions
