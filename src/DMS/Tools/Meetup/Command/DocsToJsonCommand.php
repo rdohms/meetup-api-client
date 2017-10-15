@@ -5,7 +5,7 @@ namespace DMS\Tools\Meetup\Command;
 use DMS\Tools\Meetup\Helper\DuplicateResolver;
 use DMS\Tools\Meetup\ValueObject\Api;
 use DMS\Tools\Meetup\ValueObject\Operation;
-use Guzzle\Http\Client;
+use GuzzleHttp\Client;
 use MathiasGrimm\ArrayPath\ArrayPath as arr;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\DialogHelper;
@@ -135,10 +135,10 @@ class DocsToJsonCommand extends Command
      */
     public function getApiData()
     {
-        $client = new Client(self::API_DOCS);
-        $response = $client->get()->send();
+        $client = new Client();
+        $response = $client->request('GET', self::API_DOCS);
 
-        return $response->json();
+        return json_decode($response->getBody(), true);
     }
 
     protected function generateDefinitionFiles()
