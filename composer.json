@@ -22,7 +22,11 @@
         "symfony/console": "~2.2",
         "phpunit/phpunit": "^4.8",
         "symfony/var-dumper": "~2.6",
-        "mathiasgrimm/arraypath": "~1.3"
+        "mathiasgrimm/arraypath": "~1.3",
+        "guzzlehttp/oauth-subscriber": "^0.3.0"
+    },
+    "suggest": {
+        "guzzlehttp/oauth-subscriber": "For authenticating with Oauth1.0"
     },
 
     "autoload": {
