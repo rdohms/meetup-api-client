@@ -22,8 +22,15 @@ final class KeyAuthConfig implements ClientConfig
     public function getMiddleware(): array
     {
         return [
-            'add key' => new KeyAuthPlugin($this->key)
+            'add key' => Middleware::mapRequest(new KeyAuthPlugin($this->key))
         ];
     }
 
+    /**
+     * @return string[]
+     */
+    public function getClientConfig(): array
+    {
+        return [];
+    }
 }
