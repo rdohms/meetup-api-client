@@ -1,0 +1,694 @@
+{
+    "name": "Meetup",
+    "apiVersion": "stream",
+    "description": "Meetup API Stream methods",
+    "operations": {
+        "GetEventCommentsStream": {
+            "version": "stream",
+            "name": "GetEventCommentsStream",
+            "httpMethod": "GET",
+            "parameters": {
+                "since_mtime": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Return recent Event Comments with an mtime greater than the supplied time, in milliseconds since the epoch"
+                },
+                "since_count": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Request that some number of recent messages be sent immediately, if available. May not be specified in the same request as since_mtime."
+                },
+                "event_id": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Limit notifications to a specific event id. Use alphanumeric ids for repeating events."
+                },
+                "api_version": {
+                    "location": "query",
+                    "required": false,
+                    "description": "2"
+                },
+                "page": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "offset": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "desc": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "order": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "only": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "omit": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                }
+            },
+            "summary": "\nLive HTTP stream of Event Comments  within public meetup groups. This method uses [chunked\ntransfer encoding](http://en.wikipedia.org/wiki/Chunked_transfer_encoding)\nto maintain a persistent connection with the client. This connection will only be\nterminated for server maintenance or a connection error.\n    ",
+            "uri": "/2/event_comments",
+            "notes": "This method does not require authentication, or any parameters. Applications should\n                           only need a single connection to the stream, and at most 10 connections are allowed\n                           per client IP address.",
+            "response": null,
+            "tag": "http",
+            "responseModel": "GetEventCommentsStream"
+        },
+        "GetOpenEventsStream": {
+            "version": "stream",
+            "name": "GetOpenEventsStream",
+            "httpMethod": "GET",
+            "parameters": {
+                "since_mtime": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Return events with an mtime greater than the supplied time, in milliseconds since the epoch"
+                },
+                "since_count": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Request that some number of recent messages be sent immediately, if available. May not be specified in the same request as since_mtime."
+                },
+                "api_version": {
+                    "location": "query",
+                    "required": false,
+                    "description": "2"
+                },
+                "page": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "offset": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "desc": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "order": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "only": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "omit": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                }
+            },
+            "summary": "\nLive HTTP stream of events within public Meetup groups. This method uses [chunked\ntransfer encoding](http://en.wikipedia.org/wiki/Chunked_transfer_encoding)\nto maintain a persistent connection with the client. This connection will only be\nterminated for server maintenance or a connection error.\n      ",
+            "uri": "/2/open_events",
+            "notes": "This method does not require authentication, or any parameters. Applications should\n                           only need a single connection to the stream, and at most 10 connections are allowed\n                           per client IP address.",
+            "response": {
+                "utc_offset": "The local offset from UTC time, in milliseconds",
+                "rsvp_limit": "The number of \"yes\" rsvps an event can have before members will be added to the waiting list",
+                "venue": [
+                    "Venue, if selected and not hidden",
+                    {
+                        "zip": "if US or Canada",
+                        "lat, lon": "coordinates of venue",
+                        "city, status, country": "City, Country and if in US, State of the venue",
+                        "phone": "phone number of venue",
+                        "address_1": "line 1 of venue address",
+                        "address_2": "line 2 of venue address",
+                        "name": "venue name",
+                        "address_3": "line 3 of venue address",
+                        "id": "venue id",
+                        "api_version": "2"
+                    }
+                ],
+                "venue_visibility": "Set to \"members\" or \"public\". The \"venue\" element will not be present if the visibility is \"members\".",
+                "fee": [
+                    "fee info returned when payment is required",
+                    {
+                        "description": "fee description",
+                        "amount": "amount of the fee",
+                        "currency": "currency accepted for fee",
+                        "api_version": "2"
+                    }
+                ],
+                "description": "HTML Description of the event",
+                "api_version": "2",
+                "mtime": "Last modified time of this event, in milliseconds since the epoch",
+                "event_url": "URL of the event's page on meetup.com",
+                "yes_rsvp_count": "Number of yes RSVPs including guests",
+                "duration": "Event duration in milliseconds, if an end time is specified by the organizer. When not present, a default of 3 hours may be assumed by applications.",
+                "payment_required": " \"1\" if required \"0\" otherwise",
+                "name": "The name of the event",
+                "photo_url": "URL of the event photo, if any",
+                "id": "The event id, May be numeric or alphanumeric, always served as a string",
+                "time": "UTC start time of the event, in milliseconds since the epoch",
+                "status": " \"upcoming\", \"proposed\", \"suggested\", \"canceled\" or \"deleted\" ",
+                "group": [
+                    "Group that is hosting",
+                    {
+                        "join_mode": " \"open\", \"approval\", or \"closed\" ",
+                        "name": "group name",
+                        "id": "group id",
+                        "group_lon": "group longitude, approximate",
+                        "urlname": "group url name",
+                        "api_version": "2",
+                        "category": [
+                            "Group category",
+                            {
+                                "name": "Display name of the category",
+                                "id": "Numeric identifier of the category",
+                                "api_version": "2",
+                                "shortname": "String identifier of the category"
+                            }
+                        ],
+                        "group_photo": [
+                            "Group photo if one is set",
+                            {
+                                "highres_link": "Link to full sized photo",
+                                "photo_link": "Link to standard sized photo",
+                                "photo_id": "Numeric identifier of the photo",
+                                "api_version": "2",
+                                "thumb_link": "Link to thumbnail sized photo"
+                            }
+                        ],
+                        "group_lat": "group latitude, approximate"
+                    }
+                ]
+            },
+            "tag": null,
+            "responseModel": "GetOpenEventsStream"
+        },
+        "GetOpenVenuesStream": {
+            "version": "stream",
+            "name": "GetOpenVenuesStream",
+            "httpMethod": "GET",
+            "parameters": {
+                "since_mtime": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Return recent open venues with an mtime greater then the supplied time, in milliseconds since the epoch"
+                },
+                "since_count": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Request that some number of recent messages be sent immediately, if available. May not be specified in the same request as since_mtime."
+                },
+                "api_version": {
+                    "location": "query",
+                    "required": false,
+                    "description": "2"
+                },
+                "trickle": {
+                    "location": "query",
+                    "required": false,
+                    "description": "When supplied with a request, the Meetup API will push your client the entire Meetup database of public venues in batches of 512"
+                },
+                "page": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "offset": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "desc": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "order": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "only": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "omit": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                }
+            },
+            "summary": "\nLive HTTP stream of the creation and modification of public Meetup venues using\n[chunked encoding](http://en.wikipedia.org/wiki/Chunked_transfer_encoding)\nto maintian a persistent connection with a client. The connection will only be\nterminiated for server maintenance or a connection error. It is suitable for\nlow-level HTTP clients rather than web browsers.\n      ",
+            "uri": "/2/open_venues",
+            "notes": "This method does not require authentication, or any parameters. Applications should\n                           only need a single connection to the stream, and at most 10 connections are allowed\n                           per client IP address. This method can also be used to download all of Meetup's public venues by passing in the URL request parameter 'trickle'",
+            "response": {
+                "zip": "If available, the venue's zipcode",
+                "country": "If available, the name of the venue's country code",
+                "city": "If available, the name of the venue's city",
+                "address_1": "If available, the first address line of the venue",
+                "address_2": "If available, the second address line of the venue",
+                "address_3": "If available, the third address line of the venue",
+                "lon": "If available, the venue's longitude",
+                "api_version": "2",
+                "phone": "If available, the venue's phone number",
+                "name": "If available, the venue's name",
+                "state": "If available and the venue's country is within the US or Canada, the venue's state",
+                "id": "ID of the venue",
+                "lat": "If available, the venue's latitude"
+            },
+            "tag": "http",
+            "responseModel": "GetOpenVenuesStream"
+        },
+        "GetPhotosStream": {
+            "version": "stream",
+            "name": "GetPhotosStream",
+            "httpMethod": "GET",
+            "parameters": {
+                "since_mtime": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Return recent photos with an mtime greater then the supplied time, in millisends since the epoch"
+                },
+                "since_count": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Request that some number of recent messages be sent immediately, if available. May not be specified in the same request as since_mtime."
+                },
+                "api_version": {
+                    "location": "query",
+                    "required": false,
+                    "description": "2"
+                },
+                "page": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "offset": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "desc": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "order": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "only": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "omit": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                }
+            },
+            "summary": "\nThis method serves photo notifications using\n[chunked encoding](http://en.wikipedia.org/wiki/Chunked_transfer_encoding)\nto maintian a persistent connection with a client. The connection will only be\nterminiated for server maintenance or a connection error. It is suitable for\nlow-level HTTP clients rather than web browsers.\n      ",
+            "uri": "/2/photos",
+            "notes": null,
+            "response": null,
+            "tag": "http",
+            "responseModel": "GetPhotosStream"
+        },
+        "GetRsvpsStream": {
+            "version": "stream",
+            "name": "GetRsvpsStream",
+            "httpMethod": "GET",
+            "parameters": {
+                "since_mtime": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Return recent RSVP with an mtime greater than the supplied time, in milliseconds since the epoch"
+                },
+                "since_count": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Request that some number of recent messages be sent immediately, if available. May not be specified in the same request as since_mtime."
+                },
+                "api_version": {
+                    "location": "query",
+                    "required": false,
+                    "description": "2"
+                },
+                "page": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "offset": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "desc": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "order": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "only": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "omit": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                }
+            },
+            "summary": "\nLive HTTP stream of RSVPs within public Meetup groups. This method uses [chunked \ntransfer encoding](http://en.wikipedia.org/wiki/Chunked_transfer_encoding) \nto maintain a persistent connection with the client. This connection will only be \nterminated for server maintenance or a connection error.\n    ",
+            "uri": "/2/rsvps",
+            "notes": "This method does not require authentication, or any parameters. Applications should\n                           only need a single connection to the stream, and at most 10 connections are allowed\n                           per client IP address.",
+            "response": null,
+            "tag": "http",
+            "responseModel": "GetRsvpsStream"
+        },
+        "WebSocketEventCommentsStream": {
+            "version": "stream",
+            "name": "WebSocketEventCommentsStream",
+            "httpMethod": "WS",
+            "parameters": {
+                "since_mtime": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Return recent Event Comments with an mtime greater than the supplied time, in milliseconds since the epoch"
+                },
+                "since_count": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Request that some number of recent messages be sent immediately, if available. May not be specified in the same request as since_mtime."
+                },
+                "event_id": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Limit notifications to a specific event id. Use alphanumeric ids for repeating events."
+                },
+                "api_version": {
+                    "location": "query",
+                    "required": false,
+                    "description": "2"
+                }
+            },
+            "summary": "\nFor browsers that support it, [WebSockets](http://dev.w3.org/html5/websockets/) is a more\nefficient alternative to the long-polling stream. This is a **push only** endpoint and will discard\nany messages received from the client after the socket is open.\n\nBecause browser support for WebSockets is limited, we recommend that you consume this stream\nthrough the [must.js](https://github.com/meetup/must.js#readme) client, which can fallback to long-polling.\n    ",
+            "uri": "/2/event_comments",
+            "notes": "The full URL for this method is **`ws://stream.meetup.com/2/event_comments`**",
+            "response": null,
+            "tag": "websockets",
+            "responseModel": "WebSocketEventCommentsStream"
+        },
+        "WebSocketPhotosStream": {
+            "version": "stream",
+            "name": "WebSocketPhotosStream",
+            "httpMethod": "WS",
+            "parameters": {
+                "since_mtime": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Return recent photos with an mtime greater then the supplied time, in millisends since the epoch"
+                },
+                "since_count": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Request that some number of recent messages be sent immediately, if available. May not be specified in the same request as since_mtime."
+                },
+                "api_version": {
+                    "location": "query",
+                    "required": false,
+                    "description": "2"
+                }
+            },
+            "summary": "\nFor browsers that support it, [WebSockets](http://dev.w3.org/html5/websockets/) is a more\nefficient alternative to the long-polling stream. This is a **push only** endpoint and will discard\nany messages received from the client after the socket is open.\n\nBecause browser support for WebSockets is limited, we recommend that you consume this stream\nthrough the [must.js](https://github.com/meetup/must.js#readme) client, which can fallback to long-polling.\n    ",
+            "uri": "/2/photos",
+            "notes": "The full url for this method is **`ws://stream.meetup.com/2/photos`**",
+            "response": null,
+            "tag": "websockets",
+            "responseModel": "WebSocketPhotosStream"
+        },
+        "WebSocketRsvpsStream": {
+            "version": "stream",
+            "name": "WebSocketRsvpsStream",
+            "httpMethod": "WS",
+            "parameters": {
+                "since_mtime": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Return recent RSVPs with an mtime greater than the supplied time, in milliseconds since the epoch"
+                },
+                "since_count": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Request that some number of recent messages be sent immediately, if available. May not be specified in the same request as since_mtime."
+                },
+                "event_id": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Limit notifications to a specific event id. Use alphanumeric ids for repeating events."
+                },
+                "api_version": {
+                    "location": "query",
+                    "required": false,
+                    "description": "2"
+                }
+            },
+            "summary": "\nFor browsers that support it, [WebSockets](http://dev.w3.org/html5/websockets/) is a more\nefficient alternative to the long-polling stream. This is a **push only** endpoint and will discard\nany messages received from the client after the socket is open.\n\nBecause browser support for WebSockets is limited, we recommend that you consume this stream\nthrough the [must.js](https://github.com/meetup/must.js#readme) client, which can fallback to long-polling.\n    ",
+            "uri": "/2/rsvps",
+            "notes": "The full URL for this method is **`ws://stream.meetup.com/2/rsvps`**",
+            "response": null,
+            "tag": "websockets",
+            "responseModel": "WebSocketRsvpsStream"
+        }
+    },
+    "models": {
+        "GetEventCommentsStream": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "location": "statusCode",
+                    "type": "integer"
+                }
+            }
+        },
+        "GetOpenEventsStream": {
+            "type": "array",
+            "properties": [],
+            "location": "json",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "utc_offset": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "rsvp_limit": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "venue": {
+                        "location": "json",
+                        "type": "object"
+                    },
+                    "venue_visibility": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "fee": {
+                        "location": "json",
+                        "type": "object"
+                    },
+                    "description": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "api_version": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "mtime": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "event_url": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "yes_rsvp_count": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "duration": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "payment_required": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "name": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "photo_url": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "id": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "time": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "status": {
+                        "location": "statusCode",
+                        "type": "integer"
+                    },
+                    "group": {
+                        "location": "json",
+                        "type": "object"
+                    }
+                },
+                "location": null,
+                "items": null
+            }
+        },
+        "GetOpenVenuesStream": {
+            "type": "array",
+            "properties": [],
+            "location": "json",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "zip": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "country": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "city": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "address_1": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "address_2": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "address_3": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "lon": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "api_version": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "phone": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "name": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "state": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "id": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "lat": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "status": {
+                        "location": "statusCode",
+                        "type": "integer"
+                    }
+                },
+                "location": null,
+                "items": null
+            }
+        },
+        "GetPhotosStream": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "location": "statusCode",
+                    "type": "integer"
+                }
+            }
+        },
+        "GetRsvpsStream": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "location": "statusCode",
+                    "type": "integer"
+                }
+            }
+        },
+        "WebSocketEventCommentsStream": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "location": "statusCode",
+                    "type": "integer"
+                }
+            }
+        },
+        "WebSocketPhotosStream": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "location": "statusCode",
+                    "type": "integer"
+                }
+            }
+        },
+        "WebSocketRsvpsStream": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "location": "statusCode",
+                    "type": "integer"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,431 @@
+{
+    "name": "Meetup",
+    "apiVersion": 1,
+    "description": "Meetup API v1 methods",
+    "operations": {
+        "GetActivity": {
+            "version": "1",
+            "name": "GetActivity",
+            "httpMethod": "GET",
+            "parameters": {
+                "member_id": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Returns activity from this member's groups. Must be authenticated as this member"
+                },
+                "page_start": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Starting timestamp for item to return."
+                },
+                "page": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "offset": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "desc": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "order": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "only": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "omit": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                }
+            },
+            "summary": "API method for retrieving the activity feed for a member's groups",
+            "uri": "/activity",
+            "notes": null,
+            "response": {
+                "member_id": "ID of member who performed the action.",
+                "group_name": "Name of the group where the action took place.",
+                "group_id": "Unique ID of the group where the action took place.",
+                "item_type": "Type of activity that occurred. One of: new_member, photo_upload, new_discussion, new_reply, new_rsvp, edit_rsvp, photo_tag, photo_comment, new_checkin",
+                "link": "URL to the content represented in the action.",
+                "published": "Date and time of when the action occurred.",
+                "id": "Unique identifier for the feed item.",
+                "photo_url": "Link to the profile photo of the member represented (except in the case of photo actions, where the photo URL is used instead).",
+                "title": "A short description of the action that occurred.",
+                "member_name": "Member who performed the action."
+            },
+            "tag": null,
+            "responseModel": "GetActivity"
+        },
+        "GetComments": {
+            "version": "1",
+            "name": "GetComments",
+            "httpMethod": "GET",
+            "parameters": {
+                "topic": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Return comments for the group with given topic and number"
+                },
+                "groupnum": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Return comments for the group with given topic and number"
+                },
+                "group_id": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Return comments in groups with these ID numbers [separated by commas]"
+                },
+                "group_urlname": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Return comments for the group with this custom URL path"
+                },
+                "ctime": {
+                    "location": "query",
+                    "required": false,
+                    "description": "the date the comment was posted"
+                },
+                "page": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "offset": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "desc": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "order": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "only": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "omit": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                }
+            },
+            "summary": "API method for accessing meetup group comments",
+            "uri": "/comments",
+            "notes": "At least one of the required parameter(s) must be supplied with the request.",
+            "response": {
+                "lat,lon": "Latitude and longitude coordinates of the members reported city",
+                "country,city,state": "Country, City, (and for the US, State) the member has provided",
+                "created": "The time and date that the comment was created",
+                "link": "Link to the members profile page",
+                "name": "The name of the member that posted the comment",
+                "comment": "Text of the comment that was posted",
+                "photo_url": "Link to the profile photo of the member"
+            },
+            "tag": null,
+            "responseModel": "GetComments"
+        },
+        "GetOembed": {
+            "version": "1",
+            "name": "GetOembed",
+            "httpMethod": "GET",
+            "parameters": {
+                "url": {
+                    "location": "query",
+                    "required": false,
+                    "description": "url of resource to be embedded"
+                },
+                "maxwidth": {
+                    "location": "query",
+                    "required": false,
+                    "description": "maximum width to display"
+                },
+                "page": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "offset": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "desc": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "order": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "only": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "omit": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                }
+            },
+            "summary": "oEmbed implementation",
+            "uri": "/oembed",
+            "notes": "\nThis method does not require authentication. It requires only a url parameter and responds according to the [OEmbed specification](http://www.oembed.com/). Any of the following base URLs may refer to embeddable content:\n\n* http://www.meetup.com/\n* http://meetup.com/\n* http://meetu.ps/\n\nAn optional __maxwidth__ parameter may be provided.\n",
+            "response": null,
+            "tag": null,
+            "responseModel": "GetOembed"
+        },
+        "GetTopics": {
+            "version": "1",
+            "name": "GetTopics",
+            "httpMethod": "GET",
+            "parameters": {
+                "member_id": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Return topics a target member is subscribed to"
+                },
+                "name": {
+                    "location": "query",
+                    "required": false,
+                    "description": "the topic name"
+                },
+                "topic": {
+                    "location": "query",
+                    "required": false,
+                    "description": "the topic key"
+                },
+                "search": {
+                    "location": "query",
+                    "required": false,
+                    "description": "Return topics related to a list of search terms [separate search keywords with +'s]"
+                },
+                "alertees": {
+                    "location": "query",
+                    "required": false,
+                    "description": "total alertees in the topic"
+                },
+                "members": {
+                    "location": "query",
+                    "required": false,
+                    "description": "total members in the topic"
+                },
+                "page": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "offset": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "desc": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "order": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "only": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                },
+                "omit": {
+                    "location": "query",
+                    "required": false,
+                    "description": null
+                }
+            },
+            "summary": "API method for accessing meetup topics",
+            "uri": "/topics",
+            "notes": "At least one of the required parameter(s) must be supplied with the request.",
+            "response": {
+                "urlkey": "The unique keyword used to identify this topic",
+                "members": "The number of members who belong to groups under this topic",
+                "link": "A URL of the topic's page on meetup.com updated The last date and time that this topic's information changed",
+                "name": "The name of the topic",
+                "description": "A description of the topic",
+                "id": "The ID of the topic"
+            },
+            "tag": null,
+            "responseModel": "GetTopics"
+        }
+    },
+    "models": {
+        "GetActivity": {
+            "type": "array",
+            "properties": [],
+            "location": "json",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "member_id": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "group_name": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "group_id": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "item_type": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "link": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "published": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "id": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "photo_url": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "title": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "member_name": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "status": {
+                        "location": "statusCode",
+                        "type": "integer"
+                    }
+                },
+                "location": null,
+                "items": null
+            }
+        },
+        "GetComments": {
+            "type": "array",
+            "properties": [],
+            "location": "json",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "lat,lon": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "country,city,state": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "created": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "link": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "name": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "comment": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "photo_url": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "status": {
+                        "location": "statusCode",
+                        "type": "integer"
+                    }
+                },
+                "location": null,
+                "items": null
+            }
+        },
+        "GetOembed": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "location": "statusCode",
+                    "type": "integer"
+                }
+            }
+        },
+        "GetTopics": {
+            "type": "array",
+            "properties": [],
+            "location": "json",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "urlkey": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "members": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "link": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "name": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "description": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "id": {
+                        "location": "json",
+                        "type": null
+                    },
+                    "status": {
+                        "location": "statusCode",
+                        "type": "integer"
+                    }
+                },
+                "location": null,
+                "items": null
+            }
+        }
+    }
+}
