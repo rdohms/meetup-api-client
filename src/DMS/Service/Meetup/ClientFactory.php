@@ -7,7 +7,6 @@ use Guzzle\Service\Loader\JsonLoader;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Command\Guzzle\Description;
 use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Middleware;
 use Symfony\Component\Config\FileLocator;
 
 final class ClientFactory
@@ -30,10 +29,10 @@ final class ClientFactory
         $stack = HandlerStack::create();
 
         foreach ($config->getMiddleware() as $name => $middleware) {
-            $stack->push(Middleware::mapRequest($middleware), $name);
+            $stack->push($middleware, $name);
         }
 
-        $config = array_merge($default, [
+        $config = array_merge($default, $config->getClientConfig(), [
             'handler' => $stack
         ]);
 
