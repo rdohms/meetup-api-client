@@ -9,7 +9,7 @@ final class KeyAuthConfig implements ClientConfig
     /**
      * @var string
      */
-    protected $key;
+    private $key;
 
     /**
      * @param string $key

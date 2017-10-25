@@ -9,7 +9,7 @@ use Psr\Http\Message\ResponseInterface;
 final class ClientException extends \Exception
 {
     /** @var  CommandClientException */
-    protected $previous;
+    private $previous;
 
     public static function fromGuzzleException(CommandClientException $exception): self
     {

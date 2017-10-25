@@ -9,7 +9,7 @@ final class KeyAuthPlugin
     /**
      * @var string
      */
-    protected $key;
+    private $key;
 
     public function __construct(string $key)
     {
