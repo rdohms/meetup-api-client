@@ -10,12 +10,12 @@ final class OAuth2Config implements ClientConfig
     /**
      * @var GrantTypeInterface
      */
-    protected $grantType;
+    private $grantType;
 
     /**
      * @var bool
      */
-    protected $shouldSignAllRequests;
+    private $shouldSignAllRequests;
 
     /**
      * @param GrantTypeInterface $grantType

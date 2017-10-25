@@ -10,42 +10,42 @@ final class OAuth1Config implements ClientConfig
     /**
      * @var string
      */
-    protected $consumerKey;
+    private $consumerKey;
 
     /**
      * @var string
      */
-    protected $consumerSecret;
+    private $consumerSecret;
 
     /**
      * @var string
      */
-    protected $token;
+    private $token;
 
     /**
      * @var string
      */
-    protected $tokenSecret;
+    private $tokenSecret;
 
     /**
      * @var string
      */
-    protected $privateKeyFile;
+    private $privateKeyFile;
 
     /**
      * @var string
      */
-    protected $privateKeyPassphrase;
+    private $privateKeyPassphrase;
 
     /**
      * @var string
      */
-    protected $signatureMethod;
+    private $signatureMethod;
 
     /**
      * @var bool
      */
-    protected $shouldSignAllRequests = true;
+    private $shouldSignAllRequests = true;
 
     private function __construct(string $consumerKey, string $consumerSecret, bool $shouldSignAllRequests = true)
     {
