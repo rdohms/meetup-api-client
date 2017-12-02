@@ -145,7 +145,10 @@ class RateLimitPlugin implements EventSubscriberInterface
      */
     protected function slowdownRequests()
     {
-        $microsecondsPerRequestRemaining = $this->rateLimitReset / $this->rateLimitRemaining * 1000000;
-        usleep($microsecondsPerRequestRemaining);
+        $microsecondsPerRequestRemaining = $this->rateLimitRemaining * 1000000;
+        if (0 !== (int) $this->rateLimitRemaining) {
+            $microsecondsPerRequestRemaining = $this->rateLimitReset / $this->rateLimitRemaining * 1000000;
+        }
+        usleep((int) $microsecondsPerRequestRemaining);
     }
 }
