@@ -99,4 +99,21 @@ class RateLimitPluginTest extends \PHPUnit_Framework_TestCase
 
         return $plugin;
     }
+
+    /**
+     * Test to ensure a division by zero will never occur when validating
+     * the rate limit of the API call when the rate limit remaining has a
+     * value of 0
+     *
+     * @group issue-53
+     * @see https://github.com/rdohms/meetup-api-client/issues/53
+     * @covers \DMS\Service\Meetup\Plugin\RateLimitPlugin::slowdownRequests
+     */
+    public function testRateLimitDoesNotCauseDivisionByZeroError()
+    {
+        $plugin = $this->setupProxyPluginWithValues(10, 0, 10, 0.5);
+        $plugin->onBeforeSend();
+
+        $this->assertGreaterThan(0, $plugin->slowdowns);
+    }
 }
