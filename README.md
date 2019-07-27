@@ -17,6 +17,7 @@ The library is available through Composer, so its easy to get it. Just Run this:
     * Legacy v1, except methods tagged as deprecated
 * Key authentication
 * OAuth 1.0 Authentication
+* OAuth 2.0 Authentication
 * POST, GET and DELETE methods
 
 ## Usage
