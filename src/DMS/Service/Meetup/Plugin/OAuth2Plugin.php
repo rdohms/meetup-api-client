@@ -74,6 +74,6 @@ class OAuth2Plugin implements EventSubscriberInterface
      */
     protected function signRequest($request)
     {
-        $request->addHeader("Authorization", "Bearer " . $this->access_token);
+        $request->addHeader('Authorization', 'Bearer ' . $this->access_token);
     }
 }

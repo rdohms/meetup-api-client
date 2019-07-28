@@ -33,7 +33,7 @@ class MeetupOAuth2Client extends AbstractMeetupClient
      */
     public static function getRequiredParameters()
     {
-        return array();
+        return array('access_token');
     }
 
     /**
@@ -41,7 +41,7 @@ class MeetupOAuth2Client extends AbstractMeetupClient
      *
      * @param array $config
      *
-     * @return MeetupOAuthClient
+     * @return MeetupOAuth2Client
      */
     public static function factory($config = array())
     {
