@@ -38,6 +38,12 @@ $config = array(
     'token_secret'    => '*****',
 );
 $client = MeetupOAuthClient::factory($config);
+
+// OAuth2 Authentication
+$config = array(
+    'access_token'    => 'access_token',
+);
+$client = MeetupOAuth2Client::factory($config);
 ```
 
 Invoke Commands using our `__call` method (auto-complete phpDocs are included)
