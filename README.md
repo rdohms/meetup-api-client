@@ -1,3 +1,15 @@
+# This Library is no longer maintained
+
+Due to Meetup.com changing their policies making their API a paid product, I believe it is not fair to expect Open Source Developers like me to maintain clients for it's API for Free.
+
+Thus this library will no longer be updated, the v3 rewrite will be abandoned.
+
+Sorry, I hope you all find a new house for your meetups, but if you stay on meetup.com i hope other libs can offer you the needed features.
+
+-----------------------------------------------
+
+
+
 DMS Meetup.com API Client [![Build Status](https://travis-ci.org/rdohms/meetup-api-client.png?branch=master)](https://travis-ci.org/rdohms/meetup-api-client)
 =========================
 
